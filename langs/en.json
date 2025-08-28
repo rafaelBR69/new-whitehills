@@ -1,0 +1,200 @@
+{
+  "title": "Balcones del Pinillo",
+  "brand": {
+    "part1": "Balcones del ",
+    "part2": "Pinillo"
+  },
+  "nav": {
+    "home": "Home",
+    "contact": "Contact",
+    "availability": "Availability"
+  },
+  "btn": {
+    "contact": "Contact us"
+  },
+  "hero": {
+    "welcome": "A haven between sea and sunlight",
+    "tagline": "New‑build residences in Torremolinos – Mediterranean elegance with a soul of its own"
+  },
+  "section3": {
+    "title": "16 Modern Villas in Torreblanca, Fuengirola",
+    "paragraph1": "WhiteHills Villas has been conceived as a perfect synthesis of contemporary elegance, modern comfort, and connection with nature. Located on a peaceful hillside, these exclusive villas offer panoramic views of the Mediterranean Sea, natural light all day, and open living spaces.",
+    "paragraph2": "Each villa combines architectural elegance, high-end materials, and efficient design for an exceptional living experience. A private retreat by the sea, just minutes from the heart of Fuengirola and Málaga.",
+    "button": "CONTACT US"
+  },
+  "video": {
+    "blockTitle": "Sustainable villas with private pool on the Costa del Sol",
+    "blockParagraph": "Located in a privileged setting, these villas combine energy efficiency, premium finishes, and contemporary design. They offer a perfect balance between elegance and natural surroundings, with private pools and outdoor spaces designed to enjoy the Costa del Sol’s climate all year round.",
+    "imgAlt": "Video preview of the villas on the Costa del Sol"
+  },
+  "interior": {
+    "title": "Spacious interiors and functional design",
+    "p1": "At WhiteHills, the interiors mirror the harmony of their surroundings: flexible layouts, generous spaces and meticulous attention to detail. The villas feature fully-equipped kitchens, open-plan living rooms and en-suite bedrooms that prioritise comfort, privacy and smart design.",
+    "p2": "Technical solutions ensure a quiet, energy-efficient living experience. Everything is designed so your daily life flows with comfort and style.",
+    "item": {
+      "location": "Fuengirola",
+      "area": "169 – 268 m²",
+      "plot": "Up to 225 m²",
+      "beds": "3-4 bedrooms",
+      "baths": "3-4 bathrooms",
+      "pool": "Private pool",
+      "airport": "Airport 20 min",
+      "beach": "Beach 4 min",
+      "security": "Privacy & security",
+      "domotics": "Pre-installation for home automation"
+    },
+    "imgAlt": "Exterior render of the villa"
+  },
+  "project": {
+    "imgAlt": "Kitchen interior of the Torremolinos residential project",
+    "description": "This exclusive residential project in Torremolinos redefines contemporary luxury, blending architecture, natural surroundings and lifestyle in one of the Costa del Sol’s most vibrant and established areas. Just 500 m from La Carihuela beach and Benalmádena Marina, it offers an elegant seaside home for those who value quality and privacy.",
+    "featuresTitle": "Key features:",
+    "features": {
+      "homes": "20 premium homes across two independent buildings",
+      "seaViews": "Sea views from most residences",
+      "terraces": "Generous terraces (min. 15 m²; up to 60 m² with jacuzzi in penthouses)",
+      "livingRooms": "Integrated living areas bathed in natural light",
+      "amenities": "Swimming pool, landscaped areas and potential gym or multi‑use space",
+      "parking": "40 parking spaces on a single level for added convenience"
+    },
+    "locationAdvantages": "Unique 2‑, 3‑ and 4‑bedroom homes with high‑quality finishes, communal pool, gardens and private parking. Everything designed for those who appreciate comfort, aesthetics and a life without haste."
+  },
+  "popup": {
+    "title": "Are you interested in the development?",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "phoneLabel": "Telephone",
+    "msgLabel": "Message",
+    "msgPlaceholder": "I would like more information…",
+    "send": "Send",
+    "thanksTitle": "Thank you for your interest!",
+    "thanksText": "We have received your enquiry. Our team will contact you shortly.",
+    "thanksBtn": "Close"
+  },
+  "contact": {
+    "title": "Contact | Balcones del Pinillo",
+    "heroTitle": "Get in touch with us",
+    "heroSub": "We are only a message away",
+    "imgAlt": "Person filling in a form",
+    "formTitle": "Enter your details",
+    "infoTitle": "You may also call us",
+    "infoText": "Telephone: +34 621 283 445 · Email: info@blancareal.com"
+  },
+  "availability": {
+    "heroTitle": "Check availability",
+    "heroSub": "Select a property"
+  },
+  "blockA": {
+    "title": "Building 1 · Plans",
+    "heroTitle": "Building 1",
+    "heroSub": "Select a residence",
+    "infoTitle": "Choose floor and typology",
+    "infoText": "More details and downloadable data sheets coming soon.",
+    "clickHint": "Click on a residence…",
+    "imgAlt": "Floor plan of Building A residences"
+  },
+  "blockB": {
+    "title": "Building 2 · Plans",
+    "heroTitle": "Building 2",
+    "heroSub": "Select a residence",
+    "infoTitle": "Choose floor and typology",
+    "infoText": "More details and downloadable data sheets coming soon.",
+    "clickHint": "Click on a residence…",
+    "imgAlt": "Floor plan of Building B residences"
+  },
+  "leadForm": {
+    "title": "Are you interested?",
+    "msgPlaceholderHousing": "I would like more information about this residence…"
+  },
+  "blockInfo": {
+    "noData": "No data…",
+    "pdfUnavailable": "Plan not available",
+    "rooms_one": "{{count}} bedroom",
+    "rooms_other": "{{count}} bedrooms",
+    "builtArea": "{{value}} m² built",
+    "terrace": "{{value}} m² terrace",
+    "orientation": "Orientation {{dir}}",
+    "status": {
+      "reservado": "Reserved",
+      "vendido": "Sold",
+      "disponible": "Available"
+    }
+  },
+  "orientationMap": {
+    "N": "North",
+    "S": "South",
+    "E": "East",
+    "O": "West",
+    "NE": "North‑East",
+    "NO": "North‑West",
+    "SE": "South‑East",
+    "SO": "South‑West"
+  },
+  "footer": {
+    "contact": "info@blancareal.com | +34 621 28 34 45",
+    "follow": "Follow us",
+    "legal": "Legal notice",
+    "cookies": "Cookie policy",
+    "privacy": "Privacy policy",
+    "copyright": "©2025 | Balcones del Pinillo",
+    "developer": "Developed by BlancaReal Marketing"
+  },
+  "legalNotice": {
+    "pageTitle": "Legal Notice | Balcones del Pinillo",
+    "content": "<h1>Legal Notice</h1>\n\n<p><strong>In compliance with Law&nbsp;34/2002 of 11&nbsp;July on Services of the Information Society and Electronic Commerce (LSSICE),</strong> the following general information about the website <em>www.balconesdelpinillo.com</em> is provided.</p>\n\n<h2>Entity</h2>\n<p><strong>Trade name:</strong> BLANCA&nbsp;REAL<br>\n<strong>Corporate name:</strong> AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, S.L.<br>\n<strong>CIF:</strong> B93153021<br>\n<strong>Registered office:</strong> Calle Monte Calahonda&nbsp;10, 29649 Mijas Costa<br>\n<strong>Telephone:</strong> 952&nbsp;599&nbsp;159<br>\n<strong>Email:</strong> <a href='mailto:info@blancareal.com'>info@blancareal.com</a><br>\nRegistered in the Commercial Registry of Málaga, Sheet MA‑00111198, Volume 04941, Book 3848</p>\n\n<h2>Use of the Website</h2>\n<p>The website is offered for promotional purposes, providing information about the various services offered by AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, a company acting as a Real Estate Agency. AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO may cease to provide these information services without prior notice, which will not entail any legal obligation towards the user or third parties.</p>\n\n<h2>Privacy</h2>\n<p>The information that AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO may collect from users of this website will be used exclusively to provide requested information and/or to respond to user enquiries. For more details, please consult our <a href='/privacy-policy.html'>Privacy Policy</a>.</p>\n\n<h2>Links to Third Parties</h2>\n<p>When following links to third‑party sites, the user will be governed by the Terms of Use and Privacy Policy of the new site, accepting that AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO will not be responsible nor have any legal obligation for the use of such sites.</p>\n\n<h2>Intellectual Property</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, either as owner, transferee or licensee, holds all intellectual and industrial property rights over the elements of this website. Reproduction, distribution or public communication of all or part of the contents for commercial purposes is expressly prohibited in accordance with articles&nbsp;8 and&nbsp;21 of the Intellectual Property Law. Users may view, print, store and copy the contents for strictly personal and private use.</p>\n\n<h2>Terms of Use and Responsibility</h2>\n<p>The user agrees to use this website in accordance with the law, morality and public order, refraining from:</p>\n<ul>\n  <li>Unauthorised or fraudulent use of the website.</li>\n  <li>Attempting unauthorised access by the legitimate owner.</li>\n  <li>Using the portal for illegal purposes, harmful to third parties or with the intention of damaging the site or other users.</li>\n  <li>Causing damage to the systems installed for the website’s operation.</li>\n</ul>\n<p>The owner of AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO will only be responsible for content created by them, not for links incorporated by third parties or external sites beyond their control.</p>\n\n<p>The owner reserves the right to make any changes deemed appropriate, without prior notice, to both content and services offered, and to approve or remove third‑party content considered inappropriate.</p>\n\n<h2>Modifications to the Terms of Use</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO reserves the right to modify these Terms of Use and the Privacy Policy at any time. Users are obliged to review these terms periodically, as they may change without prior notice.</p>\n\n<h2>Applicable Law and Jurisdiction</h2>\n<p>Spanish law shall apply in case of dispute or conflict regarding this Legal Notice or any services of this Portal. Any conflict arising from visiting the Portal or using its contents shall be settled in the competent Courts and Tribunals.</p>"
+  },
+  "cookiePolicy": {
+    "pageTitle": "Cookies Policy | Balcones del Pinillo",
+    "content": "<div class=\"entry-content\">\n\n\n<p>In compliance with the Law on Information Society Services and Electronic Commerce and with European Directive 2009/136/EC (Guidelines 05/2020 of the EDPB), www.nylvahomes.com informs you about its use of cookies and assumes your consent simply by continuing to browse this website.</p>\n\n<p>Cookies are small files downloaded to a user’s device when visiting certain websites, storing browsing information, recognising the device or browser, or gathering statistical data. They do not contain viruses or harmful code.<br>By accepting the cookie banner or configuring cookies on this site, you expressly accept their use. Disabling cookies may impair your browsing experience and some features may not work correctly.</p>\n\n<p><strong>TYPES OF COOKIES</strong> (source: Spanish Data Protection Agency)</p>\n<ol><li><em>By managing entity</em>:\n<ul><li>First‑party cookies: sent from a domain managed by the editor.</li><li>Third‑party cookies: sent from a domain not managed by the editor.</li></ul></li>\n<li><em>By activation time</em>:\n<ul><li>Session cookies: store data while the user is on the page.</li><li>Persistent cookies: data remain stored for a defined period.</li></ul></li>\n<li><em>By purpose</em>:\n<ul><li>Technical cookies</li><li>Personalisation cookies</li><li>Analytics cookies</li></ul></li></ol>\n\n<p>BLANCA REAL uses the cookies listed below. Should other technologies be adopted, users will be informed accordingly.</p>\n\n<h2>Technical cookies</h2>\n<p>Essential for safe navigation and proper site operation. Enabled by default and cannot be refused.</p>\n<ul><li>Ensure safe, uninterrupted browsing.</li><li>Save user preferences about cookie settings.</li><li>Share content on social networks.</li></ul>\n\n<h2>Analytics cookies</h2>\n<p>Track and analyse user behaviour to improve the service.</p>\n<table><thead><tr><th>COOKIE</th><th>PURPOSE</th><th>OWNER</th></tr></thead><tbody><tr><td>fr</td><td>Statistics and customisation by Facebook. 90‑day duration.</td><td>Facebook</td></tr><tr><td>Test_cookie</td><td>Evaluates online marketing campaigns. DoubleClick/Google Ads.</td><td>Google</td></tr><tr><td>NID</td><td>Google services (Maps, search). Persistent cookie.</td><td>Google</td></tr><tr><td>_ga, _gat, _gid, _secure_3PAPSID, _secure_3PSID</td><td>Google Analytics anonymous identifier.</td><td>Google Analytics</td></tr><tr><td>Gat_gtag_UA</td><td>Campaign information linked to Analytics and AdWords.</td><td>Google</td></tr><tr><td>Optanonalertboxclosed, optanonconsent…</td><td>Stores and determines user cookie choices.</td><td>OneTrust</td></tr></tbody></table>\n\n<h2>Control and deletion of cookies</h2>\n<p>You may accept or reject cookies via the settings module or through your browser options. Restricting cookies may disable some interactive features.</p>\n<p>Guides for managing cookies in popular browsers:</p>\n<ul><li>Firefox: <a href=\"https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop\" target=\"_blank\" rel=\"noopener\">Instructions</a></li><li>Chrome: <a href=\"https://support.google.com/accounts/answer/61416\" target=\"_blank\" rel=\"noopener\">Instructions</a></li><li>Edge/Explorer: <a href=\"https://support.microsoft.com/windows/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09\" target=\"_blank\" rel=\"noopener\">Instructions</a></li><li>Safari: <a href=\"https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac\" target=\"_blank\" rel=\"noopener\">Instructions</a></li><li>Opera: <a href=\"https://help.opera.com/en/latest/web-preferences/#cookies\" target=\"_blank\" rel=\"noopener\">Instructions</a></li></ul>\n</div>"
+  },
+  "privacyPolicy": {
+    "pageTitle": "Privacy Policy | Balcones del Pinillo",
+    "content": "<h1>Privacy Policy</h1>\n\n<p>AZUGA SERVICIO GLOBAL INMOBILIARIO&nbsp;S.L. complies with Regulation&nbsp;(EU)&nbsp;2016/679 (GDPR) and Spanish Organic Law&nbsp;3/2018 on Personal Data Protection, guaranteeing all data‑subject rights.</p>\n\n<p>In accordance with Law&nbsp;34/2002 on Information Society Services and E‑Commerce, prior consent will be requested before sending commercial communications.</p>\n\n<p>Users are informed of the controller’s identity, processing purposes and the means to exercise their rights before providing any data.</p>\n\n<h2>1.&nbsp;Data Controller</h2>\n<p><strong>AZUGA SERVICIO GLOBAL INMOBILIARIO&nbsp;S.L.</strong><br>Tax ID&nbsp;B93153021<br>C/ Monte&nbsp;Calahonda&nbsp;10, 29649&nbsp;Mijas&nbsp;Costa (Málaga, Spain)<br>Tel.&nbsp;+34&nbsp;952&nbsp;599&nbsp;159 · <a href=\\\"mailto:info@blancareal.com\\\">info@blancareal.com</a><br>Commercial Registry of Málaga: Sheet&nbsp;MA‑00111198, Volume&nbsp;04941, Book&nbsp;3848</p>\n\n<h2>2.&nbsp;Purpose of Processing</h2>\n<p>To respond to your contact request or commercial relationship and, where expressly authorised, to send you commercial communications. Data are kept while the relationship persists.</p>\n\n<h2>3.&nbsp;Legal Basis</h2>\n<p>Contractual relationship for the main purpose and your consent for marketing. Data must be accurate and up‑to‑date; they will be erased or rectified when no longer necessary.</p>\n\n<h2>4.&nbsp;Recipients</h2>\n<p>No data will be transferred to third parties except legal obligation. No international transfers unless service providers in third countries offer adequate safeguards.</p>\n\n<h2>5.&nbsp;Data‑subject Rights</h2>\n<ul>\n  <li>Access, rectification and erasure.</li>\n  <li>Restriction and objection to processing.</li>\n  <li>Data portability.</li>\n  <li>Withdrawal of consent.</li>\n  <li>Not to be subject to automated decisions.</li>\n</ul>\n<p>Exercise these rights by written request (with ID copy) to the addresses above.</p>\n\n<h2>6.&nbsp;Complaints</h2>\n<p>You may lodge a complaint with the Spanish Data Protection Agency: <a href=\\\"https://www.aepd.es\\\" target=\\\"_blank\\\">www.aepd.es</a>.</p>\n\n<p><em>Use of this Portal implies acceptance of these terms. Please review this policy periodically; it may change.</em></p>"
+  },
+  "process": {
+    "pageTitle": "Purchase Process | Balcones del Pinillo",
+    "heroTitle": "Purchase Process",
+    "heroAlt": "Housing purchase process diagram",
+
+    "faq": {
+      "q1": "What does it mean that the project is a housing cooperative and how does it differ from buying from a traditional developer?",
+      "a1": "<ul>\n<li><strong>Active member participation:</strong> you can vote and decide on finishes, layout and other project milestones.</li>\n<li><strong>15‑20 % savings</strong> compared with a traditional developer (their profit margin disappears).</li>\n<li><strong>Tax advantages:</strong> the cooperative is exempt from ITP/AJD when purchasing the land.</li>\n<li><strong>Professional management:</strong> a specialised team handles the administrative, commercial, technical and financial aspects.</li>\n<li><strong>Funds in custody:</strong> payments are deposited in a notarial escrow account and may only be released under the conditions stated in the notarial deed.</li>\n<li><strong>Guarantee or surety:</strong> once the permit is granted, all amounts are secured by bank guarantee or surety insurance in accordance with the Spanish Building Act (LOE).</li>\n</ul>",
+
+      "q2": "How much do I have to pay to reserve a home and how is my money protected (bank guarantees or surety policies)?",
+      "a2": "<ul>\n<li><strong>Reservation payment:</strong> usually between €3,000 and €5,000, depending on the project.</li>\n<li><strong>Notarial escrow:</strong> the amount is deposited in an escrow account governed by a notarial deed that specifies when the funds may be used.</li>\n<li><strong>Before the permit:</strong> the LOE does not require a special account or guarantees, but the cooperative still uses a notarial account for extra security.</li>\n<li><strong>Release of funds:</strong> always subject to the notary’s approval.</li>\n</ul>",
+
+      "q3": "What is the approximate timeline (permit, start of construction, key hand‑over) and what happens if there are delays?",
+      "a3": "<ul>\n<li>Formation and organisation of the cooperative.</li>\n<li>Application for and <strong>obtaining the building permit</strong> (timing depends on the Town Hall).</li>\n<li><strong>Start of construction</strong> once the permit is granted and financing is closed.</li>\n<li><strong>Construction period</strong>: 12‑24 months depending on the project.</li>\n<li><strong>Allocation deed</strong> and key hand‑over.</li>\n<li>If delays occur, the penalty or extension clauses in the statutes and construction contract will apply.</li>\n</ul>",
+
+      "q4": "What additional costs and taxes will I have to pay (VAT, notary, registry, plusvalía, community fees) and when are they due?",
+      "a4": "<ul>\n<li><strong>VAT 10 %</strong> (or the applicable rate) on each payment.</li>\n<li><strong>Notary and land‑registry fees:</strong> 0.5‑1 % of the price.</li>\n<li><strong>Stamp Duty (AJD):</strong> 1.2 % in Andalusia because the sale is subject to VAT.</li>\n<li><strong>Community fees</strong> from the hand‑over date, according to your ownership share.</li>\n<li><strong>Municipal plusvalía tax:</strong> paid by the cooperative, not by the member.</li>\n</ul>",
+
+      "q5": "I do not live in Spain. What paperwork do I need (NIE, bank account, power of attorney) and who can help me in another language?",
+      "a5": "<ul>\n<li>Valid identity document from your country (ID card or passport).</li>\n<li><strong>NIE</strong> (Foreigner Identification Number), mandatory for any real‑estate purchase in Spain.</li>\n<li><strong>Power of attorney:</strong> not required if you will attend the signing in person; otherwise it can be granted in Spain or at a Spanish consulate.</li>\n<li>If the power is executed before a foreign notary it must be <em>apostilled (Hague)</em> and accompanied by a sworn translation.</li>\n<li>Our Legal Department can arrange NIEs, powers of attorney, translations and act on your behalf in your language.</li>\n</ul>"
+    }
+  },
+  "home": {
+    "promo": {
+      "units": {
+        "label": "",
+        "value": 20
+      },
+      "parking":{
+        "label":"",
+        "value": 40
+      },
+      "beds": {
+        "label": "",
+        "value": 3
+      },
+      "plot": {
+        "label": "plot sqm",
+        "value": 1803
+      },
+      "sunnydays": {
+        "label": "sunny days / year",
+        "value": 300
+      }
+    }
+  }
+}

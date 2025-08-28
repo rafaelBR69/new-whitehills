@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ESTILOS COMUNES -->
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/mediaquaries.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- FUENTES  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+
+  <!-- i18next CDN -->
+  <script src="https://unpkg.com/i18next@23/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-http-backend@2/i18nextHttpBackend.min.js"></script>
+  <script src="https://unpkg.com/i18next-browser-languagedetector@8/i18nextBrowserLanguageDetector.min.js"></script>
+
+  <title data-i18n="process.pageTitle">Proceso de Compra</title>
+
+  <!-- Estilo mínimo para el acordeón FAQ -->
+  <style>
+    .faq        { max-width:900px;margin:4rem auto;padding:0 1rem }
+    details     { border:2px solid #c08f5c8e;border-radius:8px;margin-bottom:1.2rem }
+    summary     { cursor:pointer;padding:1.2rem 1.5rem;font:600 1.8rem/1 var(--ff-body);color:#5C4033 }
+    summary::-webkit-details-marker{display:none}
+    details[open] summary{background:#fffff}
+    .faq p      { padding:0 1.5rem 1.5rem;font:400 1.6rem/1.75 var(--ff-body);color:#4c362a }
+  </style>
+</head>
+
+<body>
+<!-- █ NAVBAR (idéntico) █ -->
+<header>
+  <nav>
+    <a class="logo" href="/index.html"><img src="/images/logo.png" alt="Balcones del Pinillo"></a>
+    <div class="burgar" onclick="toggleNav()">&#9776;</div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html"        data-i18n="nav.home"></a></li>
+      <li><a href="/availability.html" data-i18n="nav.availability"></a></li>
+      <li><a href="/contact.html"      data-i18n="nav.contact"></a></li>
+      <li><a href="/proceso.html"      data-i18n="nav.process"></a></li>
+    </ul>
+
+    <div class="btn">
+      <a class="sign_up primary" href="/contact.html#contactForm" data-i18n="btn.contact"></a>
+    </div>
+
+    <select id="langSwitcher" aria-label="Language">
+      <option value="es">ES</option><option value="en">EN</option>
+    </select>
+  </nav>
+</header>
+
+<!-- █ HERO con la imagen 1920×1080 █ -->
+<section class="section_1 section_1--availability" style="min-height:auto">
+  <img src="/images/proceso_compra.webp"
+       alt="" data-i18n="[alt]process.heroAlt"
+       class="process-hero-img"><!-- 👈 aquí -->
+</section>
+
+<!-- █ FAQ / preguntas frecuentes █ -->
+<section class="faq">
+  <!-- P1 -->
+  <details>
+    <summary data-i18n="process.faq.q1"></summary>
+    <p data-i18n="process.faq.a1"></p>
+  </details>
+
+  <!-- P2 -->
+  <details>
+    <summary data-i18n="process.faq.q2"></summary>
+    <p data-i18n="process.faq.a2"></p>
+  </details>
+
+  <!-- P3 -->
+  <details>
+    <summary data-i18n="process.faq.q3"></summary>
+    <p data-i18n="process.faq.a3"></p>
+  </details>
+
+  <!-- P4 -->
+  <details>
+    <summary data-i18n="process.faq.q4"></summary>
+    <p data-i18n="process.faq.a4"></p>
+  </details>
+
+  <!-- P5 -->
+  <details>
+    <summary data-i18n="process.faq.q5"></summary>
+    <p data-i18n="process.faq.a5"></p>
+  </details>
+</section>
+
+<!-- █ FOOTER (copiado) █ -->
+<footer>
+  <p data-i18n="footer.contact"></p>
+  <p>
+    <span data-i18n="footer.follow"></span><br>
+    <div class="social">
+      <a href="https://www.instagram.com/blancarealspain/?hl=es" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram fa-fw"></i></a>
+      <a href="https://es.linkedin.com/company/blancareal-real-estate" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin fa-fw"></i></a>
+      <a href="https://www.blancareal.com/" target="_blank" rel="noopener" aria-label="Official website"><i class="fa-solid fa-globe fa-fw"></i></a>
+      <a href="https://www.youtube.com/@BlancaRealSpain" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube fa-fw"></i></a>
+    </div>
+  </p>
+
+  <div class="legal-links">
+    <a href="/legal-notice.html"   data-i18n="footer.legal"   target="_blank" rel="noopener"></a>
+    <a href="/cookie-policy.html"  data-i18n="footer.cookies" target="_blank" rel="noopener"></a>
+    <a href="/privacy-policy.html" data-i18n="footer.privacy" target="_blank" rel="noopener"></a>
+  </div>
+
+  <p class="footer-text1" data-i18n="footer.copyright"></p>
+  <p class="footer-text1" data-i18n="footer.developer"></p>
+</footer>
+
+<!-- JS COMÚN -->
+<script src="/js/il18n.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

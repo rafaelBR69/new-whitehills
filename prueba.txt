@@ -1,0 +1,12 @@
+<map name="blockA-map">
+        <area target="" alt="aBajo1" title="aBajo1" href="" coords="761,727,727,726,728,852,960,851,957,727,782,731" shape="poly">
+        <area target="" alt="aBajo2" title="aBajo2" href="" coords="257,732,257,854,727,852,726,726,478,727,478,732" shape="poly">
+        <area target="" alt="aBajo3" title="aBajo3" href="" coords="57,728,56,846,255,847,256,732,244,732,242,729" shape="poly">
+        <area target="" alt="aPrim1" title="aPrim1" href="" coords="728,724,761,725,780,729,990,725,990,699,980,699,980,652,958,652,958,576,728,576" shape="poly">
+        <area target="" alt="aPrim2" title="aPrim2" href="" coords="726,575,258,573,258,699,243,700,244,731,476,730,479,725,727,724" shape="poly">
+        <area target="" alt="aPrim3" title="aPrim3" href="" coords="242,727,242,699,256,698,256,573,58,573,56,651,42,651,42,699,33,699,33,727" shape="poly">
+        <area target="" alt="aSeg1" title="aSeg1" href="" coords="738,575,958,575,957,548,953,548,952,509,879,509,880,442,718,441,717,493,730,493,731,541,737,541" shape="poly">
+        <area target="" alt="aSeg2" title="aSeg2" href="" coords="716,428,258,427,258,572,735,574,735,544,728,543,727,495,716,494" shape="poly">
+        <area target="" alt="aSeg3" title="aSeg3" href="" coords="255,427,126,427,126,509,62,509,62,547,56,547,56,571,256,571" shape="poly">
+        <area target="" alt="aTer1" title="aTer1" href="" coords="126,425,716,426,717,439,878,440,878,367,855,367,856,322,864,309,865,293,720,291,720,271,372,270,372,291,372,338,252,339,251,370,125,369" shape="poly">
+    </map>

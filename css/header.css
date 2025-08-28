@@ -1,0 +1,129 @@
+/* =========================================================
+   ▸ PERSONALIZACIÓN HEADER / NAVBAR CON BOOTSTRAP
+   ========================================================= */
+:root {
+  --header-bg    : #ffffff;
+  --brand-color  : #194f28;
+  --shadow-hdr   : 3px 3px 5px rgba(0,0,0,.7);
+
+  --ff-body      : 'Montserrat', sans-serif;
+  /* Tamaño de letra */
+  --fs-nav       : 2rem; /* normal */
+  --fs-nav-scroll: 2rem; /* con scroll */
+
+  /* Peso de letra */
+  --fw-nav       : 400; /* normal */
+  --fw-nav-scroll: 400; /* con scroll */
+
+  --ls-nav       : 0.05em;
+
+  --fs-btn       : 2.5rem;
+
+}
+
+/*──────── HEADER GENERAL ────────*/
+header {
+  font-family: var(--ff-body);
+}
+
+header.fixed-top {
+  transition: all 0.3s ease;
+}
+
+header.fixed-top .navbar {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  transition: padding 0.3s ease;
+}
+
+header.fixed-top.scrolled {
+  background-color: var(--header-bg);
+  box-shadow: var(--shadow-hdr);
+}
+
+header.fixed-top.scrolled .navbar {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/*──────── LOGO ────────*/
+.navbar-brand img {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+  margin-top: -20px;
+  transition: all 0.3s ease;
+}
+
+/* Logo blanco mientras el header es transparente */
+header:not(.scrolled) .navbar-brand img {
+  content: url("/images/logo-blanco.png");
+}
+
+/* Logo verde + tamaño reducido con scroll */
+header.scrolled .navbar-brand img {
+  height: 75px;
+  margin-top: -30px;
+  content: url("/images/logo.png");
+}
+
+/*──────── NAV LINKS ────────*/
+.navbar-nav .nav-link {
+  font-family: var(--ff-body) !important;
+  font-size: var(--fs-nav);
+  font-weight: var(--fw-nav);
+  color: var(--brand-color) !important;
+  text-transform: uppercase;
+  transition: opacity 0.25s ease;
+  padding: 0.5rem 3rem !important;
+  letter-spacing: var(--ls-nav);
+}
+
+.navbar-nav .nav-link:hover {
+  opacity: 0.8;
+}
+
+/* Scroll: links un poco más compactos */
+header.scrolled .navbar-nav .nav-link {
+  font-family: var(--ff-body) !important;
+  font-size: var(--fs-nav-scroll);
+  font-weight: var(--fw-nav-scroll);
+  padding: 0.5rem 3rem !important;
+  letter-spacing: var(--ls-nav);
+}
+
+/*──────── Enlaces blancos mientras header es transparente ────────*/
+header:not(.scrolled) .navbar-nav .nav-link,
+header:not(.scrolled) #langSwitcher,
+header:not(.scrolled) .btn .sign_up {
+  color: #ffffff !important;
+  border-color: #ffffff;
+}
+
+/*──────── SELECTOR DE IDIOMA ────────*/
+#langSwitcher {
+  font-family: var(--ff-body);
+  font-size: var(--fs-nav);
+  font-weight: 600;
+  background: transparent;
+  border: 2px solid var(--brand-color);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  color: var(--brand-color);
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+/*──────── BOTÓN CONTACTO (si se usa) ────────*/
+.btn .sign_up {
+  font-family: var(--ff-body);
+  font-size: var(--fs-btn);
+  padding: 0.8rem 2rem;
+  border-radius: 20px;
+  background: var(--brand-color);
+  color: var(--header-bg);
+  text-decoration: none;
+}
+.btn .sign_up:hover {
+  opacity: 0.8;
+}
