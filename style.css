@@ -33,6 +33,36 @@ body {
   --fs-nav     : 1.6rem;   /* tamaño enlaces / idioma                */
   --fs-btn     : 1.5rem;   /* tamaño botón “Contact”                 */
   --fw-nav     : 550; 
+  scroll-behavior: smooth;
+}
+
+/* Botón CTA “Ver villas” */
+.hero-cta{
+  display: inline-block;
+  margin-top: 1.2rem;            /* separa del título */
+  padding: .9rem 1.6rem;
+  border: 3px solid #fff;        /* borde blanco */
+  background: transparent;       /* fondo transparente */
+  color: #fff;                   /* texto blanco */
+  border-radius: 9999px;         /* forma píldora */
+  text-decoration: none;
+  font-family: var(--ff-body);
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: .2px;
+  transition: background-color .2s ease, color .2s ease, transform .06s ease, box-shadow .2s ease;
+}
+
+.hero-cta:hover{
+  background: rgba(255,255,255,.12);   /* leve brillo al pasar */
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+}
+
+.hero-cta:active{ transform: scale(.98); }
+
+.hero-cta:focus-visible{
+  outline: 3px solid #fff;
+  outline-offset: 2px;
 }
 
 /* Hero section styling */
@@ -89,7 +119,7 @@ body {
 }
 
 .bg_div :last-child {
-  font-size: 1.8rem;
+  font-size: 2.3rem;
   margin-top: 0.5rem;
   animation: slideinBottom 4s ease;
 }
@@ -232,11 +262,11 @@ body {
 ──────────────────────────────────────────────*/
 .section-services-btn {
   font-family: var(--ff-body);
-  font-size: 1.8rem;
+  font-size: 2.4rem;
   font-weight: 500;
   background-color: #ffffff;                     /* fondo blanco */
   color: var(--brand-color);                     /* texto y borde verde */
-  border: 2px solid var(--brand-color);
+  border: 3px solid var(--brand-color);
   border-radius: 50px;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -340,83 +370,6 @@ section.interior-block {
 }
 /* service section end */
 
-/* blog section  styling*/
-.section_2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  width: 100%;
-  padding-bottom: 10rem;
-  background-color: #ffffff;
-}
-.blog-header {
-  text-align: center;
-  margin-bottom: 6rem;
-}
-.blog-header h1 {
-  font-family: var(--ff-display);
-  padding-top: 8rem;
-  font-size: 3.6rem;
-  color: #5C4033;
-  line-height: 1.6;
-  font-weight: 500;
-}
-.blog-header p {
-  font-family: var(--ff-body);
-  font-size: 2.2rem;
-  font-weight: 300;
-  color: #5C4033;
-  line-height: 2;
-  max-width: 1200px;
-  margin-inline: auto;
-  padding-inline: 1rem;
-}
-.blog-gallary {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-content: center;
-  align-items: center;
-  column-gap: 26px;
-}
-.section2_div1 {
-  background-color: #ffffff;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
-  height: auto;
-  padding-bottom: 2rem;
-  transition: all 0.7s ease;
-}
-.section2_div1:hover {
-  transform: scale(1.05);
-}
-.section2_div1 img {
-  width: 100%;
-  max-width: 350px;
-}
-.div_details {
-  padding: 2rem;
-  line-height: 1.6;
-}
-.div_details h2 {
-  color: #5C4033;
-  font-size: 2rem;
-}
-.div_details p {
-  color: rgb(129, 128, 128);
-  font-size: 1.5rem;
-}
-.div_details button {
-  margin-top: 3rem;
-  padding: 1rem 2rem;
-  color: #5C4033;
-  font-weight: bold;
-  border-radius: 20px;
-  background-color: #ffffff;
-  border: 2px solid #5C4033;
-}
-/* Blog styling stop */
-
 /* blog section stop*/
 footer {
   display: flex;
@@ -508,137 +461,7 @@ footer .legal-links a:visited{
   width:1px; height:1px;       /* mínimo “hit area”  */
   overflow:hidden;
 }
-.modal__box {
-  position: relative;
-  background: #ffffff;
-  padding: 3rem 2.5rem;
-  border-radius: 12px;
-  max-width: 420px;
-  width: 90%;
-  box-shadow: 0 12px 28px rgba(0,0,0,.25);
-  z-index: 1;
-  text-align: center;
-}
 
-.modal__title  {
-  font-family: var(--ff-display);
-  font-weight: 300;
-  font-size: 2.2rem;
-  color:#5C4033; 
-  margin-bottom:2rem; 
-  }
-.modal__form   { display:flex; flex-direction:column; gap:1.2rem; }
-.modal__form label  { font-size:1.4rem; color:#5C4033; display:flex; flex-direction:column; gap:.4rem; }
-.modal__form input,
-.modal__form textarea {
-  padding:.8rem 1rem;
-  border:2px solid #5C4033;
-  border-radius:8px;
-  font-size:1.4rem;
-  background:#fff;
-}
-.modal__send {
-  background:#5C4033;
-  color:#ffffff;
-  padding:1rem 2rem;
-  border:none;
-  border-radius:20px;
-  font-size:1.6rem;
-  cursor:pointer;
-  transition: transform .15s ease;
-}
-.modal__close {
-  position:absolute;
-  top:.6rem; right:.6rem;
-  background:none; border:none;
-  font-size:2.4rem; color:#5C4033;
-  cursor:pointer;
-  transition: transform .15s ease;
-}
-
-.modal__send:active,
-.modal__close:active {
-  transform: scale(.92);     /* se encoge un poco al hacer clic */
-}
-
-/* ---------- Estado visible ---------- */
-.modal.show {
-  visibility: visible;
-  opacity: 1;
-}
-
-.modal__paragraph {
-  font-size: 1.7rem;   /* antes 1.4 rem */
-  line-height: 1.6;    /* un poco más de aire */
-}
-
-/*────────────────────────────────────────────
-  FORMULARIO EN HERO (sin tarjeta)
-  ─ Pon tu estilo tocando las variables
-────────────────────────────────────────────*/
-.hero-form {
-  z-index: 2;                    /* ahora sí está por encima */
-  width: min(92%, 480px);
-  max-width: 420px;              /* ❸ margen fijo, más fácil de centrar */
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  text-align: left;
-}
-
-/*──────── Título ────────*/
-.hero-form__title {
-  font-family: var(--ff-display); 
-  font-size: 2.9rem;        /* ← TAMAÑO de fuente del título   */
-  font-weight: 600;
-  color: #ffffff;           /* ← COLOR del título              */
-  text-shadow: 2px 2px 6px #5C4033;
-  margin: 0 0 1.2rem;
-  text-align: center;
-}
-
-
-
-.hero-form input,
-.hero-form textarea {
-  background   : var(--field-bg);
-  color        : var(--field-text);
-  border       : 2px solid var(--field-bord);
-  border-radius: 8px;
-  padding      : 1rem 1.2rem;
-  font-size    : var(--field-size);
-  width        : 100%;
-}
-
-/*──────── Botón (ya hereda .modal__send) ────────*/
-.hero-form .modal__send {
-  font-family: var(--ff-body);
-  font-weight: 450; 
-  background: #5C4033;      /* cambia aquí si quieres otro color */
-}
-
-.hero-form label {
-  font-family: var(--ff-body); 
-  font-size: 1.8rem;      /* ← TAMAÑO de letra  (ajústalo)  */
-  color: #ffffff;         /* ← COLOR del texto (cámbialo)   */
-  font-weight: 450;       /* opcional: negrita              */
-  text-shadow: 1px 1px 3px #5C4033; /* opcional: sombra sutil */
-}
-
-
-#avail-img{ 
-  max-width:100%;
-   height:auto;
-    display:block;
-}
-
-.section_1--availability{
-  background-image: none;
-  background-color: #ffffff;
-  height: auto !important;
-  min-height: 110vh;
-}
 
 .section_1--availability::before{
   background: none;                /* quita la sombra */
@@ -696,69 +519,6 @@ area:focus{
 }
 .bg_text1, .bg_text2{ color:#ffffff; }
 
-/*──────────────────────────────────────────────
-  ② Bloque de texto plano (no empuja a nadie)
-──────────────────────────────────────────────*/
-/* ─────────  Bloque de datos más grande  ───────── */
-.info-text{
-  position:absolute;
-  left:-380px;            /* ancho y desplazamiento algo mayores          */
-  top:12%;
-  width:360px;           /* +40 px sobre el original                      */
-  font-size:2rem;    /* antes era implícitamente 1rem → +12,5 %       */
-  line-height:1.85;      /* separa un poco más las líneas                 */
-  color:#4c362a;
-}
-
-.info-text h3{
-  font-family: var(--ff-body);
-  margin:.2rem 0 .7rem;
-  font-size:2rem;       /* antes heredaba ≈1.6 rem */
-  color:#5C4033;
-  font-weight: 700;
-}
-
-.info-text li{
-  font-size:2rem;    /* sube cada línea un 10-15 % */
-  line-height:1.55;     /* mantiene la separación */
-  font-weight: 500;
-}
-
-/* lista */
-.info-text ul{
-  margin:.5rem 0 1.1rem;
-  padding-left:1.4rem;   /* un pelín más de sangría                        */
-  font-size:2rem;     /* antes heredaba ≈1.125 → apenas +2 px visuales */
-}
-
-.info-text .estado-disponible{color:#4B9B4B;font-weight:700}
-.info-text .estado-reservado {color:#C08F5C;font-weight:700}
-.info-text .estado-vendido   {color:#B63E3E;font-weight:700;text-decoration:line-through}
-
-
-/*──────────────────────────────────────────────
-  ③ Adaptación móvil: texto debajo del plano
-──────────────────────────────────────────────*/
-@media (max-width: 900px){
-  /* ① la caja lateral desaparece y todo vuelve al flujo */
-  .info-text{
-    position:static;       /* sale del absoluto */
-    width:auto;
-    margin:1.5rem 0 0;     /* separación inferior del plano */
-    left:auto; top:auto;   /* por si el navegador conserva valores */
-  }
-
-  /* ② centramos el bloque completo para que no quede pegado a los bordes */
-  .plan-container{
-    justify-content:center;
-    padding:0 1rem;        /* respiración lateral */
-  }
-
-  /* ③ los títulos sobre el plano bajan un poco para no tapar la parte alta */
-  .plan-box .bg_div{
-    top:16%;
-  }
-}
 
 /* ===== INFO CARD en 3 columnas ===== */
 .info-card{
@@ -793,63 +553,10 @@ area:focus{
 .info-card li{ margin:.25rem 0; font-size:2.0rem; color:#444; }
 .info-card .precio{ margin-top:1.2rem; color:#C08F5C; font-weight:700; font-size:2.6rem; }
 
-/* ====== PDF Preview (coincide con el HTML generado) ====== */
-.pdf-carousel{
-  display:flex;
-  align-items:center;
-  justify-content: center;
-  gap:.75rem;
-}
 
-.pdf-canvas-wrap{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height: 360px;               /* ⬅️ vista previa más grande */
-  max-width: 100%;
-  border:1px solid rgba(0,0,0,.08);
-  border-radius:6px;
-  box-shadow:0 8px 22px rgba(0,0,0,.06);
-  background:#fafafa;
-  overflow:hidden;
-}
-
-.pdf-canvas{
-  display:block;
-  height:100%;                 /* llena la altura del visor */
-  width:auto;
-  cursor:pointer;
-}
-
-/* Botones */
-.pdf-nav{
-  appearance:none; -webkit-appearance:none;
-  border:none;
-  width:44px; height:44px;
-  border-radius:50%;
-  display:inline-flex;
-  align-items:center; justify-content:center;
-  font-size:22px; line-height:1;
-  color:#fff;
-  background: var(--bs-primary, #0d6efd);
-  box-shadow:0 4px 10px rgba(0,0,0,.15);
-  cursor:pointer;
-  transition:transform .12s ease, filter .12s ease, box-shadow .12s ease;
-}
 .pdf-nav:hover{ filter:brightness(.92); }
 .pdf-nav:active{ transform:scale(.96); }
 .pdf-nav:disabled{ background:#e9ecef; color:#adb5bd; cursor:not-allowed; box-shadow:none; }
-
-/* Dots */
-.pdf-dots{
-  display:flex;
-  gap:.5rem;
-  justify-content:flex-end;
-}
-.pdf-dot{
-  width:10px; height:10px; border-radius:999px; border:none; background:#dee2e6;
-}
-.pdf-dot.active{ background:#0d6efd; }
 
 /* ===== Responsive ===== */
 @media (max-width: 1100px){
@@ -864,20 +571,6 @@ area:focus{
   .pdf-canvas-wrap{ height:280px; }
 }
 
-/* ── badge de estado ───────────────────── */
-.badge{
-  display:inline-block;
-  padding:0.25rem 1.5rem;
-  font-size:1.35rem;
-  font-weight:700;
-  border-radius:9999px;
-  margin-left:0.6rem;
-  line-height:1.2;
-}
-.badge-disponible{background:#E1F4E1;color:#4B9B4B;}
-.badge-reservado {background:#FFF5D1;color:#C08F5C;}
-.badge-vendido   {background:#F8D7D7;color:#B63E3E;}
-
 /* precio destacado */
 .precio{
   margin-top:0.6rem;
@@ -886,115 +579,11 @@ area:focus{
   color:#C08F5C;
 }
 
-/*═════════════════════════════════════════════════════════════
-  FORMULARIO “lead-card”  (interés por vivienda)
-═════════════════════════════════════════════════════════════*/
-.lead-card{
-  /* ‑‑ Layout ‑‑ */
-  position:absolute;
-  top:50%;
-  left:calc(100% + 2.8rem);   /* separa 2 .8 rem del plano */
-  top: var(--card-top);         /* MISMA ALTURA            */
-  transform:none;
-  max-width:370px;            /* antes 420 px → +120 px     */
-  width:100%;
-  padding:3rem 3.2rem;        /* más aire interior          */
-
-  /* ‑‑ Estética ‑‑ */
-  background:#fff;            /* fondo blanco puro          */
-  border-radius:14px;
-  box-shadow:0 10px 28px rgba(0,0,0,.12);
-
-  /* ‑‑ Tipografía ‑‑ */
-  font-family:"Manrope",sans-serif;
-  color:#2F4F4F;
-
-  display:grid;
-  gap:1.4rem;                 /* separación entre campos    */
-}
-
-/* ─── Título ─────────────────────────────────────────────── */
-.lead-card h3{
-  margin:0 0 .6rem;
-  font-size:clamp(1.8rem,1.4rem + .8vw,2.2rem);
-  font-weight:700;
-  text-align:center;
-}
-
-/* ─── Campos ─────────────────────────────────────────────── */
-.lead-card label{
-  display:flex;
-  flex-direction:column;
-  gap:.5rem;
-  font-size:1.6rem;           /* un poco mayor               */
-  font-weight:600;
-}
-
-.lead-card input,
-.lead-card textarea{
-  font:inherit;
-  background:#fff;
-  border:0.5px solid #C08F5C;
-  border-radius:8px;
-  padding:1.2rem 1.4rem;      /* ↑ padding                   */
-  resize:vertical;
-  color:#2F4F4F;
-}
-
-.lead-card input:focus,
-.lead-card textarea:focus{
-  outline:none;
-  border-color:#5C4033;
-  box-shadow:0 0 0 2px rgba(92,64,51,.25);
-}
-
-/* ─── Botón ──────────────────────────────────────────────── */
-.lead-card button{
-  justify-self:center;
-  padding:1.1rem 2.6rem;
-  border:none;
-  border-radius:28px;
-  background:#5C4033;
-  color:#ffffff;
-  font-size:1.6rem;
-  font-weight:700;
-  cursor:pointer;
-  transition:transform .15s ease, opacity .15s;
-}
-
-.lead-card button:hover  { opacity:.9; }
-.lead-card button:active { transform:scale(.95); }
-
-/* Iconos sociales en el footer */
-footer .social a{
-  text-decoration:none;    /* quita el subrayado */
-  border-bottom:none;      /* por si algún reset añade borde */
-  color:#ddd;
-  margin:0 .4rem;
-  font-size:2.2rem;
-  line-height:1;           /* evita que la línea base deje espacio raro */
-  display:inline-block;    /* más consistente en todos los navegadores */
-  transition:color .25s ease;
-}
-
-footer .social a:visited{
-  text-decoration:none;
-  color:#ddd;
-}
-
-footer .social a:hover,
-footer .social a:focus{
-  color:#ffffff;
-  outline:none;
-  text-decoration:none;
-}
-
 .btn .primary{
   background:#5C4033;
   color:#ffffff !important;
   /* …resto… */
 }
-/* ░░░ Botón fantasma que conserva el espacio ░░░ */
 /* =========== HONEYPOT – totalmente fuera del flujo =========== */
 .ghost-btn{
   position: absolute;     /* lo saca del flujo normal */
@@ -1437,4 +1026,316 @@ footer .social a{
   letter-spacing: .2px;
   font-size: 2rem;
   margin: 0;
+}
+
+/* Card */
+.ruleta-card {
+  border: 2px solid var(--field-bord, #526344);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: #fff;
+  color: #232a36;
+  min-width: 280px;
+}
+
+/* Título/estado ya lo tienes; mantenemos clases existentes */
+
+/* Dos columnas de specs */
+.ruleta-card__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
+  margin-top: 6px;
+}
+.ruleta-card__list {
+  margin: 0;
+  padding-left: 1rem; /* conserva viñetas */
+}
+
+/* Fila precio + botón */
+.ruleta-card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* botón a la derecha */
+  gap: 12px;
+  margin-top: 10px;
+  flex-wrap: nowrap;
+}
+.ruleta-card__price { min-width: 0; }
+.ruleta-card__price strong {
+  color: var(--brand-color, #3b4d2b);
+  font-weight: 700;
+  font-size: 3rem;
+  white-space: nowrap;
+  font-family: var(--ff-body);
+}
+
+/* Botón */
+.btn-ver-plano {
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: .5rem .75rem;
+  border-radius: 10px;
+  background: var(--brand-color, #3b4d2b);
+  color: #fff;
+  border: 1px solid var(--brand-color, #3b4d2b);
+  transition: transform .06s ease, opacity .2s ease;
+}
+.btn-ver-plano:hover { opacity: .9; }
+.btn-ver-plano:active { transform: scale(.98); }
+
+.ruleta-card__title{ font-size: 3rem; }
+.ruleta-card__list li{ font-size: 1.2rem; }
+.ruleta-card__list li strong{ font-size: var(--fs-spec-strong); }
+.ruleta-card__price strong{ font-size: var(--fs-price); }
+.btn-ver-plano{ font-size: 1.5rem; font-family: var(--ff-body);}
+.badge{ font-size: var(--fs-badge); }
+
+/* Ajustes muy pequeños */
+@media (max-width: 420px) {
+  .ruleta-card__price strong { font-size: .95rem; }
+  .btn-ver-plano { padding: .45rem .65rem; font-size: .92rem; }
+}
+
+:root{
+  --brand-color: #3b4d2b;
+  --f3up-radius: 0;          /* sin esquinas redondeadas */
+  --f3up-minh : 780px;       /* +altura tarjetas */
+  --f3up-gap  : 0;           /* columnas pegadas */
+  --f3up-pad  : 24px;
+
+  /* +tamaños de fuente */
+  --fs-f3up-title: 5rem;
+  --fs-f3up-text : 3rem;
+}
+
+.features-3up{
+  padding: 0; /* pegado también a la sección */
+}
+
+.f3up-row{
+  display: flex;
+  gap: var(--f3up-gap);
+  align-items: stretch;
+}
+
+.f3up-card{
+  position: relative;
+  flex: 1 1 0;
+  min-height: var(--f3up-minh);
+  border-radius: var(--f3up-radius);
+  overflow: hidden;
+  background: #000 center/cover no-repeat;
+  background-image: var(--bg);
+  transition: flex .6s cubic-bezier(.22,1,.36,1); /* más lenta y suave */
+  box-shadow: none;          /* sin sombras */
+  isolation: isolate;
+  transform: translateZ(0);  /* evita “hilos” blancos entre columnas */
+}
+
+/* Efecto agrandar (sutil) */
+.f3up-row:hover .f3up-card{ flex: 1; }
+.f3up-row:hover .f3up-card:hover{ flex: 1.25; } /* expansión menor */
+/* sin salto vertical */
+
+/* Capa de degradado + contenido centrado */
+.f3up-overlay{
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  padding: var(--f3up-pad);
+  width: 100%; height: 100%;
+  border: 0; background: none;
+  cursor: pointer;
+}
+.f3up-overlay::before{
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(51, 51, 51, 0.55) 70%);
+  z-index: -1;
+}
+
+/* Tipos */
+.f3up-title{
+  margin: 0 0 .35rem 0;
+  color: #fff;
+  font-weight: 350;
+  font-size: var(--fs-f3up-title);
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.f3up-text{
+  margin: 0;
+  color: #fff;
+  font-size: var(--fs-f3up-text);
+  font-weight: 300;
+  text-align: center;
+  max-width: 40ch;
+
+  /* oculto por defecto */
+  opacity: 0;
+  transform: translateY(6px);
+  filter: blur(2px);
+  transition: opacity .25s ease, transform .25s ease, filter .25s ease, max-height .25s ease;
+  max-height: 0;
+}
+
+/* Mostrar texto al pasar por encima (o tap en móvil con .is-open) */
+.f3up-card:hover .f3up-text,
+.f3up-card.is-open .f3up-text{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  max-height: 200px;
+}
+
+/* Eliminamos borde decorativo del hover */
+.f3up-card:hover::after,
+.f3up-card.is-open::after{ content: none; }
+
+/* ===== Fix superposición de texto en #destacados ===== */
+
+/* ===== #destacados: expansión “de antes” + textos como ahora ===== */
+#destacados{
+  --tt-gap: 1.70rem;                                  /* separación título↔texto */
+  --reveal-speed: 1000ms cubic-bezier(.22,.61,.36,1);/* transición del texto   */
+  --expand-speed: 1000ms;                            /* velocidad de expansión */
+  --flex-hover: 1.25;                               /* cuánto se ensancha la card */
+  --title-width: 26ch;
+}
+
+/* Expansión por flex (restaurada) */
+#destacados .f3up-card{
+  transition: flex var(--expand-speed);
+}
+#destacados .f3up-row:hover .f3up-card{ flex: 1; }
+#destacados .f3up-row:hover .f3up-card:hover{ flex: var(--flex-hover); }
+
+/* Si antes metimos scale en hover, lo anulamos aquí */
+#destacados .f3up-card:hover{ transform: none; }
+
+/* Texto: mismo reveal suave y separación cómoda */
+#destacados .f3up-overlay{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tt-gap);
+  padding-inline: min(4vw, 40px);
+}
+#destacados .f3up-title{
+  margin: 0;
+  line-height: 1.15;
+  text-align: center;
+  white-space: normal !important;     /* asegura que puede saltar de línea */
+  text-wrap: balance;                 /* líneas más bonitas */
+  hyphens: auto;                      /* guiones si hiciera falta */
+  max-inline-size: var(--title-width);/* ← clave: “bloquea” el ancho del título */
+}
+
+#destacados .f3up-text{
+  margin: 0;
+  line-height: 1.4;
+  max-width: 42ch;
+  opacity: 0;
+  transform: translateY(6px);
+  filter: blur(2px);
+  max-height: 0;
+  transition: opacity var(--reveal-speed),
+              transform var(--reveal-speed),
+              filter var(--reveal-speed),
+              max-height var(--reveal-speed);
+}
+#destacados .f3up-card:hover .f3up-text,
+#destacados .f3up-card.is-open .f3up-text{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  max-height: 40vh;
+}
+
+/* En móvil no tocamos la expansión (hereda tus reglas existentes) */
+
+/* Ajuste opcional de tamaños cuando el viewport es más pequeño */
+@media (max-width: 1400px){
+  #destacados{ 
+    --fs-f3up-title: clamp(2.4rem, 3.6vw, 4.2rem);
+    --fs-f3up-text : clamp(1.6rem, 2.4vw, 2.4rem);
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .f3up-row{ flex-direction: column; }
+  .f3up-card{ min-height: 380px; } /* +alto en móvil también */
+}
+
+/* Accesibilidad: sin animaciones si el usuario lo pide */
+@media (prefers-reduced-motion: reduce){
+  .f3up-card{ transition: none; }
+  .f3up-text{ transition: none; }
+}
+
+.video-cta-wrap{ 
+  margin-top: 2rem; 
+}
+
+.btn-brochure{
+  display: inline-block;
+  padding: .85rem 1.4rem;
+  border: 3px solid var(--brand-color, #3b4d2b);
+  color: var(--brand-color, #3b4d2b);
+  background: #fff;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-family: var(--ff-body, system-ui, sans-serif);
+  font-weight: 500;
+  font-size: 2rem;
+  letter-spacing: .2px;
+  transition: transform .06s ease, background-color .15s ease, color .15s ease, box-shadow .15s ease;
+  margin-bottom: 20px;
+}
+/* Hover */
+.btn-brochure:hover,
+.btn-brochure:focus {
+  background-color: var(--brand-color);          /* fondo verde */
+  color: #ffffff;                                /* texto blanco */
+  border-color: var(--brand-color);
+}
+.btn-brochure:active{ transform: scale(.98); }
+.btn-brochure:focus-visible{ outline: 3px solid rgba(59,77,43,.35); outline-offset: 2px; }
+
+/* La fila donde va el botón (debajo del PDF) */
+#info-text .visit-actions{
+  margin-top: .6rem;
+  text-align: center;
+}
+@media (min-width: 992px){
+  #info-text .visit-actions{
+    grid-column: 1 / -1; /* ocupa ambas columnas */
+  }
+}
+
+/* Botón Agendar visita */
+.btn-visit{
+  display: inline-block;
+  padding: .9rem 1.6rem;
+  border-radius: 9999px;
+  background: var(--brand-color, #3b4d2b);
+  color: #fff;
+  border: 2px solid var(--brand-color, #3b4d2b);
+  font-family: var(--ff-body);
+  font-size: 2.6rem;
+  font-weight: 500;
+  letter-spacing: .2px;
+  cursor: pointer;
+  transition: transform .06s ease, filter .15s ease, box-shadow .15s ease;
+}
+.btn-visit:hover{ filter: brightness(1.05); box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+.btn-visit:active{ transform: scale(.98); }
+.btn-visit:focus-visible{ outline: 3px solid rgba(59,77,43,.35); outline-offset: 2px; }
+
+.section_1.parallax-bg{
+  background-position: 50% 50%;
+  will-change: background-position; /* hint de rendimiento */
 }

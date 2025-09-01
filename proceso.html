@@ -1,127 +1,174 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ESTILOS COMUNES -->
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/mediaquaries.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- ─── SEO ─── -->
+  <title data-i18n="process.pageTitle">Proceso de Compra – WhiteHills</title>
+  <meta name="description" content="Conoce el proceso de compra paso a paso: reserva, firma de contrato, pagos y entrega. Preguntas frecuentes incluidas.">
 
-  <!-- FUENTES  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+  <!-- ─── FAVICON & PWA ─── -->
+  <link rel="icon" type="image/png" sizes="96x96"  href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
 
-  <!-- i18next CDN -->
+  <!-- ─── Datos estructurados ─── -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"WhiteHills Villas",
+    "url":"https://whitehillsvillas.com",
+    "logo":"https://whitehillsvillas.com/web-app-manifest-192x192.png"
+  }
+  </script>
+
+  <!-- ─── CSS de terceros ─── -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+
+  <!-- ─── Iconos / Fuentes ─── -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:wght@100;400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- ─── i18next (CDN) ─── -->
   <script src="https://unpkg.com/i18next@23/i18next.min.js"></script>
   <script src="https://unpkg.com/i18next-http-backend@2/i18nextHttpBackend.min.js"></script>
   <script src="https://unpkg.com/i18next-browser-languagedetector@8/i18nextBrowserLanguageDetector.min.js"></script>
 
-  <title data-i18n="process.pageTitle">Proceso de Compra</title>
-
-  <!-- Estilo mínimo para el acordeón FAQ -->
-  <style>
-    .faq        { max-width:900px;margin:4rem auto;padding:0 1rem }
-    details     { border:2px solid #c08f5c8e;border-radius:8px;margin-bottom:1.2rem }
-    summary     { cursor:pointer;padding:1.2rem 1.5rem;font:600 1.8rem/1 var(--ff-body);color:#5C4033 }
-    summary::-webkit-details-marker{display:none}
-    details[open] summary{background:#fffff}
-    .faq p      { padding:0 1.5rem 1.5rem;font:400 1.6rem/1.75 var(--ff-body);color:#4c362a }
-  </style>
+  <!-- ─── CSS propio ─── -->
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/mediaquaries.css" />
+  <link rel="stylesheet" href="/css/proceso.css" />
 </head>
 
-<body>
-<!-- █ NAVBAR (idéntico) █ -->
-<header>
-  <nav>
-    <a class="logo" href="/index.html"><img src="/images/logo.png" alt="Balcones del Pinillo"></a>
-    <div class="burgar" onclick="toggleNav()">&#9776;</div>
+<body class="process-page proc-page">
+  <!--*** Header dinámico ***-->
+  <div id="header-placeholder"></div>
 
-    <ul class="nav-links" id="navLinks">
-      <li><a href="/index.html"        data-i18n="nav.home"></a></li>
-      <li><a href="/availability.html" data-i18n="nav.availability"></a></li>
-      <li><a href="/contact.html"      data-i18n="nav.contact"></a></li>
-      <li><a href="/proceso.html"      data-i18n="nav.process"></a></li>
-    </ul>
+  <!-- █ HERO con imagen 1920×1080 █ -->
+  <section class="section_1 section_1--availability proc-hero">
+    <img src="/images/proceso_compra.webp" alt="" data-i18n="[alt]process.heroAlt" class="proc-hero__img">
+  </section>
 
-    <div class="btn">
-      <a class="sign_up primary" href="/contact.html#contactForm" data-i18n="btn.contact"></a>
-    </div>
+  <!-- █ FAQ / preguntas frecuentes █ -->
+  <section class="proc-faq" id="faq">
+    <details class="proc-faq__item">
+      <summary class="proc-faq__summary" data-i18n="process.faq.q1"></summary>
+      <p class="proc-faq__content" data-i18n="process.faq.a1"></p>
+    </details>
 
-    <select id="langSwitcher" aria-label="Language">
-      <option value="es">ES</option><option value="en">EN</option>
-    </select>
-  </nav>
-</header>
+    <details class="proc-faq__item">
+      <summary class="proc-faq__summary" data-i18n="process.faq.q2"></summary>
+      <p class="proc-faq__content" data-i18n="process.faq.a2"></p>
+    </details>
 
-<!-- █ HERO con la imagen 1920×1080 █ -->
-<section class="section_1 section_1--availability" style="min-height:auto">
-  <img src="/images/proceso_compra.webp"
-       alt="" data-i18n="[alt]process.heroAlt"
-       class="process-hero-img"><!-- 👈 aquí -->
-</section>
+    <details class="proc-faq__item">
+      <summary class="proc-faq__summary" data-i18n="process.faq.q3"></summary>
+      <p class="proc-faq__content" data-i18n="process.faq.a3"></p>
+    </details>
 
-<!-- █ FAQ / preguntas frecuentes █ -->
-<section class="faq">
-  <!-- P1 -->
-  <details>
-    <summary data-i18n="process.faq.q1"></summary>
-    <p data-i18n="process.faq.a1"></p>
-  </details>
+    <details class="proc-faq__item">
+      <summary class="proc-faq__summary" data-i18n="process.faq.q4"></summary>
+      <p class="proc-faq__content" data-i18n="process.faq.a4"></p>
+    </details>
 
-  <!-- P2 -->
-  <details>
-    <summary data-i18n="process.faq.q2"></summary>
-    <p data-i18n="process.faq.a2"></p>
-  </details>
+    <details class="proc-faq__item">
+      <summary class="proc-faq__summary" data-i18n="process.faq.q5"></summary>
+      <p class="proc-faq__content" data-i18n="process.faq.a5"></p>
+    </details>
+  </section>
 
-  <!-- P3 -->
-  <details>
-    <summary data-i18n="process.faq.q3"></summary>
-    <p data-i18n="process.faq.a3"></p>
-  </details>
+  <!--*** Footer dinámico ***-->
+  <div id="footer-placeholder"></div>
 
-  <!-- P4 -->
-  <details>
-    <summary data-i18n="process.faq.q4"></summary>
-    <p data-i18n="process.faq.a4"></p>
-  </details>
+  <!-- ─── JS de terceros ─── -->
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- P5 -->
-  <details>
-    <summary data-i18n="process.faq.q5"></summary>
-    <p data-i18n="process.faq.a5"></p>
-  </details>
-</section>
+  <!-- i18n init + tu app -->
+  <script src="/js/il18n.js"></script>
+  <script src="/app.js"></script>
 
-<!-- █ FOOTER (copiado) █ -->
-<footer>
-  <p data-i18n="footer.contact"></p>
-  <p>
-    <span data-i18n="footer.follow"></span><br>
-    <div class="social">
-      <a href="https://www.instagram.com/blancarealspain/?hl=es" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram fa-fw"></i></a>
-      <a href="https://es.linkedin.com/company/blancareal-real-estate" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin fa-fw"></i></a>
-      <a href="https://www.blancareal.com/" target="_blank" rel="noopener" aria-label="Official website"><i class="fa-solid fa-globe fa-fw"></i></a>
-      <a href="https://www.youtube.com/@BlancaRealSpain" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube fa-fw"></i></a>
-    </div>
-  </p>
+  <!-- Carga de /partials y comportamiento del header -->
+  <script>
+    /* Header desde /partials */
+    fetch('/partials/header.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
 
-  <div class="legal-links">
-    <a href="/legal-notice.html"   data-i18n="footer.legal"   target="_blank" rel="noopener"></a>
-    <a href="/cookie-policy.html"  data-i18n="footer.cookies" target="_blank" rel="noopener"></a>
-    <a href="/privacy-policy.html" data-i18n="footer.privacy" target="_blank" rel="noopener"></a>
-  </div>
+        const header = document.querySelector('header');
+        const hero   = document.querySelector('.section_1');
+        if (header && hero) {
+          const io = new IntersectionObserver(
+            ([entry]) => header.classList.toggle('scrolled', !entry.isIntersecting),
+            { threshold: 0 }
+          );
+          io.observe(hero);
+        }
 
-  <p class="footer-text1" data-i18n="footer.copyright"></p>
-  <p class="footer-text1" data-i18n="footer.developer"></p>
-</footer>
+        const burger = document.querySelector('.burgar, .burger, [data-nav-toggle]');
+        const nav    = document.getElementById('navLinks') || document.querySelector('.nav-links');
+        if (burger && nav) {
+          burger.addEventListener('click', () => {
+            nav.classList.toggle('open');
+            burger.classList.toggle('open');
+          });
+          nav.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+              nav.classList.remove('open');
+              burger.classList.remove('open');
+            });
+          });
+        }
 
-<!-- JS COMÚN -->
-<script src="/js/il18n.js"></script>
-<script src="/app.js"></script>
+        // Availability apunta a index cuando no estás en home
+        const linkAvail = document.querySelector('header a.nav-link[href="#availability"]');
+        const onHome = location.pathname === '/' || location.pathname.endsWith('/index.html') || location.pathname.endsWith('index.html');
+        if (linkAvail && !onHome) linkAvail.setAttribute('href', '/index.html#availability');
+
+        // Marca activo Proceso
+        const path = location.pathname.replace(/\/+$/, '');
+        document.querySelectorAll('header a[href]').forEach(a => {
+          const href = a.getAttribute('href')?.replace(/\/+$/, '');
+          if (!href || href === '#') return;
+          if (href === path || (href.endsWith('proceso.html') && path.endsWith('proceso.html'))) {
+            a.classList.add('active');
+          }
+        });
+
+        // Retraducción de header si i18n ya está
+        if (window.i18next && i18next.isInitialized) {
+          document.querySelectorAll('header [data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (key) el.innerHTML = i18next.t(key);
+          });
+        }
+      });
+
+    /* Footer desde /partials */
+    fetch('/partials/footer.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('footer-placeholder').innerHTML = html;
+
+        if (window.i18next && i18next.isInitialized) {
+          document.querySelectorAll('footer [data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (key) el.innerHTML = i18next.t(key);
+          });
+        }
+      });
+  </script>
 </body>
 </html>

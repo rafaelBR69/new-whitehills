@@ -13,7 +13,7 @@
     "jardin": 544.46,
     "coste_sin_iva": "No disponible €",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-A1.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A1.pdf"
   },
   "a2": {
     "numero_ud": "A2",
@@ -29,7 +29,7 @@
     "jardin": 245.67,
     "coste_sin_iva": "No disponible €",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-A2.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A2.pdf"
   },
   "a3": {
     "numero_ud": "A3",
@@ -45,7 +45,7 @@
     "jardin": 204.11,
     "coste_sin_iva": "No disponible €",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-A3.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A3.pdf"
   },
   "a4": {
     "numero_ud": "A4",
@@ -61,14 +61,14 @@
     "jardin": 206.11,
     "coste_sin_iva": "1.166.400€",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-A4.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A4.pdf"
   },
   "a5": {
     "numero_ud": "A5",
     "m2c_sr": 114.6,
     "m2c_br": 73.83,
     "castillete": 15,
-    "terrazas_cubiertas": 20.535,
+    "terrazas_cubiertas": 20.53,
     "pergola": 35.5,
     "terrazas_descubiertas": 65.06,
     "terrazas_m2villa_sin_castillete": 121.1,
@@ -77,7 +77,7 @@
     "jardin": 245.81,
     "coste_sin_iva": "1.171.800€",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-A5.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A5.pdf"
   },
   "a6": {
     "numero_ud": "A6",
@@ -93,7 +93,7 @@
     "jardin": 345.95,
     "coste_sin_iva": "1.182.600€",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-A6.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A6.pdf"
   },
   "b1": {
     "numero_ud": "B1*",
@@ -109,7 +109,7 @@
     "jardin": 227.12,
     "coste_sin_iva": "1.139.400€",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-B1.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B1.pdf"
   },
   "b2": {
     "numero_ud": "B2",
@@ -125,7 +125,7 @@
     "jardin": 337.19,
     "coste_sin_iva": "1.074.600€",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-B2.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B2.pdf"
   },
   "b3": {
     "numero_ud": "B3",
@@ -141,7 +141,7 @@
     "jardin": 141.23,
     "coste_sin_iva": "No disponible €",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-B3.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B3.pdf"
   },
   "b4": {
     "numero_ud": "B4",
@@ -157,7 +157,7 @@
     "jardin": 218.76,
     "coste_sin_iva": "No disponible €",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-B4.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B4.pdf"
   },
   "b5": {
     "numero_ud": "B5*",
@@ -173,7 +173,7 @@
     "jardin": 204.31,
     "coste_sin_iva": "No disponible €",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-B5.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B5.pdf"
   },
   "b6": {
     "numero_ud": "B6*",
@@ -189,6 +189,6 @@
     "jardin": 163.09,
     "coste_sin_iva": "No disponible €",
     "estado": "disponible",
-    "plano_pdf": "/planos/White-Hills-B6.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B6.pdf"
   }
 }

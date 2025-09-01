@@ -9,12 +9,12 @@
   <meta name="description"
         content="Promoción de obra nueva en Torremolinos. Viviendas de 2-3 dormitorios con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad en la página oficial.">
 
-  <!-- ─── FAVICON & PWA ─── -->
+<!-- ─── FAVICON & PWA ─── -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="96x96"  href="/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png">
-  <link rel="apple-touch-icon"              href="/apple-touch-icon.png">
-  <link rel="shortcut icon"                 href="/favicon.ico">
-  <link rel="manifest"                      href="/site.webmanifest">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#3b4d2b">
 
   <!-- ─── Datos estructurados (opcional) ─── -->
   <script type="application/ld+json">
@@ -56,6 +56,7 @@
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/modal.css">
   <link rel="stylesheet" href="/mediaquaries.css">
 
 </head>
@@ -65,10 +66,10 @@
   <div id="header-placeholder"></div>
 
   <!--*** Hero section ***-->
-  <section class="section_1">
+  <section class="section_1 parallax-bg">
     <div class="bg_div">
       <h2 class="bg_text1" data-i18n="hero.welcome"></h2>
-      <h2 class="bg_text2" data-i18n="hero.tagline"></h2>
+      <a href="#availability" class="hero-cta" data-i18n="hero.cta">Ver villas</a>
     </div>
     <div class="promo-info reveal" id="promoStats"></div>
   </section>
@@ -81,7 +82,7 @@
       <p class="mb-3 section-services-paragraph" data-i18n="section3.paragraph1"></p>
       <p class="mb-4 section-services-paragraph" data-i18n="section3.paragraph2"></p>
 
-      <a href="#contacto" class="section-services-btn px-4 py-2" data-i18n="section3.button"></a>
+      <a href="/contact.html" class="section-services-btn px-4 py-2" data-i18n="section3.button"></a>
     </div>
   </section>
 
@@ -107,19 +108,45 @@
         <div class="col-xl-10 mx-auto">
           <figure class="position-relative ratio ratio-16x9 mb-0">
             <!-- Enlace Fancybox aplicado a todo el bloque -->
-            <a data-fancybox href="https://www.youtube.com/watch?v=-Oyb3GU5JpA" class="d-block w-100 h-100">
-              <img src="https://img.youtube.com/vi/-Oyb3GU5JpA/maxresdefault.jpg"
-                  alt="" 
-                  class="section-img w-100 h-100 object-fit-cover" 
-                  data-i18n="[alt]video.imgAlt" />
+            <a data-fancybox href="https://www.youtube.com/watch?v=BbSHt8T3OpE" class="d-block w-100 h-100">
+              <picture class="d-block w-100 h-100">
+                <source srcset="https://i.ytimg.com/vi_webp/BbSHt8T3OpE/maxresdefault.webp" type="image/webp">
+                <img
+                  src="https://i.ytimg.com/vi/BbSHt8T3OpE/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/BbSHt8T3OpE/hqdefault.jpg';"
+                  alt=""
+                  class="section-img w-100 h-100 object-fit-cover"
+                  data-i18n="[alt]video.imgAlt"
+                  loading="lazy"
+                />
+              </picture>
+
               <!-- Botón de play centrado encima -->
-              <span class="play-btn d-flex align-items-center justify-content-center position-absolute top-50 start-50 translate-middle rounded-circle text-white" role="button">
-                <svg width="30" height="30" fill="currentColor" viewBox="0 0 384 512">
+              <span class="play-btn d-flex align-items-center justify-content-center position-absolute top-50 start-50 translate-middle rounded-circle text-white" role="button" aria-label="Reproducir vídeo">
+                <svg width="30" height="30" fill="currentColor" viewBox="0 0 384 512" aria-hidden="true">
                   <path d="M48 432L336 256 48 80v352z"/>
                 </svg>
               </span>
             </a>
           </figure>
+        </div>
+      </div>
+
+      <!-- CTA debajo del vídeo -->
+      <div class="row justify-content-center">
+        <div class="col-xl-10 mx-auto text-center">
+          <div class="video-cta-wrap">
+            <a
+              class="btn-brochure"
+              href="https://TU-SUPABASE-URL/White-Hills-brochure.pdf"
+              download="White-Hills-brochure.pdf"
+              target="_blank"
+              rel="noopener"
+              data-i18n="video.ctaBrochure"
+            >
+              Obtener brochure
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -195,9 +222,52 @@
     </div>
   </section>
 
-  <section class="availability">
+  <section class="availability" id="availability">
     <div id="availability-placeholder"></div>
   </section>
+
+  
+  <section class="features-3up" id="destacados">
+    <div class="f3up-row">
+      <article class="f3up-card" style="--bg:url('/images/family_beach.webp')">
+        <button class="f3up-overlay" type="button">
+          <h3 class="f3up-title">Mar, naturaleza y serenidad</h3>
+          <p class="f3up-text">
+            En Torreblanca, una de las zonas residenciales más exclusivas de Fuengirola, vivirá rodeado de tranquilidad y privacidad, a sólo minutos del mar.
+
+Las playas de Carvajal y Torreblanca destacan por su ambiente relajado y auténticos chiringuitos frente al Mediterráneo.
+          </p>
+        </button>
+      </article>
+
+      <article class="f3up-card" style="--bg:url('/images/wine.webp')">
+        <button class="f3up-overlay" type="button">
+          <h3 class="f3up-title">Conexiones y servicios de primer nivel</h3>
+          <p class="f3up-text">
+            
+Una ubicación estratégica que combina privacidad y accesibilidad:
+15 min al centro de Fuengirola.
+35 min al Aeropuerto Internacional de Málaga.
+Conexión directa con la autovía y el AVE Madrid–Málaga.
+
+Además, tendrás a tu alcance colegios de prestigio como Salliver y el Colegio Finlandés, restaurantes gourmet, supermercados, centros de salud y el Centro Comercial Miramar.
+          </p>
+        </button>
+      </article>
+
+      <article class="f3up-card" style="--bg:url('/images/golf.webp')">
+        <button class="f3up-overlay" type="button">
+          <h3 class="f3up-title">Estilo de vida mediterráneo</h3>
+          <p class="f3up-text">
+            Con más de 330 días de sol al año y una temperatura media de 19 ºC, la Costa del Sol es sinónimo de bienestar y exclusividad. 
+
+Más de 50 campos de golf, una vibrante oferta cultural y una comunidad internacional hacen de Málaga un enclave único para quienes buscan lo mejor de la vida junto al mar.
+          </p>
+        </button>
+      </article>
+    </div>
+  </section>
+  <div id="modals-placeholder"></div>
 
 
   <!-- Footer dinámico -->
@@ -263,6 +333,26 @@
           });
         }
       });
+  </script>
+  <script>
+    fetch('/partials/modals.html')
+      .then(r => r.text())
+      .then(html => { document.getElementById('modals-placeholder').innerHTML = html; });
+  </script>
+  <script>
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.f3up-overlay');
+      if(!btn) return;
+
+      const card = btn.closest('.f3up-card');
+      // cerrar otras si quieres comportamiento exclusivo en móvil:
+      if (window.matchMedia('(max-width: 900px)').matches) {
+        document.querySelectorAll('.f3up-card.is-open').forEach(el=>{
+          if(el!==card) el.classList.remove('is-open');
+        });
+        card.classList.toggle('is-open');
+      }
+    });
   </script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imagemapster/1.5.4/jquery.imagemapster.min.js"></script>

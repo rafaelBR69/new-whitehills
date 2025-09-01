@@ -1,0 +1,162 @@
+/* =====================================================
+   Contact page – estilos ordenados y overrides (ancho+)
+   ===================================================== */
+
+/* 1) Variables */
+:root{
+  --ff-body: 'Montserrat', sans-serif;
+}
+
+/* 2) Hero con imagen de fondo (centrado total de su contenido) */
+.contact-page .section_1{ margin: 0; }
+.contact-hero{
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 5vw, 72px);
+  --hero-bg: url('/images/formulario.webp'); /* cambia aquí tu imagen */
+  background-image: var(--hero-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.contact-hero::before{
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(9,43,63,.45);
+}
+.contact-form{ position: relative; z-index: 1; }
+
+/* 3) Formulario: centrado y MÁS ANCHO */
+.contact-page .hero-form{
+  font-family: var(--ff-body);
+  color: #142016;
+  width: clamp(360px, 65vw, 960px);   /* ▲ antes 50vw/720px */
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+  justify-items: stretch;
+}
+
+/* Evita que animaciones lo desplacen */
+.contact-page .hero-form.reveal{
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* 4) Título y labels */
+.hero-form__title{
+  color: #fff;
+  text-align: center;
+  margin-bottom: .5rem;
+  font-size: 3.5rem;
+  font-family: var(--ff-body);
+  font-weight: 400;
+}
+.hero-form label{
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 500;
+  display: block;
+  font-family: var(--ff-body);
+}
+
+/* 5) Campos (llenan el ancho del formulario) */
+.hero-form input,
+.hero-form textarea{
+  font-family: inherit;
+  font-size: 1.7rem;
+  color: #142016;
+  background: #ffffffc0;
+  padding: 1.25rem 1.5rem;
+  border: 2px solid #e9e9e9;
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: 0 1px 0 rgba(0,0,0,.03) inset;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.hero-form textarea{
+  min-height: 150px;
+  resize: vertical;
+}
+.hero-form input::placeholder,
+.hero-form textarea::placeholder{
+  color: #7b8a81;
+  opacity: .95;
+}
+.hero-form input:focus,
+.hero-form textarea:focus{
+  border-color: #194f28;
+  box-shadow: 0 0 0 4px rgba(25,79,40,.22);
+  outline: none;
+}
+
+/* 6) Botón: centrado */
+.section_1 .hero-form .modal__send{
+  background: #194f28;
+  color: #ffffff;
+  font-size: 1.7rem;
+  font-weight: 700;
+  border: 0;
+  border-radius: 28px;
+  padding: 1.2rem 2.8rem;
+  width: auto;
+  white-space: nowrap;
+  box-shadow: 0 10px 20px rgba(25,79,40,.25);
+  transition: transform .15s ease, opacity .15s ease, background-color .15s ease;
+  justify-self: center;
+}
+.section_1 .hero-form .modal__send:hover{ background: #1d5a31; opacity: .98; }
+.section_1 .hero-form .modal__send:active{ background: #184a28; transform: translateY(1px) scale(.99); }
+.section_1 .hero-form .modal__send:disabled{ opacity: .55; cursor: not-allowed; box-shadow: none; }
+
+/* 7) Responsivo (móvil) */
+@media (max-width: 768px){
+  .contact-page .hero-form{
+    width: min(94vw, 640px);      /* ▲ un pelín más en móvil */
+  }
+  .hero-form label{
+    font-size: 1.6rem;
+  }
+}
+
+/* === Fix definitivo de ancho y centrado === */
+
+/* Centra el contenido del héroe */
+body.contact-page .contact-hero{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* El formulario: más ancho y SIN el tope 420px */
+body.contact-page #leadForm.hero-form{
+  width: clamp(360px, 65vw, 760px) !important; /* ajusta 65vw/960 a tu gusto */
+  max-width: none !important;                  /* anula el max-width:420px */
+  min-width: 0;                                /* por si el contenedor es flex */
+  margin: 0 auto;                              /* centra horizontal */
+  display: grid;
+  gap: 14px;
+  justify-items: stretch;
+}
+
+/* Que .reveal no lo desplace */
+body.contact-page #leadForm.hero-form.reveal{
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* Campos: llenan el ancho del formulario */
+body.contact-page #leadForm.hero-form input,
+body.contact-page #leadForm.hero-form textarea{
+  width: 100%;
+}
+
+/* Botón centrado respecto al formulario */
+.section_1 #leadForm.hero-form .modal__send{
+  justify-self: center;
+  width: auto;
+  margin: .5rem auto 0;
+}

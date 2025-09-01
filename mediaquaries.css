@@ -202,7 +202,7 @@
   }
   .section_1--availability{
     display:flex;flex-direction:column;align-items:center;
-    padding:0!important;min-height:75vh;
+    padding:0!important;min-height:35vh;
   }
   .section_1--availability .bg_div{
     position:static;transform:none;text-align:center;
@@ -335,4 +335,46 @@
   .ruleta-btn:disabled{ opacity:.4 }
   .info-col #info-text{ display:none !important; }
   #avail-ruleta{ display:block !important; }
+}
+
+/* Grid en desktop */
+@media (min-width: 992px){
+  #info-text{
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 1.25rem;
+    align-items: start;             /* ahora el h3 ya no afecta a columnas */
+  }
+
+  /* La cabecera ocupa las 2 columnas */
+  #info-text .info-card-head{
+    grid-column: 1 / -1;
+    margin-bottom: .25rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+
+  /* Columnas como “pila” y el precio al fondo */
+  #info-text .info-card-col{
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  #info-text .info-card-col .info-list{ margin-bottom: 0; }
+  #info-text .info-card-col.col-right .precio{ margin-top: auto; }
+
+  /* El PDF bajo ambas columnas */
+  #info-text .pdf-preview{ grid-column: 1 / -1; }
+}
+
+/* Ajuste fino del h3 para que no “empuje” visualmente */
+#info-text .info-card-head h3{
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
 }

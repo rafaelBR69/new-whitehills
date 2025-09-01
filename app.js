@@ -55,92 +55,89 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ──────────────────────────────
-   3. Pop‑up  (formulario → Google Sheets)
+   3. Pop-up (formulario → Google Sheets)
+   ─ Solo abre al hacer clic en “Agendar visita”
 ──────────────────────────────── */
 
-/* Configuración */
-const TIME_DELAY = 19_000;     // 19 s
+const $id = (x) => document.getElementById(x);
 
-/* Referencias DOM (pueden NO existir en algunas páginas) */
-const modal        = document.getElementById('infoModal');
-const overlay      = document.getElementById('modalOverlay');
-const btnClose     = document.getElementById('modalClose');
-const leadForm     = document.getElementById('leadForm');
+/* Helpers pop-up: buscan el nodo cada vez (robusto si inyectas partials) */
+window.openModal  = () => { const m = $id('infoModal');  if (m) m.classList.add('show'); };
+window.closeModal = () => { const m = $id('infoModal');  if (m) m.classList.remove('show'); };
+window.openThank  = () => { const m = $id('thankModal'); if (m) m.classList.add('show'); };
+window.closeThank = () => { const m = $id('thankModal'); if (m) m.classList.remove('show'); };
 
-const thankModal   = document.getElementById('thankModal');
-const thankOverlay = document.getElementById('thankOverlay');
-const thankClose   = document.getElementById('thankClose');
-const thankOk      = document.getElementById('thankOk');
-const CANVAS_SIZE = 1024;
-
-/* Helper ─ añade listener sólo si el nodo existe */
-const on = (el, evt, fn) => el && el.addEventListener(evt, fn);
-
-/* Helpers pop‑up */
-const openModal  = () => modal      && modal.classList.add('show');
-const closeModal = () => modal      && modal.classList.remove('show');
-const openThank  = () => thankModal && thankModal.classList.add('show');
-const closeThank = () => thankModal && thankModal.classList.remove('show');
-
-/* Cerrar modales */
-on(btnClose   , 'click', closeModal);
-on(overlay    , 'click', closeModal);
-on(thankClose , 'click', closeThank);
-on(thankOk    , 'click', closeThank);
-on(thankOverlay,'click', closeThank);
-
-/* Apertura automática SOLO por tiempo */
-if (modal) {
-  setTimeout(openModal, TIME_DELAY);
-}
-
-/* ==== Envío a Google Sheets para TODOS los formularios data‑lead ==== */
-document.querySelectorAll('form[data-lead]').forEach(form => {
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-
-    /* ➊ Recogemos campos + honeypot ---------------------------------- */
-    const fd = new FormData(form);
-
-    /* Honeypot: si el campo invisible “website” NO está vacío ⇒ bot */
-    if (fd.get('website')?.trim()) {           // 👈
-      console.warn('[Spam‑bot] envío bloqueado'); // 👈
-      return;                                  // 👈  abortamos envío
-    }
-    fd.delete('website');                      // 👈  ya no lo necesitamos
-
-    const data = Object.fromEntries(fd.entries());
-
-    /* ➋ Fuente de la solicitud (para la hoja) */
-    data.origin = form.dataset.origin || 'Formulario Web';
-
-    try {
-      /* cierra pop‑up o muestra gracias, si existen */
-      if (typeof closeModal === 'function') closeModal();
-      if (typeof openThank  === 'function') openThank();
-
-      /* ➌ Envío sin CORS a Google Sheets */
-      await fetch(
-        'https://script.google.com/macros/s/AKfycbxlBgB28gJM1LyutP76PLlsJy9dWhuZTgwFwT3fYZrEH4CBZu0UQ8peW3hkz8Nnsukjqw/exec',
-        { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }
-      );
-
-      form.reset();          // limpia el formulario
-    } catch (err) {
-      console.error(err);
-      alert('Ups, no se pudo enviar. Inténtalo de nuevo.');
-    }
-  });
+/* Cierre del modal por overlay / botón X (delegación, funciona siempre) */
+document.addEventListener('click', (e) => {
+  const id = e.target.id;
+  if (id === 'modalOverlay' || id === 'modalClose')            closeModal();
+  if (id === 'thankOverlay' || id === 'thankClose' || id === 'thankOk') closeThank();
 });
 
-// — Helpers para (des)habilitar la info-card —
+/* ▶️ Abrir pop-up al pulsar “Agendar visita” (botón con clase .btn-visit) */
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.btn-visit');
+  if (!btn) return;
+
+  e.preventDefault();
+  const unit = btn.getAttribute('data-unit') || '';
+
+  // Pre-rellena la unidad y el origen en el formulario del modal
+  const form = $id('leadForm');
+  if (form) {
+    let u = form.querySelector('[name="unidad"]');
+    if (!u) { u = document.createElement('input'); u.type = 'hidden'; u.name = 'unidad'; form.appendChild(u); }
+    u.value = unit;
+
+    let origin = form.querySelector('[name="origin"]') || form.querySelector('[name="origen"]');
+    if (!origin) { origin = document.createElement('input'); origin.type = 'hidden'; origin.name = 'origin'; form.appendChild(origin); }
+    origin.value = 'Agendar visita – Web';
+  }
+
+  openModal();
+});
+
+/* ==== Envío a Google Sheets para TODOS los formularios data-lead ==== */
+/* Delegado: también funciona si el <form> se inyecta después */
+document.addEventListener('submit', async (e) => {
+  const form = e.target;
+  if (!form.matches('form[data-lead]')) return;
+
+  e.preventDefault();
+
+  // Honeypot
+  const fd = new FormData(form);
+  if (fd.get('website')?.trim()) {
+    console.warn('[Spam-bot] envío bloqueado');
+    return;
+  }
+  fd.delete('website');
+
+  const data = Object.fromEntries(fd.entries());
+  data.origin = form.dataset.origin || 'Formulario Web';
+
+  try {
+    closeModal();
+    openThank();
+
+    await fetch(
+      'https://script.google.com/macros/s/AKfycbxlBgB28gJM1LyutP76PLlsJy9dWhuZTgwFwT3fYZrEH4CBZu0UQ8peW3hkz8Nnsukjqw/exec',
+      { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }
+    );
+
+    form.reset();
+  } catch (err) {
+    console.error(err);
+    alert('Ups, no se pudo enviar. Inténtalo de nuevo.');
+  }
+}, true);
+
+// — Helpers existentes (si los usas en otros sitios) —
 function setInfoDisabled($out, disabled = true) {
   if (!$out || !$out.length) return;
   $out.toggleClass('is-disabled', disabled)
       .attr('aria-hidden', disabled ? 'true' : 'false');
 }
-
-// ID único para contenedores (evita colisiones)
 function uid(prefix='id') {
   return `${prefix}-${Math.random().toString(36).slice(2,9)}`;
 }
@@ -358,23 +355,25 @@ function uid(prefix='id') {
 
     function mostrarInfo(viviendas, key, $out) {
       const d = viviendas[key];
-      if (!d) { 
-        $out.html('<p>Sin datos.</p>'); 
-        return; 
-      }
+      if (!d) { $out.html('<p>Sin datos.</p>'); return; }
 
-      // URLs: prioriza web/print si existen; cae a plano_pdf
-      const webURL   = d.plano_pdf_web   || d.plano_pdf || '';
+      // URLs para el visor PDF
+      const webURL   = d.plano_pdf_web || d.plano_pdf || '';
       const printURL = d.plano_pdf_print || webURL;
 
-      // ID único para el contenedor de la galería
       const pdfId = uid('pdf-preview');
+      const priceHTML = d.coste_sin_iva ? `<div class="precio"><strong>${d.coste_sin_iva}</strong></div>` : '';
 
       $out.html(`
-        <div class="info-card-col col-left">
+        <!-- CABECERA A TODA ANCHURA -->
+        <div class="info-card-head">
           <h3>${d.numero_ud}
             <span class="badge badge-${d.estado}">${d.estado}</span>
           </h3>
+        </div>
+
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="info-card-col col-left">
           <ul class="list-unstyled info-list">
             <li>m2c SR (PB + P1): <strong>${d.m2c_sr}</strong></li>
             <li>m2c BR (Sótano): <strong>${d.m2c_br}</strong></li>
@@ -384,6 +383,7 @@ function uid(prefix='id') {
           </ul>
         </div>
 
+        <!-- COLUMNA DERECHA -->
         <div class="info-card-col col-right">
           <ul class="list-unstyled info-list">
             <li>Terrazas descubiertas: <strong>${d.terrazas_descubiertas}</strong></li>
@@ -392,37 +392,72 @@ function uid(prefix='id') {
             <li>Parcela: <strong>${d.parcela}</strong></li>
             <li>Jardín: <strong>${d.jardin}</strong></li>
           </ul>
-          <div class="precio"><strong>${d.coste_sin_iva || ''}</strong></div>
-
-          ${printURL ? `
-          <div class="pdf-actions" style="margin-top:.5rem">
-          </div>` : ``}
+          ${priceHTML}
+          ${printURL ? `<div class="pdf-actions" style="margin-top:.5rem"></div>` : ``}
         </div>
 
-        <!-- Galería PDF -->
+        <!-- PDF debajo de las 2 columnas -->
         <div class="pdf-preview" id="${pdfId}"></div>
+
+        <!-- CTA AGENDAR VISITA (debajo del PDF) -->
+        <div class="visit-actions">
+          <button type="button" class="btn-visit" data-unit="${d.numero_ud || key}">
+            Agendar visita
+          </button>
+        </div>
       `);
 
       // Activa la tarjeta
       setInfoDisabled($out, false);
 
-      // Render de la vista previa
+      // Render PDF
       if (webURL) {
         const $pdf = $out.find('#' + pdfId);
-
-        // Altura máxima responsive (ajústalo a tu gusto)
         const maxH =
           window.matchMedia('(min-width:1200px)').matches ? 560 :
           window.matchMedia('(min-width:768px)').matches  ? 500 : 420;
 
-        renderPdfGallery(webURL, $pdf, {
-          initialPage: 1,
-          maxHeight : maxH, // tope de altura del canvas
-          zoom      : 0.95  // 1 ocupa todo el ancho; <1 un poco más pequeño
-        });
+        renderPdfGallery(webURL, $pdf, { initialPage: 1, maxHeight: maxH, zoom: 0.95 });
       } else {
         console.warn('[PDF] La vivienda no tiene URL de plano:', key);
       }
+
+      // Click en "Agendar visita" → abre el pop-up y pre-rellena unidad
+      $out.off('click', '.btn-visit').on('click', '.btn-visit', function (e) {
+        e.preventDefault();
+        const unit = this.getAttribute('data-unit') || key;
+
+        // Rellena el formulario del modal con la unidad (si existe)
+        try {
+          if (window.leadForm) {
+            let inp = leadForm.querySelector('[name="unidad"]');
+            if (!inp) {
+              inp = document.createElement('input');
+              inp.type = 'hidden';
+              inp.name = 'unidad';
+              leadForm.appendChild(inp);
+            }
+            inp.value = unit;
+
+            // (opcional) origen
+            let org = leadForm.querySelector('[name="origin"]') || leadForm.querySelector('[name="origen"]');
+            if (!org) {
+              org = document.createElement('input');
+              org.type = 'hidden';
+              org.name = 'origin';
+              leadForm.appendChild(org);
+            }
+            org.value = 'Agendar visita – Web';
+          }
+        } catch(err){ console.warn('No pude pre-rellenar la unidad en el leadForm:', err); }
+
+        // Abre el modal con tu helper existente
+        if (typeof openModal === 'function') openModal();
+        else {
+          const m = document.getElementById('infoModal');
+          if (m) m.classList.add('show');
+        }
+      });
     }
 
     /* === Utilidades ========================================================= */
@@ -447,7 +482,9 @@ function uid(prefix='id') {
         const d = viviendas[key];
         if (!d) return;
 
-        const pdfURL = d.plano_pdf_web || d.plano_pdf || d.plano_pdf_print || '';
+        const pdfURL = (typeof getPlanoURL === 'function')
+          ? getPlanoURL(d)
+          : (d.plano_pdf_web || d.plano_pdf || d.plano_pdf_print || '');
 
         const html = `
           <article class="ruleta-card ruleta-card--wide" role="listitem" data-key="${key}">
@@ -474,17 +511,16 @@ function uid(prefix='id') {
                 </ul>
               </div>
 
-              <div class="ruleta-card__price precio mt-2">
-                <strong>${d.coste_sin_iva ? d.coste_sin_iva : 'No disponible €'}</strong>
+              <div class="ruleta-card__bottom">
+                <div class="ruleta-card__price precio">
+                  <strong>${d.coste_sin_iva ? d.coste_sin_iva : 'No disponible €'}</strong>
+                </div>
+                ${pdfURL ? `
+                  <a class="btn-ver-plano" href="${pdfURL}" target="_blank" rel="noopener">
+                    Ver plano
+                  </a>
+                ` : ``}
               </div>
-            </div>
-
-            <div class="ruleta-card__foot mt-2">
-              ${pdfURL ? `
-                <a class="btn-ver-plano" href="${pdfURL}" target="_blank" rel="noopener">
-                  Ver plano
-                </a>
-              ` : ``}
             </div>
           </article>`;
         $track.append(html);
@@ -732,7 +768,7 @@ function renderPdfGallery(url, $container, opts = {}) {
 
 // ---- 1. Config de los ítems --------------------------------------
 const PROMO_ITEMS = [
-  { key: 'units',     icon: 'edificio.webp'   },
+  { key: 'units',     icon: 'villa.svg'   },
   { key: 'parking',   icon: 'parking.webp'    },
   { key: 'beds',      icon: 'dormitorio.webp', extra: 'icon-dorm' },
   { key: 'plot',      icon: 'plano.png',      extra: 'icon-plano' },
@@ -824,3 +860,56 @@ document.addEventListener('DOMContentLoaded', () => {
     i18next.on('initialized', startPromo); // se ejecutará cuando acabe
   }
 });
+
+(() => {
+  const hero = document.querySelector('.section_1.parallax-bg');
+  if (!hero) return;
+
+  // Desactiva si el usuario prefiere menos movimiento o si es táctil
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  if (prefersReduced || isTouch) return;
+
+  let rafId = null;
+  let targetX = 0, targetY = 0;
+  let currentX = 0, currentY = 0;
+
+  const INTENSITY = 20;   // px máximos de desplazamiento desde el centro
+  const SMOOTH = 0.12;    // 0–1 (mayor = sigue más rápido)
+
+  function onMove(e){
+    const rect = hero.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top  + rect.height / 2;
+
+    // -0.5 .. 0.5 aprox (según distancia al centro)
+    const dx = (e.clientX - cx) / rect.width;
+    const dy = (e.clientY - cy) / rect.height;
+
+    targetX = dx * INTENSITY;
+    targetY = dy * INTENSITY;
+
+    if (!rafId) rafId = requestAnimationFrame(update);
+  }
+
+  function update(){
+    // Interpolación suave (lerp)
+    currentX += (targetX - currentX) * SMOOTH;
+    currentY += (targetY - currentY) * SMOOTH;
+
+    hero.style.backgroundPosition = `calc(50% + ${currentX}px) calc(50% + ${currentY}px)`;
+
+    if (Math.abs(currentX - targetX) > 0.1 || Math.abs(currentY - targetY) > 0.1) {
+      rafId = requestAnimationFrame(update);
+    } else {
+      rafId = null;
+    }
+  }
+
+  // Solo trackea el mouse cuando está sobre el hero (mejor perf)
+  hero.addEventListener('mousemove', onMove, { passive: true });
+  hero.addEventListener('mouseleave', () => {
+    targetX = targetY = 0;        // vuelve al centro
+    if (!rafId) rafId = requestAnimationFrame(update);
+  });
+})();

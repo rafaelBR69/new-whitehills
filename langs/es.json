@@ -15,7 +15,7 @@
   },
   "hero": {
     "welcome": "WhiteHills",
-    "tagline": "Un refugio<br> entre el mar y la luz"
+    "cta": "Ver villas"
   },
   "section3": {
     "title": "16 villas modernas en Torreblanca, Fuengirola",
@@ -26,7 +26,8 @@
   "video": {
     "blockTitle": "Villas sostenibles con piscina privada en la Costa del Sol",
     "blockParagraph": "Ubicadas en un entorno privilegiado, estas villas combinan eficiencia energética, acabados premium y diseño contemporáneo. Ofrecen un equilibrio perfecto entre elegancia y entorno natural, con piscina privada y espacios exteriores pensados para disfrutar del clima de la Costa del Sol durante todo el año.",
-    "imgAlt": "Vista previa del vídeo de las villas en la Costa del Sol"
+    "imgAlt": "Vista previa del vídeo de las villas en la Costa del Sol",
+    "ctaBrochure": "OBTENER BROCHURE"
   },
   "interior": {
     "title": "Interiores espaciosos y diseño funcional",

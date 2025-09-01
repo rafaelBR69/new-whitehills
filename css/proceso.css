@@ -1,0 +1,120 @@
+/* =====================================================
+   Proceso de compra (namespaced: proc-*)
+   ===================================================== */
+.proc-page {
+  --ff-body: 'Montserrat', sans-serif;
+  --brand-color: var(--brand-color, #092B3F);
+  --accent-color: var(--second-color, #8C7223);
+  --ink-1: #4c362a;
+  --ink-2: #5C4033;
+  --card: #ffffff;
+  --card-alt: #fff9f3;
+  --border: #c08f5c8e;
+
+  /* Fondo de página (puedes cambiarlo) */
+  --page-bg: #a17020;
+}
+
+/* Fondo aplicado solo en esta página */
+body.proc-page{ background: var(--page-bg); }
+
+/* Si usas header fijo y algún ancla, que no quede tapado */
+.proc-page [id]{ scroll-margin-top: 110px; }
+
+/* = Hero ================================================================ */
+.proc-hero{
+  position: relative;
+  min-height: auto;
+  padding: clamp(12px, 2vw, 24px) 0;
+}
+.proc-hero__img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.12);
+}
+
+/* = FAQ ================================================================ */
+.proc-faq{
+  max-width: 900px;
+  margin: clamp(28px, 5vw, 64px) auto;
+  padding: 0 clamp(12px, 2.5vw, 24px);
+  font-family: var(--ff-body);
+}
+
+/* Cada item */
+.proc-faq__item{
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.proc-faq__item[open]{
+  background: var(--card);
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  border-color: color-mix(in srgb, var(--accent-color) 45%, #ffffff);
+}
+
+/* Cabecera */
+.proc-faq__summary{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: 1.2rem 1.5rem;
+  font: 600 1.8rem/1 var(--ff-body);
+  color: var(--ink-2);
+  list-style: none;
+  user-select: none;
+}
+.proc-faq__item .proc-faq__summary::-webkit-details-marker{ display: none; }
+
+/* Flecha */
+.proc-faq__summary::after{
+  content: "";
+  margin-left: auto;
+  width: 10px; height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform .2s ease;
+  opacity: .9;
+}
+.proc-faq__item[open] .proc-faq__summary::after{
+  transform: rotate(45deg);
+}
+
+/* Estados */
+.proc-faq__summary:hover{ background: #fffefb; }
+.proc-faq__summary:focus{ outline: none; }
+.proc-faq__summary:focus-visible{
+  outline: 0;
+  box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--accent-color) 30%, #ffffff);
+  border-radius: 8px;
+}
+
+/* Contenido */
+.proc-faq__content{
+  padding: 0 1.5rem 1.5rem;
+  font: 400 1.6rem/1.75 var(--ff-body);
+  color: var(--ink-1);
+  margin: 0;
+}
+
+/* = Responsive ========================================================= */
+@media (max-width: 992px){
+  .proc-faq{ max-width: 820px; }
+  .proc-faq__summary{ font-size: 1.7rem; }
+}
+@media (max-width: 768px){
+  .proc-faq{ max-width: 640px; }
+  .proc-faq__summary{ font-size: 1.6rem; padding: 1rem 1.25rem; }
+  .proc-faq__content{ font-size: 1.5rem; padding: 0 1.25rem 1.25rem; }
+}
+@media (max-width: 480px){
+  .proc-hero__img{ border-radius: 10px; }
+  .proc-faq{ padding: 0 12px; }
+}

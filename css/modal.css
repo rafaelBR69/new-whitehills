@@ -1,0 +1,178 @@
+/* ===== Variables (puedes ajustarlas por página) ===== */
+:root{
+  --modal-width: 920px;              /* ancho máximo del pop-up */
+  --modal-bg: none;                  /* imagen de fondo, se define en línea */
+  --modal-tint: rgba(0,0,0,.45);     /* tinte encima de la imagen */
+  --ff-body    : 'Montserrat', sans-serif; 
+}
+
+/* ===== Base del modal (igual que antes) ===== */
+.modal{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .25s ease;
+  z-index: 9999;
+}
+.modal__overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  cursor: pointer;
+}
+
+/* ===== Caja ===== */
+.modal__box{
+  position: relative;
+  background: #ffffff;               /* fallback si no hay imagen */
+  padding: 3rem 2.8rem;
+  border-radius: 16px;
+  max-width: var(--modal-width, 680px);
+  width: 92%;
+  box-shadow: 0 18px 40px rgba(0,0,0,.28);
+  z-index: 1;
+  text-align: center;
+  transform: translateY(6px) scale(.98);
+  transition: transform .25s ease;
+}
+
+/* Estado visible */
+.modal.show{ visibility: visible; opacity: 1; }
+.modal.show .modal__box{ transform: translateY(0) scale(1); }
+
+/* ===== Modo con imagen de fondo =====
+   Aplica la clase .modal--with-bg al contenedor .modal y
+   pasa la imagen con la variable --modal-bg en línea. */
+.modal--with-bg .modal__box{
+  color: #fff;
+  background: #000 center/cover no-repeat;
+  background-image: var(--modal-bg);
+}
+
+/* Tinte para mejorar la legibilidad del contenido sobre la foto */
+.modal--with-bg .modal__box::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--modal-tint);
+  border-radius: inherit;
+  z-index: 0;
+}
+
+/* Asegura que el contenido vaya por encima del tinte */
+.modal__box > *{ position: relative; z-index: 1; }
+
+/* ===== Tipografía / tamaños un poco mayores ===== */
+.modal__title{
+  font-family: var(--ff-body);
+  font-weight: 300;
+  font-size: 4rem;               /* ↑ */
+  margin-bottom: 2rem;
+  color: var(--brand-color, #5C4033);
+}
+.modal--with-bg .modal__title{ color: #fff; }
+
+.modal__paragraph{
+  font-size: 1.8rem;               /* ↑ */
+  line-height: 1.7;
+  margin: .2rem 0 1.2rem;
+  color: inherit;
+}
+
+/* ===== Formulario más grande ===== */
+.modal__form{
+  display: flex; flex-direction: column; gap: 1.4rem; /* ↑ */
+  text-align: left;
+}
+
+.modal__form label{
+  font-size: 2rem;               /* ↑ */
+  font-family: var(--ff-body);
+  color: var(--brand-color, #5C4033);
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.modal--with-bg .modal__form label{ color: #fff; }
+
+.modal__form input,
+.modal__form textarea{
+  padding: 1.2rem 1.4rem;          /* ↑ */
+  border: 2px solid var(--brand-color, #5C4033);
+  border-radius: 10px;             /* ↑ */
+  font-size: 1.6rem;               /* ↑ */
+  background: #fff;
+  color: #222;
+}
+
+/* Campos sobre imagen: más contraste y ligera transparencia */
+.modal--with-bg .modal__form input,
+.modal--with-bg .modal__form textarea{
+  background: rgba(255, 255, 255, 0.384);
+  border-color: rgba(255, 255, 255, 0.534);
+  color: #222;
+}
+
+.modal__send{
+  background: #194f28dc;
+  color: #ffffff;
+  font-family: var(--ff-body);
+  padding: .9rem 1.6rem;
+  border: none;
+  border-radius: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform .15s ease, opacity .15s ease;
+
+  /* 👇 clave para centrar */
+  display: block;            /* deja de ser inline */
+  width: max-content;        /* ancho al contenido */
+  margin-inline: auto;       /* centra horizontal */
+}
+.modal__send:hover{ opacity:.92; }
+.modal__send:active{ transform: scale(.92); }
+
+
+/* Cerrar (X) */
+.modal__close{
+  position: absolute;
+  top: .8rem; right: .8rem;        /* ↑ */
+  background: none; border: none;
+  font-size: 3.6rem;               /* ↑ */
+  color: currentColor;
+  cursor: pointer;
+  transition: transform .15s ease, opacity .15s ease;
+}
+.modal__close:hover{ opacity: .85; }
+.modal__close:active{ transform: scale(.92); }
+
+/* Foco accesible */
+.modal__close:focus-visible,
+.modal__send:focus-visible,
+.modal__form input:focus-visible,
+.modal__form textarea:focus-visible{
+  outline: 3px solid rgba(59,77,43,.35);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (min-width: 768px){
+  .modal__box{ padding: 3.2rem 3.2rem; }       /* ↑ en desktop */
+}
+@media (max-width: 420px){
+  .modal__box{ padding: 2.2rem 1.8rem; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .modal, .modal__box{ transition: none; }
+}
+
+/* Honeypot */
+.hp-wrapper{
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px; height: 1px; overflow: hidden;
+}
