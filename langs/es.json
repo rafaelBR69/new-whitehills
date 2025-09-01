@@ -8,7 +8,8 @@
     "home": "INICIO",
     "contact": "CONTACTO",
     "availability": "DISPONIBILIDAD",
-    "process": "PROCESO DE COMPRA"
+    "process": "PROCESO DE COMPRA",
+    "location": "LOCALIZACIÓN"
   },
   "btn": {
     "contact": "Contactar"
@@ -18,7 +19,7 @@
     "cta": "Ver villas"
   },
   "section3": {
-    "title": "16 villas modernas en Torreblanca, Fuengirola",
+    "title": "12 villas modernas en Torreblanca, Fuengirola",
     "paragraph1": "WhiteHills Villas ha sido concebida como una síntesis perfecta entre elegancia contemporánea, confort moderno y conexión con la naturaleza. Situadas en una ladera tranquila, estas villas exclusivas ofrecen vistas panorámicas al mar Mediterráneo, luz natural todo el día y estancias abiertas al exterior.",
     "paragraph2": "Cada villa combina elegancia arquitectónica, materiales de alta gama y diseño eficiente para una experiencia de vida excepcional. Un refugio privado junto al mar, a sólo unos minutos del corazón de Fuengirola y Málaga.",
     "button": "CONTACTAR"
@@ -74,13 +75,13 @@
     "thanksBtn": "Cerrar"
   },
   "contact": {
-    "title": "Contacto | Balcones del Pinillo",
+    "title": "Contacto | WhiteHills",
     "heroTitle": "Póngase en contacto con nosotros",
     "heroSub": "Estamos a un mensaje de distancia",
     "imgAlt": "Persona rellenando un formulario",
     "formTitle": "Rellene sus datos",
     "infoTitle": "También puede llamarnos",
-    "infoText": "Teléfono: +34 621 28 34 45 · Email: info@blancareal.com"
+    "infoText": "Teléfono: +34 621 28 34 45 · Email: marcelo@blancareal.com"
   },
   "availability": {
     "heroTitle": "Consulta la disponibilidad",
@@ -133,69 +134,102 @@
     "SO": "Suroeste"
   },
   "footer": {
-    "contact": "info@blancareal.com | +34 621 28 34 45",
+    "contact": "marcelo@blancareal.com | +34 621 28 34 45",
     "follow": "Síganos",
     "legal": "Aviso legal",
     "cookies": "Política de cookies",
     "privacy": "Política de privacidad",
-    "copyright": "©2025 | Balcones del Pinillo",
+    "copyright": "©2025 | WhiteHills",
     "developer": "Desarrollado por Marketing BlancaReal"
   },
   "legalNotice": {
-      "pageTitle": "Aviso legal | Balcones del Pinillo",
-      "content": "<h1>Aviso legal</h1>\n\n<p><strong>Para dar cumplimiento a lo establecido en la Ley&nbsp;34/2002 de 11&nbsp;de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE),</strong> a continuación se indican los datos de información general del sitio web <em>www.balconesdelpinillo.com</em>.</p>\n\n<h2>Entidad</h2>\n<p><strong>Nombre comercial:</strong> BLANCA&nbsp;REAL<br>\n<strong>Denominación social:</strong> AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, S.L.<br>\n<strong>CIF:</strong> B93153021<br>\n<strong>Domicilio social:</strong> Calle Monte Calahonda&nbsp;10, 29649 Mijas Costa<br>\n<strong>Teléfono:</strong> 952&nbsp;599&nbsp;159<br>\n<strong>Email:</strong> <a href='mailto:info@blancareal.com'>info@blancareal.com</a><br>\nInscrita en el Registro Mercantil de Málaga, Hoja MA‑00111198, Tomo 04941, Libro 3848</p>\n\n<h2>Utilización del sitio web</h2>\n<p>El sitio web se ofrece con fines promocionales, informando sobre los distintos servicios prestados por AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, empresa dedicada a prestar servicios como Agencia Inmobiliaria. AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO podrá dejar de prestar los servicios de información ofrecidos en este sitio web sin mediar comunicación con el usuario, sin que ello genere obligación legal alguna hacia éste o terceros.</p>\n\n<h2>Privacidad</h2>\n<p>La información que AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO pueda recabar de los usuarios de este sitio web se utilizará exclusivamente para facilitar la información solicitada y/o para contestar las consultas planteadas. Para más información consulte nuestra <a href='/privacy-policy.html'>Política de Privacidad</a>.</p>\n\n<h2>Vínculos a terceros</h2>\n<p>En caso de acceder a sitios de terceros mediante vínculos, el usuario quedará regido por los Términos de Uso y la Política de Privacidad del nuevo sitio, aceptando que AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO no asumirá responsabilidad ni obligación legal por el uso de tales sitios.</p>\n\n<h2>Propiedad intelectual</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, por sí mismo o como cesionario o licenciatario, es titular de todos los derechos de propiedad intelectual e industrial de los elementos que componen este sitio web, quedando así todos los derechos reservados. Queda expresamente prohibida la reproducción, distribución o comunicación pública —total o parcial— de los contenidos de esta web con fines comerciales, conforme a los artículos&nbsp;8 y&nbsp;21 de la Ley de Propiedad Intelectual. El usuario puede visualizar, imprimir y almacenar los contenidos siempre que sea para uso estrictamente personal y privado.</p>\n\n<h2>Condiciones de uso y responsabilidad</h2>\n<p>El usuario se compromete a utilizar la web de AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO conforme a la legalidad, la moral y el orden público, absteniéndose de:</p>\n<ul>\n  <li>Uso no autorizado o con fines fraudulentos del sitio web.</li>\n  <li>Intentar accesos no autorizados por su legítimo titular.</li>\n  <li>Uso del portal con fines ilícitos o lesivos para terceros, o con intención de perjudicar al sitio o a otros usuarios.</li>\n  <li>Producir daños en los sistemas que la web pudiera tener instalados.</li>\n</ul>\n<p>El titular sólo será responsable de los contenidos creados por él mismo, no de los enlaces o contenidos externos añadidos por terceros.</p>\n\n<p>El propietario se reserva el derecho de realizar, sin previo aviso, las alteraciones que considere oportunas —tanto en contenidos como en servicios—, así como de aprobar o retirar contenidos añadidos por terceros que no considere oportunos.</p>\n\n<h2>Modificaciones de los Términos de Uso</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO se reserva el derecho de modificar estos Términos de Uso y la Política de Privacidad cuando lo estime conveniente. El usuario se obliga a revisar periódicamente dichos términos, ya que pueden cambiar sin previo aviso.</p>\n\n<h2>Ley aplicable y jurisdicción</h2>\n<p>La ley aplicable será la española. Para la resolución de cualquier conflicto que pueda surgir con ocasión de la visita al portal o del uso de los contenidos publicados, las partes se someterán a los Juzgados y Tribunales que correspondan.</p>"
+      "pageTitle": "Aviso legal | WhiteHills",
+      "content": "<h1>Aviso legal</h1>\n\n<p><strong>Para dar cumplimiento a lo establecido en la Ley&nbsp;34/2002 de 11&nbsp;de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE),</strong> a continuación se indican los datos de información general del sitio web <em>www.balconesdelpinillo.com</em>.</p>\n\n<h2>Entidad</h2>\n<p><strong>Nombre comercial:</strong> BLANCA&nbsp;REAL<br>\n<strong>Denominación social:</strong> AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, S.L.<br>\n<strong>CIF:</strong> B93153021<br>\n<strong>Domicilio social:</strong> Calle Monte Calahonda&nbsp;10, 29649 Mijas Costa<br>\n<strong>Teléfono:</strong> 952&nbsp;599&nbsp;159<br>\n<strong>Email:</strong> <a href='mailto:infoo@blancareal.com'>info@blancareal.com</a><br>\nInscrita en el Registro Mercantil de Málaga, Hoja MA‑00111198, Tomo 04941, Libro 3848</p>\n\n<h2>Utilización del sitio web</h2>\n<p>El sitio web se ofrece con fines promocionales, informando sobre los distintos servicios prestados por AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, empresa dedicada a prestar servicios como Agencia Inmobiliaria. AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO podrá dejar de prestar los servicios de información ofrecidos en este sitio web sin mediar comunicación con el usuario, sin que ello genere obligación legal alguna hacia éste o terceros.</p>\n\n<h2>Privacidad</h2>\n<p>La información que AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO pueda recabar de los usuarios de este sitio web se utilizará exclusivamente para facilitar la información solicitada y/o para contestar las consultas planteadas. Para más información consulte nuestra <a href='/privacy-policy.html'>Política de Privacidad</a>.</p>\n\n<h2>Vínculos a terceros</h2>\n<p>En caso de acceder a sitios de terceros mediante vínculos, el usuario quedará regido por los Términos de Uso y la Política de Privacidad del nuevo sitio, aceptando que AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO no asumirá responsabilidad ni obligación legal por el uso de tales sitios.</p>\n\n<h2>Propiedad intelectual</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, por sí mismo o como cesionario o licenciatario, es titular de todos los derechos de propiedad intelectual e industrial de los elementos que componen este sitio web, quedando así todos los derechos reservados. Queda expresamente prohibida la reproducción, distribución o comunicación pública —total o parcial— de los contenidos de esta web con fines comerciales, conforme a los artículos&nbsp;8 y&nbsp;21 de la Ley de Propiedad Intelectual. El usuario puede visualizar, imprimir y almacenar los contenidos siempre que sea para uso estrictamente personal y privado.</p>\n\n<h2>Condiciones de uso y responsabilidad</h2>\n<p>El usuario se compromete a utilizar la web de AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO conforme a la legalidad, la moral y el orden público, absteniéndose de:</p>\n<ul>\n  <li>Uso no autorizado o con fines fraudulentos del sitio web.</li>\n  <li>Intentar accesos no autorizados por su legítimo titular.</li>\n  <li>Uso del portal con fines ilícitos o lesivos para terceros, o con intención de perjudicar al sitio o a otros usuarios.</li>\n  <li>Producir daños en los sistemas que la web pudiera tener instalados.</li>\n</ul>\n<p>El titular sólo será responsable de los contenidos creados por él mismo, no de los enlaces o contenidos externos añadidos por terceros.</p>\n\n<p>El propietario se reserva el derecho de realizar, sin previo aviso, las alteraciones que considere oportunas —tanto en contenidos como en servicios—, así como de aprobar o retirar contenidos añadidos por terceros que no considere oportunos.</p>\n\n<h2>Modificaciones de los Términos de Uso</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO se reserva el derecho de modificar estos Términos de Uso y la Política de Privacidad cuando lo estime conveniente. El usuario se obliga a revisar periódicamente dichos términos, ya que pueden cambiar sin previo aviso.</p>\n\n<h2>Ley aplicable y jurisdicción</h2>\n<p>La ley aplicable será la española. Para la resolución de cualquier conflicto que pueda surgir con ocasión de la visita al portal o del uso de los contenidos publicados, las partes se someterán a los Juzgados y Tribunales que correspondan.</p>"
   },
   "cookiePolicy": {
-    "pageTitle": "Política de cookies | Balcones del Pinillo",
+    "pageTitle": "Política de cookies | WhiteHills",
     "content": "<div class=\"entry-content\">\n\n\n<p>En cumplimiento de la Ley de Servicios de la Sociedad de la Información y de Comercio Electrónico y conforme a la Directiva Europea 2009/136/CE, así como a las Directrices 05/2020 del Comité Europeo de Protección de Datos, www.nylvahomes.com le informa sobre el uso de cookies y solicita su consentimiento para seguir utilizándolas con el mero hecho de continuar navegando por este sitio web.</p>\n\n<p>Las cookies son pequeños archivos que se descargan y almacenan en el dispositivo del usuario al acceder a determinados sitios web, con la finalidad de almacenar información de navegación, reconocer el dispositivo o recopilar datos con fines estadísticos. En ningún caso contienen virus ni sistemas perjudiciales para el usuario.<br>Al aceptar el aviso de cookies que aparece al iniciar la navegación o al configurar las cookies de este sitio, usted acepta expresamente el uso de estas cookies. Si las deshabilita, la navegación puede no ser óptima y algunas funcionalidades podrían no funcionar correctamente.</p>\n\n<p><strong>TIPOS DE COOKIES</strong> (fuente: Agencia Española de Protección de Datos)</p>\n<ol><li><em>Según la entidad que las gestione</em>:\n<ul><li>Cookies propias: enviadas al equipo del usuario desde un dominio gestionado por el editor.</li><li>Cookies de terceros: enviadas desde un dominio no gestionado por el editor.</li></ul></li>\n<li><em>Según el tiempo de activación</em>:\n<ul><li>Cookies de sesión: recogen y almacenan datos mientras el usuario navega.</li><li>Cookies persistentes: los datos permanecen almacenados y pueden ser tratados durante un periodo definido.</li></ul></li>\n<li><em>Según su finalidad</em>:\n<ul><li>Cookies técnicas</li><li>Cookies de personalización</li><li>Cookies de análisis</li></ul></li></ol>\n\n<p>BLANCA REAL utiliza cookies con los fines que se detallan a continuación. Si en el futuro se emplean otras tecnologías, se informará debidamente.</p>\n\n<h2>Cookies técnicas</h2>\n<p>Estas cookies son esenciales para la navegación segura y el correcto funcionamiento del sitio. Están habilitadas por defecto y no pueden rechazarse.</p>\n<ul><li>Navegación segura e ininterrumpida.</li><li>Guardar preferencias sobre aceptación o rechazo de cookies.</li><li>Compartir contenido en redes sociales.</li></ul>\n\n<h2>Cookies analíticas</h2>\n<p>Permiten el seguimiento y análisis del comportamiento de los usuarios con el fin de introducir mejoras.</p>\n<table><thead><tr><th>Cookie</th><th>Finalidad</th><th>Propietario</th></tr></thead><tbody><tr><td>fr</td><td>Medición y personalización de Facebook. Duración 90 días.</td><td>Facebook</td></tr><tr><td>Test_cookie</td><td>Evalúa eficacia de campañas online. DoubleClick/Google Ads.</td><td>Google</td></tr><tr><td>NID</td><td>Servicios Google (Maps, búsqueda). Cookie persistente.</td><td>Google</td></tr><tr><td>_ga, _gat, _gid, _secure_3PAPSID, _secure_3PSID</td><td>Google Analytics. Identificador anónimo.</td><td>Google Analytics</td></tr><tr><td>Gat_gtag_UA</td><td>Información de campaña vinculada a Analytics y AdWords.</td><td>Google</td></tr><tr><td>Optanonalertboxclosed, optanonconsent…</td><td>Gestión de preferencias de cookies.</td><td>OneTrust</td></tr></tbody></table>\n\n<h2>Control y eliminación de cookies</h2>\n<p>Puede aceptar o rechazar cookies mediante el módulo de configuración o desde la opción correspondiente de su navegador. Si limita las cookies, algunas funciones interactivas podrían no estar disponibles.</p>\n<p>Guías para la gestión de cookies en navegadores populares:</p>\n<ul><li>Firefox: <a href=\"https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias\" target=\"_blank\" rel=\"noopener\">Instrucciones</a></li><li>Chrome: <a href=\"https://support.google.com/accounts/answer/61416?hl=es\" target=\"_blank\" rel=\"noopener\">Instrucciones</a></li><li>Edge/Explorer: <a href=\"https://support.microsoft.com/es-es/help/17442/windows-internet-explorer-delete-manage-cookies\" target=\"_blank\" rel=\"noopener\">Instrucciones</a></li><li>Safari: <a href=\"https://support.apple.com/es-es/guide/safari/sfri11471/mac\" target=\"_blank\" rel=\"noopener\">Instrucciones</a></li><li>Opera: <a href=\"https://help.opera.com/Windows/11.50/es-ES/cookies.html\" target=\"_blank\" rel=\"noopener\">Instrucciones</a></li></ul>\n</div>"
   },
   "privacyPolicy": {
-    "pageTitle": "Política de privacidad | Balcones del Pinillo",
+    "pageTitle": "Política de privacidad | WhiteHills",
     "content": "<h1>Política de privacidad</h1>\n\n<p>AZUGA SERVICIO GLOBAL INMOBILIARIO&nbsp;S.L. cumple con las obligaciones impuestas en el Reglamento&nbsp;(UE)&nbsp;2016/679 del Parlamento Europeo y del Consejo (27&nbsp;abril&nbsp;2016) y la Ley Orgánica&nbsp;3/2018, de Protección de Datos Personales y garantía de los derechos digitales, garantizando los derechos de los afectados.</p>\n\n<p>Asimismo, en aplicación de la Ley&nbsp;34/2002 de Servicios de la Sociedad de la Información y de Comercio Electrónico, solicitará consentimiento previo para el envío de comunicaciones comerciales.</p>\n\n<p>Los usuarios serán informados sobre la identidad del responsable, las finalidades del tratamiento y la posibilidad de ejercer sus derechos antes de facilitar datos.</p>\n\n<h2>1.&nbsp;Responsable del tratamiento</h2>\n<p><strong>AZUGA SERVICIO GLOBAL INMOBILIARIO&nbsp;S.L.</strong><br>CIF&nbsp;B93153021<br>C/ Monte&nbsp;Calahonda&nbsp;10, 29649&nbsp;Mijas&nbsp;Costa (Málaga)<br>Tel.&nbsp;952&nbsp;599&nbsp;159 · <a href=\\\"mailto:info@blancareal.com\\\">info@blancareal.com</a><br>Registro Mercantil de Málaga: Hoja&nbsp;MA‑00111198, Tomo&nbsp;04941, Libro&nbsp;3848</p>\n\n<h2>2.&nbsp;Finalidad del tratamiento</h2>\n<p>Atender su solicitud de contacto o la relación comercial solicitada y, en su caso, remitirle comunicaciones comerciales (previo consentimiento). Los datos se conservarán mientras exista relación con la entidad.</p>\n\n<h2>3.&nbsp;Legitimación</h2>\n<p>Relación contractual para la finalidad principal y consentimiento para comunicaciones comerciales. Los datos deben ser veraces y actualizados; se suprimirán o rectificarán cuando dejen de ser necesarios.</p>\n\n<h2>4.&nbsp;Destinatarios</h2>\n<p>No se cederán datos a terceros salvo obligación legal. No hay transferencias internacionales, salvo prestación de servicios por proveedores en terceros países con garantías adecuadas.</p>\n\n<h2>5.&nbsp;Derechos de los interesados</h2>\n<ul>\n  <li>Acceso, rectificación o supresión.</li>\n  <li>Limitación y oposición al tratamiento.</li>\n  <li>Portabilidad de los datos.</li>\n  <li>Retirada del consentimiento.</li>\n  <li>No ser objeto de decisiones automatizadas.</li>\n</ul>\n<p>Para ejercerlos, envíe solicitud (y copia del DNI) a las direcciones indicadas.</p>\n\n<h2>6.&nbsp;Reclamaciones</h2>\n<p>Puede reclamar ante la Agencia Española de Protección de Datos: <a href=\\\"https://www.aepd.es\\\" target=\\\"_blank\\\">www.aepd.es</a>.</p>\n\n<p><em>El uso del Portal implica la aceptación de estas condiciones. Revise periódicamente esta política; puede variar.</em></p>"
-  },
-  "process": {
-    "pageTitle": "Proceso de Compra | Balcones del Pinillo",
-    "heroTitle": "Proceso de Compra",
-    "heroAlt": "Esquema del proceso de compra de vivienda",
-    "faq": {
-      "q1": "¿Qué implica que la promoción sea una cooperativa y en qué se diferencia de comprar a un promotor tradicional?",
-      "a1": "<ul>\n<li><strong>Participación activa del socio:</strong> puedes votar y decidir sobre acabados, distribución y resto de hitos del proyecto.</li>\n<li><strong>Ahorro 15‑20 %</strong> frente a un promotor tradicional (se elimina su margen).</li>\n<li><strong>Ventajas fiscales:</strong> la cooperativa está exenta de ITP/AJD en la compra del suelo.</li>\n<li><strong>Gestión profesional:</strong> un equipo experto se ocupa de la parte administrativa, comercial, técnica y financiera.</li>\n<li><strong>Aportaciones custodiadas:</strong> se ingresan en una cuenta notarial; solo se liberan en los supuestos fijados en el acta de depósito.</li>\n<li><strong>Seguro o aval:</strong> tras la licencia, todas las cantidades se garantizan mediante aval o póliza de caución conforme a la LOE.</li>\n</ul>",
-
-      "q2": "¿Cuánto tengo que abonar para la reserva y cómo está protegido mi dinero (avales o pólizas de caución)?",
-      "a2": "<ul>\n<li><strong>Reserva:</strong> normalmente entre 3 000 € y 5 000 € (según proyecto).</li>\n<li><strong>Depósito notarial:</strong> el importe se ingresa en una cuenta de depósito regulada por acta notarial que define cuándo puede utilizarse.</li>\n<li><strong>Antes de la licencia:</strong> la LOE no exige aval ni cuenta especial, pero la cooperativa usa cuenta notarial para mayor seguridad.</li>\n<li><strong>Disposición de fondos:</strong> siempre requiere la autorización del notario.</li>\n</ul>",
-
-      "q3": "¿Cuál es el calendario aproximado de la obra (licencia, inicio de construcción, entrega de llaves) y qué ocurre si hay retrasos?",
-      "a3": "<ul>\n<li>Constitución y organización de la cooperativa.</li>\n<li>Solicitud y <strong>obtención de licencia de obra</strong> (plazo variable según Ayuntamiento).</li>\n<li><strong>Inicio de construcción</strong> tras la licencia y el cierre financiero.</li>\n<li><strong>Ejecución de la obra</strong>: 12‑24 meses según proyecto.</li>\n<li><strong>Escritura de adjudicación</strong> y entrega de llaves.</li>\n<li>En caso de retrasos se aplicarán las cláusulas de penalización o prórroga recogidas en los estatutos y en el contrato de ejecución.</li>\n</ul>",
-
-      "q4": "¿Qué gastos e impuestos adicionales tendré que asumir (IVA, notaría, registro, plusvalía, comunidad) y cuándo se pagan?",
-      "a4": "<ul>\n<li><strong>IVA 10 %</strong> (o el tipo vigente) sobre cada pago de la vivienda.</li>\n<li><strong>Notaría y registro:</strong> 0,5‑1 % del precio.</li>\n<li><strong>AJD:</strong> 1,2 % en Andalucía (al ser entrega sujeta a IVA).</li>\n<li><strong>Cuota de comunidad</strong> desde la entrega, según cuota de participación.</li>\n<li><strong>Plusvalía municipal:</strong> la abona la cooperativa, no el socio.</li>\n</ul>",
-
-      "q5": "Si no resido en España, ¿qué trámites necesito (NIE, cuenta bancaria, poder notarial) y quién puede ayudarme con la documentación en otro idioma?",
-      "a5": "<ul>\n<li>Documento de identidad vigente de tu país (DNI o pasaporte).</li>\n<li><strong>NIE</strong>, obligatorio para cualquier compra inmobiliaria en España.</li>\n<li><strong>Poder notarial:</strong> no es necesario si asistirás personalmente a la firma; en caso contrario puede otorgarse en España o en un consulado español.</li>\n<li>Si el poder se otorga ante notario extranjero necesitará <em>apostilla de La Haya</em> y traducción jurada.</li>\n<li>Nuestro Departamento Legal puede gestionar NIE, poderes, traducciones y representar al cliente en su idioma.</li>\n</ul>"
-    }
   },
   "home": {
     "promo": {
-      "units": {
-        "label": "",
-        "value": 20
-      },
-      "parking":{
-        "label":"",
-        "value": 40
-      },
-      "beds": {
-        "label": "",
-        "value": 3
-      },
-      "plot": {
-        "label": "m²",
-        "value": 1803
-      },
-      "sunnydays": {
-        "label": "días de sol/año",
-        "value": 300
-      }
+      "units":   { "label": "Viviendas",            "value": 12 },
+      "parking": { "label": "Plazas de garaje",     "value": 1  },
+      "beds":    { "label": "Dormitorios",          "value": 3  },
+      "plot":    { "label": "m² de parcela",        "value": 1803 },
+      "mins":    { "label": "min. a la playa",       "value": 5  },
+      "sunnydays": { "label": "días de sol/año",    "value": 320 }
+    }
+  },
+  "ui.features3.title1": "Mar, naturaleza y serenidad",
+  "ui.features3.text1_html": "En Torreblanca, una de las zonas residenciales más exclusivas de Fuengirola, vivirá rodeado de tranquilidad y privacidad, a sólo minutos del mar.<br><br>Las playas de Carvajal y Torreblanca destacan por su ambiente relajado y auténticos chiringuitos frente al Mediterráneo.",
+
+  "ui.features3.title2": "Conexiones y servicios de primer nivel",
+  "ui.features3.text2_html": "Una ubicación estratégica que combina privacidad y accesibilidad:<br>15 min al centro de Fuengirola.<br>35 min al Aeropuerto Internacional de Málaga.<br>Conexión directa con la autovía y el AVE Madrid–Málaga.<br><br>Además, tendrás a tu alcance colegios de prestigio como Salliver y el Colegio Finlandés, restaurantes gourmet, supermercados, centros de salud y el Centro Comercial Miramar.",
+
+  "ui.features3.title3": "Estilo de vida mediterráneo",
+  "ui.features3.text3_html": "Con más de 330 días de sol al año y una temperatura media de 19&nbsp;ºC, la Costa del Sol es sinónimo de bienestar y exclusividad.<br><br>Más de 50 campos de golf, una vibrante oferta cultural y una comunidad internacional hacen de Málaga un enclave único para quienes buscan lo mejor de la vida junto al mar.",
+  "unit": {
+    "info": {
+      "empty": "Sin datos.",
+      "m2c_sr": "m2c SR (PB + P1)",
+      "m2c_br": "m2c BR (Sótano)",
+      "castillete": "Castillete",
+      "terrazas_cubiertas": "Terrazas cubiertas",
+      "pergola": "Pérgola",
+      "terrazas_descubiertas": "Terrazas descubiertas",
+      "m2villa_sin_castillete": "m2 villa SIN castillete",
+      "m2villa_con_castillete": "m2 villa CON castillete",
+      "parcela": "Parcela",
+      "jardin": "Jardín"
+    },
+    "price": {
+      "na": "No disponible"
+    },
+    "actions": {
+      "view_plan": "Ver plano"
+    },
+    "cta": {
+      "schedule_visit": "Agendar visita",
+      "origin_schedule": "Agendar visita – Web"
+    },
+    "status": {
+      "disponible": "Disponible",
+      "reservado": "Reservado",
+      "vendido": "Vendido"
+    }
+  },
+  "section": {
+    "title": "LOCALIZACIÓN",
+    "imgAlt": "Descripción de la imagen de la sección"
+  },
+  "process": {
+    "simple": {
+      "title": "Proceso de compra",
+      "imgAlt": "Ilustración del proceso de compra",
+      "pageTitle": "Proceso de compra"
+    }
+  },
+  "modal": {
+    "visit": {
+      "title": "Agendar visita",
+      "desc": "Déjanos tus datos y nos pondremos en contacto para concertar una visita."
+    },
+    "form": {
+      "name": "Nombre",
+      "email": "Email",
+      "phone": "Teléfono",
+      "message": "Mensaje",
+      "messagePH": "¿Cuándo te viene bien?",
+      "send": "Enviar"
+    },
+    "thanks": {
+      "title": "¡Gracias!",
+      "body": "Hemos recibido tu solicitud. Te contactaremos muy pronto.",
+      "ok": "Aceptar"
     }
   }
 }

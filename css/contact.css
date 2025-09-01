@@ -88,14 +88,14 @@
 }
 .hero-form input:focus,
 .hero-form textarea:focus{
-  border-color: #194f28;
+  border-color: #3c4d28;
   box-shadow: 0 0 0 4px rgba(25,79,40,.22);
   outline: none;
 }
 
 /* 6) Botón: centrado */
 .section_1 .hero-form .modal__send{
-  background: #194f28;
+  background: #3c4d28;
   color: #ffffff;
   font-size: 1.7rem;
   font-weight: 700;

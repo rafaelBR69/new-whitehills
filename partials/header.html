@@ -1,15 +1,31 @@
 <!-- /partials/header.html -->
-<header class="fixed-top">
-  <nav class="navbar navbar-expand-lg navbar-light bg-transparent px-4 py-3">
+<header class="fixed-top" role="banner">
+  <!-- Enlace para saltar al contenido (accesibilidad) -->
+  <a class="visually-hidden-focusable" href="#main-content">Saltar al contenido</a>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent px-4 py-3"
+       aria-label="Navegación principal"
+       itemscope itemtype="https://schema.org/SiteNavigationElement">
     <div class="container-fluid">
 
       <!-- LOGO -->
-      <a class="navbar-brand" href="index.html">
-        <img id="main-logo" src="/images/logo-blanco.png" alt="Balcones del Pinillo" height="70">
+      <a class="navbar-brand" href="index.html" rel="home" aria-label="WhiteHills Villas – Inicio">
+        <img id="main-logo"
+             src="/images/logo-blanco.png"
+             alt="WhiteHills Villas"
+             height="70"
+             decoding="async"
+             fetchpriority="high">
       </a>
 
       <!-- BURGER ICON -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Abrir navegación">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -17,21 +33,47 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <div class="d-flex align-items-center gap-4 me-5">
           <ul class="navbar-nav text-uppercase align-items-center gap-3 mb-0">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html" data-i18n="nav.home"></a>
+            <li class="nav-item" itemprop="name">
+              <a class="nav-link"
+                 href="index.html"
+                 data-i18n="nav.home"
+                 itemprop="url"
+                 title="Villas en Fuengirola y Málaga – Inicio"></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/index.html#availability" data-i18n="nav.availability"></a>
+            <li class="nav-item" itemprop="name">
+              <a class="nav-link"
+                 href="/index.html#availability"
+                 data-i18n="nav.availability"
+                 itemprop="url"
+                 title="Disponibilidad de villas de obra nueva en Fuengirola"></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/contact.html" data-i18n="nav.contact"></a>
+            <li class="nav-item" itemprop="name">
+              <a class="nav-link"
+                 href="/index.html#location"
+                 data-i18n="nav.location"
+                 itemprop="url"
+                 title="Ubicación: Torreblanca, Fuengirola (Málaga)"></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/proceso.html" data-i18n="nav.process"></a>
+            <li class="nav-item" itemprop="name">
+              <a class="nav-link"
+                 href="/contact.html"
+                 data-i18n="nav.contact"
+                 itemprop="url"
+                 title="Contacto para información y visitas"></a>
+            </li>
+            <li class="nav-item" itemprop="name">
+              <a class="nav-link"
+                 href="/proceso.html"
+                 data-i18n="nav.process"
+                 itemprop="url"
+                 title="Proceso de compra de villas en Málaga"></a>
             </li>
           </ul>
 
-          <select id="langSwitcher" class="form-select form-select-sm border-2 fw-semibold" style="width: auto;">
+          <select id="langSwitcher"
+                  class="form-select form-select-sm border-2 fw-semibold"
+                  style="width: auto;"
+                  aria-label="Cambiar idioma del sitio">
             <option value="es">ES</option>
             <option value="en">EN</option>
           </select>

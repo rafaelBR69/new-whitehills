@@ -1,6 +1,11 @@
 <!-- /partials/footer.html -->
-<footer class="bg-light text-center py-4">
+<footer class="bg-light text-center py-4" role="contentinfo"
+        itemscope itemtype="https://schema.org/Organization">
   <div class="container">
+
+    <!-- Microdatos mínimos de la organización (no visibles) -->
+    <meta itemprop="name" content="WhiteHills Villas">
+    <link itemprop="url" href="https://whitehillsvillas.com">
 
     <!-- Línea de contacto -->
     <p class="mb-2" data-i18n="footer.contact"></p>
@@ -8,28 +13,43 @@
     <!-- Seguimiento y redes sociales -->
     <div class="mb-3">
       <span data-i18n="footer.follow"></span><br />
-      <div class="d-flex justify-content-center gap-3 mt-2 social">
-        <a href="https://www.instagram.com/blancarealspain/?hl=es" target="_blank" rel="noopener" aria-label="Instagram">
-          <i class="fa-brands fa-instagram fa-lg"></i>
+      <div class="d-flex justify-content-center gap-3 mt-2 social" aria-label="Síguenos en redes">
+        <a href="https://www.instagram.com/blancarealspain/?hl=es"
+           target="_blank" rel="noopener external"
+           aria-label="Instagram" itemprop="sameAs" title="Instagram – WhiteHills Villas">
+          <i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
+          <span class="visually-hidden">Instagram</span>
         </a>
-        <a href="https://es.linkedin.com/company/blancareal-real-estate" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <i class="fa-brands fa-linkedin fa-lg"></i>
+        <a href="https://es.linkedin.com/company/blancareal-real-estate"
+           target="_blank" rel="noopener external"
+           aria-label="LinkedIn" itemprop="sameAs" title="LinkedIn – WhiteHills Villas">
+          <i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+          <span class="visually-hidden">LinkedIn</span>
         </a>
-        <a href="https://www.blancareal.com/" target="_blank" rel="noopener" aria-label="Official website">
-          <i class="fa-solid fa-globe fa-lg"></i>
+        <a href="https://www.blancareal.com/"
+           target="_blank" rel="noopener external"
+           aria-label="Sitio oficial Blanca Real" itemprop="sameAs" title="Blanca Real – Sitio oficial">
+          <i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
+          <span class="visually-hidden">Sitio web</span>
         </a>
-        <a href="https://www.youtube.com/@BlancaRealSpain" target="_blank" rel="noopener" aria-label="YouTube">
-          <i class="fa-brands fa-youtube fa-lg"></i>
+        <a href="https://www.youtube.com/@BlancaRealSpain"
+           target="_blank" rel="noopener external"
+           aria-label="YouTube" itemprop="sameAs" title="YouTube – WhiteHills Villas">
+          <i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
+          <span class="visually-hidden">YouTube</span>
         </a>
       </div>
     </div>
 
     <!-- Enlaces legales -->
-    <div class="legal-links mb-2">
-      <a href="/legal-notice.html" data-i18n="footer.legal" target="_blank" rel="noopener" class="mx-2 text-decoration-none text-muted"></a>
-      <a href="/cookie-policy.html" data-i18n="footer.cookies" target="_blank" rel="noopener" class="mx-2 text-decoration-none text-muted"></a>
-      <a href="/privacy-policy.html" data-i18n="footer.privacy" target="_blank" rel="noopener" class="mx-2 text-decoration-none text-muted"></a>
-    </div>
+    <nav class="legal-links mb-2" aria-label="Enlaces legales">
+      <a href="/legal-notice.html" data-i18n="footer.legal" target="_blank" rel="noopener"
+         class="mx-2 text-decoration-none text-muted" title="Aviso legal"></a>
+      <a href="/cookie-policy.html" data-i18n="footer.cookies" target="_blank" rel="noopener"
+         class="mx-2 text-decoration-none text-muted" title="Política de cookies"></a>
+      <a href="/privacy-policy.html" data-i18n="footer.privacy" target="_blank" rel="noopener"
+         class="mx-2 text-decoration-none text-muted" title="Política de privacidad"></a>
+    </nav>
 
     <!-- Copyright y desarrollo -->
     <p class="footer-text1 mb-0 text-muted" data-i18n="footer.copyright"></p>

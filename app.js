@@ -355,42 +355,62 @@ function uid(prefix='id') {
 
     function mostrarInfo(viviendas, key, $out) {
       const d = viviendas[key];
-      if (!d) { $out.html('<p>Sin datos.</p>'); return; }
+      const _t = (k, dv = '') => (window.i18next ? i18next.t(k, { defaultValue: dv }) : (dv || k));
+
+      if (!d) {
+        $out.html('<p data-i18n="unit.info.empty">Sin datos.</p>');
+        if (typeof translateIn === 'function') translateIn($out[0]);
+        else {
+          // Fallback de traducción local
+          $out.find('[data-i18n]').each(function () {
+            const k = this.getAttribute('data-i18n');
+            const val = _t(k, this.textContent);
+            if (/_html$/.test(k)) this.innerHTML = val; else this.textContent = val;
+          });
+        }
+        return;
+      }
 
       // URLs para el visor PDF
       const webURL   = d.plano_pdf_web || d.plano_pdf || '';
       const printURL = d.plano_pdf_print || webURL;
 
       const pdfId = uid('pdf-preview');
-      const priceHTML = d.coste_sin_iva ? `<div class="precio"><strong>${d.coste_sin_iva}</strong></div>` : '';
+      const estadoClass = String(d.estado || '').toLowerCase().trim().replace(/\s+/g, '-');
+
+      // Precio: conserva tu misma lógica (solo se muestra si hay coste_sin_iva)
+      const priceHTML = d.coste_sin_iva
+        ? `<div class="precio"><strong>${d.coste_sin_iva}</strong></div>`
+        : '';
 
       $out.html(`
         <!-- CABECERA A TODA ANCHURA -->
         <div class="info-card-head">
-          <h3>${d.numero_ud}
-            <span class="badge badge-${d.estado}">${d.estado}</span>
+          <h3>
+            ${d.numero_ud}
+            <span class="badge badge-${estadoClass}" data-i18n="unit.status.${estadoClass}">${d.estado || ''}</span>
           </h3>
         </div>
 
         <!-- COLUMNA IZQUIERDA -->
         <div class="info-card-col col-left">
           <ul class="list-unstyled info-list">
-            <li>m2c SR (PB + P1): <strong>${d.m2c_sr}</strong></li>
-            <li>m2c BR (Sótano): <strong>${d.m2c_br}</strong></li>
-            <li>Castillete: <strong>${d.castillete}</strong></li>
-            <li>Terrazas cubiertas: <strong>${d.terrazas_cubiertas}</strong></li>
-            <li>Pérgola: <strong>${d.pergola}</strong></li>
+            <li><span data-i18n="unit.info.m2c_sr">m2c SR (PB + P1)</span> <strong>${d.m2c_sr ?? '-'}</strong></li>
+            <li><span data-i18n="unit.info.m2c_br">m2c BR (Sótano)</span> <strong>${d.m2c_br ?? '-'}</strong></li>
+            <li><span data-i18n="unit.info.castillete">Castillete</span> <strong>${d.castillete ?? '-'}</strong></li>
+            <li><span data-i18n="unit.info.terrazas_cubiertas">Terrazas cubiertas</span> <strong>${d.terrazas_cubiertas ?? '-'}</strong></li>
+            <li><span data-i18n="unit.info.pergola">Pérgola</span> <strong>${d.pergola ?? '-'}</strong></li>
           </ul>
         </div>
 
         <!-- COLUMNA DERECHA -->
         <div class="info-card-col col-right">
           <ul class="list-unstyled info-list">
-            <li>Terrazas descubiertas: <strong>${d.terrazas_descubiertas}</strong></li>
-            <li>m2 villa SIN castillete: <strong>${d.terrazas_m2villa_sin_castillete}</strong></li>
-            <li>m2 villa CON castillete: <strong>${d.terrazas_m2villa_con_castillete}</strong></li>
-            <li>Parcela: <strong>${d.parcela}</strong></li>
-            <li>Jardín: <strong>${d.jardin}</strong></li>
+            <li><span data-i18n="unit.info.terrazas_descubiertas">Terrazas descubiertas</span> <strong>${d.terrazas_descubiertas ?? '-'}</strong></li>
+            <li><span data-i18n="unit.info.m2villa_sin_castillete"></span> <strong>${d.terrazas_m2villa_sin_castillete ?? '-'}</strong></li>
+            <li><span data-i18n="unit.info.m2villa_con_castillete"></span> <strong>${d.terrazas_m2villa_con_castillete ?? '-'}</strong></li>
+            <li><span data-i18n="unit.info.parcela">Parcela</span> <strong>${d.parcela ?? '-'}</strong></li>
+            <li><span data-i18n="unit.info.jardin">Jardín</span> <strong>${d.jardin ?? '-'}</strong></li>
           </ul>
           ${priceHTML}
           ${printURL ? `<div class="pdf-actions" style="margin-top:.5rem"></div>` : ``}
@@ -402,10 +422,22 @@ function uid(prefix='id') {
         <!-- CTA AGENDAR VISITA (debajo del PDF) -->
         <div class="visit-actions">
           <button type="button" class="btn-visit" data-unit="${d.numero_ud || key}">
-            Agendar visita
+            <span data-i18n="unit.cta.schedule_visit">Agendar visita</span>
           </button>
         </div>
       `);
+
+      // Traducir el bloque recién insertado
+      if (typeof translateIn === 'function') {
+        translateIn($out[0]);
+      } else {
+        // Fallback si no tienes helper translateIn
+        $out.find('[data-i18n]').each(function () {
+          const k = this.getAttribute('data-i18n');
+          const val = _t(k, this.textContent);
+          if (/_html$/.test(k)) this.innerHTML = val; else this.textContent = val;
+        });
+      }
 
       // Activa la tarjeta
       setInfoDisabled($out, false);
@@ -447,9 +479,11 @@ function uid(prefix='id') {
               org.name = 'origin';
               leadForm.appendChild(org);
             }
-            org.value = 'Agendar visita – Web';
+            org.value = _t('unit.cta.origin_schedule', 'Agendar visita – Web');
           }
-        } catch(err){ console.warn('No pude pre-rellenar la unidad en el leadForm:', err); }
+        } catch (err) {
+          console.warn('No pude pre-rellenar la unidad en el leadForm:', err);
+        }
 
         // Abre el modal con tu helper existente
         if (typeof openModal === 'function') openModal();
@@ -473,6 +507,8 @@ function uid(prefix='id') {
     }
 
     function buildRuleta(viviendas, { autoselectOnInit = true } = {}) {
+      const _t = (k, dv = '') => (window.i18next ? i18next.t(k, { defaultValue: dv }) : (dv || k));
+
       const order  = orderKeysFromMap();
       const $track = $('#ruleta-track');
       $track.empty();
@@ -486,38 +522,40 @@ function uid(prefix='id') {
           ? getPlanoURL(d)
           : (d.plano_pdf_web || d.plano_pdf || d.plano_pdf_print || '');
 
+        const estadoClass = String(d.estado || '').toLowerCase().trim().replace(/\s+/g, '-');
+
         const html = `
           <article class="ruleta-card ruleta-card--wide" role="listitem" data-key="${key}">
             <header class="ruleta-card__head d-flex align-items-center justify-content-between">
               <h4 class="ruleta-card__title m-0">${d.numero_ud || key}</h4>
-              <span class="badge badge-${d.estado}">${d.estado}</span>
+              <span class="badge badge-${estadoClass}" data-i18n="unit.status.${estadoClass}">${d.estado || ''}</span>
             </header>
 
             <div class="ruleta-card__body">
               <div class="ruleta-card__cols">
                 <ul class="ruleta-card__list">
-                  <li>m2c SR (PB + P1): <strong>${d.m2c_sr ?? '-'}</strong></li>
-                  <li>m2c BR (Sótano): <strong>${d.m2c_br ?? '-'}</strong></li>
-                  <li>Castillete: <strong>${d.castillete ?? '-'}</strong></li>
-                  <li>Terrazas cubiertas: <strong>${d.terrazas_cubiertas ?? '-'}</strong></li>
-                  <li>Pérgola: <strong>${d.pergola ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.m2c_sr">m2c SR (PB + P1)</span>: <strong>${d.m2c_sr ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.m2c_br">m2c BR (Sótano)</span>: <strong>${d.m2c_br ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.castillete">Castillete</span>: <strong>${d.castillete ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.terrazas_cubiertas">Terrazas cubiertas</span>: <strong>${d.terrazas_cubiertas ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.pergola">Pérgola</span>: <strong>${d.pergola ?? '-'}</strong></li>
                 </ul>
                 <ul class="ruleta-card__list">
-                  <li>Terrazas descubiertas: <strong>${d.terrazas_descubiertas ?? '-'}</strong></li>
-                  <li>m2 villa SIN castillete: <strong>${d.terrazas_m2villa_sin_castillete ?? '-'}</strong></li>
-                  <li>m2 villa CON castillete: <strong>${d.terrazas_m2villa_con_castillete ?? '-'}</strong></li>
-                  <li>Parcela: <strong>${d.parcela ?? '-'}</strong></li>
-                  <li>Jardín: <strong>${d.jardin ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.terrazas_descubiertas">Terrazas descubiertas</span>: <strong>${d.terrazas_descubiertas ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.m2villa_sin_castillete">m2 villa SIN castillete</span>: <strong>${d.terrazas_m2villa_sin_castillete ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.m2villa_con_castillete">m2 villa CON castillete</span>: <strong>${d.terrazas_m2villa_con_castillete ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.parcela">Parcela</span>: <strong>${d.parcela ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.jardin">Jardín</span>: <strong>${d.jardin ?? '-'}</strong></li>
                 </ul>
               </div>
 
               <div class="ruleta-card__bottom">
                 <div class="ruleta-card__price precio">
-                  <strong>${d.coste_sin_iva ? d.coste_sin_iva : 'No disponible €'}</strong>
+                  <strong>${d.coste_sin_iva ? d.coste_sin_iva : `<span data-i18n="unit.price.na">No disponible €</span>`}</strong>
                 </div>
                 ${pdfURL ? `
                   <a class="btn-ver-plano" href="${pdfURL}" target="_blank" rel="noopener">
-                    Ver plano
+                    <span data-i18n="unit.actions.view_plan">Ver plano</span>
                   </a>
                 ` : ``}
               </div>
@@ -525,6 +563,18 @@ function uid(prefix='id') {
           </article>`;
         $track.append(html);
       });
+
+      // Traducir el bloque recién creado
+      if (typeof translateIn === 'function') {
+        translateIn($track[0]);
+      } else {
+        // Fallback si no tienes helper translateIn
+        $track.find('[data-i18n]').each(function () {
+          const k = this.getAttribute('data-i18n');
+          const val = _t(k, this.textContent);
+          if (/_html$/.test(k)) this.innerHTML = val; else this.textContent = val;
+        });
+      }
 
       let activeIndex = 0;
 
@@ -590,6 +640,7 @@ function uid(prefix='id') {
         updateArrows();
       }
     }
+
 
     let _prevKey = null;
     let _selectedKey = null;
@@ -768,11 +819,10 @@ function renderPdfGallery(url, $container, opts = {}) {
 
 // ---- 1. Config de los ítems --------------------------------------
 const PROMO_ITEMS = [
-  { key: 'units',     icon: 'villa.svg'   },
-  { key: 'parking',   icon: 'parking.webp'    },
-  { key: 'beds',      icon: 'dormitorio.webp', extra: 'icon-dorm' },
-  { key: 'plot',      icon: 'plano.png',      extra: 'icon-plano' },
-  { key: 'sunnydays', icon: 'tiempo.webp'     }
+  { key: 'units',     icon: 'casa-residencial.svg'   },
+  { key: 'beds',      icon: 'cama.svg', extra: 'icon-dorm' },
+  { key: 'mins',      icon: 'vacaciones.svg',      extra: 'icon-plano' },
+  { key: 'sunnydays', icon: 'sol.svg'     }
 ];
 
 // ---- 2. Construye la lista (con “0” inicial) ---------------------

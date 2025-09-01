@@ -5,18 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- ─── SEO ─── -->
-  <title data-i18n="contact.title">Contacto – Balcones del Pinillo</title>
+  <title data-i18n="contact.title">Contacto – WhiteHills</title>
   <meta name="description"
-        content="Contacta con nosotros para solicitar información, agendar una visita y resolver dudas sobre Balcones del Pinillo.">
+        content="Contacta con nosotros para solicitar información, agendar una visita y resolver dudas sobre WhiteHills." />
+  <link rel="canonical" href="https://whitehillsvillas.com/contact.html" />
 
-  <!-- ─── FAVICON & PWA (igual que index) ─── -->
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contacto | WhiteHills Villas" />
+  <meta property="og:description" content="Solicita información o agenda una visita. Te ayudamos en todo el proceso de compra." />
+  <meta property="og:url" content="https://whitehillsvillas.com/contact.html" />
+  <meta property="og:image" content="https://whitehillsvillas.com/images/og-contact.jpg" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contacto | WhiteHills Villas" />
+  <meta name="twitter:description" content="Solicita información o agenda una visita. Te ayudamos en todo el proceso de compra." />
+  <meta name="twitter:image" content="https://whitehillsvillas.com/images/og-contact.jpg" />
+
+  <!-- ─── FAVICON & PWA ─── -->
   <link rel="icon" type="image/png" sizes="96x96"  href="/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- ─── Datos estructurados (coherentes) ─── -->
+  <!-- ─── Datos estructurados ─── -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -26,8 +39,18 @@
     "logo":"https://whitehillsvillas.com/web-app-manifest-192x192.png"
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ContactPage",
+    "name":"Contacto",
+    "url":"https://whitehillsvillas.com/contact.html",
+    "inLanguage":"es-ES",
+    "isPartOf":{"@type":"WebSite","name":"WhiteHills Villas","url":"https://whitehillsvillas.com"}
+  }
+  </script>
 
-  <!-- ─── CSS de terceros (como en index) ─── -->
+  <!-- ─── CSS de terceros ─── -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 
@@ -46,57 +69,75 @@
   <script src="https://unpkg.com/i18next-http-backend@2/i18nextHttpBackend.min.js"></script>
   <script src="https://unpkg.com/i18next-browser-languagedetector@8/i18nextBrowserLanguageDetector.min.js"></script>
 
-  <!-- ─── CSS propio (igual que index) ─── -->
+  <!-- ─── CSS propio ─── -->
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/footer.css">
   <link rel="stylesheet" href="/css/contact.css">
   <link rel="stylesheet" href="/mediaquaries.css" />
+
+  <!-- Utilidad accesible -->
+  <style>
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
 </head>
 
 <body class="contact-page">
+  <!-- Skip link -->
+  <a class="visually-hidden" href="#main-content">Saltar al contenido</a>
+
   <!--*** Header dinámico ***-->
   <div id="header-placeholder"></div>
 
-  <!-- ███ HERO · FORMULARIO EN LA IMAGEN ███ -->
-  <section class="section_1 contact-hero" id="contactForm">
-    <form id="leadForm"
-          class="hero-form contact-form reveal"
-          data-lead
-          autocomplete="off"
-          novalidate>
+  <!-- ===== MAIN ===== -->
+  <main id="main-content" role="main">
+    <!-- ███ HERO · FORMULARIO EN LA IMAGEN ███ -->
+    <section class="section_1 contact-hero" id="contactForm" aria-labelledby="contactTitle">
+      <form id="leadForm"
+            class="hero-form contact-form reveal"
+            data-lead
+            autocomplete="on"
+            novalidate
+            aria-describedby="contactIntro">
 
-      <h2 class="hero-form__title contact-form__title" data-i18n="contact.formTitle"></h2>
+        <h1 id="contactTitle" class="hero-form__title contact-form__title" data-i18n="contact.formTitle">Contáctanos</h1>
+        <p id="contactIntro" class="visually-hidden">Formulario de contacto para solicitar información o agendar una visita.</p>
 
-      <label class="contact-form__label" for="cf-name" data-i18n="popup.nameLabel"></label>
-      <input class="contact-form__input" id="cf-name" type="text" name="name" required>
+        <label class="contact-form__label" for="cf-name" data-i18n="popup.nameLabel">Nombre</label>
+        <input class="contact-form__input" id="cf-name" type="text" name="name" required
+               autocomplete="name" autocapitalize="words" enterkeyhint="next">
 
-      <label class="contact-form__label" for="cf-email" data-i18n="popup.emailLabel"></label>
-      <input class="contact-form__input" id="cf-email" type="email" name="email" required>
+        <label class="contact-form__label" for="cf-email" data-i18n="popup.emailLabel">Email</label>
+        <input class="contact-form__input" id="cf-email" type="email" name="email" required
+               autocomplete="email" spellcheck="false" enterkeyhint="next">
 
-      <label class="contact-form__label" for="cf-phone" data-i18n="popup.phoneLabel"></label>
-      <input class="contact-form__input" id="cf-phone" type="tel"  name="phone" required>
+        <label class="contact-form__label" for="cf-phone" data-i18n="popup.phoneLabel">Teléfono</label>
+        <input class="contact-form__input" id="cf-phone" type="tel"  name="phone" required
+               autocomplete="tel" inputmode="tel" enterkeyhint="next">
 
-      <label class="contact-form__label" for="cf-message" data-i18n="popup.msgLabel"></label>
-      <textarea class="contact-form__textarea" id="cf-message" name="message" rows="4"
-                data-i18n-placeholder="popup.msgPlaceholder"></textarea>
+        <label class="contact-form__label" for="cf-message" data-i18n="popup.msgLabel">Mensaje</label>
+        <textarea class="contact-form__textarea" id="cf-message" name="message" rows="4"
+                  data-i18n-placeholder="popup.msgPlaceholder"
+                  placeholder="¿Cómo podemos ayudarte?"
+                  enterkeyhint="send"></textarea>
 
-      <!-- Honeypot anti-spam (no tabulable, oculto) -->
-      <div class="hp-wrapper contact-form__hp" aria-hidden="true">
-        <label for="website">Website</label>
-        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-      </div>
+        <!-- Honeypot anti-spam (no tabulable, oculto) -->
+        <div class="hp-wrapper contact-form__hp" aria-hidden="true">
+          <label for="website">Website</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
 
-      <button type="submit"
-              class="modal__send contact-form__button"
-              data-i18n="popup.send"></button>
-    </form>
-  </section>
+        <button type="submit"
+                class="modal__send contact-form__button"
+                data-i18n="popup.send">Enviar</button>
+      </form>
+    </section>
+  </main>
 
   <!--*** Footer dinámico ***-->
   <div id="footer-placeholder"></div>
 
-  <!-- ─── JS globales (igual que index) ─── -->
+  <!-- ─── JS globales ─── -->
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -139,18 +180,19 @@
           });
         }
 
-        /* Marca activo el enlace de Contacto (opcional) */
+        /* Marca activo el enlace de Contacto (+ aria-current) */
         const path = location.pathname.replace(/\/+$/, '');
         document.querySelectorAll('header a[href]').forEach(a => {
-          const href = a.getAttribute('href').replace(/\/+$/, '');
+          const href = a.getAttribute('href')?.replace(/\/+$/, '');
           if (href && href !== '#' && (href === path || (href.endsWith('contact.html') && path.endsWith('contact.html')))) {
             a.classList.add('active');
+            a.setAttribute('aria-current','page');
           }
         });
 
         /* Retraducción del header inyectado si i18n ya está */
         if (window.i18next && i18next.isInitialized) {
-          document.querySelectorAll('[data-i18n]').forEach(el => {
+          document.querySelectorAll('header [data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (key) el.innerHTML = i18next.t(key);
           });
@@ -165,7 +207,7 @@
 
         /* Retraducción del footer si i18n ya está */
         if (window.i18next && i18next.isInitialized) {
-          document.querySelectorAll('[data-i18n]').forEach(el => {
+          document.querySelectorAll('footer [data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (key) el.innerHTML = i18next.t(key);
           });

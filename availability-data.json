@@ -11,7 +11,7 @@
     "terrazas_m2villa_con_castillete": 216.45,
     "parcela": 231.45,
     "jardin": 544.46,
-    "coste_sin_iva": "No disponible €",
+    "coste_sin_iva": " - €",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A1.pdf"
   },
@@ -27,7 +27,7 @@
     "terrazas_m2villa_con_castillete": 216.45,
     "parcela": 231.45,
     "jardin": 245.67,
-    "coste_sin_iva": "No disponible €",
+    "coste_sin_iva": " - €",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A2.pdf"
   },
@@ -43,7 +43,7 @@
     "terrazas_m2villa_con_castillete": 216.45,
     "parcela": 231.45,
     "jardin": 204.11,
-    "coste_sin_iva": "No disponible €",
+    "coste_sin_iva": " - €",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A3.pdf"
   },
@@ -139,7 +139,7 @@
     "terrazas_m2villa_con_castillete": 228.61,
     "parcela": 239.11,
     "jardin": 141.23,
-    "coste_sin_iva": "No disponible €",
+    "coste_sin_iva": " - €",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B3.pdf"
   },
@@ -155,7 +155,7 @@
     "terrazas_m2villa_con_castillete": 245.63,
     "parcela": 256.13,
     "jardin": 218.76,
-    "coste_sin_iva": "No disponible €",
+    "coste_sin_iva": " - €",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B4.pdf"
   },
@@ -171,7 +171,7 @@
     "terrazas_m2villa_con_castillete": 242.11,
     "parcela": 242.11,
     "jardin": 204.31,
-    "coste_sin_iva": "No disponible €",
+    "coste_sin_iva": " - €",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B5.pdf"
   },
@@ -187,7 +187,7 @@
     "terrazas_m2villa_con_castillete": 270.24,
     "parcela": 251.03,
     "jardin": 163.09,
-    "coste_sin_iva": "No disponible €",
+    "coste_sin_iva": " - €",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B6.pdf"
   }

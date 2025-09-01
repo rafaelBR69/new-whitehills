@@ -1,129 +1,250 @@
 /* =========================================================
-   ▸ PERSONALIZACIÓN HEADER / NAVBAR CON BOOTSTRAP
+   PERSONALIZACIÓN HEADER / NAVBAR (Bootstrap)
    ========================================================= */
-:root {
+:root{
   --header-bg    : #ffffff;
-  --brand-color  : #194f28;
+  --brand-color  : #3c4d28;
   --shadow-hdr   : 3px 3px 5px rgba(0,0,0,.7);
 
   --ff-body      : 'Montserrat', sans-serif;
-  /* Tamaño de letra */
-  --fs-nav       : 2rem; /* normal */
-  --fs-nav-scroll: 2rem; /* con scroll */
 
-  /* Peso de letra */
-  --fw-nav       : 400; /* normal */
-  --fw-nav-scroll: 400; /* con scroll */
+  /* Nav sizes */
+  --fs-nav       : 2rem;  /* normal */
+  --fs-nav-scroll: 2rem;  /* con scroll */
+
+  /* Nav weights */
+  --fw-nav       : 400;   /* normal */
+  --fw-nav-scroll: 400;   /* con scroll */
 
   --ls-nav       : 0.05em;
-
   --fs-btn       : 2.5rem;
-
 }
 
-/*──────── HEADER GENERAL ────────*/
-header {
-  font-family: var(--ff-body);
-}
+/* ───────── HEADER GENERAL ───────── */
+header{ font-family: var(--ff-body); }
+header.fixed-top{ transition: all .3s ease; }
+header.fixed-top .navbar{ padding-block:1.5rem; transition: padding .3s ease; }
+header.fixed-top.scrolled{ background-color: var(--header-bg); box-shadow: var(--shadow-hdr); }
+header.fixed-top.scrolled .navbar{ padding-block:.5rem; }
 
-header.fixed-top {
-  transition: all 0.3s ease;
+/* ───────── LOGO ───────── */
+.navbar-brand img{
+  height:100px; width:auto; object-fit:contain;
+  margin-top:-20px; transition:all .3s ease;
 }
+/* Logo blanco con header transparente */
+header:not(.scrolled) .navbar-brand img{ content:url("/images/logo-blanco.png"); }
+/* Logo verde + tamaño reducido al hacer scroll */
+header.scrolled .navbar-brand img{ height:75px; margin-top:-30px; content:url("/images/logo.png"); }
 
-header.fixed-top .navbar {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  transition: padding 0.3s ease;
-}
-
-header.fixed-top.scrolled {
-  background-color: var(--header-bg);
-  box-shadow: var(--shadow-hdr);
-}
-
-header.fixed-top.scrolled .navbar {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-/*──────── LOGO ────────*/
-.navbar-brand img {
-  height: 100px;
-  width: auto;
-  object-fit: contain;
-  margin-top: -20px;
-  transition: all 0.3s ease;
-}
-
-/* Logo blanco mientras el header es transparente */
-header:not(.scrolled) .navbar-brand img {
-  content: url("/images/logo-blanco.png");
-}
-
-/* Logo verde + tamaño reducido con scroll */
-header.scrolled .navbar-brand img {
-  height: 75px;
-  margin-top: -30px;
-  content: url("/images/logo.png");
-}
-
-/*──────── NAV LINKS ────────*/
-.navbar-nav .nav-link {
+/* ───────── NAV LINKS ───────── */
+.navbar-nav .nav-link{
   font-family: var(--ff-body) !important;
   font-size: var(--fs-nav);
   font-weight: var(--fw-nav);
   color: var(--brand-color) !important;
   text-transform: uppercase;
-  transition: opacity 0.25s ease;
-  padding: 0.5rem 3rem !important;
   letter-spacing: var(--ls-nav);
+  padding: .5rem 3rem !important;
+  transition: opacity .25s ease;
 }
+.navbar-nav .nav-link:hover{ opacity:.8; }
 
-.navbar-nav .nav-link:hover {
-  opacity: 0.8;
-}
-
-/* Scroll: links un poco más compactos */
-header.scrolled .navbar-nav .nav-link {
-  font-family: var(--ff-body) !important;
+/* Scroll: compacta ligeramente (tipos iguales por var) */
+header.scrolled .navbar-nav .nav-link{
   font-size: var(--fs-nav-scroll);
   font-weight: var(--fw-nav-scroll);
-  padding: 0.5rem 3rem !important;
-  letter-spacing: var(--ls-nav);
+  padding: .5rem 3rem !important;
 }
 
-/*──────── Enlaces blancos mientras header es transparente ────────*/
+/* Enlaces blancos con header transparente */
 header:not(.scrolled) .navbar-nav .nav-link,
 header:not(.scrolled) #langSwitcher,
-header:not(.scrolled) .btn .sign_up {
-  color: #ffffff !important;
-  border-color: #ffffff;
+header:not(.scrolled) .btn .sign_up{
+  color:#fff !important; border-color:#fff;
 }
 
-/*──────── SELECTOR DE IDIOMA ────────*/
-#langSwitcher {
+/* Estado activo (SEO/accesibilidad visual) */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link[aria-current="page"]{
+  position:relative;
+}
+.navbar-nav .nav-link.active::after,
+.navbar-nav .nav-link[aria-current="page"]::after{
+  content:""; position:absolute; left:1.5rem; right:1.5rem; bottom:-.2rem;
+  height:2px; background: currentColor; opacity:.75;
+}
+
+/* ───────── SELECTOR DE IDIOMA ───────── */
+#langSwitcher{
   font-family: var(--ff-body);
   font-size: var(--fs-nav);
-  font-weight: 600;
-  background: transparent;
-  border: 2px solid var(--brand-color);
-  border-radius: 6px;
-  padding: 0.4rem 0.6rem;
-  color: var(--brand-color);
-  cursor: pointer;
-  margin-left: 1rem;
+  font-weight:600;
+  background:transparent;
+  border:2px solid var(--brand-color);
+  border-radius:6px;
+  padding:.4rem .6rem;
+  color:var(--brand-color);
+  cursor:pointer;
+  margin-left:1rem;
 }
 
-/*──────── BOTÓN CONTACTO (si se usa) ────────*/
-.btn .sign_up {
+/* ───────── BOTÓN CONTACTO (opcional) ───────── */
+.btn .sign_up{
   font-family: var(--ff-body);
   font-size: var(--fs-btn);
-  padding: 0.8rem 2rem;
-  border-radius: 20px;
-  background: var(--brand-color);
-  color: var(--header-bg);
-  text-decoration: none;
+  padding:.8rem 2rem;
+  border-radius:20px;
+  background:var(--brand-color);
+  color:var(--header-bg);
+  text-decoration:none;
 }
-.btn .sign_up:hover {
-  opacity: 0.8;
+.btn .sign_up:hover{ opacity:.8; }
+
+/* ───────── BURGER / TOGGLER ───────── */
+.navbar-toggler{
+  border:0; box-shadow:none !important; outline:none !important;
+  padding:.25rem .5rem;
+}
+.navbar-toggler:focus-visible{ outline:2px solid rgba(0,0,0,.25); outline-offset:2px; }
+
+/* Icono burger (SVG embebido) */
+header:not(.scrolled) .navbar-toggler-icon{
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+header.scrolled .navbar-toggler-icon{
+  background-image:url('data:image/svg+xml,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="%233c4d28" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+}
+
+/* =========================================================
+   MEDIA QUERIES (Responsive)
+   ========================================================= */
+
+/* ── MOBILE / TABLET < LG (≤ 991.98px) ─────────────────── */
+@media (max-width:991.98px){
+
+  /* Navbar padding más contenido */
+  header.fixed-top .navbar{ padding-block:.75rem; }
+
+  /* Logo más contenido en móviles */
+  .navbar-brand img{ height:68px; margin-top:-10px; }
+  header.scrolled .navbar-brand img{ height:62px; margin-top:-16px; }
+
+  /* Panel lateral usando .navbar-collapse */
+  .navbar-collapse{
+    position:fixed; top:0; right:0; bottom:0;
+    width:min(84vw, 360px);
+    background:rgba(255,255,255,.86);
+    backdrop-filter: blur(12px);
+    box-shadow:-10px 0 30px rgba(0,0,0,.18);
+    padding: calc(env(safe-area-inset-top, 16px) + 8px) 18px 18px;
+    overflow-y:auto;
+    transform:translateX(100%);
+    visibility:hidden;
+    transition: transform .3s ease, visibility .3s step-end;
+    z-index:1050;
+  }
+  .navbar-collapse.show{
+    transform:translateX(0);
+    visibility:visible;
+    transition: transform .3s ease, visibility 0s;
+  }
+
+  /* Columna vertical de enlaces + espacios táctiles */
+  .navbar-nav{
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    gap:.25rem;
+    padding-block: .75rem;
+  }
+  .navbar-nav .nav-link{
+    padding:.9rem 1.2rem !important;
+    font-size:2.1rem;
+    letter-spacing:.04em;
+  }
+
+  /* Color de enlaces dentro del panel (si header estaba transparente) */
+  .navbar-collapse.show .nav-link,
+  .navbar-collapse.show #langSwitcher,
+  .navbar-collapse.show .btn .sign_up{
+    color:var(--brand-color) !important;
+    border-color:var(--brand-color);
+  }
+
+  /* Selector de idioma ocupa toda la fila y es tocable */
+  #langSwitcher{
+    width: auto;
+    display:inline-block;
+    margin: .75rem 1.2rem 0;
+    padding:.55rem .8rem;
+    font-size:1.8rem;
+  }
+
+  /* CTA dentro del panel (si lo usas) */
+  .btn .sign_up{
+    display:inline-block;
+    margin: .75rem 1.2rem 0;
+    font-size:2rem;
+    border-radius:9999px;
+  }
+
+  /* Espaciado del botón burger por encima del panel */
+  .navbar-toggler{ z-index:1060; }
+
+  /* Mejor foco para enlaces en móvil */
+  .navbar-nav .nav-link:focus-visible{
+    outline:2px solid rgba(60,77,40,.4);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+}
+
+/* ── DESKTOP ≥ LG (≥ 992px) — resets del panel ─────────── */
+@media (min-width:992px){
+  .navbar-collapse{
+    position:static; transform:none !important; visibility:visible !important;
+    background:transparent; box-shadow:none; padding:0; width:auto; height:auto; overflow:visible;
+    backdrop-filter:none;
+  }
+  .navbar-nav{ flex-direction:row !important; align-items:center !important; gap:0; }
+  #langSwitcher{ margin-left:1rem; }
+}
+
+/* =========================================================
+   MÓVIL / TABLET (≤ 991.98px): siempre logo y textos en verde
+   ========================================================= */
+@media (max-width: 991.98px){
+  /* Fuerza fondo y sombra como si estuviera scrolleado */
+  header.fixed-top{
+    background-color: var(--header-bg) !important;
+    box-shadow: var(--shadow-hdr) !important;
+  }
+
+  /* Logo SIEMPRE verde */
+  header .navbar-brand img{
+    content: url("/images/logo.png") !important;
+    height: 62px;             /* ajusta si quieres */
+    margin-top: -16px;        /* ajusta si quieres */
+  }
+
+  /* Enlaces, selector idioma y CTA SIEMPRE verdes */
+  header .navbar-nav .nav-link,
+  header #langSwitcher,
+  header .btn .sign_up{
+    color: var(--brand-color) !important;
+    border-color: var(--brand-color) !important;
+  }
+
+  /* Anula explícitamente las reglas de “header transparente” */
+  header:not(.scrolled) .navbar-nav .nav-link,
+  header:not(.scrolled) #langSwitcher,
+  header:not(.scrolled) .btn .sign_up{
+    color: var(--brand-color) !important;
+    border-color: var(--brand-color) !important;
+  }
+
+  /* Burger SIEMPRE verde */
+  .navbar-toggler-icon{
+    background-image:url('data:image/svg+xml,%3Csvg viewBox%3D%220 0 30 30%22 xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath stroke%3D%22%233c4d28%22 stroke-linecap%3D%22round%22 stroke-miterlimit%3D%2210%22 stroke-width%3D%222%22 d%3D%22M4 7h22M4 15h22M4 23h22%22/%3E%3C/svg%3E') !important;
+  }
 }

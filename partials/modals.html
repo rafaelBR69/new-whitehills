@@ -5,41 +5,46 @@
      Cambia la ruta de --modal-bg y el ancho --modal-width a tu gusto. -->
 <div id="infoModal"
      class="modal modal--with-bg"
-     role="dialog" aria-modal="true" aria-labelledby="visitTitle"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="visitTitle"
+     aria-describedby="visitDesc"
      style="--modal-bg: url('/images/formulario.webp'); --modal-width: 760px; --modal-tint: rgba(0,0,0,.45);">
   <div id="modalOverlay" class="modal__overlay" aria-hidden="true"></div>
 
-  <div class="modal__box">
+  <div class="modal__box" tabindex="-1">
     <button id="modalClose" class="modal__close" type="button" aria-label="Cerrar">×</button>
 
-    <h3 id="visitTitle" class="modal__title">Agendar visita</h3>
+    <h3 id="visitTitle" class="modal__title" data-i18n="modal.visit.title">Agendar visita</h3>
 
     <!-- data-lead + data-origin para que app.js lo procese -->
     <form id="leadForm" class="modal__form" data-lead data-origin="Agendar visita – Web">
       <!-- Honeypot anti-spam (oculto por CSS) -->
-      <input type="text" name="website" class="hp-wrapper" tabindex="-1" autocomplete="off">
+      <input type="text" name="website" class="hp-wrapper" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <!-- Se pre-rellena desde mostrarInfo() -->
       <input type="hidden" name="unidad" value="">
       <input type="hidden" name="origin" value="">
 
-      <label>Nombre
-        <input type="text" name="nombre" required>
-      </label>
+      <label for="lf-nombre" data-i18n="modal.form.name">Nombre</label>
+      <input id="lf-nombre" type="text" name="nombre" required
+             autocomplete="name" autocapitalize="words" enterkeyhint="next">
 
-      <label>Email
-        <input type="email" name="email" required>
-      </label>
+      <label for="lf-email" data-i18n="modal.form.email">Email</label>
+      <input id="lf-email" type="email" name="email" required
+             autocomplete="email" spellcheck="false" enterkeyhint="next">
 
-      <label>Teléfono
-        <input type="tel" name="telefono">
-      </label>
+      <label for="lf-tel" data-i18n="modal.form.phone">Teléfono</label>
+      <input id="lf-tel" type="tel" name="telefono"
+             autocomplete="tel" inputmode="tel" enterkeyhint="next">
 
-      <label>Mensaje
-        <textarea name="mensaje" rows="4" placeholder="¿Cuándo te viene bien?"></textarea>
-      </label>
+      <label for="lf-msg" data-i18n="modal.form.message">Mensaje</label>
+      <textarea id="lf-msg" name="mensaje" rows="4"
+                placeholder="¿Cuándo te viene bien?"
+                data-i18n="[placeholder]modal.form.messagePH"
+                enterkeyhint="send"></textarea>
 
-      <button class="modal__send" type="submit">Enviar</button>
+      <button class="modal__send" type="submit" data-i18n="modal.form.send">Enviar</button>
     </form>
   </div>
 </div>
@@ -48,17 +53,22 @@
      Fondo con logo. Ajustamos tint y tamaño del fondo para que actúe como “marca de agua”. -->
 <div id="thankModal"
      class="modal modal--with-bg"
-     role="dialog" aria-modal="true" aria-labelledby="thankTitle"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="thankTitle"
+     aria-describedby="thankDesc"
      style="--modal-bg: url('/images/logo.png'); --modal-width: 560px; --modal-tint: rgba(0,0,0,.35);">
   <div id="thankOverlay" class="modal__overlay" aria-hidden="true"></div>
 
   <!-- Para que el logo no se deforme, forzamos contain/center en esta caja -->
-  <div class="modal__box" style="background-size: contain; background-position: center; background-repeat: no-repeat;">
+  <div class="modal__box" style="background-size: contain; background-position: center; background-repeat: no-repeat;" tabindex="-1">
     <button id="thankClose" class="modal__close" type="button" aria-label="Cerrar">×</button>
 
-    <h3 id="thankTitle" class="modal__title">¡Gracias!</h3>
-    <p class="modal__paragraph">Hemos recibido tu solicitud. Te contactaremos muy pronto.</p>
+    <h3 id="thankTitle" class="modal__title" data-i18n="modal.thanks.title">¡Gracias!</h3>
+    <p id="thankDesc" class="modal__paragraph" data-i18n="modal.thanks.body">
+      Hemos recibido tu solicitud. Te contactaremos muy pronto.
+    </p>
 
-    <button id="thankOk" class="modal__send" type="button">Aceptar</button>
+    <button id="thankOk" class="modal__send" type="button" data-i18n="modal.thanks.ok">Aceptar</button>
   </div>
 </div>

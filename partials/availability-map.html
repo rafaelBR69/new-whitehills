@@ -1,53 +1,96 @@
 <section id="availability-home"
          class="section_1 section_1--availability"
-         data-json="/availability-data.json">
+         data-json="/availability-data.json"
+         role="region"
+         aria-labelledby="availability-heading">
 
   <!-- Caja con borde que envuelve plano + info -->
   <div class="availability-box">
     <div class="availability-head">
-      <h2 class="availability-title" data-i18n="availability.heroTitle"></h2>
+      <h2 class="availability-title" id="availability-heading" data-i18n="availability.heroTitle"></h2>
       <p class="availability-sub" data-i18n="availability.heroSub"></p>
+      <!-- Descripción accesible (oculta) útil para SEO -->
+      <p class="visually-hidden">
+        Mapa de disponibilidad de villas de obra nueva en Fuengirola (Torreblanca), Málaga.
+        Selecciona una vivienda para ver detalles, planos y estado.
+      </p>
     </div>
 
     <div class="map-col">
       <div class="map-canvas">
         <div class="map-viewport">
-          <!-- Nueva imagen y mapa -->
+          <!-- Imagen base del plano -->
           <img src="/images/availability-final.webp"
                id="avail-img"
                usemap="#avail-map"
-               alt="Plano de disponibilidad">
-          <map name="avail-map">
-            <area shape="poly" data-key="a1" href="#" alt="a1" title="a1" coords="2937,402,2989,363,3053,333,2837,312,2656,191,2639,191,2634,148,2609,126,2609,87,2587,74,2496,70,2496,109,2384,109,2380,186,2358,186,2358,221,2341,225,2341,251,2380,268,2380,299,2453,320,2453,342">
-            <area shape="poly" data-key="a2" href="#" alt="a2" title="a2" coords="2276,337,2410,342,2449,320,2367,294,2367,268,2336,255,2336,225,2349,217,2354,143,2289,126,2289,87,2250,74,2164,79,2164,122,2064,130,2064,204,2047,204,2043,238,2026,243,2026,273,2168,260,2216,281,2211,312">
-            <area shape="poly" data-key="a3" href="#" alt="a3" title="a3" coords="2034,346,2038,290,2026,281,2021,243,2038,234,2043,161,1978,143,1978,96,1939,87,1853,91,1853,135,1749,143,1749,225,1693,225,1697,277,1684,281,1684,312,1710,324,1848,307,1879,320,1879,363">
-            <area shape="poly" data-key="a4" href="#" alt="a4" title="a4" coords="1693,195,1641,169,1637,122,1607,109,1503,117,1503,161,1386,169,1386,251,1309,260,1313,303,1300,307,1300,346,1490,324,1537,350,1537,398,1702,381,1702,329,1676,312,1676,277,1693,277">
-            <area shape="poly" data-key="a5" href="#" alt="a5" title="a5" coords="1304,428,1304,359,1291,350,1291,303,1304,303,1304,221,1257,195,1252,143,1222,130,1114,139,1114,186,989,199,989,268,838,268,821,385,1071,381,1106,394,1106,450">
-            <area shape="poly" data-key="a6" href="#" alt="a6" title="a6" coords="812,381,812,333,834,268,557,264,553,173,419,173,415,122,285,122,263,139,268,191,229,221,229,251,173,299,125,368,130,432,466,428,471,385">
-            <area shape="poly" data-key="b1" href="#" alt="b1" title="b1" coords="130,441,69,601,78,765,423,765,428,678,795,687,812,601,808,562,466,570,462,437">
-            <area shape="poly" data-key="b2" href="#" alt="b2" title="b2" coords="812,566,816,605,799,700,1041,704,1261,678,1265,743,1589,648,1589,545,1559,527,1559,428,1529,415,1533,350,1486,320,1304,350,1304,424,1304,532">
-            <area shape="poly" data-key="b3" href="#" alt="b3" title="b3" coords="1559,523,1589,545,1589,639,1792,596,1956,592,1961,488,1926,471,1931,389,1866,355,1857,316,1702,329,1702,376,1702,463,1559,480">
-            <area shape="poly" data-key="b4" href="#" alt="b4" title="b4" coords="2138,264,2099,268,2047,273,2047,329,2038,329,2038,450,1926,467,1961,484,1961,583,2229,596,2237,506,2324,450,2259,424,2267,337,2198,312,2194,277,2168,260">
-            <area shape="poly" data-key="b5" href="#" alt="b5" title="b5" coords="2237,510,2237,601,2457,652,2462,566,2557,497,2561,394,2617,363,2423,337,2358,368,2345,437">
-            <area shape="poly" data-key="b6" href="#" alt="b6" title="b6" coords="2462,562,2453,648,2647,700,2643,639,2932,411,2617,363,2565,398,2561,497">
+               alt="Plano de disponibilidad de villas"
+               decoding="async"
+               fetchpriority="high"
+               style="width:100%;height:auto;">
+          <map name="avail-map" id="avail-map">
+            <!-- Añadimos tabindex para teclado y aria-label básico (usa tus titles actuales) -->
+            <area shape="poly" data-key="a1" href="#" alt="a1" title="a1" coords="2937,402,2989,363,3053,333,2837,312,2656,191,2639,191,2634,148,2609,126,2609,87,2587,74,2496,70,2496,109,2384,109,2380,186,2358,186,2358,221,2341,225,2341,251,2380,268,2380,299,2453,320,2453,342" tabindex="0" aria-label="Vivienda A1">
+            <area shape="poly" data-key="a2" href="#" alt="a2" title="a2" coords="2276,337,2410,342,2449,320,2367,294,2367,268,2336,255,2336,225,2349,217,2354,143,2289,126,2289,87,2250,74,2164,79,2164,122,2064,130,2064,204,2047,204,2043,238,2026,243,2026,273,2168,260,2216,281,2211,312" tabindex="0" aria-label="Vivienda A2">
+            <area shape="poly" data-key="a3" href="#" alt="a3" title="a3" coords="2034,346,2038,290,2026,281,2021,243,2038,234,2043,161,1978,143,1978,96,1939,87,1853,91,1853,135,1749,143,1749,225,1693,225,1697,277,1684,281,1684,312,1710,324,1848,307,1879,320,1879,363" tabindex="0" aria-label="Vivienda A3">
+            <area shape="poly" data-key="a4" href="#" alt="a4" title="a4" coords="1693,195,1641,169,1637,122,1607,109,1503,117,1503,161,1386,169,1386,251,1309,260,1313,303,1300,307,1300,346,1490,324,1537,350,1537,398,1702,381,1702,329,1676,312,1676,277,1693,277" tabindex="0" aria-label="Vivienda A4">
+            <area shape="poly" data-key="a5" href="#" alt="a5" title="a5" coords="1304,428,1304,359,1291,350,1291,303,1304,303,1304,221,1257,195,1252,143,1222,130,1114,139,1114,186,989,199,989,268,838,268,821,385,1071,381,1106,394,1106,450" tabindex="0" aria-label="Vivienda A5">
+            <area shape="poly" data-key="a6" href="#" alt="a6" title="a6" coords="812,381,812,333,834,268,557,264,553,173,419,173,415,122,285,122,263,139,268,191,229,221,229,251,173,299,125,368,130,432,466,428,471,385" tabindex="0" aria-label="Vivienda A6">
+            <area shape="poly" data-key="b1" href="#" alt="b1" title="b1" coords="130,441,69,601,78,765,423,765,428,678,795,687,812,601,808,562,466,570,462,437" tabindex="0" aria-label="Vivienda B1">
+            <area shape="poly" data-key="b2" href="#" alt="b2" title="b2" coords="812,566,816,605,799,700,1041,704,1261,678,1265,743,1589,648,1589,545,1559,527,1559,428,1529,415,1533,350,1486,320,1304,350,1304,424,1304,532" tabindex="0" aria-label="Vivienda B2">
+            <area shape="poly" data-key="b3" href="#" alt="b3" title="b3" coords="1559,523,1589,545,1589,639,1792,596,1956,592,1961,488,1926,471,1931,389,1866,355,1857,316,1702,329,1702,376,1702,463,1559,480" tabindex="0" aria-label="Vivienda B3">
+            <area shape="poly" data-key="b4" href="#" alt="b4" title="b4" coords="2138,264,2099,268,2047,273,2047,329,2038,329,2038,450,1926,467,1961,484,1961,583,2229,596,2237,506,2324,450,2259,424,2267,337,2198,312,2194,277,2168,260" tabindex="0" aria-label="Vivienda B4">
+            <area shape="poly" data-key="b5" href="#" alt="b5" title="b5" coords="2237,510,2237,601,2457,652,2462,566,2557,497,2561,394,2617,363,2423,337,2358,368,2345,437" tabindex="0" aria-label="Vivienda B5">
+            <area shape="poly" data-key="b6" href="#" alt="b6" title="b6" coords="2462,562,2453,648,2647,700,2643,639,2932,411,2617,363,2565,398,2561,497" tabindex="0" aria-label="Vivienda B6">
           </map>
         </div>
+      </div>
     </div>
 
     <aside class="info-col">
       <div id="info-text" class="info-card">
         <p data-i18n="availability.clickHint">Pulsa sobre una vivienda para ver los detalles.</p>
       </div>
+
       <!-- Ruleta (solo móvil) -->
       <div id="avail-ruleta" class="ruleta" aria-label="Viviendas (desliza)">
         <div class="ruleta-track" id="ruleta-track" role="list"></div>
+      </div>
+
+      <!-- Fallback SEO / No-JS: listado oculto de unidades -->
+      <div class="visually-hidden">
+        <h3>Villas disponibles en Fuengirola (Torreblanca), Málaga</h3>
+        <ul>
+          <li><a href="#a1">Vivienda A1</a></li>
+          <li><a href="#a2">Vivienda A2</a></li>
+          <li><a href="#a3">Vivienda A3</a></li>
+          <li><a href="#a4">Vivienda A4</a></li>
+          <li><a href="#a5">Vivienda A5</a></li>
+          <li><a href="#a6">Vivienda A6</a></li>
+          <li><a href="#b1">Vivienda B1</a></li>
+          <li><a href="#b2">Vivienda B2</a></li>
+          <li><a href="#b3">Vivienda B3</a></li>
+          <li><a href="#b4">Vivienda B4</a></li>
+          <li><a href="#b5">Vivienda B5</a></li>
+          <li><a href="#b6">Vivienda B6</a></li>
+        </ul>
       </div>
     </aside>
   </div>
 </section>
 
 <script>
+  // Mantiene tu lógica original
   window.addEventListener('load', () => {
     if (window.initAvailabilityMap) window.initAvailabilityMap();
+  });
+
+  // Accesibilidad: activa las áreas con teclado (Enter/Espacio)
+  document.addEventListener('keydown', (e) => {
+    const area = e.target?.closest?.('area[tabindex]');
+    if (!area) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      area.click();
+    }
   });
 </script>

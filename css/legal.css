@@ -1,0 +1,84 @@
+/* ===== Utilidades ===== */
+.legal-page{
+    background-color: #3c4d28;
+}
+.visually-hidden{
+  position:absolute !important;
+  width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0
+}
+
+/* ===== Contenedor legal con fondo verde y texto blanco ===== */
+.legal-container{
+  --legal-bg: #3c4d28;         /* verde corporativo */
+  --legal-fg: #ffffff;         /* texto blanco */
+  --legal-accent: #b7f5c9;     /* links y énfasis */
+  --header-h: 72px;            /* respaldo si tu header define esta var */
+
+  max-width: 1100px;
+  margin: calc(var(--header-h) + 2rem) auto 4rem;
+  padding: 2rem 1.5rem;
+
+  background: var(--legal-bg);
+  color: var(--legal-fg);
+
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.12);
+
+  font-family: var(--ff-body, "Montserrat", system-ui, -apple-system, sans-serif);
+  font-size: clamp(16px, 1.7vw, 18px);
+  line-height: 1.8;
+}
+
+/* Títulos */
+.legal-container .entry-title{
+  font-weight: 600;
+  line-height: 1.2;
+  font-size: clamp(28px, 3vw, 40px);
+  color: #fff;
+  margin: 0 0 0.75rem 0;
+}
+
+.legal-container .entry-intro{
+  color: rgba(255,255,255,.88);
+  margin: 0 0 1.25rem 0;
+  font-size: 1rem;
+}
+
+/* Enlaces con buen contraste */
+.legal-container a{
+  color: var(--legal-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.legal-container a:hover{
+  text-decoration-thickness: 2px;
+}
+
+/* Listas / espaciados */
+.legal-container p{ margin: 0 0 1rem 0; }
+.legal-container ul, .legal-container ol{ margin: 0 0 1rem 1.25rem; }
+.legal-container li + li{ margin-top: .25rem; }
+
+/* Tablas legales (si las hubiera) */
+.legal-container table{
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background: rgba(0,0,0,.08);
+  color: #fff;
+}
+.legal-container th,
+.legal-container td{
+  border: 1px solid rgba(255,255,255,.2);
+  padding: .5rem .75rem;
+}
+.legal-container th{
+  background: rgba(255,255,255,.08);
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (min-width: 992px){
+  .legal-container{ padding: 2.5rem 2rem; }
+}

@@ -4,9 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- ─── i18next (CDN) ─── -->
+  <script src="https://unpkg.com/i18next@23/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-http-backend@2/i18nextHttpBackend.min.js"></script>
+  <script src="https://unpkg.com/i18next-browser-languagedetector@8/i18nextBrowserLanguageDetector.min.js"></script>
+
   <!-- ─── SEO ─── -->
-  <title data-i18n="process.pageTitle">Proceso de Compra – WhiteHills</title>
+  <title data-i18n="process.simple.pageTitle">Proceso de Compra – WhiteHills</title>
   <meta name="description" content="Conoce el proceso de compra paso a paso: reserva, firma de contrato, pagos y entrega. Preguntas frecuentes incluidas.">
+  <link rel="canonical" href="https://whitehillsvillas.com/proceso.html" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Proceso de compra | WhiteHills Villas">
+  <meta property="og:description" content="Paso a paso: reserva, contrato, pagos y entrega. Toda la información del proceso de compra.">
+  <meta property="og:url" content="https://whitehillsvillas.com/proceso.html">
+  <meta property="og:image" content="https://whitehillsvillas.com/images/og-proceso.jpg">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Proceso de compra | WhiteHills Villas">
+  <meta name="twitter:description" content="Paso a paso: reserva, contrato, pagos y entrega.">
+  <meta name="twitter:image" content="https://whitehillsvillas.com/images/og-proceso.jpg">
 
   <!-- ─── FAVICON & PWA ─── -->
   <link rel="icon" type="image/png" sizes="96x96"  href="/favicon-96x96.png">
@@ -25,6 +43,16 @@
     "logo":"https://whitehillsvillas.com/web-app-manifest-192x192.png"
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Proceso de compra",
+    "url":"https://whitehillsvillas.com/proceso.html",
+    "inLanguage":"es-ES",
+    "isPartOf":{"@type":"WebSite","name":"WhiteHills Villas","url":"https://whitehillsvillas.com"}
+  }
+  </script>
 
   <!-- ─── CSS de terceros ─── -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -38,10 +66,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:wght@100;400;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-  <!-- ─── i18next (CDN) ─── -->
-  <script src="https://unpkg.com/i18next@23/i18next.min.js"></script>
-  <script src="https://unpkg.com/i18next-http-backend@2/i18nextHttpBackend.min.js"></script>
-  <script src="https://unpkg.com/i18next-browser-languagedetector@8/i18nextBrowserLanguageDetector.min.js"></script>
 
   <!-- ─── CSS propio ─── -->
   <link rel="stylesheet" href="/style.css" />
@@ -49,44 +73,47 @@
   <link rel="stylesheet" href="/css/footer.css">
   <link rel="stylesheet" href="/mediaquaries.css" />
   <link rel="stylesheet" href="/css/proceso.css" />
+
+  <style>.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
 </head>
 
 <body class="process-page proc-page">
+  <!-- Skip link para accesibilidad -->
+  <a class="visually-hidden" href="#main-content">Saltar al contenido</a>
+
   <!--*** Header dinámico ***-->
   <div id="header-placeholder"></div>
 
-  <!-- █ HERO con imagen 1920×1080 █ -->
-  <section class="section_1 section_1--availability proc-hero">
-    <img src="/images/proceso_compra.webp" alt="" data-i18n="[alt]process.heroAlt" class="proc-hero__img">
-  </section>
+  <!-- ===== MAIN ===== -->
+  <main id="main-content" role="main">
+    <!-- █ CONTENIDO SIMPLE: Título + Imagen (localizada por idioma y dispositivo) █ -->
+    <section class="proc-simple py-5">
+      <div class="container text-center">
+        <h1 class="proc-title mb-4" data-i18n="process.simple.title">Proceso de compra</h1>
 
-  <!-- █ FAQ / preguntas frecuentes █ -->
-  <section class="proc-faq" id="faq">
-    <details class="proc-faq__item">
-      <summary class="proc-faq__summary" data-i18n="process.faq.q1"></summary>
-      <p class="proc-faq__content" data-i18n="process.faq.a1"></p>
-    </details>
-
-    <details class="proc-faq__item">
-      <summary class="proc-faq__summary" data-i18n="process.faq.q2"></summary>
-      <p class="proc-faq__content" data-i18n="process.faq.a2"></p>
-    </details>
-
-    <details class="proc-faq__item">
-      <summary class="proc-faq__summary" data-i18n="process.faq.q3"></summary>
-      <p class="proc-faq__content" data-i18n="process.faq.a3"></p>
-    </details>
-
-    <details class="proc-faq__item">
-      <summary class="proc-faq__summary" data-i18n="process.faq.q4"></summary>
-      <p class="proc-faq__content" data-i18n="process.faq.a4"></p>
-    </details>
-
-    <details class="proc-faq__item">
-      <summary class="proc-faq__summary" data-i18n="process.faq.q5"></summary>
-      <p class="proc-faq__content" data-i18n="process.faq.a5"></p>
-    </details>
-  </section>
+        <picture id="procPic">
+          <!-- Móvil -->
+          <source media="(max-width: 991.98px)" type="image/webp"
+                  data-src-es="/images/proceso_es_mobile.webp"
+                  data-src-en="/images/proceso_en_mobile.webp">
+          <!-- Desktop -->
+          <source media="(min-width: 992px)" type="image/webp"
+                  data-src-es="/images/proceso_es_desktop.webp"
+                  data-src-en="/images/proceso_en_desktop.webp">
+          <!-- Fallback (se actualiza por idioma) -->
+          <img id="procImg"
+               class="proc-image img-fluid rounded shadow-sm mx-auto d-block"
+               src="/images/proceso_es_desktop.webp"
+               data-src-es="/images/proceso_es_desktop.webp"
+               data-src-en="/images/proceso_en_desktop.webp"
+               alt="Ilustración del proceso"
+               data-i18n="[alt]process.simple.imgAlt"
+               decoding="async"
+               fetchpriority="high">
+        </picture>
+      </div>
+    </section>
+  </main>
 
   <!--*** Footer dinámico ***-->
   <div id="footer-placeholder"></div>
@@ -99,7 +126,7 @@
   <script src="/js/il18n.js"></script>
   <script src="/app.js"></script>
 
-  <!-- Carga de /partials y comportamiento del header -->
+  <!-- Carga de /partials y comportamiento del header + localización de la imagen -->
   <script>
     /* Header desde /partials */
     fetch('/partials/header.html')
@@ -108,7 +135,7 @@
         document.getElementById('header-placeholder').innerHTML = html;
 
         const header = document.querySelector('header');
-        const hero   = document.querySelector('.section_1');
+        const hero   = document.querySelector('.proc-simple'); // observamos esta sección
         if (header && hero) {
           const io = new IntersectionObserver(
             ([entry]) => header.classList.toggle('scrolled', !entry.isIntersecting),
@@ -137,13 +164,14 @@
         const onHome = location.pathname === '/' || location.pathname.endsWith('/index.html') || location.pathname.endsWith('index.html');
         if (linkAvail && !onHome) linkAvail.setAttribute('href', '/index.html#availability');
 
-        // Marca activo Proceso
+        // Marca activo Proceso (+ aria-current)
         const path = location.pathname.replace(/\/+$/, '');
         document.querySelectorAll('header a[href]').forEach(a => {
           const href = a.getAttribute('href')?.replace(/\/+$/, '');
           if (!href || href === '#') return;
           if (href === path || (href.endsWith('proceso.html') && path.endsWith('proceso.html'))) {
             a.classList.add('active');
+            a.setAttribute('aria-current','page'); // accesibilidad/SEO semántico
           }
         });
 
@@ -169,6 +197,36 @@
           });
         }
       });
+
+    /* Localiza la imagen del <picture> según idioma (y respeta media queries) */
+    function applyLocalizedPicture(forceReload){
+      const lang = (i18next?.resolvedLanguage || i18next?.language || 'es').slice(0,2);
+      const pic  = document.getElementById('procPic');
+      const img  = document.getElementById('procImg');
+      if (!pic || !img) return;
+
+      pic.querySelectorAll('source').forEach(s => {
+        const url = s.dataset[ lang === 'es' ? 'srcEs' : 'srcEn' ];
+        if (url) s.srcset = url;
+      });
+
+      // Fallback <img>
+      const fall = img.dataset[ lang === 'es' ? 'srcEs' : 'srcEn' ];
+      if (fall) img.src = fall;
+
+      // Si cambias idioma tras pintar, fuerza reevaluación del <picture>
+      if (forceReload) {
+        const clone = img.cloneNode(true);
+        img.replaceWith(clone);
+      }
+    }
+
+    // Aplica al cargar (si i18n ya está) y en cambios de idioma
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.i18next && i18next.isInitialized) applyLocalizedPicture();
+      else i18next?.on?.('initialized', () => applyLocalizedPicture());
+      i18next?.on?.('languageChanged', () => applyLocalizedPicture(true));
+    });
   </script>
 </body>
 </html>
