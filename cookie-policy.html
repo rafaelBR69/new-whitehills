@@ -106,7 +106,7 @@
 
   <!-- Carga de partials + re-traducción -->
   <script>
-    /* Header desde /partials */
+    /* Header desde ./partials */
     fetch('./partials/header.html')
       .then(r => r.text())
       .then(html => {
@@ -159,7 +159,7 @@
         }
       });
 
-    /* Footer desde /partials */
+    /* Footer desde ./partials */
     fetch('./partials/footer.html')
       .then(r => r.text())
       .then(html => {

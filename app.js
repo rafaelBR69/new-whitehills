@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!header || !logoImg || !hero) return;                  // seguridad
 
   /* rutas de tus dos logos */
-  const WHITE_LOGO = '/images/logo-blanco.png';
-  const GREEN_LOGO = '/images/logo.png';
+  const WHITE_LOGO = './images/logo-blanco.png';
+  const GREEN_LOGO = './images/logo.png';
 
   /* — IO: cuando el héroe deja de ser visible — */
   const io = new IntersectionObserver(
