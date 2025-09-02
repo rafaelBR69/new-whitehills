@@ -835,7 +835,7 @@ function buildPromoList() {
   PROMO_ITEMS.forEach(({ key, icon, extra = '' }) => {
     ul.insertAdjacentHTML('beforeend', `
       <li class="promo-pair" data-key="${key}">
-        <img src="/images/iconos/${icon}" class="promo-icon ${extra}" alt="">
+        <img src="./images/iconos/${icon}" class="promo-icon ${extra}" alt="">
         <span id="${key}-count" class="promo-count">0</span>
         <span class="promo-label"></span>
         
