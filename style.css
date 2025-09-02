@@ -502,7 +502,7 @@ footer .social a{font-family:unset;}
 .f3up-card{
   position:relative;flex:1 1 0;min-height:var(--f3up-minh);
   border-radius:var(--f3up-radius);overflow:hidden;
-  background:#000 center/cover no-repeat;background-image:var(--bg);
+  background:#000 center/cover no-repeat var(--bg);
   transition:flex .6s cubic-bezier(.22,1,.36,1);
   box-shadow:none;isolation:isolate;transform:translateZ(0);
 }
