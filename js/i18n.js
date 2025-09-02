@@ -52,7 +52,7 @@ i18next
     /* descarga los dos archivos al arrancar (evita flashes) */
     preload: ['es', 'en'],
 
-    backend: { loadPath: '/langs/{{lng}}.json' },
+    backend: { loadPath: './langs/{{lng}}.json' },
 
     /* bloquea el hilo hasta que los JSON están en memoria  */
     initImmediate: false,
