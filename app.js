@@ -55,35 +55,55 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ──────────────────────────────
-   3. Pop-up (formulario → Google Sheets)
-   ─ Solo abre al hacer clic en “Agendar visita”
+   3. Pop-up (formularios → Google Sheets)
+   ─ Visita y Brochure con modales separados
 ──────────────────────────────── */
 
 const $id = (x) => document.getElementById(x);
 
-/* Helpers pop-up: buscan el nodo cada vez (robusto si inyectas partials) */
-window.openModal  = () => { const m = $id('infoModal');  if (m) m.classList.add('show'); };
-window.closeModal = () => { const m = $id('infoModal');  if (m) m.classList.remove('show'); };
-window.openThank  = () => { const m = $id('thankModal'); if (m) m.classList.add('show'); };
-window.closeThank = () => { const m = $id('thankModal'); if (m) m.classList.remove('show'); };
+/* Helper genérico */
+function toggleModal(modalEl, show = true) {
+  if (!modalEl) return;
+  modalEl.classList.toggle('show', show);
+  if (show) modalEl.querySelector('.modal__box')?.focus();
+}
 
-/* Cierre del modal por overlay / botón X (delegación, funciona siempre) */
+/* Visit (infoModal) */
+window.openVisitModal  = () => toggleModal($id('infoModal'), true);
+window.closeVisitModal = () => toggleModal($id('infoModal'), false);
+
+/* Brochure (brochureModal) */
+window.openBrochureModal  = () => toggleModal($id('brochureModal'), true);
+window.closeBrochureModal = () => toggleModal($id('brochureModal'), false);
+
+/* Gracias (thankModal) */
+window.openThank  = () => toggleModal($id('thankModal'), true);
+window.closeThank = () => toggleModal($id('thankModal'), false);
+
+/* Alias compatibilidad con código existente */
+window.openModal  = () => window.openVisitModal();
+window.closeModal = () => window.closeVisitModal();
+
+/* Cierre por overlay o botón X (para cualquier modal) */
 document.addEventListener('click', (e) => {
+  const isOverlay = e.target.classList?.contains('modal__overlay');
+  const closeBtn  = e.target.closest?.('.modal__close');
+  if (isOverlay || closeBtn) {
+    const modal = (isOverlay ? e.target.closest('.modal') : closeBtn.closest('.modal'));
+    modal?.classList.remove('show');
+  }
+  // ids específicos de "Gracias" (por compatibilidad)
   const id = e.target.id;
-  if (id === 'modalOverlay' || id === 'modalClose')            closeModal();
   if (id === 'thankOverlay' || id === 'thankClose' || id === 'thankOk') closeThank();
 });
-
-/* ▶️ Abrir pop-up al pulsar “Agendar visita” (botón con clase .btn-visit) */
+/* ▶️ Abrir “Agendar visita” (.btn-visit) */
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('.btn-visit');
   if (!btn) return;
 
   e.preventDefault();
   const unit = btn.getAttribute('data-unit') || '';
-
-  // Pre-rellena la unidad y el origen en el formulario del modal
-  const form = $id('leadForm');
+  const form = $id('visitForm'); // <-- antes buscabas 'leadForm'
   if (form) {
     let u = form.querySelector('[name="unidad"]');
     if (!u) { u = document.createElement('input'); u.type = 'hidden'; u.name = 'unidad'; form.appendChild(u); }
@@ -93,37 +113,87 @@ document.addEventListener('click', (e) => {
     if (!origin) { origin = document.createElement('input'); origin.type = 'hidden'; origin.name = 'origin'; form.appendChild(origin); }
     origin.value = 'Agendar visita – Web';
   }
+  openVisitModal();
+});
 
-  openModal();
+
+/* ▶️ Abrir “Obtener brochure” (a.btn-brochure) */
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a.btn-brochure');
+  if (!link) return;
+
+  e.preventDefault();
+
+  // Pasamos la URL del PDF al hidden del formulario de brochure
+  const pdfURL = link.getAttribute('href') || '';
+  const form = $id('brochureForm');
+  if (form) {
+    const hidden = form.querySelector('input[name="download_url"]');
+    if (hidden) hidden.value = pdfURL;
+  }
+  openBrochureModal();
 });
 
 /* ==== Envío a Google Sheets para TODOS los formularios data-lead ==== */
-/* Delegado: también funciona si el <form> se inyecta después */
 document.addEventListener('submit', async (e) => {
   const form = e.target;
   if (!form.matches('form[data-lead]')) return;
 
   e.preventDefault();
 
-  // Honeypot
   const fd = new FormData(form);
+
+  // Honeypot
   if (fd.get('website')?.trim()) {
     console.warn('[Spam-bot] envío bloqueado');
     return;
   }
   fd.delete('website');
 
+  // ----- Normalización de nombres (ES -> EN) -----
+  if (!fd.get('name') && fd.get('nombre'))    fd.set('name',    fd.get('nombre'));
+  if (!fd.get('phone') && fd.get('telefono')) fd.set('phone',   fd.get('telefono'));
+  if (!fd.get('message') && fd.get('mensaje'))fd.set('message', fd.get('mensaje'));
+
+  // Origin por si no viene via data-origin
+  if (!fd.get('origin')) {
+    fd.set('origin', form.dataset.origin || 'Formulario Web');
+  }
+
+  // Tipo de formulario (útil en Sheet)
+  if (!fd.get('form_type')) {
+    fd.set('form_type',
+      form.id === 'visitForm'     ? 'visit' :
+      form.id === 'brochureForm'  ? 'brochure' :
+      form.id || 'form'
+    );
+  }
+
+  // RGPD / marketing (si existen)
+  const rgpdInput = form.querySelector('[name="rgpd"]');
+  const mkInput   = form.querySelector('[name="marketing_ok"]');
+  if (rgpdInput) fd.set('rgpd', rgpdInput.checked ? 'Sí' : 'No');
+  if (mkInput)   fd.set('marketing_ok', mkInput.checked ? 'Sí' : 'No');
+
   const data = Object.fromEntries(fd.entries());
-  data.origin = form.dataset.origin || 'Formulario Web';
+
+  // Para "brochure": abrir PDF automáticamente tras enviar
+  const shouldDownload = String(form.dataset.downloadOnSuccess).toLowerCase() === 'true';
+  const downloadUrl = data.download_url || form.querySelector('[name="download_url"]')?.value;
 
   try {
-    closeModal();
+    // Cierra el modal actual (si aplica) y abre “Gracias”
+    form.closest('.modal')?.classList.remove('show');
     openThank();
 
     await fetch(
-      'https://script.google.com/macros/s/AKfycbxlBgB28gJM1LyutP76PLlsJy9dWhuZTgwFwT3fYZrEH4CBZu0UQ8peW3hkz8Nnsukjqw/exec',
+      'https://script.google.com/macros/s/AKfycbwKiHszSE0B-BIaMAbV6JTShlpzE-rVCxTxJMWJWgLdI6FRbaCL9cPDB8lojN5EhQAgzQ/exec',
       { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }
     );
+
+    if (shouldDownload && downloadUrl) {
+      window.open(downloadUrl, '_blank', 'noopener');
+    }
 
     form.reset();
   } catch (err) {
@@ -132,7 +202,7 @@ document.addEventListener('submit', async (e) => {
   }
 }, true);
 
-// — Helpers existentes (si los usas en otros sitios) —
+/* — Helpers existentes — */
 function setInfoDisabled($out, disabled = true) {
   if (!$out || !$out.length) return;
   $out.toggleClass('is-disabled', disabled)
@@ -141,7 +211,6 @@ function setInfoDisabled($out, disabled = true) {
 function uid(prefix='id') {
   return `${prefix}-${Math.random().toString(36).slice(2,9)}`;
 }
-
 
   /* ──────────────────────────────
     Availability map (Image-Mapster)

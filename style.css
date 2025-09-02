@@ -112,7 +112,14 @@ body{overflow-x:hidden;background-color:#ffffff;}
   font-size:3.3rem;
   font-weight:500;
   color:#fff;
+
+  width:120%;
+  position:relative;     /* ← importa para que 'left' funcione */
+  left:50%;
+  transform:translateX(-50%); /* centra según su propio ancho */
+  text-align:center;     /* si quieres el texto centrado dentro */
 }
+
 .section-img-paragraph{
   padding-top:2%;
   font-family:var(--ff-body);

@@ -215,16 +215,27 @@
   },
   "modal": {
     "visit": {
-      "title": "Agendar visita",
-      "desc": "Déjanos tus datos y nos pondremos en contacto para concertar una visita."
+      "title": "Agendar visita"
+    },
+    "brochure": {
+      "title": "Descargar brochure",
+      "desc": "Déjanos tus datos y te facilitamos el brochure oficial.",
+      "submit": "Obtener brochure",
+      "note": "Responsable: WhiteHills Villas. Finalidad: gestionar tu solicitud y el envío del brochure. Legitimación: tu consentimiento. Destinatarios: no se cederán datos a terceros, salvo obligación legal. Derechos: acceso, rectificación, supresión y otros, tal como se indica en la Política de privacidad."
     },
     "form": {
       "name": "Nombre",
       "email": "Email",
       "phone": "Teléfono",
+      "phoneOptional": "Teléfono (opcional)",
       "message": "Mensaje",
       "messagePH": "¿Cuándo te viene bien?",
       "send": "Enviar"
+    },
+    "rgpd": {
+      "accept_html": "Acepto la <a href=\"./privacy-policy.html\" target=\"_blank\" rel=\"noopener\">Política de privacidad</a> y el <a href=\"./legal-notice.html\" target=\"_blank\" rel=\"noopener\">Aviso legal</a>.",
+      "cookiesMore_html": "Más información sobre cookies en la <a href=\"./cookie-policy.html\" target=\"_blank\" rel=\"noopener\">Política de cookies</a>.",
+      "marketing": "Consiento recibir comunicaciones comerciales por medios electrónicos (opcional)."
     },
     "thanks": {
       "title": "¡Gracias!",

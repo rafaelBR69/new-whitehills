@@ -1,8 +1,6 @@
 <!-- /partials/modals.html -->
 
-<!-- ===== Modal: Solicitar visita =====
-     Usa imagen de fondo + caja más ancha.
-     Cambia la ruta de --modal-bg y el ancho --modal-width a tu gusto. -->
+<!-- ===== Modal: Solicitar visita (RGPD solo obligatorio) ===== -->
 <div id="infoModal"
      class="modal modal--with-bg"
      role="dialog"
@@ -17,26 +15,20 @@
 
     <h3 id="visitTitle" class="modal__title" data-i18n="modal.visit.title">Agendar visita</h3>
 
-    <!-- data-lead + data-origin para que app.js lo procese -->
-    <form id="leadForm" class="modal__form" data-lead data-origin="Agendar visita – Web">
-      <!-- Honeypot anti-spam (oculto por CSS) -->
+    <form id="visitForm" class="modal__form" data-lead data-origin="Agendar visita – Web">
       <input type="text" name="website" class="hp-wrapper" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-      <!-- Se pre-rellena desde mostrarInfo() -->
       <input type="hidden" name="unidad" value="">
       <input type="hidden" name="origin" value="">
 
       <label for="lf-nombre" data-i18n="modal.form.name">Nombre</label>
-      <input id="lf-nombre" type="text" name="nombre" required
-             autocomplete="name" autocapitalize="words" enterkeyhint="next">
+      <input id="lf-nombre" type="text" name="nombre" required autocomplete="name" autocapitalize="words" enterkeyhint="next">
 
       <label for="lf-email" data-i18n="modal.form.email">Email</label>
-      <input id="lf-email" type="email" name="email" required
-             autocomplete="email" spellcheck="false" enterkeyhint="next">
+      <input id="lf-email" type="email" name="email" required autocomplete="email" spellcheck="false" enterkeyhint="next">
 
       <label for="lf-tel" data-i18n="modal.form.phone">Teléfono</label>
-      <input id="lf-tel" type="tel" name="telefono"
-             autocomplete="tel" inputmode="tel" enterkeyhint="next">
+      <input id="lf-tel" type="tel" name="telefono" autocomplete="tel" inputmode="tel" enterkeyhint="next">
 
       <label for="lf-msg" data-i18n="modal.form.message">Mensaje</label>
       <textarea id="lf-msg" name="mensaje" rows="4"
@@ -44,13 +36,88 @@
                 data-i18n="[placeholder]modal.form.messagePH"
                 enterkeyhint="send"></textarea>
 
+      <!-- RGPD obligatorio (sin marketing) -->
+      <div class="rgpd-block">
+        <label class="rgpd-item">
+          <input type="checkbox" name="rgpd" required>
+          <span>
+            Acepto la <a href="./privacy-policy.html" target="_blank" rel="noopener">Política de privacidad</a> y el
+            <a href="./legal-notice.html" target="_blank" rel="noopener">Aviso legal</a>.
+          </span>
+        </label>
+      </div>
+
       <button class="modal__send" type="submit" data-i18n="modal.form.send">Enviar</button>
     </form>
   </div>
 </div>
 
-<!-- ===== Modal “Gracias” =====
-     Fondo con logo. Ajustamos tint y tamaño del fondo para que actúe como “marca de agua”. -->
+
+<!-- ===== Modal: Brochure (RGPD obligatorio + marketing opcional) ===== -->
+<div id="brochureModal"
+     class="modal modal--with-bg"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="brochureTitle"
+     aria-describedby="brochureDesc"
+     style="--modal-bg: url('../images/formulario.webp'); --modal-width: 760px; --modal-tint: rgba(0,0,0,.45);">
+  <div class="modal__overlay" aria-hidden="true"></div>
+
+  <div class="modal__box" tabindex="-1">
+    <button class="modal__close" type="button" aria-label="Cerrar">×</button>
+
+    <h3 id="brochureTitle" class="modal__title">Descargar brochure</h3>
+    <p id="brochureDesc" class="modal__paragraph">
+      Déjanos tus datos y te facilitamos el brochure oficial.
+    </p>
+
+    <form id="brochureForm"
+          class="modal__form"
+          data-lead
+          data-origin="Brochure – Web"
+          data-download-on-success="true">
+      <input type="text" name="website" class="hp-wrapper" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <label for="bf-nombre">Nombre</label>
+      <input id="bf-nombre" type="text" name="nombre" required autocomplete="name" autocapitalize="words" enterkeyhint="next">
+
+      <label for="bf-email">Email</label>
+      <input id="bf-email" type="email" name="email" required autocomplete="email" spellcheck="false" enterkeyhint="next">
+
+      <label for="bf-tel">Teléfono (opcional)</label>
+      <input id="bf-tel" type="tel" name="telefono" autocomplete="tel" inputmode="tel" enterkeyhint="next">
+
+      <input type="hidden" name="download_url" value="">
+
+      <!-- RGPD obligatorio + marketing opcional -->
+      <div class="rgpd-block">
+        <label class="rgpd-item">
+          <input type="checkbox" name="rgpd" required>
+          <span>
+            Acepto la <a href="./privacy-policy.html" target="_blank" rel="noopener">Política de privacidad</a> y el
+            <a href="./legal-notice.html" target="_blank" rel="noopener">Aviso legal</a>. 
+            Más información sobre cookies en la <a href="./cookie-policy.html" target="_blank" rel="noopener">Política de cookies</a>.
+          </span>
+        </label>
+        <label class="rgpd-item">
+          <input type="checkbox" name="marketing_ok">
+          <span>Consiento recibir comunicaciones comerciales por medios electrónicos (opcional).</span>
+        </label>
+      </div>
+
+      <button class="modal__send" type="submit">Obtener brochure</button>
+
+      <p class="modal__note">
+        Responsable: WhiteHills Villas. Finalidad: gestionar tu solicitud y el envío del brochure.
+        Legitimación: tu consentimiento. Destinatarios: no se cederán datos a terceros, salvo obligación legal.
+        Derechos: acceso, rectificación, supresión y otros, tal como se indica en la Política de privacidad.
+      </p>
+    </form>
+  </div>
+</div>
+
+
+<!-- ===== Modal “Gracias” ===== -->
 <div id="thankModal"
      class="modal modal--with-bg"
      role="dialog"
@@ -60,7 +127,6 @@
      style="--modal-bg: url('../images/logo.png'); --modal-width: 560px; --modal-tint: rgba(0,0,0,.35);">
   <div id="thankOverlay" class="modal__overlay" aria-hidden="true"></div>
 
-  <!-- Para que el logo no se deforme, forzamos contain/center en esta caja -->
   <div class="modal__box" style="background-size: contain; background-position: center; background-repeat: no-repeat;" tabindex="-1">
     <button id="thankClose" class="modal__close" type="button" aria-label="Cerrar">×</button>
 
@@ -72,3 +138,11 @@
     <button id="thankOk" class="modal__send" type="button" data-i18n="modal.thanks.ok">Aceptar</button>
   </div>
 </div>
+
+<!-- Estilos RGPD (opcionales) -->
+<style>
+  .rgpd-block{ margin:.75rem 0 1rem; display:flex; flex-direction:column; gap:.5rem; font-size:.95em; }
+  .rgpd-item{ display:flex; align-items:flex-start; gap:.55rem; line-height:1.45; }
+  .rgpd-item input{ margin-top:.2rem; }
+  .modal__note{ font-size:.85em; opacity:.8; margin-top:.5rem; }
+</style>

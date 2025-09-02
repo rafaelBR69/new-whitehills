@@ -16,7 +16,8 @@
   },
   "hero": {
     "welcome": "WhiteHills",
-    "tagline": "New‑build residences in Torremolinos – Mediterranean elegance with a soul of its own"
+    "tagline": "New‑build residences in Torremolinos – Mediterranean elegance with a soul of its own",
+    "cta": "Go to villas"
   },
   "section3": {
     "title": "16 Modern Villas in Torreblanca, Fuengirola",
@@ -215,22 +216,32 @@
   },
   "modal": {
     "visit": {
-      "title": "Schedule a visit",
-      "desc": "Leave us your details and we will contact you to arrange a visit."
+      "title": "Schedule a visit"
+    },
+    "brochure": {
+      "title": "Download brochure",
+      "desc": "Leave your details and we'll send you the official brochure.",
+      "submit": "Get brochure",
+      "note": "Controller: WhiteHills Villas. Purpose: manage your request and send the brochure. Legal basis: your consent. Recipients: data will not be shared with third parties unless required by law. Rights: access, rectification, erasure and others, as set out in the Privacy Policy."
     },
     "form": {
       "name": "Name",
       "email": "Email",
       "phone": "Phone",
+      "phoneOptional": "Phone (optional)",
       "message": "Message",
-      "messagePH": "When is a good time for you?",
+      "messagePH": "When would suit you?",
       "send": "Send"
+    },
+    "rgpd": {
+      "accept_html": "I accept the <a href=\"./privacy-policy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> and the <a href=\"./legal-notice.html\" target=\"_blank\" rel=\"noopener\">Legal Notice</a>.",
+      "cookiesMore_html": "More information about cookies in the <a href=\"./cookie-policy.html\" target=\"_blank\" rel=\"noopener\">Cookie Policy</a>.",
+      "marketing": "I agree to receive marketing communications by electronic means (optional)."
     },
     "thanks": {
       "title": "Thank you!",
-      "body": "We've received your request. We'll contact you very soon.",
+      "body": "We have received your request. We will contact you shortly.",
       "ok": "OK"
     }
   }
-
 }
