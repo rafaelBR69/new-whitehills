@@ -177,8 +177,16 @@ body{overflow-x:hidden;background-color:#ffffff;}
   cursor:pointer;
 }
 .section-services-btn:hover,
-.section-services-btn:focus{background:var(--brand-color);color:#fff;border-color:var(--brand-color);}
-.section-services-btn:active{background:var(--brand-color);color:#fff;transform:scale(.97);}
+.section-services-btn:focus{
+  background:var(--brand-color);
+  color:#fff;
+  border-color:var(--brand-color);
+}
+.section-services-btn:active{
+  background:var(--brand-color);
+  color:#fff;
+  transform:scale(.97);
+}
 
 /* =========================================================
    INTERIOR + CARACTERÍSTICAS (BASE)
