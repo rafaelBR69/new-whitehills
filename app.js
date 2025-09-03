@@ -1034,3 +1034,89 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!rafId) rafId = requestAnimationFrame(update);
   });
 })();
+
+(function () {
+  // Dominios de producción donde quieres slugs bonitos
+  const PROD_HOSTS = [
+    'whitehillsvillas.com',
+    'www.whitehillsvillas.com',
+    'rafaelbr69.github.io'     // quita/añade los que necesites
+  ];
+  const IS_PROD = PROD_HOSTS.includes(location.hostname);
+
+  // Mapa slug → archivo .html para desarrollo local
+  function slugToHtml(url) {
+    try {
+      const u = new URL(url, location.origin);
+      const path = u.pathname.replace(/\/+$/,''); // sin barra final
+      const hash = u.hash || '';
+
+      const map = {
+        '/es/inicio':              'index.html',
+        '/en/home':                'index.html',
+        '/es/proceso-compra':      'proceso.html',
+        '/en/process':             'proceso.html',
+        '/es/contacto':            'contact.html',
+        '/en/contact':             'contact.html',
+        '/es/aviso-legal':         'legal-notice.html',
+        '/en/legal-notice':        'legal-notice.html',
+        '/es/politica-cookies':    'cookies-policy.html',
+        '/en/cookie-policy':       'cookies-policy.html',
+        '/es/politica-privacidad': 'privacy-policy.html',
+        '/en/privacy-policy':      'privacy-policy.html'
+      };
+
+      const html = map[path];
+      return (html ? html : url) + hash;
+    } catch {
+      return url;
+    }
+  }
+
+  // Selector de idioma
+  const $select = document.getElementById('langSwitcher');
+  const initialLang = (localStorage.getItem('i18n_lang') || 'es').toLowerCase();
+
+  function applyLang(lng) {
+    document.querySelectorAll('a[data-href-es]').forEach(a => {
+      // slug objetivo según idioma
+      const slug = (lng === 'en') ? a.dataset.hrefEn : a.dataset.hrefEs;
+
+      if (IS_PROD) {
+        // En producción usamos slugs bonitos
+        if (slug) a.setAttribute('href', slug);
+      } else {
+        // En local dejamos el href (fallback .html). Si faltara, convertimos a .html
+        const current = a.getAttribute('href') || '';
+        if (!current || /^\/(es|en)\//.test(current)) {
+          a.setAttribute('href', slugToHtml(slug));
+        }
+      }
+    });
+  }
+
+  applyLang(initialLang);
+  if ($select) {
+    $select.value = initialLang;
+    $select.addEventListener('change', e => {
+      const lng = e.target.value.toLowerCase();
+      localStorage.setItem('i18n_lang', lng);
+      applyLang(lng);
+    });
+  }
+
+  // Cinturón y tirantes: si en local haces clic en un slug, lo convertimos a .html al vuelo.
+  if (!IS_PROD) {
+    document.addEventListener('click', (ev) => {
+      const a = ev.target.closest('a[data-href-es]');
+      if (!a) return;
+      const href = a.getAttribute('href') || '';
+      if (/^\/(es|en)\//.test(href)) { // parece slug
+        ev.preventDefault();
+        const lng = (localStorage.getItem('i18n_lang') || 'es').toLowerCase();
+        const slug = (lng === 'en') ? a.dataset.hrefEn : a.dataset.hrefEs;
+        location.href = slugToHtml(slug);
+      }
+    });
+  }
+})();
