@@ -1120,3 +1120,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 })();
+
+// ─────────────────────────────────────────────────────────────
+// 6) Refresco al cambiar de idioma (i18next / evento propio)
+// ─────────────────────────────────────────────────────────────
+
+// A) actualiza labels y re-anima valores desde el i18n actual
+function refreshPromoCounters() {
+  const box = document.getElementById('promoStats');
+  if (!box) return;
+
+  // si aún no existe la lista (p. ej. navegación SPA), créala
+  if (!box.querySelector('ul')) buildPromoList();
+
+  // 1) reset visual: poner todos a "0"
+  PROMO_ITEMS.forEach(({ key }) => {
+    const countEl = document.getElementById(`${key}-count`);
+    if (countEl) countEl.textContent = '0';
+  });
+
+  // 2) traducir labels + re-animar valores del idioma actual
+  initPromoCounters();
+}
+
+// B) pequeño debounce por si disparan varios eventos seguidos
+let _langRefreshTimer = null;
+function onLanguageChangedDebounced() {
+  clearTimeout(_langRefreshTimer);
+  _langRefreshTimer = setTimeout(refreshPromoCounters, 50);
+}
+
+// C) engancha eventos de cambio de idioma
+//    (i) evento nativo de i18next
+if (window.i18next && typeof i18next.on === 'function') {
+  i18next.on('languageChanged', onLanguageChangedDebounced);
+}
+//    (ii) si en tu app disparas un evento custom (p. ej. setLang → window.dispatchEvent(new Event('i18n:changed')))
+window.addEventListener('i18n:changed', onLanguageChangedDebounced);
