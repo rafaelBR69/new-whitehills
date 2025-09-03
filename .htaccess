@@ -27,10 +27,7 @@ RewriteRule ^$ /es/inicio [R=302,L]
 #################################################################
 # 3) RUTAS ESPAÑOLAS
 #################################################################
-RewriteRule ^es/inicio/?$               /index.html            [L]
-RewriteRule ^es/disponibilidad/?$       /availability.html     [L]
-RewriteRule ^es/bloque-1/?$             /bloque-a.html         [L]
-RewriteRule ^es/bloque-2/?$             /bloque-b.html         [L]
+RewriteRule ^es/inicio/?$ /whitehills/new-whitehills/index.html [L]
 RewriteRule ^es/contacto/?$             /contact.html          [L]
 
 # Páginas legales
@@ -42,9 +39,6 @@ RewriteRule ^es/politica-privacidad/?$  /privacy-policy.html   [L]
 # 4) RUTAS INGLESAS
 #################################################################
 RewriteRule ^en/home/?$                 /index.html            [L]
-RewriteRule ^en/availability/?$         /availability.html     [L]
-RewriteRule ^en/building-1/?$           /bloque-a.html         [L]
-RewriteRule ^en/building-2/?$           /bloque-b.html         [L]
 RewriteRule ^en/contact/?$              /contact.html          [L]
 
 # Páginas legales
@@ -63,21 +57,6 @@ RewriteRule ^index\.html$ /en/home   [R=301,L]
 
 RewriteCond %{THE_REQUEST} \s/index\.html\s [NC]
 RewriteRule  ^index\.html$ /es/inicio [R=301,L]
-
-# availability.html
-RewriteCond %{THE_REQUEST} \s/availability\.html\s [NC]
-RewriteCond %{HTTP:Accept-Language} ^en [NC]
-RewriteRule ^availability\.html$ /en/availability [R=301,L]
-
-RewriteCond %{THE_REQUEST} \s/availability\.html\s [NC]
-RewriteRule ^availability\.html$ /es/disponibilidad [R=301,L]
-
-# bloque-a.html / bloque-b.html
-RewriteCond %{THE_REQUEST} \s/bloque-a\.html\s [NC]
-RewriteRule ^bloque-a\.html$ /es/bloque-1 [R=301,L]
-
-RewriteCond %{THE_REQUEST} \s/bloque-b\.html\s [NC]
-RewriteRule ^bloque-b\.html$ /es/bloque-2 [R=301,L]
 
 # contact.html
 RewriteCond %{THE_REQUEST} \s/contact\.html\s [NC]

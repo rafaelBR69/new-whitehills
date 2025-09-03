@@ -58,7 +58,9 @@ body{overflow-x:hidden;background-color:#ffffff;}
    ========================================================= */
 .section_1{
   position:relative;
-  background-image:url("./images/home.webp");
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.108), rgba(0, 0, 0, 0.108)), /* velo negro */
+    url("./images/home.webp");
   background-position:center;
   background-repeat:no-repeat;
   background-size:115% auto;
