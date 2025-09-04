@@ -202,13 +202,6 @@
     "title": "LOCALIZACIÓN",
     "imgAlt": "Descripción de la imagen de la sección"
   },
-  "process": {
-    "simple": {
-      "title": "Proceso de compra",
-      "imgAlt": "Ilustración del proceso de compra",
-      "pageTitle": "Proceso de compra"
-    }
-  },
   "modal": {
     "visit": {
       "title": "Agendar visita"
@@ -237,6 +230,24 @@
       "title": "¡Gracias!",
       "body": "Hemos recibido tu solicitud. Te contactaremos muy pronto.",
       "ok": "Aceptar"
+    }
+  },
+  "process": {
+    "simple": {
+      "pageTitle": "Proceso de Compra – WhiteHills",
+      "title": "Proceso de compra",
+      "skipLink": "Saltar al contenido",
+      "notes": {
+        "iva": "*IVA no incluido.",
+        "disclaimer": "*Estas formas de pago pueden estar sujetas a modificación."
+      },
+      "steps": {
+        "reserva": { "title": "Reserva", "sub": "25.000€" },
+        "cpc": { "title": "CPC", "sub": "Pago: 15%" },
+        "inicio": { "title": "Inicio de obra", "sub": "Pago: 8%" },
+        "entrega": { "title": "Entrega de llaves", "sub": "Pago: 61% aprox." },
+        "mas6": { "title": "+6 meses inicio de obra", "sub": "Pago: 8%" }
+      }
     }
   }
 }

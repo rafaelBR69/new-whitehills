@@ -66,7 +66,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:wght@100;400;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-
   <!-- ─── CSS propio ─── -->
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./css/header.css">
@@ -79,40 +78,68 @@
 
 <body class="process-page proc-page">
   <!-- Skip link para accesibilidad -->
-  <a class="visually-hidden" href="#main-content">Saltar al contenido</a>
+  <a class="visually-hidden" href="#main-content" data-i18n="process.simple.skipLink">Saltar al contenido</a>
 
   <!--*** Header dinámico ***-->
   <div id="header-placeholder"></div>
 
   <!-- ===== MAIN ===== -->
   <main id="main-content" role="main">
-    <!-- █ CONTENIDO SIMPLE: Título + Imagen (localizada por idioma y dispositivo) █ -->
-    <section class="proc-simple py-5">
-      <div class="container text-center">
-        <h1 class="proc-title mb-4" data-i18n="process.simple.title">Proceso de compra</h1>
 
-        <picture id="procPic">
-          <!-- Móvil -->
-          <source media="(max-width: 991.98px)" type="image/webp"
-                  data-src-es="./images/proceso_es_mobile.webp"
-                  data-src-en="./images/proceso_en_mobile.webp">
-          <!-- Desktop -->
-          <source media="(min-width: 992px)" type="image/webp"
-                  data-src-es="./images/proceso_es_desktop.webp"
-                  data-src-en="./images/proceso_en_desktop.webp">
-          <!-- Fallback (se actualiza por idioma) -->
-          <img id="procImg"
-               class="proc-image img-fluid rounded shadow-sm mx-auto d-block"
-               src="./images/proceso_es_desktop.webp"
-               data-src-es="./images/proceso_es_desktop.webp"
-               data-src-en="./images/proceso_en_desktop.webp"
-               alt="Ilustración del proceso"
-               data-i18n="[alt]process.simple.imgAlt"
-               decoding="async"
-               fetchpriority="high">
-        </picture>
+    <section class="process-tl" id="proceso-compra">
+      <h2 class="process-tl__title" data-i18n="process.simple.title">Proceso de compra</h2>
+
+      <div class="tl">
+        <!-- Trazo (fondo) -->
+        <svg class="tl__svg" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
+          <!-- r = (500 - 220) / 2 = 140 -->
+          <path class="tl__path"
+                d="M140 220 H1060 A140 140 0 0 1 1060 500 H140" />
+        </svg>
+
+        <!-- Pasos fila superior -->
+        <button class="tl__step is-top" style="--x:120px"  data-title="Reserva" data-text="25K€*">
+          <img src="./images/iconos/comprobado.webp" alt="">
+          <span data-i18n="process.simple.steps.reserva.title">Reserva</span>
+          <small data-i18n="process.simple.steps.reserva.sub">25.000€</small>
+        </button>
+
+        <button class="tl__step is-top" style="--x:520px" data-title="CPC" data-text="Pago: 15%*">
+          <img src="./images/iconos/documento-_1_.webp" alt="">
+          <span data-i18n="process.simple.steps.cpc.title">CPC</span>
+          <small data-i18n="process.simple.steps.cpc.sub">Pago: 15%</small>
+        </button>
+
+        <button class="tl__step is-top" style="--x:910px" data-title="Inicio de obra" data-text="Pago: 12%*">
+          <img src="./images/iconos/pala.svg" alt="">
+          <span data-i18n="process.simple.steps.inicio.title">Inicio de obra</span>
+          <small data-i18n="process.simple.steps.inicio.sub">Pago: 8%</small>
+        </button>
+
+        <!-- Pasos fila inferior -->
+        <button class="tl__step is-bottom" style="--x:120px" data-title="Entrega de llaves" data-text="Pago: 60%* aprox.">
+          <img src="./images/iconos/fuegos-artificiales.svg" alt="">
+          <span data-i18n="process.simple.steps.entrega.title">Entrega de llaves</span>
+          <small data-i18n="process.simple.steps.entrega.sub">Pago: 61% aprox.</small>
+        </button>
+
+        <button class="tl__step is-bottom" style="--x:520px" data-title="+6 meses inicio de obra" data-text="Pago: 8%*">
+          <img src="./images/iconos/grua.svg" alt="">
+          <span data-i18n="process.simple.steps.mas6.title">+6 meses inicio de obra</span>
+          <small data-i18n="process.simple.steps.mas6.sub">Pago: 8%</small>
+        </button>
+
+        <button class="tl__step is-bottom" style="--x:910px" data-title="+6 meses inicio de obra" data-text="Pago: 8%*">
+          <img src="./images/iconos/grua.svg" alt="">
+          <span data-i18n="process.simple.steps.mas6.title">+6 meses inicio de obra</span>
+          <small data-i18n="process.simple.steps.mas6.sub">Pago: 8%</small>
+        </button>
       </div>
+
+      <p class="process-tl__note" data-i18n="process.simple.notes.iva">*IVA no incluido.</p>
+      <p class="process-tl__note" data-i18n="process.simple.notes.disclaimer">*Estas formas de pago pueden estar sujetas a modificación.</p>
     </section>
+
   </main>
 
   <!--*** Footer dinámico ***-->
@@ -171,11 +198,11 @@
           if (!href || href === '#') return;
           if (href === path || (href.endsWith('proceso.html') && path.endsWith('proceso.html'))) {
             a.classList.add('active');
-            a.setAttribute('aria-current','page'); // accesibilidad/SEO semántico
+            a.setAttribute('aria-current','page');
           }
         });
 
-        // Retraducción de header si i18n ya está
+        // Retraducción del header si i18n ya está
         if (window.i18next && i18next.isInitialized) {
           document.querySelectorAll('header [data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
@@ -210,23 +237,60 @@
         if (url) s.srcset = url;
       });
 
-      // Fallback <img>
       const fall = img.dataset[ lang === 'es' ? 'srcEs' : 'srcEn' ];
       if (fall) img.src = fall;
 
-      // Si cambias idioma tras pintar, fuerza reevaluación del <picture>
       if (forceReload) {
         const clone = img.cloneNode(true);
         img.replaceWith(clone);
       }
     }
 
-    // Aplica al cargar (si i18n ya está) y en cambios de idioma
     document.addEventListener('DOMContentLoaded', () => {
       if (window.i18next && i18next.isInitialized) applyLocalizedPicture();
       else i18next?.on?.('initialized', () => applyLocalizedPicture());
       i18next?.on?.('languageChanged', () => applyLocalizedPicture(true));
     });
   </script>
+
+  <script>
+    // Dibuja el trazo cuando el bloque entra al viewport
+    (() => {
+      const box  = document.querySelector('.tl');
+      const path = document.querySelector('.tl__path');
+      if (!box || !path) return;
+
+      const io = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting){
+          path.style.strokeDashoffset = '0';  // anima
+          io.disconnect();
+        }
+      }, {threshold: .25});
+
+      io.observe(box);
+    })();
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tl   = document.querySelector('.process-tl .tl');
+      const path = tl?.querySelector('.tl__path');
+      if (!tl || !path) return;
+
+      // Longitud real del path → variable CSS
+      try {
+        const len = Math.ceil(path.getTotalLength());
+        path.style.setProperty('--pathLen', len);
+      } catch(_) {}
+
+      // Activa/desactiva animación según visibilidad
+      const io = new IntersectionObserver(([entry]) => {
+        tl.classList.toggle('is-loop', entry.isIntersecting);
+      }, { threshold: 0.35 });
+
+      io.observe(tl);
+    });
+  </script>
+
 </body>
 </html>

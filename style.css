@@ -854,3 +854,186 @@ aside.info-col{
 
 /* Badge “No disponible” (clave con guion_bajo) */
 .badge-no_disponible{ background:#B63E3E; border-color:#B63E3E; color:#fff; }
+/* =========================================================
+   Proceso de compra — Timeline (limpio)
+   Ajusta rápido desde las variables de .process-tl
+   ========================================================= */
+
+/* Contenedor */
+.process-tl{
+  /* Paleta */
+  --bg:    #3c4d28;    /* color del “pastilla” */
+  --txt:   #ffffff;    /* color de textos */
+  --brand: #3c4d28;    /* color del punto (aro exterior) */
+  --line:  #c83b32;    /* rojo del trazo */
+
+  /* Geometría del timeline (desktop) */
+  --tl-height:     650px;  /* altura total del bloque */
+  --tl-pad-v:      84px;   /* padding vertical (arriba/abajo) */
+  --tl-step-top:   11%;    /* distancia fila superior al borde superior */
+  --tl-step-bottom: 8%;    /* distancia fila inferior al borde inferior */
+
+  max-width: 1240px;
+  margin: 2rem auto;
+  padding: 20rem 1.25rem;   /* tu espaciado exterior actual */
+}
+
+.process-tl__title{
+  font-family: var(--ff-body);
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: .3px;
+  margin: 0 0 1rem;
+  font-size: 4rem;
+}
+
+/* Lienzo del timeline */
+.tl{
+  position: relative;
+  background: var(--bg);
+  color: var(--txt);
+  border-radius: 18px;
+
+  /* Horizontal fijo + vertical por variables */
+  padding: 0 28px;
+  padding-top: var(--tl-pad-v);
+  padding-bottom: var(--tl-pad-v);
+  min-height: var(--tl-height);
+
+  overflow: visible;   /* que nada se recorte */
+}
+
+/* SVG del trazo (debajo de los pasos) */
+.tl__svg{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Trazo */
+.tl__path{
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  /* Longitud del path (la pone el JS); 2600 es fallback seguro */
+  stroke-dasharray:  var(--pathLen, 2600);
+  stroke-dashoffset: var(--pathLen, 2600);
+}
+
+/* Animación en bucle: dibuja → pausa → reset instantáneo → pausa corta */
+.tl.is-loop .tl__path{
+  animation: tl-draw-pause 8s ease-in-out infinite both;
+  will-change: stroke-dashoffset;
+}
+
+@keyframes tl-draw-pause{
+  0%      { stroke-dashoffset: var(--pathLen, 2600); } /* oculto */
+  65%     { stroke-dashoffset: 0; }                   /* dibuja */
+  85%     { stroke-dashoffset: 0; }                   /* pausa al final */
+  85.001% { stroke-dashoffset: var(--pathLen, 2600); }/* reset instantáneo */
+  100%    { stroke-dashoffset: var(--pathLen, 2600); }/* mini pausa ya reseteado */
+}
+
+/* Respeto a usuarios con reduce-motion */
+@media (prefers-reduced-motion: reduce){
+  .tl.is-loop .tl__path{ animation: none !important; }
+}
+
+/* Pasos (encima del trazo) */
+.tl__step{
+  position: absolute;
+  z-index: 2;
+  left: var(--x);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .125rem;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Posición vertical de filas (escala con la altura) */
+.tl__step.is-top    { top:    var(--tl-step-top); }
+.tl__step.is-bottom { bottom: var(--tl-step-bottom); }
+
+/* Icono + textos */
+.tl__step img   { width: 56px; height: 56px; display: block; }
+.tl__step span  { font-weight: 400; color: var(--txt); font-size: 2rem; font-family: var(--ff-body); }
+.tl__step small { color: #fff;     font-weight: 400; font-size: 2rem; font-family: var(--ff-body); }
+
+/* Punto sobre la línea */
+.tl__step::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--brand);
+  outline: 6px solid #fff;            /* halo blanco */
+  box-shadow: 0 0 0 3px var(--brand);  /* aro exterior */
+  top: calc(100% + 10px);             /* por defecto bajo el icono (fila superior) */
+}
+.tl__step.is-bottom::before{ top: -14px; } /* fila inferior: punto por encima */
+
+/* Hover / foco */
+.tl__step:hover img{
+  transform: translateY(-2px) scale(1.04);
+  transition: .2s;
+}
+.tl__step:focus-visible{
+  outline: 2px dashed var(--brand);
+  outline-offset: 4px;
+}
+
+/* Nota al pie */
+.process-tl__note{
+  font-size: 2.9rem;
+  opacity: .75;
+  margin: .75rem 0 0;
+  color: #ffffff;
+}
+
+/* -----------------------------
+   Responsive (móvil)
+   ----------------------------- */
+@media (max-width: 768px){
+  /* El trazo no aporta en móvil: oculto y layout vertical */
+  .tl__svg{ display: none; }
+
+  .tl{
+    display: grid;
+    gap: 14px;
+    padding: 20px 16px;
+    min-height: initial;
+  }
+
+  .tl__step{
+    position: relative;
+    left: auto;
+    transform: none;
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 44px;
+  }
+
+  .tl__step img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 36px;
+    height: 36px;
+  }
+
+  .tl__step::before{ display: none; }
+}

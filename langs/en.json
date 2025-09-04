@@ -203,13 +203,6 @@
     "title": "LOCATION",
     "imgAlt": "Section image description"
   },
-  "process": {
-    "simple": {
-      "title": "Purchase process",
-      "imgAlt": "Purchase process illustration",
-      "pageTitle": "Purchase process"
-    }
-  },
   "modal": {
     "visit": {
       "title": "Schedule a visit"
@@ -238,6 +231,24 @@
       "title": "Thank you!",
       "body": "We have received your request. We will contact you shortly.",
       "ok": "OK"
+    }
+  },
+  "process": {
+    "simple": {
+      "pageTitle": "Purchase Process – WhiteHills",
+      "title": "Purchase process",
+      "skipLink": "Skip to content",
+      "notes": {
+        "iva": "*VAT not included.",
+        "disclaimer": "*These payment terms may be subject to change."
+      },
+      "steps": {
+        "reserva": { "title": "Reservation", "sub": "€25,000" },
+        "cpc": { "title": "CPC", "sub": "Payment: 15%" },
+        "inicio": { "title": "Construction start", "sub": "Payment: 8%" },
+        "entrega": { "title": "Completion", "sub": "Payment: ~61%" },
+        "mas6": { "title": "+6 months after start", "sub": "Payment: 8%" }
+      }
     }
   }
 }
