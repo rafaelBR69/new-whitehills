@@ -259,54 +259,38 @@ function uid(prefix='id') {
 
         window.VIVIENDAS = viviendas;
 
-        const order = orderKeysFromMap();
-        const firstSelectable = (() => {
-          for (const k of order) {
-            const v = viviendas[k];
-            if (v && v.estado !== 'reservado') return k;
-          }
-          return order[0] || Object.keys(viviendas)[0];
-        })();
-
+        const order    = orderKeysFromMap();
         const mqMobile = window.matchMedia('(max-width: 768px)');
 
-        // 1) SIEMPRE construimos la ruleta
+        // 1) Construye la ruleta SIN autoselección
         buildRuleta(viviendas, { autoselectOnInit: false });
 
-        // 2) En móvil: marcamos card inicial y seleccionamos EN EL MAPA
-        if (mqMobile.matches) {
-          if (firstSelectable) {
-            $('#ruleta-track .ruleta-card[data-key="' + firstSelectable + '"]').addClass('is-active');
-            // 👇 Importante: también selecciona esa vivienda en Mapster
-            selectUnidad(firstSelectable, { source: 'ruleta' });
-          }
-          setInfoDisabled($('#info-text'), true);
-        } else {
-          setInfoDisabled($('#info-text'), true);
-        }
+        // 2) Panel deshabilitado de inicio (ninguna unidad seleccionada)
+        setInfoDisabled($('#info-text'), true);
 
-        // 3) Iniciamos Mapster (en desktop pinta info al terminar)
-        iniciarMapster(viviendas, firstSelectable, { paintInfoOnConfigured: !mqMobile.matches });
+        // 3) Inicia Mapster SIN initialKey (no marca A1 ni ninguna)
+        iniciarMapster(viviendas, null, { paintInfoOnConfigured: !mqMobile.matches });
 
-        // (Opcional) si cambia el tamaño y entra/sale de móvil
+        // 4) Cambio de breakpoint: no autoseleccionar nunca
         if (mqMobile.addEventListener) {
           mqMobile.addEventListener('change', (e) => {
             if (e.matches) {
+              // Entrando a móvil → ocultamos panel y limpiamos estado visual de cards
               setInfoDisabled($('#info-text'), true);
-              const $active = $('#ruleta-track .ruleta-card.is-active');
-              if (!$active.length) {
-                const $first = $('#ruleta-track .ruleta-card').first();
-                if ($first.length) $first.addClass('is-active');
-              }
+              $('#ruleta-track .ruleta-card').removeClass('is-active');
             } else {
-              const key = $('#ruleta-track .ruleta-card.is-active').data('key') || firstSelectable;
-              if (key) {
+              // Volviendo a desktop → si hay card activa mostramos su info; si no, nada
+              const $active = $('#ruleta-track .ruleta-card.is-active');
+              if ($active.length) {
+                const key  = String($active.data('key')).toLowerCase();
                 const $out = $('#info-text');
                 if (typeof mostrarInfo === 'function') {
                   if (mostrarInfo.length >= 3) { mostrarInfo(viviendas, key, $out); }
                   else { mostrarInfo(key); }
                 }
                 setInfoDisabled($out, false);
+              } else {
+                setInfoDisabled($('#info-text'), true);
               }
             }
           });
@@ -743,6 +727,24 @@ function uid(prefix='id') {
     let _selectedKey = null;
     let _pendingSelection = null;
     let _mapReady = false;
+    
+
+    function scrollInfoIntoView() {
+      const el = document.getElementById('info-text');
+      if (!el) return;
+
+      const header = document.querySelector('header');
+      const offset = (header?.offsetHeight || 0) + 16; // margen bajo cabecera
+      const r = el.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+
+      // ¿Está suficientemente visible? (al menos mitad)
+      const halfVisible = (r.top >= offset && r.top <= vh*0.5) || (r.bottom <= vh && r.bottom >= vh*0.5);
+      if (halfVisible) return;
+
+      const y = window.scrollY + r.top - offset;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    }
 
     function selectUnidad(rawKey, { source } = {}) {
       const key = String(rawKey).toLowerCase();
@@ -788,6 +790,7 @@ function uid(prefix='id') {
             }
           }
           setInfoDisabled($out, false);
+          scrollInfoIntoView();
         } catch(e) { console.warn('mostrarInfo error:', e); }
       } else {
         setInfoDisabled($('#info-text'), true);

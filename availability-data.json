@@ -5,7 +5,7 @@
     "m2c_br": 73.83,
     "castillete": 15,
     "terrazas_cubiertas": 20.54,
-    "superficie": 35.5,
+    "superficie": 213.7,
     "coste_sin_iva": " - €",
     "estado": " No disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A1.pdf"
@@ -16,7 +16,7 @@
     "m2c_br": 73.83,
     "castillete": 15,
     "terrazas_cubiertas": 20.54,
-    "superficie": 35.5,
+    "superficie": 213.7,
     "coste_sin_iva": " - €",
     "estado": "No disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A2.pdf"
@@ -27,7 +27,7 @@
     "m2c_br": 73.83,
     "castillete": 15,
     "terrazas_cubiertas": 20.54,
-    "superficie": 35.5,
+    "superficie": 213.7,
     "coste_sin_iva": " - €",
     "estado": "No disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A3.pdf"
@@ -38,7 +38,7 @@
     "m2c_br": 73.83,
     "castillete": 15,
     "terrazas_cubiertas": 20.54,
-    "superficie": 35.5,
+    "superficie": 213.7,
     "coste_sin_iva": "1.166.400€",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A4.pdf"
@@ -49,7 +49,7 @@
     "m2c_br": 73.83,
     "castillete": 15,
     "terrazas_cubiertas": 20.53,
-    "superficie": 35.5,
+    "superficie": 213.7,
     "coste_sin_iva": "1.171.800€",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A5.pdf"
@@ -60,18 +60,18 @@
     "m2c_br": 73.83,
     "castillete": 15,
     "terrazas_cubiertas": 22.54,
-    "superficie": 35.5,
+    "superficie": 214.7,
     "coste_sin_iva": "1.182.600€",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A6.pdf"
   },
   "b1": {
-    "numero_ud": "B1*",
+    "numero_ud": "B1",
     "m2c_sr": 96.7,
     "m2c_br": 98.23,
     "castillete": 0,
     "terrazas_cubiertas": 8.8,
-    "superficie": 24.02,
+    "superficie": 209.83,
     "coste_sin_iva": "1.139.400€",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B1.pdf"
@@ -82,7 +82,7 @@
     "m2c_br": 135.23,
     "castillete": 10.5,
     "terrazas_cubiertas": 8.8,
-    "superficie": 24.02,
+    "superficie": 246.83,
     "coste_sin_iva": "1.074.600€",
     "estado": "disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B2.pdf"
@@ -93,7 +93,7 @@
     "m2c_br": 115.5,
     "castillete": 10.5,
     "terrazas_cubiertas": 8.8,
-    "superficie": 24.02,
+    "superficie": 227.1,
     "coste_sin_iva": " - €",
     "estado": "No disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B3.pdf"
@@ -104,29 +104,29 @@
     "m2c_br": 132.52,
     "castillete": 10.5,
     "terrazas_cubiertas": 8.8,
-    "superficie": 24.02,
+    "superficie": 244.12,
     "coste_sin_iva": " - €",
     "estado": "No disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B4.pdf"
   },
   "b5": {
-    "numero_ud": "B5*",
+    "numero_ud": "B5",
     "m2c_sr": 96.7,
     "m2c_br": 129,
     "castillete": 0,
     "terrazas_cubiertas": 8.8,
-    "superficie": 24.02,
+    "superficie": 230.1,
     "coste_sin_iva": " - €",
     "estado": "No disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B5.pdf"
   },
   "b6": {
-    "numero_ud": "B6*",
+    "numero_ud": "B6",
     "m2c_sr": 96.7,
     "m2c_br": 157.13,
     "castillete": 0,
     "terrazas_cubiertas": 8.8,
-    "superficie": 24.02,
+    "superficie": 258.23,
     "coste_sin_iva": " - €",
     "estado": "No disponible",
     "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B6.pdf"
