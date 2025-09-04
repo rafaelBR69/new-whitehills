@@ -421,6 +421,11 @@ footer .social a{font-family:unset;}
 .badge-disponible{background:#19875488;}
 .badge-reservado{background:#ffc10788;color:#212529;}
 .badge-vendido{background:#b63e3e77;}
+.badge-no_disponible {
+  background: #B63E3E;
+  border-color: #B63E3E;
+  color: #fff;
+}
 
 /* Galería PDF */
 .pdf-preview{margin-top:.75rem;}
@@ -622,3 +627,149 @@ footer .social a{font-family:unset;}
 .titulo-localizacion{
   font-family:var(--ff-body);font-weight:500;font-size:3.8rem;line-height:1.1;color:var(--brand-color);
 }
+
+/* Card base */
+#info-text{
+  background:var(--card-bg);
+  border:1px solid var(--card-bord);
+  border-radius:16px;
+  padding:1.25rem;
+  box-shadow:var(--card-shadow);
+
+  /* grid de UNA columna y centrado de todos los hijos */
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:1.25rem;
+  align-items:start;
+  justify-items:center;         /* centra los elementos hijos */
+}
+
+/* Cabecera centrada */
+#info-text .info-card-head{
+  grid-column:1 / -1;
+  margin-bottom:.25rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;       /* centra el h3 + badge */
+  gap:.6rem;
+  text-align:center;
+}
+
+/* Contenedor de “la columna” */
+#info-text .info-card-grid{
+  /* mantiene la estructura, pero ya no crea 2 columnas */
+  display:block;
+  width:100%;
+}
+
+/* La única columna: limitada y centrada */
+#info-text .info-card-col{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  width:100%;
+  max-width: 720px;             /* ajusta a gusto (640–800px) */
+  margin: 0 auto;               /* centra por si deja de usarse grid */
+}
+
+/* Listas y tipografía */
+#info-text .info-card-col .info-list{ margin-bottom:0; }
+#info-text h3{
+  font-size:2rem;font-weight:700;line-height:1.2;margin:0 0 .5rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+#info-text ul{list-style:none;padding-left:0;margin:0 0 .5rem;}
+#info-text li{
+  display:flex;justify-content:space-between;
+  padding:.35rem .5rem;border-bottom:1px dashed rgba(0,0,0,.06);
+  font-size:2rem;
+}
+#info-text li strong{font-weight:700;}
+
+/* Precio centrado */
+#info-text .precio{
+  margin-top:.75rem;
+  font-size:3.1rem;
+  color:var(--brand-color);
+  text-align:center;
+}
+
+/* PDF y CTA centrados y limitados */
+#info-text .pdf-preview,
+#info-text .visit-actions{
+  grid-column:1 / -1;
+  width:100%;
+  max-width: 900px;             /* un poco más ancho para el PDF */
+  margin: 0 auto;
+}
+
+/* (Opcional) centra el canvas dentro del preview */
+#info-text .pdf-preview .pdf-carousel{
+  display:flex; flex-direction:column; align-items:center;
+}
+
+/* Badges (tus colores) */
+.badge{font-weight:800;letter-spacing:.2px;}
+.badge-disponible{background:#19875488;}
+.badge-reservado{background:#ffc10788;color:#212529;}
+.badge-vendido{background:#b63e3e77;}
+.badge-no_disponible { background:#B63E3E; border-color:#B63E3E; color:#fff; }
+
+/* Ya no necesitamos el layout de 2 columnas en desktop */
+@media (min-width:992px){
+  /* aseguramos que NO vuelva a 2 columnas */
+  #info-text{ grid-template-columns: 1fr; }
+}
+
+/* 1) Centrar el contenedor entero dentro de su columna */
+aside.info-col{
+  display:flex;               /* la columna pasa a ser un contenedor flex */
+  justify-content:center;     /* centra su contenido horizontalmente */
+}
+
+/* 2) El card en sí: ancho limitado y centrado respecto a la pantalla */
+#info-text{
+  /* base existente del card… */
+  background:var(--card-bg);
+  border:1px solid var(--card-bord);
+  border-radius:16px;
+  padding:1.25rem;
+  box-shadow:var(--card-shadow);
+
+  /* layout de 1 columna y centrado */
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:1.25rem;
+  align-items:start;
+  justify-items:center;
+
+  /* 👇 centrado del bloque respecto al viewport */
+  width:100%;
+  max-width: 980px;           /* ajusta a gusto (900–1040px) */
+  margin-inline:auto;         /* centra el card */
+}
+
+/* 3) La “única columna” y la lista, también centradas */
+#info-text .info-card-grid{ width:100%; }
+#info-text .info-card-col{
+  width:100%;
+  max-width:900px;            /* ajusta a gusto */
+  margin-inline:auto;         /* centra la columna */
+}
+
+/* 4) Cabecera, PDF y CTA centrados */
+#info-text .info-card-head{
+  grid-column:1 / -1;
+  display:flex; align-items:center; justify-content:center;
+  gap:.6rem; text-align:center; margin-bottom:.25rem;
+}
+#info-text .pdf-preview,
+#info-text .visit-actions{
+  grid-column:1 / -1;
+  width:100%;
+  max-width:900px;            /* un poco más ancho para el PDF */
+  margin-inline:auto;
+}
+
+/* (opcional) asegurar centrado interno del carrusel PDF */
+#info-text .pdf-preview .pdf-carousel{ display:flex; flex-direction:column; align-items:center; }

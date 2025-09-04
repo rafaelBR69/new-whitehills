@@ -263,7 +263,7 @@ function uid(prefix='id') {
         const firstSelectable = (() => {
           for (const k of order) {
             const v = viviendas[k];
-            if (v && v.estado !== 'vendido') return k;
+            if (v && v.estado !== 'reservado') return k;
           }
           return order[0] || Object.keys(viviendas)[0];
         })();
@@ -320,27 +320,49 @@ function uid(prefix='id') {
 
       const base   = '2F4F4F';
       const border = '2F4F4F';
+      const RED    = 'B63E3E';  // vendido / no disponible
+      const YELLOW = 'FFC300';  // reservado
+
+      // helper para comparar estados de forma robusta
+      const norm = s => String(s || '').toLowerCase().replace(/[_-]+/g,' ').trim();
 
       const vendidos = [];
       const areaOpts = Object.keys(viviendas).map(key => {
         const v = viviendas[key];
         if (!v) return { key };
 
-        if (v.estado === 'vendido') {
+        const est = norm(v.estado);
+
+        // === VENDIDO → bloqueado (no clickable), rojo ===
+        if (est === 'vendido') {
           vendidos.push(key);
           return {
             key, isSelectable:false, staticState:true, selected:true,
-            render_highlight:{ fillColor:'B63E3E', fillOpacity:0.55, stroke:true, strokeColor:'B63E3E', strokeWidth:3 },
-            render_select   :{ fillColor:'B63E3E', fillOpacity:0.55, stroke:true, strokeColor:'B63E3E', strokeWidth:3 }
+            render_highlight:{ fillColor:RED, fillOpacity:0.55, stroke:true, strokeColor:RED, strokeWidth:3 },
+            render_select   :{ fillColor:RED, fillOpacity:0.55, stroke:true, strokeColor:RED, strokeWidth:3 }
           };
         }
-        if (v.estado === 'reservado') {
+
+        // === NO DISPONIBLE → MISMO COLOR QUE VENDIDO (rojo) PERO CLICABLE ===
+        if (est === 'no disponible') {
           return {
             key,
-            render_highlight:{ fillColor:'FFC300', fillOpacity:0.55, stroke:true, strokeColor:'FFC300', strokeWidth:3 },
-            render_select   :{ fillColor:'FFC300', fillOpacity:0.45, stroke:true, strokeColor:'FFC300', strokeWidth:3 }
+            render_highlight:{ fillColor:RED, fillOpacity:0.55, stroke:true, strokeColor:RED, strokeWidth:3 },
+            render_select   :{ fillColor:RED, fillOpacity:0.45, stroke:true, strokeColor:RED, strokeWidth:3 }
           };
         }
+
+        // === RESERVADO → amarillo y clicable ===
+        if (est === 'reservado') {
+          return {
+            key,
+            selected: true,
+            render_highlight:{ fillColor:YELLOW, fillOpacity:0.55, stroke:true, strokeColor:YELLOW, strokeWidth:3 },
+            render_select   :{ fillColor:YELLOW, fillOpacity:0.45, stroke:true, strokeColor:YELLOW, strokeWidth:3 }
+          };
+        }
+
+        // === DISPONIBLE / otros ===
         return {
           key,
           render_highlight:{ fillColor:base, fillOpacity:0.55, stroke:true, strokeColor:base, strokeWidth:3 },
@@ -363,14 +385,17 @@ function uid(prefix='id') {
           if(_selectedKey){
             requestAnimationFrame(() => $img.mapster('set', true, _selectedKey));
           }
-
         },
 
         onClick: function(area, e){
           if (e && e.preventDefault) e.preventDefault();
           const key = String(area.key).toLowerCase();
           const v = viviendas[key];
-          if (!v || v.estado === 'vendido') return false;
+          if (!v) return false;
+
+          const est = norm(v.estado);
+          // ❌ sólo bloqueamos VENDIDO; NO bloqueamos no_disponible ni reservado
+          if (est === 'vendido') return false;
 
           // 👇 Centraliza selección + pintado (evita dobles)
           selectUnidad(key, { source:'mapster' });
@@ -383,11 +408,10 @@ function uid(prefix='id') {
 
           const reapplySelected = () => {
             if (_selectedKey) {
-              // por si acaso, limpia la anterior que tuviéramos guardada
               if (_prevKey && _prevKey !== _selectedKey) {
                 $img.mapster('set', false, _prevKey);
               }
-              $img.mapster('set', true, _selectedKey); // <- vuelve a marcarla
+              $img.mapster('set', true, _selectedKey);
               _prevKey = _selectedKey;
             }
           };
@@ -397,18 +421,15 @@ function uid(prefix='id') {
             const parentW = $img.parent().width();
             const targetW = Math.min(parentW, natural);
             $img.mapster('resize', targetW, 0, 0);
-            // importante: reaplicar selección tras el resize
             requestAnimationFrame(reapplySelected);
           };
           ajustar();
           $(window).on('resize', ajustar);
 
-          // Selección inicial correctamente (pasa por selectUnidad)
           if (initialKey) {
             selectUnidad(initialKey, { source: 'init' });
           }
 
-          // Si hubo una selección antes de que Mapster estuviera listo
           if (_pendingSelection) {
             selectUnidad(_pendingSelection, { source: 'pending' });
             _pendingSelection = null;
@@ -417,7 +438,6 @@ function uid(prefix='id') {
 
       });
 
-      // marca como inicializado
       $img.data('mapstered', true);
       console.log('[Map] Mapster inicializado');
     }
@@ -425,12 +445,13 @@ function uid(prefix='id') {
     function mostrarInfo(viviendas, key, $out) {
       const d = viviendas[key];
       const _t = (k, dv = '') => (window.i18next ? i18next.t(k, { defaultValue: dv }) : (dv || k));
+      const norm  = s => String(s || '').toLowerCase().replace(/[_-]+/g,' ').trim();
+      const asKey = s => String(s || '').toLowerCase().trim().replace(/[\s-]+/g, '_');
 
       if (!d) {
         $out.html('<p data-i18n="unit.info.empty">Sin datos.</p>');
         if (typeof translateIn === 'function') translateIn($out[0]);
         else {
-          // Fallback de traducción local
           $out.find('[data-i18n]').each(function () {
             const k = this.getAttribute('data-i18n');
             const val = _t(k, this.textContent);
@@ -440,55 +461,68 @@ function uid(prefix='id') {
         return;
       }
 
-      // URLs para el visor PDF
-      const webURL   = d.plano_pdf_web || d.plano_pdf || '';
-      const printURL = d.plano_pdf_print || webURL;
+      const estNorm   = norm(d.estado);
+      const estadoKey = asKey(d.estado);
 
-      const pdfId = uid('pdf-preview');
-      const estadoClass = String(d.estado || '').toLowerCase().trim().replace(/\s+/g, '-');
+      // ⛔ Vista mínima para NO DISPONIBLE y RESERVADO (solo badge)
+      if (estNorm === 'no disponible' || estNorm === 'reservado') {
+        $out.html(`
+          <div class="info-card-head">
+            <h3>
+              ${d.numero_ud || key}
+              <span class="badge badge-${estadoKey}" data-i18n="unit.status.${estadoKey}">${d.estado || ''}</span>
+            </h3>
+          </div>
+        `);
 
-      // Precio: conserva tu misma lógica (solo se muestra si hay coste_sin_iva)
-      const priceHTML = d.coste_sin_iva
+        if (typeof translateIn === 'function') translateIn($out[0]);
+        else {
+          $out.find('[data-i18n]').each(function () {
+            const k = this.getAttribute('data-i18n');
+            const val = _t(k, this.textContent);
+            if (/_html$/.test(k)) this.innerHTML = val; else this.textContent = val;
+          });
+        }
+        setInfoDisabled($out, false);
+        return;
+      }
+
+      // === Vista completa (disponible/otros) — UNA COLUMNA ===
+      const webURL = d.plano_pdf_web || d.plano_pdf || '';
+      const pdfId  = uid('pdf-preview');
+
+      const priceHTML = (typeof d.coste_sin_iva === 'string' && /\d/.test(d.coste_sin_iva))
         ? `<div class="precio"><strong>${d.coste_sin_iva}</strong></div>`
         : '';
 
       $out.html(`
-        <!-- CABECERA A TODA ANCHURA -->
+        <!-- CABECERA -->
         <div class="info-card-head">
           <h3>
             ${d.numero_ud}
-            <span class="badge badge-${estadoClass}" data-i18n="unit.status.${estadoClass}">${d.estado || ''}</span>
+            <span class="badge badge-${estadoKey}" data-i18n="unit.status.${estadoKey}">${d.estado || ''}</span>
           </h3>
         </div>
 
-        <!-- COLUMNA IZQUIERDA -->
-        <div class="info-card-col col-left">
-          <ul class="list-unstyled info-list">
-            <li><span data-i18n="unit.info.m2c_sr">m2c SR (PB + P1)</span> <strong>${d.m2c_sr ?? '-'}</strong></li>
-            <li><span data-i18n="unit.info.m2c_br">m2c BR (Sótano)</span> <strong>${d.m2c_br ?? '-'}</strong></li>
-            <li><span data-i18n="unit.info.castillete">Castillete</span> <strong>${d.castillete ?? '-'}</strong></li>
-            <li><span data-i18n="unit.info.terrazas_cubiertas">Terrazas cubiertas</span> <strong>${d.terrazas_cubiertas ?? '-'}</strong></li>
-            <li><span data-i18n="unit.info.pergola">Pérgola</span> <strong>${d.pergola ?? '-'}</strong></li>
-          </ul>
+        <!-- UNA SOLA COLUMNA -->
+        <div class="info-card-grid">
+          <div class="info-card-col col-only">
+            <ul class="list-unstyled info-list">
+              <li><span data-i18n="unit.info.m2c_sr">m2c SR (PB + P1)</span> <strong>${d.m2c_sr ?? '-'}</strong></li>
+              <li><span data-i18n="unit.info.m2c_br">m2c BR (Sótano)</span> <strong>${d.m2c_br ?? '-'}</strong></li>
+              <li><span data-i18n="unit.info.castillete">Castillete</span> <strong>${d.castillete ?? '-'}</strong></li>
+              <li><span data-i18n="unit.info.terrazas_cubiertas">Terrazas cubiertas</span> <strong>${d.terrazas_cubiertas ?? '-'}</strong></li>
+              <li><span data-i18n="unit.info.superficie">Superficie</span> <strong>${d.superficie ?? '-'}</strong></li>
+            </ul>
+
+            ${priceHTML}
+          </div>
         </div>
 
-        <!-- COLUMNA DERECHA -->
-        <div class="info-card-col col-right">
-          <ul class="list-unstyled info-list">
-            <li><span data-i18n="unit.info.terrazas_descubiertas">Terrazas descubiertas</span> <strong>${d.terrazas_descubiertas ?? '-'}</strong></li>
-            <li><span data-i18n="unit.info.m2villa_sin_castillete"></span> <strong>${d.terrazas_m2villa_sin_castillete ?? '-'}</strong></li>
-            <li><span data-i18n="unit.info.m2villa_con_castillete"></span> <strong>${d.terrazas_m2villa_con_castillete ?? '-'}</strong></li>
-            <li><span data-i18n="unit.info.parcela">Parcela</span> <strong>${d.parcela ?? '-'}</strong></li>
-            <li><span data-i18n="unit.info.jardin">Jardín</span> <strong>${d.jardin ?? '-'}</strong></li>
-          </ul>
-          ${priceHTML}
-          ${printURL ? `<div class="pdf-actions" style="margin-top:.5rem"></div>` : ``}
-        </div>
-
-        <!-- PDF debajo de las 2 columnas -->
+        <!-- PDF debajo -->
         <div class="pdf-preview" id="${pdfId}"></div>
 
-        <!-- CTA AGENDAR VISITA (debajo del PDF) -->
+        <!-- CTA -->
         <div class="visit-actions">
           <button type="button" class="btn-visit" data-unit="${d.numero_ud || key}">
             <span data-i18n="unit.cta.schedule_visit">Agendar visita</span>
@@ -496,11 +530,9 @@ function uid(prefix='id') {
         </div>
       `);
 
-      // Traducir el bloque recién insertado
-      if (typeof translateIn === 'function') {
-        translateIn($out[0]);
-      } else {
-        // Fallback si no tienes helper translateIn
+      // Traducción
+      if (typeof translateIn === 'function') translateIn($out[0]);
+      else {
         $out.find('[data-i18n]').each(function () {
           const k = this.getAttribute('data-i18n');
           const val = _t(k, this.textContent);
@@ -508,10 +540,9 @@ function uid(prefix='id') {
         });
       }
 
-      // Activa la tarjeta
       setInfoDisabled($out, false);
 
-      // Render PDF
+      // PDF (si hay)
       if (webURL) {
         const $pdf = $out.find('#' + pdfId);
         const maxH =
@@ -523,12 +554,11 @@ function uid(prefix='id') {
         console.warn('[PDF] La vivienda no tiene URL de plano:', key);
       }
 
-      // Click en "Agendar visita" → abre el pop-up y pre-rellena unidad
+      // CTA
       $out.off('click', '.btn-visit').on('click', '.btn-visit', function (e) {
         e.preventDefault();
         const unit = this.getAttribute('data-unit') || key;
 
-        // Rellena el formulario del modal con la unidad (si existe)
         try {
           if (window.leadForm) {
             let inp = leadForm.querySelector('[name="unidad"]');
@@ -540,7 +570,6 @@ function uid(prefix='id') {
             }
             inp.value = unit;
 
-            // (opcional) origen
             let org = leadForm.querySelector('[name="origin"]') || leadForm.querySelector('[name="origen"]');
             if (!org) {
               org = document.createElement('input');
@@ -554,7 +583,6 @@ function uid(prefix='id') {
           console.warn('No pude pre-rellenar la unidad en el leadForm:', err);
         }
 
-        // Abre el modal con tu helper existente
         if (typeof openModal === 'function') openModal();
         else {
           const m = document.getElementById('infoModal');
@@ -702,7 +730,7 @@ function uid(prefix='id') {
         let firstIdx = 0;
         for (let i = 0; i < order.length; i++) {
           const v = viviendas[order[i]];
-          if (v && v.estado !== 'vendido') { firstIdx = i; break; }
+          if (v && v.estado !== 'reservado') { firstIdx = i; break; }
         }
         activateByIndex(firstIdx, { scroll: false, source: 'ruleta' });
       } else {
@@ -731,7 +759,12 @@ function uid(prefix='id') {
       // 2) Selección en Mapster (persistente)
       if (_mapReady) {
         if (_prevKey && _prevKey !== key) {
-          $img.mapster('set', false, _prevKey); // quita la anterior
+          const prev = (window.VIVIENDAS || window.viviendas || {})[_prevKey];
+          const prevEst = String(prev?.estado || '').toLowerCase().replace(/[_-]+/g,' ').trim();
+          // 👇 Si la anterior era "reservado", la dejamos pintada en amarillo
+          if (prevEst !== 'reservado') {
+            $img.mapster('set', false, _prevKey);
+          }
         }
         $img.mapster('set', true, key);         // pinta la nueva
         _prevKey = key;

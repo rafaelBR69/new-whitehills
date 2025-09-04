@@ -180,12 +180,7 @@
       "m2c_br": "m² built BR (Basement)",
       "castillete": "Turret",
       "terrazas_cubiertas": "Covered terraces",
-      "pergola": "Pergola",
-      "terrazas_descubiertas": "Open terraces",
-      "m2villa_sin_castillete": "Villa m² WITHOUT turret",
-      "m2villa_con_castillete": "Villa m² WITH turret",
-      "parcela": "Plot",
-      "jardin": "Garden"
+      "superficie": "Built area"
     },
     "price": {
       "na": "Not available"
@@ -200,7 +195,8 @@
     "status": {
       "disponible": "Available",
       "reservado": "Reserved",
-      "vendido": "Sold"
+      "vendido": "Sold",
+      "no_disponible": "Not available"
     }
   },
   "section": {

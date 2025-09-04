@@ -175,17 +175,12 @@
   "unit": {
     "info": {
       "empty": "Sin datos.",
-      "m2c_sr": "m2c SR (PB + P1)",
-      "m2c_br": "m2c BR (Sótano)",
+      "m2c_sr": "m2 construidos (PB + P1)",
+      "m2c_br": "m2 construidos (Sótano)",
       "castillete": "Castillete",
       "terrazas_cubiertas": "Terrazas cubiertas",
-      "pergola": "Pérgola",
-      "terrazas_descubiertas": "Terrazas descubiertas",
-      "m2villa_sin_castillete": "m2 villa SIN castillete",
-      "m2villa_con_castillete": "m2 villa CON castillete",
-      "parcela": "Parcela",
-      "jardin": "Jardín"
-    },
+      "superficie": "Superficie construida"
+      },
     "price": {
       "na": "No disponible"
     },
@@ -199,7 +194,8 @@
     "status": {
       "disponible": "Disponible",
       "reservado": "Reservado",
-      "vendido": "Vendido"
+      "vendido": "Vendido",
+      "no_disponible": "No disponible"
     }
   },
   "section": {

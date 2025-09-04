@@ -422,13 +422,7 @@
     transform:translateY(-40px);
   }
 
-  /* Grid en desktop para info-text */
-  #info-text{
-    display:grid;
-    grid-template-columns:1.15fr 1fr;
-    gap:1.25rem;
-    align-items:start;
-  }
+
   #info-text .info-card-head{
     grid-column:1 / -1;
     margin-bottom:.25rem;
