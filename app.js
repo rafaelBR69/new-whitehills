@@ -589,67 +589,79 @@ function uid(prefix='id') {
 
     function buildRuleta(viviendas, { autoselectOnInit = true } = {}) {
       const _t = (k, dv = '') => (window.i18next ? i18next.t(k, { defaultValue: dv }) : (dv || k));
+      const norm  = s => String(s || '').toLowerCase().replace(/[_-]+/g,' ').trim();
+      const asKey = s => String(s || '').toLowerCase().trim().replace(/[\s-]+/g, '_');
 
       const order  = orderKeysFromMap();
       const $track = $('#ruleta-track');
       $track.empty();
 
-      // 1) Pintar cards completas (2 columnas + precio + botón)
       order.forEach(key => {
         const d = viviendas[key];
         if (!d) return;
 
+        const estNorm   = norm(d.estado);
+        const estadoKey = asKey(d.estado);
+
+        // URL del plano (si existe)
         const pdfURL = (typeof getPlanoURL === 'function')
           ? getPlanoURL(d)
           : (d.plano_pdf_web || d.plano_pdf || d.plano_pdf_print || '');
 
-        const estadoClass = String(d.estado || '').toLowerCase().trim().replace(/\s+/g, '-');
+        // === CARDS COMPACTAS (reservado / no disponible / vendido) ===
+        if (estNorm === 'reservado' || estNorm === 'no disponible' || estNorm === 'vendido') {
+          const html = `
+            <article class="ruleta-card ruleta-card--wide is-compact"
+                    role="listitem" data-key="${key}" data-state="${estadoKey}">
+              <header class="ruleta-card__head d-flex align-items-center justify-content-between">
+                <h4 class="ruleta-card__title m-0">${d.numero_ud || key}</h4>
+                <span class="badge badge-${estadoKey}" data-i18n="unit.status.${estadoKey}">${d.estado || ''}</span>
+              </header>
+            </article>`;
+          $track.append(html);
+          return;
+        }
+
+        // === CARD NORMAL (disponible / otros) → lista corta + precio/botón ===
+        const priceHTML = d.coste_sin_iva
+          ? `<div class="ruleta-card__price precio"><strong>${d.coste_sin_iva}</strong></div>`
+          : `<div class="ruleta-card__price precio"><strong><span data-i18n="unit.price.na">No disponible €</span></strong></div>`;
 
         const html = `
-          <article class="ruleta-card ruleta-card--wide" role="listitem" data-key="${key}">
+          <article class="ruleta-card ruleta-card--wide"
+                  role="listitem" data-key="${key}" data-state="${estadoKey}">
             <header class="ruleta-card__head d-flex align-items-center justify-content-between">
               <h4 class="ruleta-card__title m-0">${d.numero_ud || key}</h4>
-              <span class="badge badge-${estadoClass}" data-i18n="unit.status.${estadoClass}">${d.estado || ''}</span>
+              <span class="badge badge-${estadoKey}" data-i18n="unit.status.${estadoKey}">${d.estado || ''}</span>
             </header>
 
             <div class="ruleta-card__body">
               <div class="ruleta-card__cols">
                 <ul class="ruleta-card__list">
-                  <li><span data-i18n="unit.info.m2c_sr">m2c SR (PB + P1)</span>: <strong>${d.m2c_sr ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.m2c_br">m2c BR (Sótano)</span>: <strong>${d.m2c_br ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.castillete">Castillete</span>: <strong>${d.castillete ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.terrazas_cubiertas">Terrazas cubiertas</span>: <strong>${d.terrazas_cubiertas ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.pergola">Pérgola</span>: <strong>${d.pergola ?? '-'}</strong></li>
-                </ul>
-                <ul class="ruleta-card__list">
-                  <li><span data-i18n="unit.info.terrazas_descubiertas">Terrazas descubiertas</span>: <strong>${d.terrazas_descubiertas ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.m2villa_sin_castillete">m2 villa SIN castillete</span>: <strong>${d.terrazas_m2villa_sin_castillete ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.m2villa_con_castillete">m2 villa CON castillete</span>: <strong>${d.terrazas_m2villa_con_castillete ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.parcela">Parcela</span>: <strong>${d.parcela ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.jardin">Jardín</span>: <strong>${d.jardin ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.m2c_sr">m2c SR (PB + P1)</span> <strong>${d.m2c_sr ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.m2c_br">m2c BR (Sótano)</span> <strong>${d.m2c_br ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.castillete">Castillete</span> <strong>${d.castillete ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.terrazas_cubiertas">Terrazas cubiertas</span> <strong>${d.terrazas_cubiertas ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.superficie">Superficie</span> <strong>${d.superficie ?? '-'}</strong></li>
                 </ul>
               </div>
 
               <div class="ruleta-card__bottom">
-                <div class="ruleta-card__price precio">
-                  <strong>${d.coste_sin_iva ? d.coste_sin_iva : `<span data-i18n="unit.price.na">No disponible €</span>`}</strong>
-                </div>
+                ${priceHTML}
                 ${pdfURL ? `
                   <a class="btn-ver-plano" href="${pdfURL}" target="_blank" rel="noopener">
                     <span data-i18n="unit.actions.view_plan">Ver plano</span>
-                  </a>
-                ` : ``}
+                  </a>` : ``}
               </div>
             </div>
           </article>`;
         $track.append(html);
       });
 
-      // Traducir el bloque recién creado
+      // Traducción del bloque recién creado
       if (typeof translateIn === 'function') {
         translateIn($track[0]);
       } else {
-        // Fallback si no tienes helper translateIn
         $track.find('[data-i18n]').each(function () {
           const k = this.getAttribute('data-i18n');
           const val = _t(k, this.textContent);
@@ -660,7 +672,7 @@ function uid(prefix='id') {
       let activeIndex = 0;
 
       function updateArrows() {
-        // flechas ocultas por CSS, esta función puede quedarse vacía
+        // si tienes flechas, gestiona aquí
       }
 
       function activateByIndex(i, { scroll = true, source = 'ruleta' } = {}) {
@@ -668,11 +680,17 @@ function uid(prefix='id') {
         const $card  = $cards.eq(i);
         if (!$card.length) return;
 
+        const key  = String($card.data('key')).toLowerCase();
+        const data = (window.VIVIENDAS || window.viviendas || {});
+        const est  = norm(data[key]?.estado);
+
+        // bloquea click en vendido
+        if (est === 'vendido') return;
+
         activeIndex = i;
         $cards.removeClass('is-active');
         $card.addClass('is-active');
 
-        const key = String($card.data('key')).toLowerCase();
         selectUnidad(key, { source });
 
         if (scroll) {
@@ -683,17 +701,18 @@ function uid(prefix='id') {
 
       // Click en card
       $track.off('click', '.ruleta-card').on('click', '.ruleta-card', function () {
-        activateByIndex($(this).index(), { source: 'ruleta' });
+        const i = $(this).index();
+        activateByIndex(i, { source: 'ruleta' });
       });
 
-      // Activación al terminar el scroll (card más centrada)
+      // Activación al terminar el scroll (card centrada)
       let scrollTO = null;
       $track.off('scroll').on('scroll', function() {
         clearTimeout(scrollTO);
         scrollTO = setTimeout(() => {
-          const $cards = $track.find('.ruleta-card');
-          const trackRect = $track[0].getBoundingClientRect();
-          const centerX = trackRect.left + trackRect.width / 2;
+          const $cards   = $track.find('.ruleta-card');
+          const trackRect= $track[0].getBoundingClientRect();
+          const centerX  = trackRect.left + trackRect.width / 2;
 
           let best = -1, bestDist = Infinity;
           $cards.each(function(i) {
@@ -714,13 +733,14 @@ function uid(prefix='id') {
         let firstIdx = 0;
         for (let i = 0; i < order.length; i++) {
           const v = viviendas[order[i]];
-          if (v && v.estado !== 'reservado') { firstIdx = i; break; }
+          if (v && norm(v.estado) !== 'reservado') { firstIdx = i; break; }
         }
         activateByIndex(firstIdx, { scroll: false, source: 'ruleta' });
       } else {
         updateArrows();
       }
     }
+
 
 
     let _prevKey = null;
