@@ -1037,3 +1037,7 @@ aside.info-col{
 
   .tl__step::before{ display: none; }
 }
+
+aside.info-col{
+  font-size: 5rem;
+}

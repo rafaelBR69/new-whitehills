@@ -85,7 +85,8 @@
   },
   "availability": {
     "heroTitle": "Consulta la disponibilidad",
-    "heroSub": "Selecciona sobre la vivienda"
+    "heroSub": "Selecciona sobre la vivienda",
+    "clickHint":"Haga clic en una vivienda…"
   },
   "blockA": {
     "title": "Bloque 1 · Planos",
@@ -222,9 +223,9 @@
       "send": "Enviar"
     },
     "rgpd": {
-      "accept_html": "Acepto la <a href=\"./privacy-policy.html\" target=\"_blank\" rel=\"noopener\">Política de privacidad</a> y el <a href=\"./legal-notice.html\" target=\"_blank\" rel=\"noopener\">Aviso legal</a>.",
-      "cookiesMore_html": "Más información sobre cookies en la <a href=\"./cookie-policy.html\" target=\"_blank\" rel=\"noopener\">Política de cookies</a>.",
-      "marketing": "Consiento recibir comunicaciones comerciales por medios electrónicos (opcional)."
+      "accept_html": "Acepto la <a href=\"./privacy-policy.html\" target=\"_blank\" rel=\"noopener\">Política de privacidad</a>.",
+      "cookiesMore_html": "",
+      "marketing": "Consiento recibir comunicaciones comerciales por medios electrónicos de otras proyectos (opcional) ."
     },
     "thanks": {
       "title": "¡Gracias!",
@@ -249,5 +250,21 @@
         "mas6": { "title": "+6 meses inicio de obra", "sub": "Pago: 8%" }
       }
     }
-  }
+  },
+  "aria.close": "Cerrar",
+
+  "modal.brochure.title": "Descargar brochure",
+  "modal.brochure.desc": "Déjanos tus datos y te facilitamos el brochure oficial.",
+  "modal.brochure.submit": "Obtener brochure",
+
+  "form.name": "Nombre",
+  "form.email": "Email",
+  "form.phone_optional": "Teléfono (opcional)",
+
+  "rgpd.required": "Acepto la <a href=\"./privacy-policy.html\" target=\"_blank\" rel=\"noopener\">Política de privacidad</a> y el <a href=\"./legal-notice.html\" target=\"_blank\" rel=\"noopener\">Aviso legal</a>. Más información sobre cookies en la <a href=\"./cookie-policy.html\" target=\"_blank\" rel=\"noopener\">Política de cookies</a>.",
+  "rgpd.marketing": "Consiento recibir comunicaciones comerciales por medios electrónicos (opcional).",
+
+  "modal.thanks.title": "¡Gracias!",
+  "modal.thanks.body": "Hemos recibido tu solicitud. Te contactaremos muy pronto.",
+  "modal.thanks.ok": "Aceptar"
 }

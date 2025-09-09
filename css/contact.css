@@ -160,3 +160,45 @@ body.contact-page #leadForm.hero-form textarea{
   width: auto;
   margin: .5rem auto 0;
 }
+/* ===== RGPD (contact + modals): checkbox en línea junto al texto ===== */
+/* Anula el display:block global de .hero-form label SOLO dentro de rgpd-block */
+.hero-form .rgpd-block label.rgpd-item,
+.modal__form .rgpd-block label.rgpd-item{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:flex-start !important; /* usa center si lo prefieres centrado */
+  gap:.55rem;
+  margin:0;
+}
+
+/* Evita que el checkbox herede width:100% de tus reglas globales */
+.hero-form .rgpd-block label.rgpd-item > input[type="checkbox"],
+.modal__form .rgpd-block label.rgpd-item > input[type="checkbox"]{
+  display:inline-block !important;
+  width:auto !important;
+  height:auto;
+  margin:.2rem 0 0 0;  /* ajusta vertical si lo ves alto/bajo */
+  flex:0 0 auto;
+}
+
+/* El texto a la derecha, en la misma línea */
+.hero-form .rgpd-block label.rgpd-item > span,
+.modal__form .rgpd-block label.rgpd-item > span{
+  display:inline; 
+  line-height:1.45;
+  flex:1 1 auto;
+}
+
+/* Cinturón y tirantes: por si hay una regla global para inputs dentro de hero-form */
+.hero-form .rgpd-block input[type="checkbox"]{
+  width:auto !important;
+  display:inline-block !important;
+}
+/* Tamaño y color del checkbox (RGPD) */
+.hero-form .rgpd-block label.rgpd-item > input[type="checkbox"],
+.modal__form .rgpd-block label.rgpd-item > input[type="checkbox"]{
+  transform: scale(1.6);          /* ← ajusta 1.6 a tu gusto */
+  transform-origin: top left;     /* evita que “salte” al escalar */
+  margin-top: .1rem;              /* afina alineación vertical */
+  accent-color: var(--brand-color, #3c4d28);
+}

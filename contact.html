@@ -120,6 +120,20 @@
                   data-i18n-placeholder="popup.msgPlaceholder"
                   placeholder="¿Cómo podemos ayudarte?"
                   enterkeyhint="send"></textarea>
+        
+        <!-- RGPD obligatorio + marketing opcional -->
+        <div class="rgpd-block">
+          <label class="rgpd-item">
+            <input type="checkbox" name="rgpd" required>
+            <span>
+              Acepto la <a href="./privacy-policy.html" target="_blank" rel="noopener">Política de privacidad</a>.
+            </span>
+          </label>
+          <label class="rgpd-item">
+            <input type="checkbox" name="marketing_ok">
+            <span>Consiento recibir comunicaciones comerciales por medios electrónicos (opcional).</span>
+          </label>
+        </div>
 
         <!-- Honeypot anti-spam (no tabulable, oculto) -->
         <div class="hp-wrapper contact-form__hp" aria-hidden="true">

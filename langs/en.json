@@ -20,7 +20,7 @@
     "cta": "Go to villas"
   },
   "section3": {
-    "title": "16 Modern Villas in Torreblanca, Fuengirola",
+    "title": "12 Modern Villas in Torreblanca, Fuengirola",
     "paragraph1": "WhiteHills Villas has been conceived as a perfect synthesis of contemporary elegance, modern comfort, and connection with nature. Located on a peaceful hillside, these exclusive villas offer panoramic views of the Mediterranean Sea, natural light all day, and open living spaces.",
     "paragraph2": "Each villa combines architectural elegance, high-end materials, and efficient design for an exceptional living experience. A private retreat by the sea, just minutes from the heart of Fuengirola and Málaga.",
     "button": "CONTACT US"
@@ -86,7 +86,8 @@
   },
   "availability": {
     "heroTitle": "Check availability",
-    "heroSub": "Select a property"
+    "heroSub": "Select a property",
+    "clickHint":"Click on a home…"
   },
   "blockA": {
     "title": "Building 1 · Plans",
@@ -225,7 +226,7 @@
     "rgpd": {
       "accept_html": "I accept the <a href=\"./privacy-policy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> and the <a href=\"./legal-notice.html\" target=\"_blank\" rel=\"noopener\">Legal Notice</a>.",
       "cookiesMore_html": "More information about cookies in the <a href=\"./cookie-policy.html\" target=\"_blank\" rel=\"noopener\">Cookie Policy</a>.",
-      "marketing": "I agree to receive marketing communications by electronic means (optional)."
+      "marketing": "I consent to receive marketing communications by electronic means about other projects (optional)."
     },
     "thanks": {
       "title": "Thank you!",
@@ -250,5 +251,21 @@
         "mas6": { "title": "+6 months after start", "sub": "Payment: 8%" }
       }
     }
-  }
+  },
+  "aria.close": "Close",
+
+  "modal.brochure.title": "Download brochure",
+  "modal.brochure.desc": "Share your details and we will provide the official brochure.",
+  "modal.brochure.submit": "Get brochure",
+
+  "form.name": "Name",
+  "form.email": "Email",
+  "form.phone_optional": "Phone (optional)",
+
+  "rgpd.required": "I accept the <a href=\"./privacy-policy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> and the <a href=\"./legal-notice.html\" target=\"_blank\" rel=\"noopener\">Legal Notice</a>. More information about cookies in the <a href=\"./cookie-policy.html\" target=\"_blank\" rel=\"noopener\">Cookie Policy</a>.",
+  "rgpd.marketing": "I consent to receive marketing communications by electronic means (optional).",
+
+  "modal.thanks.title": "Thanks!",
+  "modal.thanks.body": "We’ve received your request. We’ll contact you very soon.",
+  "modal.thanks.ok": "OK"
 }

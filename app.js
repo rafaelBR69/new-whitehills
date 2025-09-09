@@ -151,23 +151,20 @@ document.addEventListener('submit', async (e) => {
   fd.delete('website');
 
   // ----- Normalización de nombres (ES -> EN) -----
-  if (!fd.get('name') && fd.get('nombre'))    fd.set('name',    fd.get('nombre'));
-  if (!fd.get('phone') && fd.get('telefono')) fd.set('phone',   fd.get('telefono'));
-  if (!fd.get('message') && fd.get('mensaje'))fd.set('message', fd.get('mensaje'));
-
-  // Origin por si no viene via data-origin
-  if (!fd.get('origin')) {
-    fd.set('origin', form.dataset.origin || 'Formulario Web');
-  }
+  if (!fd.get('name') && fd.get('nombre'))     fd.set('name',    fd.get('nombre'));
+  if (!fd.get('phone') && fd.get('telefono'))  fd.set('phone',   fd.get('telefono'));
+  if (!fd.get('message') && fd.get('mensaje')) fd.set('message', fd.get('mensaje'));
 
   // Tipo de formulario (útil en Sheet)
-  if (!fd.get('form_type')) {
-    fd.set('form_type',
-      form.id === 'visitForm'     ? 'visit' :
-      form.id === 'brochureForm'  ? 'brochure' :
-      form.id || 'form'
-    );
-  }
+  const formType =
+    form.id === 'visitForm'     ? 'visit'    :
+    form.id === 'brochureForm'  ? 'brochure' :
+    form.id === 'leadForm'      ? 'contact'  :
+    'form';
+  fd.set('form_type', formType);
+
+  // Origen FORZADO según tipo
+  fd.set('origin', formType === 'brochure' ? 'Formulario Brochure' : 'Formulario Web');
 
   // RGPD / marketing (si existen)
   const rgpdInput = form.querySelector('[name="rgpd"]');
@@ -178,16 +175,16 @@ document.addEventListener('submit', async (e) => {
   const data = Object.fromEntries(fd.entries());
 
   // Para "brochure": abrir PDF automáticamente tras enviar
-  const shouldDownload = String(form.dataset.downloadOnSuccess).toLowerCase() === 'true';
+  const shouldDownload = String(form.dataset.downloadOnSuccess || '').toLowerCase() === 'true';
   const downloadUrl = data.download_url || form.querySelector('[name="download_url"]')?.value;
 
   try {
     // Cierra el modal actual (si aplica) y abre “Gracias”
     form.closest('.modal')?.classList.remove('show');
-    openThank();
+    if (typeof openThank === 'function') openThank();
 
     await fetch(
-      'https://script.google.com/macros/s/AKfycbwKiHszSE0B-BIaMAbV6JTShlpzE-rVCxTxJMWJWgLdI6FRbaCL9cPDB8lojN5EhQAgzQ/exec',
+      'https://script.google.com/macros/s/AKfycbyCUQ0H6Hi4Cx00W3Rfp9L32GF7RcPVCqP6hO4wstPFSzJQ1IYt7BZ7C4dd7MCDnqRBlw/exec',
       { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }
     );
 
