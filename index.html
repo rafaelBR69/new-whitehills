@@ -416,6 +416,24 @@
         'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
     }
   </script>
+  <script>
+  (function () {
+    const log = () => {
+      const vv = window.visualViewport;
+      console.log({
+        innerW: window.innerWidth,
+        innerH: window.innerHeight,
+        devicePixelRatio: window.devicePixelRatio,
+        scale: vv ? vv.scale : 'n/a',
+        width: vv ? vv.width : 'n/a',
+        height: vv ? vv.height : 'n/a'
+      });
+    };
+    addEventListener('resize', log, { passive: true });
+    if (window.visualViewport) visualViewport.addEventListener('resize', log, { passive: true });
+    log();
+  })();
+  </script>
   <script src="./app.js"></script>
 </body>
 </html>

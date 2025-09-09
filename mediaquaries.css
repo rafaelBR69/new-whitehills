@@ -1,27 +1,19 @@
 /* ===========================================================
    BASE (sin media queries)
    =========================================================== */
-
-/* Oculto por defecto la ruleta en desktop */
 .ruleta { display: none; }
 
-/* Ajuste fino del h3 para que no “empuje” visualmente */
+/* h3 estable en el card */
 #info-text .info-card-head h3{
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.1;
-  margin: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
+  font-size:2rem;font-weight:700;line-height:1.1;margin:0;
+  display:inline-flex;align-items:center;gap:.5rem;
 }
-
 
 /* ===========================================================
    MAX-WIDTH (desktop-first): de mayor → menor
    =========================================================== */
 
-/* ❷ DESKTOP/TABLET (≤ 1200 px) — panel lateral & logo */
+/* ≤ 1200px — panel lateral & logo */
 @media (max-width:1200px){
   .burgar{display:block;font-size:3rem;}
 
@@ -48,7 +40,7 @@
   .video-overlap{ margin-top:-200px; }
 }
 
-/* ❹ TABLET V (≤ 900 px) — formulario bajo el plano */
+/* ≤ 900px — formulario bajo el plano */
 @media (max-width:900px){
   .lead-card{
     position:static; margin:2rem auto 0; transform:none;
@@ -70,7 +62,6 @@
   .section-img-background-extend{ height:420px; }
   .video-overlap{ margin-top:-170px; }
 
-  /* Interior + Características: imagen a tamaño auto */
   .interior-figure{ height:auto; }
   .interior-img{ height:auto; object-fit:contain; }
 
@@ -86,7 +77,7 @@
   }
 }
 
-/* ❺ TABLET / SMALL DESKTOP (≤ 768 px) — bloques img-text, modales y ruleta */
+/* ≤ 768px — bloques img-text, modales y ruleta */
 @media (max-width:768px){
   .img-text,
   .img-text--reverse{ flex-direction:column; text-align:center; }
@@ -111,7 +102,7 @@
   .section-img-background-extend{ height:340px; }
   .video-overlap{ margin-top:-140px; }
 
-  /* Ruleta (móvil / tablet pequeña) */
+  /* Ruleta en móviles/tablet pequeña */
   .ruleta{
     display:flex; align-items:center; gap:.5rem;
     margin-top:.75rem; position:relative;
@@ -121,7 +112,7 @@
     -webkit-overflow-scrolling:touch; padding:.25rem .25rem .5rem;
   }
   .ruleta-card{
-    flex:0 0 85%; /* 1 card por pantalla aprox. */
+    flex:0 0 85%;
     scroll-snap-align:center;
     background:#fff; border-radius:14px; box-shadow:0 6px 16px rgba(0,0,0,.08);
     padding:.9rem 1rem; border:1px solid rgba(0,0,0,.06);
@@ -137,7 +128,7 @@
   #avail-ruleta{ display:block !important; }
 }
 
-/* ❻ MÓVIL GRANDE (≤ 600 px) — NAV y bloques */
+/* ≤ 600px — NAV y bloques */
 @media (max-width:600px){
   html{ font-size:55%; }
 
@@ -176,6 +167,23 @@
   .section_1--availability .bg_div{
     position:static; transform:none; text-align:center;
     margin:calc(var(--header-h) + 1rem) 0 .8rem; order:0;
+  }
+  .bg_div :first-child {
+    font-size: 8rem;
+    font-weight: 300;
+    animation: slideinBottom 2s ease;
+  }
+
+  .interior-title {
+      font-weight: 500;
+      font-size: 2.5rem !important;
+      text-align: center !important;
+  }
+
+  .interior-text {
+      font-weight: 400;
+      font-size: 1.9rem !important;
+      text-align: center !important;
   }
 
   .bg_text1{ font-size:clamp(2.4rem,7vw,3.2rem); color:#5C4033 !important; }
@@ -224,12 +232,12 @@
   .section-services-title,
   .section-img-title{
     font-size:2.5rem;
-    font-family: var(--header-h); /* (se mantiene tal cual) */
+    font-family: var(--ff-body);
     font-weight:500;
   }
   .section-services-paragraph,
   .section-img-paragraph{
-    font-family: var(--header-h); /* (se mantiene tal cual) */
+    font-family: var(--ff-body);
     font-weight:400;
     font-size:1.9rem;
     line-height:1.6;
@@ -239,124 +247,49 @@
   .section-services-btn{ font-size:1.4rem; padding:.45rem 1.4rem; }
   .section-img-background-extend{ height:510px; }
   .video-overlap{ margin-top:-10px; }
+
+  /* Hero móvil limpio y consistente */
   .section_1.parallax-bg{
     position: relative;
-    min-height: 92svh;                  /* ocupa casi toda la pantalla */
-    background-size: cover !important;  /* agranda aunque recorte */
+    min-height: 92svh;
+    background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat;
   }
-
-  /* velo para mejorar contraste del texto */
   .section_1.parallax-bg::before{
     content:"";
     position:absolute; inset:0;
     background: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.38));
     z-index:0; pointer-events:none;
   }
-
-  /* caja del texto superpuesta y centrada */
   .section_1.parallax-bg .bg_div{
     position:absolute; inset:0;
-    display:grid; place-items:center;   /* centra vertical y horizontal */
+    display:grid; place-items:center;
     text-align:center;
     padding:0 1.25rem;
     z-index:1;
     margin:0; transform:none; width:100%; height:100%;
+    padding-bottom:10vh; /* sube un poco el conjunto */
   }
-
-  /* título más pequeño y claro sobre la foto */
   .section_1.parallax-bg .bg_text1{
-    font-size: 8.4rem;
+    margin-bottom:.4rem;
     color:#fff !important;
-    text-shadow: 0 2px 8px rgba(0,0,0,.35);
-    margin-bottom:.8rem;
+    text-shadow:0 2px 8px rgba(0,0,0,.35);
   }
-
-  /* botón legible sobre la imagen */
   .section_1.parallax-bg .hero-cta{
-    font-size:2.4rem;
+    font-size:2.1rem;
     padding:.6rem 1.2rem;
     color:#fff !important;
     border:2px solid rgba(255,255,255,.85);
     background: rgba(0,0,0,.15);
     backdrop-filter: blur(4px);
-    display: inline-block;             /* por si acaso */
-    transform: translateY(-300px);      /* súbelo ~10px; ajusta a tu gusto */
   }
-
-  /* Quitar la capa negra del hero en móvil */
-  .section_1.parallax-bg::before{
-    content: none !important;          /* elimina el pseudo-elemento */
-    /* alternativa: background: none !important; */
-  }
-
-  /* (opcional) reduce el hueco bajo el título para que el CTA quede más arriba */
-  .section_1.parallax-bg .bg_text1{
-    margin-bottom: .2rem;              /* antes tenías .8rem */
-  }
-
-  /* 1) Sin velo oscuro en el hero */
-  .section_1.parallax-bg::before{
-    content: none !important;
-  }
-
-  /* 2) Desactiva animaciones/transiciones en el hero (evita el salto) */
-  .section_1.parallax-bg .bg_div,
-  .section_1.parallax-bg .bg_text1,
-  .section_1.parallax-bg .hero-cta{
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;   /* quita cualquier translate previo */
-  }
-
-  /* Si usas .reveal en el hero, neutralízalo en móvil */
-  .section_1 .reveal{ 
-    opacity: 1 !important; 
-    transform: none !important; 
-    transition: none !important; 
-  }
-
-  /* 3) Sube un poco TODO el bloque (título + botón) sin usar transform */
-  .section_1.parallax-bg .bg_div{
-    position: absolute; inset: 0;
-    display: grid; place-items: center;
-    text-align: center;
-    padding: 0 1.25rem;
-    z-index: 1;
-    /* mueve visualmente el centro hacia arriba sin animación */
-    padding-bottom: 10vh;          /* ajusta 6–12vh según te guste */
-  }
-
-  /* 4) Tipografía y CTA (sin animaciones) */
-  .section_1.parallax-bg .bg_text1{
-    margin-bottom: .4rem; /* menos hueco para que el CTA quede más arriba */
-    color: #fff !important;
-    text-shadow: 0 2px 8px rgba(0,0,0,.35);
-  }
-
-  .section_1.parallax-bg .hero-cta{
-    font-size: 2.4rem;
-    padding: .6rem 1.2rem;
-    color: #fff !important;
-    border: 2px solid rgba(255,255,255,.85);
-    background: rgba(0,0,0,.15);
-    backdrop-filter: blur(4px);
-  }
-
-  .promo-label{
-    font-size: 2rem;
-    font-weight: 300;
-    font-family: var(--ff-body);
-  }
-
 }
 
-:root{
-  --ff-body   : 'Montserrat', sans-serif;
-}
+/* tipografía por si faltara */
+:root{ --ff-body:'Montserrat', sans-serif; }
 
-/* ❼ MÓVIL MEDIO (≤ 480 px) */
+/* ≤ 480px */
 @media (max-width:480px){
   .modal__box{ max-width:95%; padding:1.5rem 1rem; }
   .modal__title{ font-size:1.7rem; }
@@ -364,83 +297,56 @@
   .modal__send{ font-size:1.4rem; }
 }
 
-/* ❽ MÓVIL PEQUEÑO (≤ 360 px) */
+/* ≤ 360px */
 @media (max-width:360px){
   .service-header{ width:73%; }
-
   footer :nth-child(1),
   footer :nth-child(2){ font-size:1.5rem; }
   .footer-text1{ font-size:1.3rem; }
-
   .section-services-title,
   .section-img-title{ font-size:1.9rem; }
   .section-services-paragraph,
   .section-img-paragraph{ font-size:1.45rem; }
-
   .section-services-btn{ font-size:1.3rem; padding:.4rem 1.2rem; }
   .section-img-background-extend{ height:240px; }
   .video-overlap{ margin-top:-90px; }
 }
 
-/* ❾ MÓVIL XS (≤ 320 px) */
+/* ≤ 320px */
 @media (max-width:320px){
   .logo{ font-size:2.2rem; margin-right:12rem; }
   .service-header{ width:75%; }
   .section3_div1{ width:250px; }
 }
 
-
 /* ===========================================================
    MIN-WIDTH (mobile-first): de menor → mayor
    =========================================================== */
 
-/* ❸ DESKTOP BASE (≥ 992 px) — interior + características y grid info */
+/* ≥ 992px — interior + características y grid info */
 @media (min-width:992px){
-  /* Interior + Características */
-  .interior-block .col-text{
-    position:relative;
-    left:-280px;
-  }
-  .interior-block .row{
-    align-items:stretch;
-    --bs-gutter-x:4rem; /* aire entre texto e imagen */
-  }
+  .interior-block .col-text{ position:relative; left:-280px; }
+  .interior-block .row{ align-items:stretch; --bs-gutter-x:4rem; }
   .interior-block .col-lg-6:first-child{ flex:0 0 66%; max-width:66%; }
   .interior-block .col-lg-6:last-child{ flex:0 0 66%; max-width:66%; display:flex; }
-  .interior-figure{
-    display:flex;
-    flex:1 1 auto;
-    margin:0;
-    min-height:0;
-  }
+  .interior-figure{ display:flex; flex:1 1 auto; margin:0; min-height:0; }
   .interior-img{
-    width:120%;
-    height:120%;
-    object-fit:cover;
-    object-position:center 35%;
+    width:120%; height:120%;
+    object-fit:cover; object-position:center 35%;
     box-shadow:0 4px 14px rgba(0,0,0,.08);
     transform:translateY(-40px);
   }
 
-
+  /* refuerzos #info-text sin romper 1 columna */
   #info-text .info-card-head{
-    grid-column:1 / -1;
-    margin-bottom:.25rem;
-    display:flex;
-    align-items:center;
-    gap:.6rem;
+    grid-column:1 / -1; margin-bottom:.25rem; display:flex; align-items:center; gap:.6rem;
   }
-  #info-text .info-card-col{
-    display:flex;
-    flex-direction:column;
-    min-width:0;
-  }
-  #info-text .info-card-col .info-list{ margin-bottom:0; }
+  #info-text .info-card-col{ display:flex; flex-direction:column; min-width:0; }
   #info-text .info-card-col.col-right .precio{ margin-top:auto; }
   #info-text .pdf-preview{ grid-column:1 / -1; }
 }
 
-/* ❶ ULTRA-HD (≥ 2560 px) — escalado general */
+/* ≥ 2560px — escalado general */
 @media (min-width:2560px){
   html{ font-size:87.5%; }
 
@@ -448,11 +354,9 @@
   .nav-links li{ font-size:2.2rem; margin-right:5rem; }
   .btn a{ font-size:2rem; }
 
-  /* Hero */
   .bg_div :first-child{ font-size:9rem; }
   .bg_div :last-child{ font-size:3rem; }
 
-  /* Bloques imagen – texto */
   .img-text{
     --gap:14rem; --img-basis:36%; --img-max:840px; --line:2;
     --padding:3.5rem 4rem;
@@ -462,10 +366,8 @@
   .img-text__list li,
   .img-text__paragraph{ font-size:2.6rem; }
 
-  /* Interior + Características */
   .interior-block .container{ max-width:1500px; }
 
-  /* Footer */
   footer :nth-child(1),
   footer :nth-child(2){ font-size:2.8rem; }
   .footer-text1{ font-size:2.4rem; }
