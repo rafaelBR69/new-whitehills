@@ -152,12 +152,7 @@
         });
 
         // Retraducción del header si i18n ya está listo
-        if (window.i18next && i18next.isInitialized) {
-          document.querySelectorAll('header [data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (key) el.innerHTML = i18next.t(key);
-          });
-        }
+        window.applyI18nAndRoutes && window.applyI18nAndRoutes();
       });
 
     /* Footer desde /partials */
@@ -167,12 +162,7 @@
         document.getElementById('footer-placeholder').innerHTML = html;
 
         // Retraducción del footer si i18n ya está listo
-        if (window.i18next && i18next.isInitialized) {
-          document.querySelectorAll('footer [data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (key) el.innerHTML = i18next.t(key);
-          });
-        }
+        window.applyI18nAndRoutes && window.applyI18nAndRoutes();
 
         // Marca activo el enlace legal del footer (si existe)
         document.querySelectorAll('footer a[href$="legal-notice.html"]').forEach(a => {

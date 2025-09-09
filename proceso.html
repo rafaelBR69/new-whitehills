@@ -203,12 +203,7 @@
         });
 
         // Retraducción del header si i18n ya está
-        if (window.i18next && i18next.isInitialized) {
-          document.querySelectorAll('header [data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (key) el.innerHTML = i18next.t(key);
-          });
-        }
+        window.applyI18nAndRoutes && window.applyI18nAndRoutes();
       });
 
     /* Footer desde /partials */
@@ -217,12 +212,7 @@
       .then(html => {
         document.getElementById('footer-placeholder').innerHTML = html;
 
-        if (window.i18next && i18next.isInitialized) {
-          document.querySelectorAll('footer [data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (key) el.innerHTML = i18next.t(key);
-          });
-        }
+        window.applyI18nAndRoutes && window.applyI18nAndRoutes();
       });
 
     /* Localiza la imagen del <picture> según idioma (y respeta media queries) */

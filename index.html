@@ -339,12 +339,7 @@
         initHeaderScroll();
 
         /* 3. (Opcional) Re-traduce el nuevo nodo si i18next ya estaba listo */
-        if (window.i18next && i18next.isInitialized) {
-          document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (key) el.innerHTML = i18next.t(key);
-          });
-        }
+        window.applyI18nAndRoutes && window.applyI18nAndRoutes();
       });
 
     /* ——— Función que añade/quita .scrolled al header ——— */
@@ -377,12 +372,7 @@
         document.getElementById('footer-placeholder').innerHTML = html;
 
         // Re-traduce el footer si i18next ya está listo
-        if (window.i18next && i18next.isInitialized) {
-          document.querySelectorAll('footer [data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (key) el.innerHTML = i18next.t(key);
-          });
-        }
+        window.applyI18nAndRoutes && window.applyI18nAndRoutes();
       });
   </script>
   <script>

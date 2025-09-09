@@ -1,6 +1,5 @@
 <!-- /partials/header.html -->
 <header class="fixed-top" role="banner">
-  <!-- Enlace para saltar al contenido (accesibilidad) -->
   <a class="visually-hidden-focusable" href="#main-content">Saltar al contenido</a>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-transparent px-4 py-3"
@@ -9,7 +8,7 @@
     <div class="container-fluid">
 
       <!-- LOGO -->
-      <a class="navbar-brand" href="/index.html" rel="home" aria-label="WhiteHills Villas – Inicio">
+      <a class="navbar-brand" href="#" data-route="home" rel="home" aria-label="WhiteHills Villas – Inicio">
         <img id="main-logo"
              src="/images/logo-blanco.png"
              alt="WhiteHills Villas"
@@ -35,40 +34,44 @@
           <ul class="navbar-nav text-uppercase align-items-center gap-3 mb-0">
             <li class="nav-item" itemprop="name">
               <a class="nav-link"
-                 href="/index.html"
+                 href="#"
+                 data-route="home"
                  data-i18n="nav.home"
                  itemprop="url"
                  title="Villas en Fuengirola y Málaga – Inicio"></a>
             </li>
             <li class="nav-item" itemprop="name">
               <a class="nav-link"
-                 href="/index.html#availability"
+                 href="#"
+                 data-route="availability"
                  data-i18n="nav.availability"
                  itemprop="url"
                  title="Disponibilidad de villas de obra nueva en Fuengirola"></a>
             </li>
             <li class="nav-item" itemprop="name">
               <a class="nav-link"
-                 href="/index.html#location"
+                 href="#"
+                 data-route="location"
                  data-i18n="nav.location"
                  itemprop="url"
                  title="Ubicación: Torreblanca, Fuengirola (Málaga)"></a>
             </li>
             <li class="nav-item" itemprop="name">
               <a class="nav-link"
-                 href="/proceso.html"
+                 href="#"
+                 data-route="process"
                  data-i18n="nav.process"
                  itemprop="url"
                  title="Proceso de compra de villas en Málaga"></a>
             </li>
             <li class="nav-item" itemprop="name">
               <a class="nav-link"
-                 href="/contact.html"
+                 href="#"
+                 data-route="contact"
                  data-i18n="nav.contact"
                  itemprop="url"
                  title="Contacto para información y visitas"></a>
             </li>
-            
           </ul>
 
           <select id="langSwitcher"
