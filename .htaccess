@@ -1,40 +1,48 @@
 ###############################################
-# URLs limpias básicas (IONOS / Apache)
+# WhiteHills URL Rewrites (IONOS / Apache)
 ###############################################
 RewriteEngine On
-
-# Desactiva MultiViews si IONOS lo tiene activo por defecto (evita colisiones)
 Options -MultiViews
+RewriteBase /
+DirectoryIndex index.html
 
-# BYPASS: si existe archivo o carpeta → no reescribir
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-
-# Raíz del dominio → español (usa 302 mientras pruebas)
+# ====== Home raíz → ES (302 mientras pruebas; luego 301) ======
 RewriteRule ^$ es/inicio [R=302,L]
 
-# Raíz de idioma
+# ====== Raíces de idioma ======
 RewriteRule ^es/?$ es/inicio [R=301,L]
 RewriteRule ^en/?$ en/home   [R=301,L]
 
-# RUTAS ES
-RewriteRule ^es/inicio/?$           index.html     [L]
-RewriteRule ^es/proceso-compra/?$   proceso.html   [L]
-RewriteRule ^es/contacto/?$         contact.html   [L]
-RewriteRule ^es/aviso-legal/?$          legal-notice.html   [L]
-RewriteRule ^es/politica-cookies/?$     cookies-policy.html [L]
-RewriteRule ^es/politica-privacidad/?$  privacy-policy.html [L]
+# ====== HOME ======
+RewriteRule ^es/inicio/?$ index.html [L,NC]
+RewriteRule ^en/home/?$    index.html [L,NC]
 
-# RUTAS EN
-RewriteRule ^en/home/?$             index.html     [L]
-RewriteRule ^en/process/?$          proceso.html   [L]
-RewriteRule ^en/contact/?$          contact.html   [L]
-RewriteRule ^en/legal-notice/?$     legal-notice.html   [L]
-RewriteRule ^en/cookie-policy/?$    cookies-policy.html [L]
-RewriteRule ^en/privacy-policy/?$   privacy-policy.html [L]
+# ====== SECCIONES que viven dentro de index.html ======
+RewriteRule ^es/disponibilidad/?$ index.html?section=availability [QSA,L,NC]
+RewriteRule ^en/availability/?$   index.html?section=availability [QSA,L,NC]
+RewriteRule ^es/localizacion/?$   index.html?section=location     [QSA,L,NC]
+RewriteRule ^en/location/?$       index.html?section=location     [QSA,L,NC]
 
-# (Opcional) cuando TODO funcione, activa canonicals (cambia 302→301)
-# Ejemplos:
-# RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
-# RewriteRule ^index\.html$ es/inicio [R=301,L]
+# ====== PÁGINAS FÍSICAS ======
+# ES
+RewriteRule ^es/proceso-compra/?$     proceso.html        [L,NC]
+RewriteRule ^es/contacto/?$           contact.html        [L,NC]
+RewriteRule ^es/aviso-legal/?$        legal-notice.html   [L,NC]
+RewriteRule ^es/politica-cookies/?$   cookies-policy.html [L,NC]
+RewriteRule ^es/politica-privacidad/?$ privacy-policy.html [L,NC]
+
+# EN (mapean a los mismos .html físicos)
+RewriteRule ^en/process/?$        proceso.html        [L,NC]
+RewriteRule ^en/contact/?$        contact.html        [L,NC]
+RewriteRule ^en/legal-notice/?$   legal-notice.html   [L,NC]
+RewriteRule ^en/cookie-policy/?$  cookies-policy.html [L,NC]
+RewriteRule ^en/privacy-policy/?$ privacy-policy.html [L,NC]
+
+# ====== CATCH-ALL de idioma → index.html (evita 404 con /es/... o /en/...) ======
+# Si llega cualquier otra ruta con prefijo de idioma, cae en la SPA (index.html)
+RewriteRule ^(es|en)/.+$ index.html [QSA,L,NC]
+
+# ====== BYPASS de estáticos (al final) ======
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]

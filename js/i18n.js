@@ -52,7 +52,7 @@ i18next
     /* descarga los dos archivos al arrancar (evita flashes) */
     preload: ['es', 'en'],
 
-    backend: { loadPath: './langs/{{lng}}.json' },
+    backend: { loadPath: '/langs/{{lng}}.json' },
 
     /* bloquea el hilo hasta que los JSON están en memoria  */
     initImmediate: false,
@@ -71,3 +71,90 @@ document.addEventListener('change', e => {
 
 /* 4 · Reactualiza si el idioma cambia por cualquier otro medio */
 i18next.on('languageChanged', renderPage);
+
+/* ========= Utilidades SEO / UX ========= */
+
+// 1) Scroll a secciones si viene ?section=availability|location|...
+(function(){
+  const params = new URLSearchParams(location.search);
+  const section = params.get('section');
+  if(!section) return;
+
+  // mapea 'availability' → '#availability', 'location' → '#location'
+  const targetId = section === 'availability' ? 'availability'
+                 : section === 'location'     ? 'location'
+                 : null;
+
+  if(!targetId) return;
+
+  const go = () => {
+    const el = document.getElementById(targetId);
+    if(!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // espera a que se inserten los parciales si hace falta
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(go, 50);
+  } else {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(go, 50));
+  }
+})();
+
+// 2) Enlaces del header según idioma (evita href rotos en /en/…)
+(function(){
+  // Detecta idioma actual desde i18next (si existe) o desde URL
+  function getLocale(){
+    if (window.i18next && i18next.language) {
+      const l = i18next.language.slice(0,2);
+      return (l === 'en' || l === 'es') ? l : 'es';
+    }
+    const m = location.pathname.match(/^\/(es|en)(\/|$)/i);
+    return m ? m[1] : 'es';
+  }
+  const L = getLocale();
+
+  // Mapa de rutas limpias por idioma
+  const routes = {
+    es: {
+      home: '/es/inicio',
+      availability: '/es/disponibilidad',
+      location: '/es/localizacion',
+      process: '/es/proceso-compra',
+      contact: '/es/contacto'
+    },
+    en: {
+      home: '/en/home',
+      availability: '/en/availability',
+      location: '/en/location',
+      process: '/en/process',
+      contact: '/en/contact'
+    }
+  };
+
+  // Aplica a los enlaces del menú si existen
+  const map = {
+    'a[data-i18n="nav.home"]':        routes[L].home,
+    'a[data-i18n="nav.availability"]':routes[L].availability,
+    'a[data-i18n="nav.location"]':    routes[L].location,
+    'a[data-i18n="nav.process"]':     routes[L].process,
+    'a[data-i18n="nav.contact"]':     routes[L].contact
+  };
+  for (const sel in map){
+    const a = document.querySelector(sel);
+    if (a) a.setAttribute('href', map[sel]);
+  }
+
+  // Cambia <html lang="…">
+  document.documentElement.setAttribute('lang', L === 'en' ? 'en' : 'es');
+
+  // Cambia selector si existe
+  const sel = document.getElementById('langSwitcher');
+  if (sel) sel.value = L;
+
+  // Al cambiar idioma desde el selector → redirige a la home del otro idioma
+  if (sel) sel.addEventListener('change', (e)=>{
+    const v = e.target.value === 'en' ? 'en' : 'es';
+    location.href = routes[v].home;
+  });
+})();

@@ -27,11 +27,11 @@
   <meta name="twitter:image" content="https://whitehillsvillas.com/images/og-proceso.jpg">
 
   <!-- ─── FAVICON & PWA ─── -->
-  <link rel="icon" type="image/png" sizes="96x96"  href="./favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="./web-app-manifest-192x192.png">
-  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-  <link rel="shortcut icon" href="./favicon.ico">
-  <link rel="manifest" href="./site.webmanifest">
+  <link rel="icon" type="image/png" sizes="96x96"  href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
 
   <!-- ─── Datos estructurados ─── -->
   <script type="application/ld+json">
@@ -67,11 +67,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <!-- ─── CSS propio ─── -->
-  <link rel="stylesheet" href="./style.css" />
-  <link rel="stylesheet" href="./css/header.css">
-  <link rel="stylesheet" href="./css/footer.css">
-  <link rel="stylesheet" href="./mediaquaries.css" />
-  <link rel="stylesheet" href="./css/proceso.css" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/mediaquaries.css" />
+  <link rel="stylesheet" href="/css/proceso.css" />
 
   <style>.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
 </head>
@@ -99,38 +99,38 @@
 
         <!-- Pasos fila superior -->
         <button class="tl__step is-top" style="--x:120px"  data-title="Reserva" data-text="25K€*">
-          <img src="./images/iconos/comprobado.webp" alt="">
+          <img src="/images/iconos/comprobado.webp" alt="">
           <span data-i18n="process.simple.steps.reserva.title">Reserva</span>
           <small data-i18n="process.simple.steps.reserva.sub">25.000€</small>
         </button>
 
         <button class="tl__step is-top" style="--x:520px" data-title="CPC" data-text="Pago: 15%*">
-          <img src="./images/iconos/documento-_1_.webp" alt="">
+          <img src="/images/iconos/documento-_1_.webp" alt="">
           <span data-i18n="process.simple.steps.cpc.title">CPC</span>
           <small data-i18n="process.simple.steps.cpc.sub">Pago: 15%</small>
         </button>
 
         <button class="tl__step is-top" style="--x:910px" data-title="Inicio de obra" data-text="Pago: 12%*">
-          <img src="./images/iconos/pala.svg" alt="">
+          <img src="/images/iconos/pala.svg" alt="">
           <span data-i18n="process.simple.steps.inicio.title">Inicio de obra</span>
           <small data-i18n="process.simple.steps.inicio.sub">Pago: 8%</small>
         </button>
 
         <!-- Pasos fila inferior -->
         <button class="tl__step is-bottom" style="--x:120px" data-title="Entrega de llaves" data-text="Pago: 60%* aprox.">
-          <img src="./images/iconos/fuegos-artificiales.svg" alt="">
+          <img src="/images/iconos/fuegos-artificiales.svg" alt="">
           <span data-i18n="process.simple.steps.entrega.title">Entrega de llaves</span>
           <small data-i18n="process.simple.steps.entrega.sub">Pago: 61% aprox.</small>
         </button>
 
         <button class="tl__step is-bottom" style="--x:520px" data-title="+6 meses inicio de obra" data-text="Pago: 8%*">
-          <img src="./images/iconos/grua.svg" alt="">
+          <img src="/images/iconos/grua.svg" alt="">
           <span data-i18n="process.simple.steps.mas6.title">+6 meses inicio de obra</span>
           <small data-i18n="process.simple.steps.mas6.sub">Pago: 8%</small>
         </button>
 
         <button class="tl__step is-bottom" style="--x:910px" data-title="+6 meses inicio de obra" data-text="Pago: 8%*">
-          <img src="./images/iconos/grua.svg" alt="">
+          <img src="/images/iconos/grua.svg" alt="">
           <span data-i18n="process.simple.steps.mas6.title">+6 meses inicio de obra</span>
           <small data-i18n="process.simple.steps.mas6.sub">Pago: 8%</small>
         </button>
@@ -150,13 +150,13 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- i18n init + tu app -->
-  <script src="./js/i18n.js"></script>
-  <script src="./app.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/app.js"></script>
 
   <!-- Carga de /partials y comportamiento del header + localización de la imagen -->
   <script>
     /* Header desde /partials */
-    fetch('./partials/header.html')
+    fetch('/partials/header.html')
       .then(r => r.text())
       .then(html => {
         document.getElementById('header-placeholder').innerHTML = html;
@@ -188,8 +188,8 @@
 
         // Availability apunta a index cuando no estás en home
         const linkAvail = document.querySelector('header a.nav-link[href="#availability"]');
-        const onHome = location.pathname === '/' || location.pathname.endsWith('./index.html') || location.pathname.endsWith('index.html');
-        if (linkAvail && !onHome) linkAvail.setAttribute('href', './index.html#availability');
+        const onHome = location.pathname === '/' || location.pathname.endsWith('/index.html') || location.pathname.endsWith('index.html');
+        if (linkAvail && !onHome) linkAvail.setAttribute('href', '/index.html#availability');
 
         // Marca activo Proceso (+ aria-current)
         const path = location.pathname.replace(/\/+$/, '');
@@ -212,7 +212,7 @@
       });
 
     /* Footer desde /partials */
-    fetch('./partials/footer.html')
+    fetch('/partials/footer.html')
       .then(r => r.text())
       .then(html => {
         document.getElementById('footer-placeholder').innerHTML = html;

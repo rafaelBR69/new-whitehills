@@ -60,7 +60,7 @@ body{overflow-x:clip;background-color:#ffffff;}
   position:relative;
   background-image:
     linear-gradient(rgba(0,0,0,0.108), rgba(0,0,0,0.108)),
-    url("./images/home.webp");
+    url("/images/home.webp");
   background-position:center;
   background-repeat:no-repeat;
 

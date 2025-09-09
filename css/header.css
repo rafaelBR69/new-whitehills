@@ -33,9 +33,9 @@ header.fixed-top.scrolled .navbar{ padding-block:.5rem; }
   margin-top:-20px; transition:all .3s ease;
 }
 /* Logo blanco con header transparente */
-header:not(.scrolled) .navbar-brand img{ content:url("../images/logo-blanco.png"); }
+header:not(.scrolled) .navbar-brand img{ content:url("./images/logo-blanco.png"); }
 /* Logo verde + tamaño reducido al hacer scroll */
-header.scrolled .navbar-brand img{ height:75px; margin-top:-30px; content:url("../images/logo.png"); }
+header.scrolled .navbar-brand img{ height:75px; margin-top:-30px; content:url("./images/logo.png"); }
 
 /* ───────── NAV LINKS ───────── */
 .navbar-nav .nav-link{
@@ -222,7 +222,7 @@ header.scrolled .navbar-toggler-icon{
 
   /* Logo SIEMPRE verde */
   header .navbar-brand img{
-    content: url("../images/logo.png") !important;
+    content: url("./images/logo.png") !important;
     height: 62px;             /* ajusta si quieres */
     margin-top: -16px;        /* ajusta si quieres */
   }

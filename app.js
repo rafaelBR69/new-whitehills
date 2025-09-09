@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!header || !logoImg || !hero) return;                  // seguridad
 
   /* rutas de tus dos logos */
-  const WHITE_LOGO = './images/logo-blanco.png';
-  const GREEN_LOGO = './images/logo.png';
+  const WHITE_LOGO = '/images/logo-blanco.png';
+  const GREEN_LOGO = '/images/logo.png';
 
   /* — IO: cuando el héroe deja de ser visible — */
   const io = new IntersectionObserver(
@@ -947,7 +947,7 @@ const PROMO_ITEMS = [
   { key: 'sunnydays', icon: 'sol.svg'     }
 ];
 
-const ICON_BASE = './images/iconos/';
+const ICON_BASE = '/images/iconos/';
 
 // ---- 2. Construye la lista (con “0” inicial) ---------------------
 function buildPromoList() {

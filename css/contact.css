@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: center;
   padding: clamp(24px, 5vw, 72px);
-  --hero-bg: url('../images/formulario.webp'); /* cambia aquí tu imagen */
+  --hero-bg: url('/images/formulario.webp'); /* cambia aquí tu imagen */
   background-image: var(--hero-bg);
   background-size: cover;
   background-position: center;
