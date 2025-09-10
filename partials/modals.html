@@ -1,8 +1,8 @@
 <!-- /partials/modals.html -->
 
-<!-- ===== Modal: Solicitar visita (RGPD solo obligatorio) ===== -->
+<!-- ===== Modal: Solicitar visita (RGPD obligatorio) ===== -->
 <div id="infoModal"
-     class="modal modal--with-bg"
+     class="modal wh-modal modal--with-bg"
      role="dialog"
      aria-modal="true"
      aria-labelledby="visitTitle"
@@ -16,16 +16,21 @@
     <h3 id="visitTitle" class="modal__title" data-i18n="modal.visit.title">Agendar visita</h3>
 
     <form id="visitForm" class="modal__form" data-lead data-origin="Agendar visita – Web">
+      <!-- Honeypot -->
       <input type="text" name="website" class="hp-wrapper" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <input type="hidden" name="unidad" value="">
       <input type="hidden" name="origin" value="">
 
       <label for="lf-nombre" data-i18n="modal.form.name">Nombre</label>
-      <input id="lf-nombre" type="text" name="nombre" required autocomplete="name" autocapitalize="words" enterkeyhint="next">
+      <input id="lf-nombre" type="text" name="nombre" required autocomplete="name" autocapitalize="words" enterkeyhint="next"
+             minlength="2"
+             pattern="^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]{2,}$"
+             title="Introduce tu nombre (solo letras y espacios).">
 
       <label for="lf-email" data-i18n="modal.form.email">Email</label>
-      <input id="lf-email" type="email" name="email" required autocomplete="email" spellcheck="false" enterkeyhint="next">
+      <input id="lf-email" type="email" name="email" required autocomplete="email" spellcheck="false" enterkeyhint="next"
+             title="Introduce un email válido (ej: nombre@dominio.com)">
 
       <label for="lf-tel" data-i18n="modal.form.phone">Teléfono</label>
       <input id="lf-tel" type="tel" name="telefono" autocomplete="tel" inputmode="tel" enterkeyhint="next">
@@ -36,7 +41,7 @@
                 data-i18n="[placeholder]modal.form.messagePH"
                 enterkeyhint="send"></textarea>
 
-      <!-- RGPD obligatorio (sin marketing) -->
+      <!-- RGPD obligatorio -->
       <div class="rgpd-block">
         <label class="rgpd-item">
           <input type="checkbox" name="rgpd" required>
@@ -47,15 +52,20 @@
         </label>
       </div>
 
-      <button class="modal__send" type="submit" data-i18n="modal.form.send">Enviar</button>
+      <button class="modal__send" type="submit" data-i18n="modal.form.send">
+        <span class="btn-label">Enviar</span>
+        <span class="btn-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span>
+        <span class="btn-check" aria-hidden="true"><i class="fa-solid fa-check"></i>&nbsp;Enviado</span>
+      </button>
+
+      <p id="visitStatus" class="form-status" aria-live="polite" role="status"></p>
     </form>
   </div>
 </div>
 
-
 <!-- ===== Modal: Brochure (RGPD obligatorio + marketing opcional) ===== -->
 <div id="brochureModal"
-     class="modal modal--with-bg"
+     class="modal wh-modal modal--with-bg"
      role="dialog"
      aria-modal="true"
      aria-labelledby="brochureTitle"
@@ -79,13 +89,18 @@
           data-lead
           data-origin="Brochure – Web"
           data-download-on-success="true">
+      <!-- Honeypot -->
       <input type="text" name="website" class="hp-wrapper" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <label for="bf-nombre" data-i18n="form.name">Nombre</label>
-      <input id="bf-nombre" type="text" name="nombre" required autocomplete="name" autocapitalize="words" enterkeyhint="next">
+      <input id="bf-nombre" type="text" name="nombre" required autocomplete="name" autocapitalize="words" enterkeyhint="next"
+             minlength="2"
+             pattern="^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]{2,}$"
+             title="Introduce tu nombre (solo letras y espacios).">
 
       <label for="bf-email" data-i18n="form.email">Email</label>
-      <input id="bf-email" type="email" name="email" required autocomplete="email" spellcheck="false" enterkeyhint="next">
+      <input id="bf-email" type="email" name="email" required autocomplete="email" spellcheck="false" enterkeyhint="next"
+             title="Introduce un email válido (ej: nombre@dominio.com)">
 
       <label for="bf-tel" data-i18n="form.phone_optional">Teléfono (opcional)</label>
       <input id="bf-tel" type="tel" name="telefono" autocomplete="tel" inputmode="tel" enterkeyhint="next">
@@ -108,7 +123,13 @@
         </label>
       </div>
 
-      <button class="modal__send" type="submit" data-i18n="modal.brochure.submit">Obtener brochure</button>
+      <button class="modal__send" type="submit" data-i18n="modal.brochure.submit">
+        <span class="btn-label">Obtener brochure</span>
+        <span class="btn-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span>
+        <span class="btn-check" aria-hidden="true"><i class="fa-solid fa-check"></i>&nbsp;Enviado</span>
+      </button>
+
+      <p id="brochureStatus" class="form-status" aria-live="polite" role="status"></p>
 
       <p class="modal__note">
         Responsable: WhiteHills Villas. Finalidad: gestionar tu solicitud y el envío del brochure.
@@ -119,15 +140,14 @@
   </div>
 </div>
 
-
-<!-- ===== Modal “Gracias” ===== -->
+<!-- ===== Modal “Gracias” (opcional) ===== -->
 <div id="thankModal"
-     class="modal modal--with-bg"
+     class="modal wh-modal modal--with-bg"
      role="dialog"
      aria-modal="true"
      aria-labelledby="thankTitle"
      aria-describedby="thankDesc"
-     style="--modal-bg: url('./images/logo.png'); --modal-width: 560px; --modal-tint: rgba(0,0,0,.35);">
+     style="--modal-bg: url('/images/logo.png'); --modal-width: 560px; --modal-tint: rgba(0,0,0,.35);">
   <div id="thankOverlay" class="modal__overlay" aria-hidden="true"></div>
 
   <div class="modal__box" style="background-size: contain; background-position: center; background-repeat: no-repeat;" tabindex="-1">
@@ -146,10 +166,223 @@
   </div>
 </div>
 
-<!-- Estilos RGPD (opcionales) -->
+<!-- Estilos RGPD + botones con estados + visibilidad modal -->
 <style>
   .rgpd-block{ margin:.75rem 0 1rem; display:flex; flex-direction:column; gap:.5rem; font-size:.95em; }
   .rgpd-item{ display:flex; align-items:flex-start; gap:.55rem; line-height:1.45; }
   .rgpd-item input{ margin-top:.2rem; }
   .modal__note{ font-size:.85em; opacity:.8; margin-top:.5rem; }
+
+  /* Estados inválidos (por JS) */
+  .modal__form input.is-invalid, .modal__form textarea.is-invalid{
+    border-color:#dc3545; box-shadow:0 0 0 2px rgba(220,53,69,.15);
+  }
+
+  /* Botón con estados */
+  .modal__send{ position:relative; display:inline-flex; align-items:center; gap:.5rem; min-width:10.5rem; }
+  .modal__send .btn-label{ display:inline-block; }
+  .modal__send .btn-dots, .modal__send .btn-check{ display:none; align-items:center; }
+  .modal__send.is-sending .btn-label{ display:none; }
+  .modal__send.is-sending .btn-dots{ display:inline-flex; }
+  .modal__send.is-success{ background:#198754; border-color:#198754; }
+  .modal__send.is-success .btn-label, .modal__send.is-success .btn-dots{ display:none; }
+  .modal__send.is-success .btn-check{ display:inline-flex; }
+  .btn-dots span{ opacity:0; font-weight:700; font-size:1.15em; line-height:1; }
+  .btn-dots span:nth-child(1){ animation:dot 1.2s infinite; animation-delay:0s; }
+  .btn-dots span:nth-child(2){ animation:dot 1.2s infinite; animation-delay:.2s; }
+  .btn-dots span:nth-child(3){ animation:dot 1.2s infinite; animation-delay:.4s; }
+  @keyframes dot{ 0%{opacity:0} 20%{opacity:1} 100%{opacity:0} }
+
+  .form-status{ margin-top:.6rem; font-size:.95rem; }
+  .form-status.ok{ color:#198754; }
+  .form-status.err{ color:#dc3545; }
+
+  /* Visibilidad del modal (fallback genérico) */
+  .modal{ display:none; }
+  .modal.is-open{ display:block; }
+  body.modal-open{ overflow:hidden; }
 </style>
+
+<!-- JS: Abrir modal desde CTA + Validación + Envío (SANDBOX / Apps Script) -->
+<script>
+(() => {
+  /* ======== CONFIG ======== */
+  const SANDBOX  = true; // ⬅️ true = simular; false = enviar a Sheets
+  const ENDPOINT = 'https://script.google.com/macros/s/WEB_APP_URL/exec'; // ⬅️ tu Web App
+  const SECRET   = 'WH_V1_123456'; // ⬅️ igual en Apps Script
+
+  const nameRegex  = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]{2,}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  /* ---------- Utilidades modal ---------- */
+  function openModal(modal){
+    modal.classList.add('is-open');
+    document.body.classList.add('modal-open');
+    const focusEl = modal.querySelector('input,textarea,button,[tabindex]:not([tabindex="-1"])');
+    focusEl && focusEl.focus();
+  }
+  function closeModal(modal){
+    modal.classList.remove('is-open');
+    document.body.classList.remove('modal-open');
+  }
+
+  // Cerrar al pulsar overlay o botón cerrar (delegación)
+  document.addEventListener('click', (e) => {
+    const closer = e.target.closest('.modal__overlay, .modal__close, [data-modal-close]');
+    if (closer){
+      const modal = closer.closest('.modal');
+      if (modal){ e.preventDefault(); closeModal(modal); }
+    }
+  });
+
+  // Intercepta CTA(s) .btn-brochure → abre modal y setea download_url
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a.btn-brochure');
+    if (!a) return;
+    e.preventDefault();
+    const url   = a.getAttribute('href') || '';
+    const modal = document.getElementById('brochureModal');
+    if (!modal) return;
+    const input = modal.querySelector('input[name="download_url"]');
+    if (input) input.value = url;
+    openModal(modal);
+  });
+
+  /* ---------- Envío ---------- */
+  function setButton(btn, state, statusEl){
+    btn.classList.remove('is-sending','is-success');
+    btn.disabled = (state === 'sending');
+    if (statusEl) {
+      if (state === 'sending'){ statusEl.textContent = 'Enviando…'; statusEl.className = 'form-status'; }
+      else if (state === 'success'){ statusEl.textContent = '¡Enviado correctamente!'; statusEl.className = 'form-status ok'; }
+      else if (state === 'error'){ statusEl.className = 'form-status err'; }
+      else { statusEl.textContent = ''; statusEl.className = 'form-status'; }
+    }
+    if (state === 'sending') btn.classList.add('is-sending');
+    if (state === 'success') btn.classList.add('is-success');
+  }
+
+  function validateName(input){
+    input.setCustomValidity('');
+    const v = input.value.trim();
+    if (!v) input.setCustomValidity('El nombre es obligatorio.');
+    else if (!nameRegex.test(v)) input.setCustomValidity('Introduce un nombre válido (solo letras y espacios).');
+    const invalid = !input.checkValidity();
+    input.classList.toggle('is-invalid', invalid);
+    input.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+  }
+  function validateEmail(input){
+    input.setCustomValidity('');
+    const v = input.value.trim();
+    if (!v) input.setCustomValidity('El email es obligatorio.');
+    else if (!emailRegex.test(v)) input.setCustomValidity('Introduce un email válido (ej: nombre@dominio.com).');
+    const invalid = !input.checkValidity();
+    input.classList.toggle('is-invalid', invalid);
+    input.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+  }
+
+  function fakeSend(payload){ return new Promise(r => setTimeout(() => r({ ok:true, sandbox:true }), 1100)); }
+  async function sendToSheet(payload){
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // simple request
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error(await res.text().catch(()=> 'HTTP '+res.status));
+    return res.json().catch(()=> ({}));
+  }
+
+  function initLeadForm(form){
+    const isBrochure = form.id === 'brochureForm';
+    const statusEl   = form.querySelector('.form-status') || form.querySelector('#brochureStatus') || form.querySelector('#visitStatus');
+    const btn        = form.querySelector('.modal__send');
+    const modalEl    = form.closest('.modal');
+
+    const nameEl = form.querySelector('input[name="nombre"]');
+    const mailEl = form.querySelector('input[name="email"]');
+    const telEl  = form.querySelector('input[name="telefono"]');
+    const msgEl  = form.querySelector('textarea[name="mensaje"]');
+    const hpEl   = form.querySelector('input[name="website"]');
+    const rgpdEl = form.querySelector('input[name="rgpd"]');
+    const mktEl  = form.querySelector('input[name="marketing_ok"]');
+    const unitEl = form.querySelector('input[name="unidad"]');
+    const originHiddenEl = form.querySelector('input[name="origin"]');
+    const downloadEl = form.querySelector('input[name="download_url"]');
+
+    // Live validation
+    if (nameEl) nameEl.addEventListener('input', () => { validateName(nameEl); nameEl.reportValidity(); });
+    if (mailEl) mailEl.addEventListener('input', () => { validateEmail(mailEl); mailEl.reportValidity(); });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (nameEl) validateName(nameEl);
+      if (mailEl) validateEmail(mailEl);
+      if (!form.checkValidity()) {
+        const firstInvalid = form.querySelector(':invalid');
+        if (firstInvalid) firstInvalid.focus({ preventScroll:false });
+        return;
+      }
+
+      // Honeypot
+      if (hpEl && hpEl.value.trim() !== '') {
+        setButton(btn, 'success', statusEl);
+        form.reset();
+        setTimeout(() => {
+          setButton(btn, 'idle', statusEl);
+          modalEl && closeModal(modalEl);
+        }, 2000);
+        return;
+      }
+
+      const payload = {
+        secret: SECRET,
+        origin: form.dataset.origin || originHiddenEl?.value || '',
+        name: nameEl?.value?.trim() || '',
+        email: mailEl?.value?.trim() || '',
+        phone: telEl?.value?.trim() || '',
+        message: msgEl?.value?.trim() || '',
+        unit: unitEl?.value || '',
+        rgpd: !!rgpdEl?.checked,
+        marketing_ok: !!mktEl?.checked,
+        page: location.href,
+        ua: navigator.userAgent,
+        lang: navigator.language || document.documentElement.lang || 'es',
+        ts: new Date().toISOString(),
+        type: isBrochure ? 'brochure' : 'visit',
+        download_url: downloadEl?.value || ''
+      };
+
+      try {
+        setButton(btn, 'sending', statusEl);
+        await (SANDBOX ? fakeSend(payload) : sendToSheet(payload));
+
+        setButton(btn, 'success', statusEl);
+        // Descarga/abre PDF tras éxito si es brochure
+        if (isBrochure && payload.download_url) {
+          try { window.open(payload.download_url, '_blank', 'noopener'); } catch(e){}
+        }
+        form.reset();
+        [nameEl, mailEl, telEl, msgEl].forEach(el => { if(el){ el.classList.remove('is-invalid'); el.removeAttribute('aria-invalid'); } });
+
+        setTimeout(() => {
+          setButton(btn, 'idle', statusEl);
+          modalEl && closeModal(modalEl);
+        }, 2200);
+
+      } catch (err) {
+        console.error('Lead error:', err);
+        setButton(btn, 'error', statusEl);
+        if (statusEl) statusEl.textContent = 'No se pudo enviar. Revisa tu conexión o inténtalo de nuevo.';
+        btn.disabled = false;
+      }
+    });
+  }
+
+  // Inicializa todos los formularios del parcial
+  document.querySelectorAll('form[data-lead]').forEach(initLeadForm);
+
+  // Si cargas i18n después, re-aplica traducciones si existe el helper global
+  window.applyI18nAndRoutes && window.applyI18nAndRoutes();
+})();
+</script>

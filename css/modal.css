@@ -175,3 +175,30 @@
   left: -9999px !important;
   width: 1px; height: 1px; overflow: hidden;
 }
+
+/* === Forzar centrado SOLO en los modales propios (evita choque con Bootstrap) === */
+.wh-modal {
+  position: fixed;
+  inset: 0;
+  display: flex !important;       /* Bootstrap pone block/none */
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9999;
+  transition: opacity .25s ease;
+}
+
+.wh-modal.show {
+  display: flex !important;       /* visible y centrado */
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Por si el overlay hereda algo raro */
+.wh-modal .modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  cursor: pointer;
+}

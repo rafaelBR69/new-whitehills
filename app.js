@@ -61,24 +61,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const $id = (x) => document.getElementById(x);
 
-/* Helper genérico */
+/* Helper genérico: soporta .show y .is-open */
 function toggleModal(modalEl, show = true) {
   if (!modalEl) return;
   modalEl.classList.toggle('show', show);
+  modalEl.classList.toggle('is-open', show);   // por si tus estilos usan esta
+  document.body.classList.toggle('modal-open', show);
   if (show) modalEl.querySelector('.modal__box')?.focus();
 }
 
-/* Visit (infoModal) */
-window.openVisitModal  = () => toggleModal($id('infoModal'), true);
-window.closeVisitModal = () => toggleModal($id('infoModal'), false);
+/* Carga perezosa del parcial de modales si falta en el DOM */
+async function ensureModalsLoaded() {
+  if (document.getElementById('brochureModal')) return true;
+  const res = await fetch('/partials/modals.html', { cache: 'no-store' });
+  if (!res.ok) { console.error('No se pudo cargar /partials/modals.html'); return false; }
+  const html = await res.text();
+  // ⬇️ Inserta modales como hijos directos de <body>
+  document.body.insertAdjacentHTML('beforeend', html);
+  window.applyI18nAndRoutes && window.applyI18nAndRoutes();
+  return !!document.getElementById('brochureModal');
+}
 
-/* Brochure (brochureModal) */
-window.openBrochureModal  = () => toggleModal($id('brochureModal'), true);
-window.closeBrochureModal = () => toggleModal($id('brochureModal'), false);
+
+/* Visit (infoModal) */
+window.openVisitModal  = async () => {
+  if (!(await ensureModalsLoaded())) return;
+  toggleModal(document.getElementById('infoModal'), true);
+};
+window.closeVisitModal = () => toggleModal(document.getElementById('infoModal'), false);
+
+/* Brochure (brochureModal) — ahora asíncrono y con URL */
+window.openBrochureModal  = async (pdfURL = '') => {
+  if (!(await ensureModalsLoaded())) return;
+  const modal = document.getElementById('brochureModal');
+  if (!modal) return console.warn('#brochureModal no encontrado tras cargar parcial');
+
+  // pasa la URL al hidden
+  const hidden = modal.querySelector('input[name="download_url"]');
+  if (hidden) hidden.value = pdfURL;
+
+  toggleModal(modal, true);
+};
+window.closeBrochureModal = () => {
+  const m = document.getElementById('brochureModal');
+  if (m) toggleModal(m, false);
+};
 
 /* Gracias (thankModal) */
-window.openThank  = () => toggleModal($id('thankModal'), true);
-window.closeThank = () => toggleModal($id('thankModal'), false);
+window.openThank  = async () => {
+  if (!(await ensureModalsLoaded())) return;
+  toggleModal(document.getElementById('thankModal'), true);
+};
+window.closeThank = () => toggleModal(document.getElementById('thankModal'), false);
+
 
 /* Alias compatibilidad con código existente */
 window.openModal  = () => window.openVisitModal();
@@ -118,21 +153,16 @@ document.addEventListener('click', (e) => {
 
 
 /* ▶️ Abrir “Obtener brochure” (a.btn-brochure) */
-document.addEventListener('click', (e) => {
+document.addEventListener('click', async (e) => {
   const link = e.target.closest('a.btn-brochure');
   if (!link) return;
 
   e.preventDefault();
 
-  // Pasamos la URL del PDF al hidden del formulario de brochure
   const pdfURL = link.getAttribute('href') || '';
-  const form = $id('brochureForm');
-  if (form) {
-    const hidden = form.querySelector('input[name="download_url"]');
-    if (hidden) hidden.value = pdfURL;
-  }
-  openBrochureModal();
+  await openBrochureModal(pdfURL); // ← se asegura de cargar el parcial y abrir
 });
+
 
 /* ==== Envío a Google Sheets para TODOS los formularios data-lead ==== */
 document.addEventListener('submit', async (e) => {
