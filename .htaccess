@@ -68,6 +68,16 @@ RewriteRule ^en/legal-notice/?$   legal-notice.html    [L,NC]
 RewriteRule ^en/cookie-policy/?$  cookies-policy.html  [L,NC]
 RewriteRule ^en/privacy-policy/?$ privacy-policy.html  [L,NC]
 
+# ====== GALERÍA (ES/EN) ======
+# Canoniza /galeria.html → /es/galeria (mientras pruebas, 302)
+RewriteCond %{THE_REQUEST} \s/+(galeria\.html)[\s?] [NC]
+RewriteRule ^galeria\.html$ es/galeria [R=302,L]
+
+# Mapeo a archivo físico
+RewriteRule ^es/galeria/?$ galeria.html [L,NC]
+RewriteRule ^en/gallery/?$ galeria.html [L,NC]
+
+
 # ====== CATCH-ALL de idioma → index.html (evita 404 con /es/... o /en/...) ======
 RewriteRule ^(es|en)/.+$ index.html [QSA,L,NC]
 

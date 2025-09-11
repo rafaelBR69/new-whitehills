@@ -1,0 +1,473 @@
+/* ===== Reset + base ===== */
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { height:100%; }
+
+/* Antes: body{ ... }  →  Ahora: */
+.glr-page{
+  min-height:100vh;
+  /* quitamos el centrado global y el overflow que recortaba el footer */
+  background:#ffffff;
+  color:#3c4d28;
+  font-family:'Montserrat', sans-serif;;
+}
+
+/* Contenedor local: centramos SOLO la galería */
+.glr-scope{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding: 8px;
+  overflow:visible;
+}
+
+/* ====== Variables (anchos/ruleta) ====== */
+:root{
+  --glr-card-w: 630px;
+  --glr-card-h: 600px;
+  --glr-gap   : 28px;
+  --glr-persp : 1100px;
+
+  --glr-shift-1: calc(var(--glr-card-w) * 0.95 + var(--glr-gap));
+  --glr-shift-2: calc(var(--glr-card-w) * 1.90 + var(--glr-gap) * 2);
+
+  --glr-depth-1: -120px;
+  --glr-depth-2: -360px;
+  --glr-scale-center: 1.10;
+  --glr-scale-side  : 0.92;
+  --glr-scale-far   : 0.84;
+}
+
+/* Título decorativo */
+.glr-about-title{
+  font-size:7.5rem;
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:-.02em;
+  position:absolute;
+  left:50%;
+  top:45px;
+  transform:translateX(-50%);
+  pointer-events:none;
+  white-space:nowrap;
+  color:#3c4d28;
+}
+
+/* Carrusel */
+.glr-carousel{
+  width:100%;
+  max-width:min(1400px,95vw);
+  height: calc(var(--glr-card-h) + 70px);
+  position:relative;
+  perspective: var(--glr-persp);
+  margin-top:80px;
+}
+.glr-track{
+  width:100%; height:100%;
+  display:flex; justify-content:center; align-items:center;
+  position:relative; transform-style:preserve-3d;
+  transition:transform .8s cubic-bezier(.25,.46,.45,.94);
+}
+
+/* Cards */
+.glr-card{
+  position:absolute;
+  width:var(--glr-card-w);
+  height:var(--glr-card-h);
+  background:#ffffff;
+  border:2px solid #3c4d28;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(60,77,40,.12);
+  transition:all .8s cubic-bezier(.25,.46,.45,.94);
+  cursor:pointer;
+}
+.glr-card img{
+  display:block;
+  width:100%; height:100%;
+  object-fit:cover;
+  transition:all .8s cubic-bezier(.25,.46,.45,.94);
+}
+
+/* Estados (ruleta) */
+.glr-card.is-center{ z-index:10; transform:scale(var(--glr-scale-center)) translateZ(0); }
+
+.glr-card.is-left-1 { z-index:5; transform: translateX(calc(var(--glr-shift-1) * -1)) scale(var(--glr-scale-side)) translateZ(var(--glr-depth-1)); opacity:.95; }
+.glr-card.is-right-1{ z-index:5; transform: translateX(var(--glr-shift-1))       scale(var(--glr-scale-side)) translateZ(var(--glr-depth-1)); opacity:.95; }
+
+.glr-card.is-left-2 { z-index:1; transform: translateX(calc(var(--glr-shift-2) * -1)) scale(var(--glr-scale-far)) translateZ(var(--glr-depth-2)); opacity:.75; }
+.glr-card.is-right-2{ z-index:1; transform: translateX(var(--glr-shift-2))          scale(var(--glr-scale-far)) translateZ(var(--glr-depth-2)); opacity:.75; }
+
+.glr-card.is-hidden{ opacity:0; pointer-events:none; }
+
+.glr-card.is-left-1 img,
+.glr-card.is-left-2 img,
+.glr-card.is-right-1 img,
+.glr-card.is-right-2 img { filter:grayscale(100%); }
+
+/* Pie (título + meta) */
+.glr-member{
+  text-align:center;
+  margin-top:34px;
+  transition:all .5s ease-out;
+}
+.glr-member__name{
+  color:#3c4d28;
+  font-size:2.5rem;
+  font-weight:700;
+  margin-bottom:10px;
+  position:relative;
+  display:inline-block;
+}
+.glr-member__name::before,
+.glr-member__name::after{
+  content:"";
+  position:absolute;
+  top:100%;
+  width:100px; height:2px;
+  background:#3c4d28;
+}
+.glr-member__name::before{ left:-120px; }
+.glr-member__name::after{ right:-120px; }
+.glr-member__role{
+  color:rgba(60,77,40,.75);
+  font-size:1.5rem;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  padding:10px 0;
+  margin-top:-15px;
+  position:relative;
+}
+
+/* Dots */
+.glr-dots{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:46px;
+}
+.glr-dot{
+  width:12px; height:12px; border-radius:50%;
+  background:rgba(60,77,40,.18);
+  border:1px solid #3c4d28;
+  cursor:pointer; transition:all .3s ease;
+}
+.glr-dot.is-active{ background:#3c4d28; transform:scale(1.2); }
+
+/* === Flechas: icono grande, botón pequeño, fondo transparente, borde blanco === */
+:root{
+  --glr-ctrl-size    : 40px;   /* tamaño del botón (hitbox) */
+  --glr-chevron-size : 28px;   /* tamaño del símbolo ‹ › (hazlo más/menos grande) */
+  --glr-ctrl-gap     : 12px;   /* separación respecto al borde del carrusel */
+}
+
+.glr-nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:var(--glr-ctrl-size); height:var(--glr-ctrl-size);
+  padding:0; line-height:1;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; z-index:20;
+
+  /* Visual */
+  background:transparent;
+  border:4px solid #fff;
+  border-radius:9999px;
+  color:#fff;
+  font-size:var(--glr-chevron-size);
+
+  /* Área de click recortada al círculo (no invade la 2ª tarjeta) */
+  clip-path: circle(calc(var(--glr-ctrl-size)/2) at 50% 50%);
+
+  /* Animación suave */
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background-color .18s ease,
+    border-color .18s ease,
+    opacity .18s ease;
+}
+
+/* Posición en los bordes del carrusel */
+.glr-nav--left{  left:  var(--glr-ctrl-gap); }
+.glr-nav--right{ right: var(--glr-ctrl-gap); }
+
+/* Hover: ligera ampliación y resplandor suave */
+.glr-nav:hover{
+  transform: translateY(-50%) scale(1.07);
+  background: rgba(255,255,255,.06);
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.35),
+    0 0 18px rgba(255,255,255,.45);
+}
+
+/* Active (click mantenido): más grande + “luz” blanca pulsante */
+.glr-nav:active{
+  transform: translateY(-50%) scale(1.12);
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.55),
+    0 0 26px rgba(255,255,255,.65);
+}
+
+/* Pulso de luz expandiéndose */
+.glr-nav::after{
+  content:""; position:absolute; inset:-4px; border-radius:inherit;
+  pointer-events:none; opacity:0;
+}
+.glr-nav:active::after{
+  animation: glr-pulse .45s ease-out;
+}
+@keyframes glr-pulse{
+  0%   { box-shadow: 0 0 0 0 rgba(255,255,255,.65); opacity:1; }
+  100% { box-shadow: 0 0 0 22px rgba(255,255,255,0); opacity:0; }
+}
+
+/* Responsive: un pelín más compacto en móvil */
+@media (max-width:520px){
+  :root{
+    --glr-ctrl-size    : 34px;
+    --glr-chevron-size : 24px;
+    --glr-ctrl-gap     : 8px;
+  }
+}
+
+
+/* ===== Responsive ===== */
+@media (max-width: 900px){
+  :root{
+    --glr-card-w: 300px;
+    --glr-card-h: 400px;
+    --glr-gap   : 20px;
+    --glr-shift-1: calc(var(--glr-card-w) * 0.95 + var(--glr-gap));
+    --glr-shift-2: calc(var(--glr-card-w) * 1.90 + var(--glr-gap) * 2);
+    --glr-depth-1: -100px;
+    --glr-depth-2: -300px;
+  }
+  .glr-about-title{ font-size:4.5rem; opacity:.14; }
+  .glr-member__name{ font-size:2rem; }
+  .glr-member__role{ font-size:1.2rem; }
+  .glr-member__name::before, .glr-member__name::after{ width:50px; }
+  .glr-member__name::before{ left:-70px; }
+  .glr-member__name::after{ right:-70px; }
+}
+@media (max-width: 520px){
+  :root{
+    --glr-card-w: 240px;
+    --glr-card-h: 330px;
+    --glr-gap   : 16px;
+    --glr-shift-1: calc(var(--glr-card-w) * 0.92 + var(--glr-gap));
+    --glr-shift-2: calc(var(--glr-card-w) * 1.84 + var(--glr-gap) * 2);
+    --glr-depth-1: -90px;
+    --glr-depth-2: -260px;
+  }
+}
+
+/* ===== Forzar aspecto "scrolled" del header SOLO en galeria ===== */
+.glr-page header.fixed-top{
+  background-color: var(--header-bg) !important;
+  box-shadow: var(--shadow-hdr) !important;
+}
+.glr-page header.fixed-top .navbar{ padding-block: .5rem !important; }
+.glr-page header .navbar-brand img{
+  height:75px !important;
+  margin-top:-30px !important;
+  content:url("/images/logo.png") !important; /* logo verde */
+}
+/* Burger verde también si hiciera falta en desktop */
+.glr-page .navbar-toggler-icon{
+  background-image:url('data:image/svg+xml,%3Csvg viewBox%3D%220 0 30 30%22 xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath stroke%3D%22%233c4d28%22 stroke-linecap%3D%22round%22 stroke-miterlimit%3D%2210%22 stroke-width%3D%222%22 d%3D%22M4 7h22M4 15h22M4 23h22%22/%3E%3C/svg%3E') !important;
+}
+
+:root{
+  --glr-extra-top-desktop: 96px;
+  --glr-extra-top-mobile : 56px;
+}
+
+/* Sitúa el título justo por debajo del header fijo */
+.glr-about-title{
+  /* usa la altura real del header que mandamos desde JS */
+  top: calc(var(--hdr-h, 80px) + 8px);
+}
+
+/* (Opcional) si quieres empujar un pelín más todo el bloque de la galería: */
+@media (min-width: 992px){
+  .glr-scope{ margin-top: var(--glr-extra-top-desktop); }
+}
+@media (max-width: 991.98px){
+  .glr-scope{ margin-top: var(--glr-extra-top-mobile); }
+}
+
+/* 1) Asegura que el scope ocupe todo el ancho, y centra el carrusel */
+.glr-scope{ width:100%; }
+.glr-carousel{ width: min(1400px, 95vw); margin-inline:auto; }
+
+/* En móvil las acercamos un poco */
+@media (max-width: 520px){
+  .glr-nav--left{  left:  max(8px,  calc(50% - (var(--glr-card-w) / 2) - 28px)); }
+  .glr-nav--right{ right: max(8px,  calc(50% - (var(--glr-card-w) / 2) - 28px)); }
+}
+
+/* === Flechas con hitbox pequeño y pegadas al borde === */
+:root{
+  --glr-ctrl-size: 36px;   /* tamaño del botón (reduce si quieres aún menos) */
+  --glr-ctrl-gap : 12px;   /* separación al borde del carrusel */
+}
+
+/* botón compacto y sin padding adicional */
+.glr-nav{
+  width: var(--glr-ctrl-size);
+  height: var(--glr-ctrl-size);
+  padding: 0;
+  line-height: 1;
+  border-radius: 50%;
+  /* recorta el área clicable al círculo (evita que la caja “rectangular” estorbe) */
+  clip-path: circle(calc(var(--glr-ctrl-size) / 2) at 50% 50%);
+}
+
+/* posición: a los bordes del carrusel, no dentro de la zona de la 2ª tarjeta */
+.glr-nav--left  { left:  var(--glr-ctrl-gap) !important; }
+.glr-nav--right { right: var(--glr-ctrl-gap) !important; }
+
+/* hover suave (opcional) */
+.glr-nav:hover{
+  transform: translateY(-50%) scale(1.06);
+}
+
+/* En móvil: un poco más pequeñas y más pegadas aún */
+@media (max-width: 520px){
+  :root{
+    --glr-ctrl-size: 32px;
+    --glr-ctrl-gap : 8px;
+  }
+}
+
+:root{
+  --glr-ctrl-size: 36px;  /* tamaño clicable del botón */
+  --glr-ctrl-gap : 12px;  /* distancia al borde del carrusel */
+}
+.glr-nav{
+  width:var(--glr-ctrl-size);
+  height:var(--glr-ctrl-size);
+  padding:0;
+  clip-path: circle(calc(var(--glr-ctrl-size)/2) at 50% 50%); /* hitbox redondo */
+}
+.glr-nav--left{  left: var(--glr-ctrl-gap); }
+.glr-nav--right{ right:var(--glr-ctrl-gap); }
+
+/* ===== Tamaño de botón/área y tamaño del icono ===== */
+:root{
+  --glr-ctrl-size    : 64px;  /* tamaño del botón (hitbox) */
+  --glr-chevron-size : 56px;  /* tamaño del icono (‹ ›) */
+}
+
+/* Reducimos el overlay de Bootstrap al botoncito circular */
+.glr-carousel .carousel-control-prev,
+.glr-carousel .carousel-control-next{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width: var(--glr-ctrl-size) !important;   /* NO el 15% por defecto */
+  height: var(--glr-ctrl-size) !important;
+  padding:0 !important;
+  opacity:1 !important;
+  background: transparent;
+  display:flex; align-items:center; justify-content:center;
+  z-index:20;
+}
+
+/* Posición a los lados */
+.glr-carousel .carousel-control-prev{ left: 12px; }
+.glr-carousel .carousel-control-next{ right:12px; }
+
+/* Icono más grande (y sin filtros) */
+.glr-carousel .carousel-control-prev-icon,
+.glr-carousel .carousel-control-next-icon{
+  width: var(--glr-chevron-size);
+  height: var(--glr-chevron-size);
+  background-size:100% 100%;
+  filter:none;                 /* evita invertir colores */
+}
+
+/* === Icono más GRUESO: sobreescribimos el SVG de Bootstrap === */
+/* Prev (chevron izquierdo) */
+.glr-carousel .carousel-control-prev-icon{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Cpath d='M20 6 L10 16 L20 26' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+/* Next (chevron derecho) */
+.glr-carousel .carousel-control-next-icon{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Cpath d='M12 6 L22 16 L12 26' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Hover/Active con “glow” sutil */
+.glr-carousel .carousel-control-prev:hover,
+.glr-carousel .carousel-control-next:hover{
+  transform: translateY(-50%) scale(1.07);
+}
+.glr-carousel .carousel-control-prev:active,
+.glr-carousel .carousel-control-next:active{
+  transform: translateY(-50%) scale(1.12);
+}
+
+/* ===== Botón "Agendar visita" (galería) ===== */
+.glr-page .visit-actions{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* separaciones */
+  margin-top: 2rem;
+  margin-bottom: clamp(4rem, 12vw, 9rem); /* grande para no pegarse al footer */
+  padding-inline: 1rem; /* respiración lateral en móvil */
+}
+
+.glr-page .btn-visit{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-width: 240px;            /* tamaño cómodo */
+  padding: .95rem 1.6rem;
+  border-radius: 999px;        /* pastilla */
+  border: 2px solid transparent;
+
+  /* Colores con variables de marca si existen */
+  background: var(--brand-color, #3b4d2b);
+  color: #fff;
+
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: none;
+
+  /* Elevación suave */
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease;
+}
+
+/* Hover / Active / Focus accesibles */
+.glr-page .btn-visit:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.16);
+  /* ligero contraste usando borde si tienes var de borde */
+  border-color: var(--field-bord, #526344);
+}
+
+.glr-page .btn-visit:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0,0,0,.14) inset;
+}
+
+.glr-page .btn-visit:focus-visible{
+  outline: none;
+  /* anillo de foco con color de marca semi-transparente */
+  box-shadow:
+    0 0 0 .2rem rgba(59,77,43,.35),
+    0 10px 24px rgba(0,0,0,.18);
+}
+
+/* Opcional: versión deshabilitada si la usas */
+.glr-page .btn-visit:disabled{
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

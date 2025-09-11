@@ -9,7 +9,8 @@
     "contact": "CONTACT",
     "availability": "AVAILABILITY",
     "process": "PURCHASE PROCESS",
-    "location": "LOCATION"
+    "location": "LOCATION",
+    "galeria": "GALLERY"
   },
   "btn": {
     "contact": "Contact us"
@@ -348,5 +349,11 @@
       "openMenu": "Open navigation menu",
       "viewPlan": "View selected home floorplan"
     }
+  },
+  "gallery": {
+    "pageTitle": "Gallery – WhiteHills",
+    "heroTitle": "WHITEHILLS – GALLERY",
+    "prev": "Previous",
+    "next": "Next"
   }
 }

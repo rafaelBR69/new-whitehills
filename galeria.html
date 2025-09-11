@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- i18n -->
+  <script src="https://unpkg.com/i18next@23/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-http-backend@2/i18nextHttpBackend.min.js"></script>
+  <script src="https://unpkg.com/i18next-browser-languagedetector@8/i18nextBrowserLanguageDetector.min.js"></script>
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- SEO (el texto lo sobreescribimos vía i18n) -->
+  <title data-i18n="gallery.pageTitle">Galería – WhiteHills</title>
+  <meta name="description" content="Galería de imágenes de WhiteHills Villas: interiores, exteriores y zonas comunes.">
+  <link rel="canonical" id="canonical" href=""/>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS del sitio -->
+  <link rel="stylesheet" href="/style.css"/>
+  <link rel="stylesheet" href="/css/header.css"/>
+  <link rel="stylesheet" href="/css/footer.css"/>
+  <link rel="stylesheet" href="/css/modal.css"/><!-- ⬅️ igual que en index -->
+  <link rel="stylesheet" href="/mediaquaries.css"/>
+
+  <!-- CSS de la galería -->
+  <link rel="stylesheet" href="/css/galeria.css"/>
+
+  <style>.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+</head>
+
+<body class="gallery-page glr-page">
+  <a class="visually-hidden" href="#main-content">Saltar al contenido</a>
+
+  <!-- Header dinámico -->
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" role="main" data-route="galeria">
+    <section id="galeria"></section>
+
+    <div class="glr-scope">
+      <!-- H1 traducible -->
+      <h1 class="glr-about-title" data-i18n="gallery.heroTitle">WHITEHILLS – GALERÍA</h1>
+
+      <div class="glr-carousel" id="glrCarousel">
+        <!-- Prev traducible -->
+        <button class="carousel-control-prev glr-control"
+                type="button"
+                data-glr="prev"
+                aria-label=""
+                data-i18n-aria-label="gallery.prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden" data-i18n="gallery.prev">Anterior</span>
+        </button>
+
+        <div class="glr-track" id="glrTrack"></div>
+
+        <!-- Next traducible -->
+        <button class="carousel-control-next glr-control"
+                type="button"
+                data-glr="next"
+                aria-label=""
+                data-i18n-aria-label="gallery.next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden" data-i18n="gallery.next">Siguiente</span>
+        </button>
+      </div>
+
+      <div class="glr-member" id="glrMember">
+        <h2 class="glr-member__name">—</h2>
+        <p class="glr-member__role">—</p>
+      </div>
+
+      <div class="glr-dots" id="glrDots"></div>
+    </div>
+
+    <!-- CTA: Agendar visita -->
+    <div class="visit-actions">
+      <button type="button" class="btn-visit" data-unit="B2">
+        <span data-i18n="unit.cta.schedule_visit">Agendar visita</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer dinámico -->
+  <div id="footer-placeholder"></div>
+
+  <!-- === Modales (igual que en index: placeholder simple) === -->
+  <div id="modals-placeholder"></div>
+
+  <!-- ====== JS ====== -->
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Header dinámico + comportamiento scrolled + i18n mínimo para esta página -->
+  <script>
+    function applyI18nForGallery(){
+      if (!window.i18next) return;
+      const $title = document.querySelector('title[data-i18n="gallery.pageTitle"]');
+      if ($title) $title.textContent = i18next.t('gallery.pageTitle');
+      const $h1 = document.querySelector('.glr-about-title[data-i18n="gallery.heroTitle"]');
+      if ($h1) $h1.textContent = i18next.t('gallery.heroTitle');
+      document.querySelectorAll('[data-i18n="gallery.prev"]').forEach(el => el.textContent = i18next.t('gallery.prev'));
+      document.querySelectorAll('[data-i18n="gallery.next"]').forEach(el => el.textContent = i18next.t('gallery.next'));
+      document.querySelectorAll('[data-i18n-aria-label="gallery.prev"]').forEach(el => el.setAttribute('aria-label', i18next.t('gallery.prev')));
+      document.querySelectorAll('[data-i18n-aria-label="gallery.next"]').forEach(el => el.setAttribute('aria-label', i18next.t('gallery.next')));
+    }
+
+    // Header
+    fetch('/partials/header.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
+
+        const header = document.querySelector('header');
+        const main   = document.querySelector('main');
+
+        // Forzar estado "scrolled" en galería
+        if (header) {
+          header.classList.add('scrolled');
+          header.dataset.forceScrolled = 'true';
+          document.addEventListener('scroll', () => {
+            if (header.dataset.forceScrolled === 'true') header.classList.add('scrolled');
+          }, { passive: true });
+        }
+
+        // Offset de main bajo header
+        function adjustMainOffset(){
+          if (!header || !main) return;
+          const base = header.offsetHeight || 80;
+          const isMobile = window.matchMedia('(max-width: 991.98px)').matches;
+          const extra = isMobile ? 8 : 16;
+          main.style.paddingTop = (base + extra) + 'px';
+          document.documentElement.style.setProperty('--hdr-h', base + 'px');
+        }
+        adjustMainOffset();
+        window.addEventListener('resize', adjustMainOffset);
+
+        // Marca activo "Galería"
+        const path = location.pathname.replace(/\/+$/, '');
+        document.querySelectorAll('header a[href]').forEach(a => {
+          const href = a.getAttribute('href')?.replace(/\/+$/, '');
+          if (!href || href === '#') return;
+          if (href === path || (href.endsWith('galeria.html') && path.endsWith('galeria.html'))) {
+            a.classList.add('active');
+            a.setAttribute('aria-current','page');
+          }
+        });
+
+        if (window.i18next) {
+          if (i18next.isInitialized) applyI18nForGallery();
+          i18next.on?.('initialized', applyI18nForGallery);
+          i18next.on?.('languageChanged', applyI18nForGallery);
+        }
+
+        window.applyI18nAndRoutes && window.applyI18nAndRoutes();
+      });
+
+    // Footer
+    fetch('/partials/footer.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('footer-placeholder').innerHTML = html;
+        window.applyI18nAndRoutes && window.applyI18nAndRoutes();
+        if (window.i18next && i18next.isInitialized) applyI18nForGallery();
+      });
+
+    // === Carga modales (igual que en index; sin ejecutar <script> embebidos) ===
+    fetch('/partials/modals.html')
+      .then(r => r.text())
+      .then(html => {
+        const host = document.getElementById('modals-placeholder');
+        host.innerHTML = html;
+        // Asegura estado cerrado al cargar (por si el parcial trae clases residuales)
+        document.body.classList.remove('modal-open');
+        host.querySelectorAll('.modal').forEach(m => m.classList.remove('is-open','show'));
+      });
+  </script>
+
+  <!-- i18n + (otros) iguales que en index, ANTES de app.js -->
+  <script src="/js/i18n.js"></script>
+
+  <!-- Lógica de la galería -->
+  <script src="/js/galeria.js" defer></script>
+
+  <!-- app.js AL FINAL (como en index, para que encuentre ya los modales en el DOM) -->
+  <script src="/app.js"></script>
+
+  <!-- Fallback ligero: abrir #infoModal desde .btn-visit si app.js no lo hace -->
+  <script>
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-visit');
+      if (!btn) return;
+
+      // Si app.js ya ha abierto el modal, no hacemos nada
+      const alreadyOpen = document.querySelector('#infoModal.is-open');
+      if (alreadyOpen) return;
+
+      const modal = document.getElementById('infoModal');
+      if (!modal) return; // aún no cargó el parcial
+
+      e.preventDefault();
+      const unit   = btn.dataset.unit || '';
+      const origin = `Agendar visita – Galería${unit ? ' (unidad '+unit+')' : ''}`;
+
+      const setVal = (sel, val) => { const el = modal.querySelector(sel); if (el) el.value = val; };
+      setVal('input[name="unidad"]', unit);
+      setVal('input[name="origin"]', origin);
+
+      modal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+
+      const first = modal.querySelector('input,textarea,button,[tabindex]:not([tabindex="-1"])');
+      first && first.focus({ preventScroll:false });
+    });
+  </script>
+</body>
+</html>

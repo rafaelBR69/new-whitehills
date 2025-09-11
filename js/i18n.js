@@ -41,6 +41,7 @@ function getRoutesMap () {
       location:     '/es/localizacion',
       process:      '/es/proceso-compra',
       contact:      '/es/contacto',
+      galeria:      '/es/galeria',
       legal:        '/es/aviso-legal',
       cookies:      '/es/politica-cookies',
       privacy:      '/es/politica-privacidad'
@@ -51,6 +52,7 @@ function getRoutesMap () {
       location:     '/en/location',
       process:      '/en/process',
       contact:      '/en/contact',
+      galeria:      '/en/gallery',
       legal:        '/en/legal-notice',
       cookies:      '/en/cookie-policy',
       privacy:      '/en/privacy-policy'
@@ -66,14 +68,15 @@ function getCurrentSemanticRoute () {
   if (h === '#availability') return 'availability';
   if (h === '#location')     return 'location';
 
-  if (p.endsWith('/index.html') || p === '' || p === '/')                                       return 'home';
-  if (p.endsWith('/contact.html') || /\/(es\/contacto|en\/contact)(\/)?$/.test(p))              return 'contact';
-  if (p.endsWith('/proceso.html') || /\/(es\/proceso-compra|en\/process)(\/)?$/.test(p))        return 'process';
+  if (p.endsWith('/index.html') || p === '' || p === '/')                                        return 'home';
+  if (p.endsWith('/contact.html')      || /\/(es\/contacto|en\/contact)(\/)?$/.test(p))          return 'contact';
+  if (p.endsWith('/proceso.html')      || /\/(es\/proceso-compra|en\/process)(\/)?$/.test(p))    return 'process';
   if (/\/(es\/disponibilidad|en\/availability)(\/)?$/.test(p))                                   return 'availability';
   if (/\/(es\/localizacion|en\/location)(\/)?$/.test(p))                                         return 'location';
-  if (p.endsWith('/legal-notice.html')   || /\/(es\/aviso-legal|en\/legal-notice)(\/)?$/.test(p))   return 'legal';
-  if (p.endsWith('/cookies-policy.html') || /\/(es\/politica-cookies|en\/cookie-policy)(\/)?$/.test(p)) return 'cookies';
-  if (p.endsWith('/privacy-policy.html') || /\/(es\/politica-privacidad|en\/privacy-policy)(\/)?$/.test(p)) return 'privacy';
+  if (p.endsWith('/galeria.html')      || /\/(es\/galeria|en\/gallery)(\/)?$/.test(p))           return 'galeria';
+  if (p.endsWith('/legal-notice.html') || /\/(es\/aviso-legal|en\/legal-notice)(\/)?$/.test(p))  return 'legal';
+  if (p.endsWith('/cookies-policy.html')||/\/(es\/politica-cookies|en\/cookie-policy)(\/)?$/.test(p)) return 'cookies';
+  if (p.endsWith('/privacy-policy.html')||/\/(es\/politica-privacidad|en\/privacy-policy)(\/)?$/.test(p)) return 'privacy';
 
   return 'home';
 }
@@ -95,28 +98,89 @@ window.applyI18nAndRoutes = function applyI18nAndRoutes () {
   // Logo / Home
   setHref('a.navbar-brand, a[data-route="home"]', routes.home);
 
-  // Availability / Location
+  // Availability / Location → hash si estás en home; ruta limpia si no
   setHref('header a[data-route="availability"], footer a[data-route="availability"]',
           onHome ? '#availability' : routes.availability);
   setHref('header a[data-route="location"], footer a[data-route="location"]',
           onHome ? '#location' : routes.location);
 
   // Páginas físicas
-  setHref('a[data-route="process"]', routes.process);
-  setHref('a[data-route="contact"]', routes.contact);
+  setHref('a[data-route="process"]',  routes.process);
+  setHref('a[data-route="contact"]',  routes.contact);
+  setHref('a[data-route="galeria"]',  routes.galeria);
 
   // Footer legales
   setHref('footer a[data-route="legal"]',   routes.legal);
   setHref('footer a[data-route="cookies"]', routes.cookies);
   setHref('footer a[data-route="privacy"]', routes.privacy);
 
+  // html[lang]
   document.documentElement.setAttribute('lang', L);
+
+  // Marca activo en el header
+  const path = location.pathname.replace(/\/+$/,'').toLowerCase();
+  document.querySelectorAll('header a[href]').forEach(a => {
+    const href = (a.getAttribute('href')||'').replace(/\/+$/,'').toLowerCase();
+    a.classList.remove('active'); a.removeAttribute('aria-current');
+    if (href && href !== '#' && href === path) {
+      a.classList.add('active');
+      a.setAttribute('aria-current','page');
+    }
+  });
+
+  // Título y meta description por página (si existen claves)
+  const semantic = getCurrentSemanticRoute();
+  const keyBase  = (
+    semantic === 'galeria'   ? 'gallery' :
+    semantic === 'process'   ? 'process' :
+    semantic === 'contact'   ? 'contact' :
+    semantic === 'legal'     ? 'legal'   :
+    semantic === 'cookies'   ? 'cookies' :
+    semantic === 'privacy'   ? 'privacy' :
+    semantic === 'home'      ? 'home'    : null
+  );
+
+  if (keyBase) {
+    const metaTitle = i18next.t(`${keyBase}.metaTitle`, { defaultValue: '' });
+    if (metaTitle) document.title = metaTitle;
+
+    const metaDesc = i18next.t(`${keyBase}.metaDescription`, { defaultValue: '' });
+    if (metaDesc) {
+      let m = document.querySelector('meta[name="description"]');
+      if (!m) { m = document.createElement('meta'); m.setAttribute('name','description'); document.head.appendChild(m); }
+      m.setAttribute('content', metaDesc);
+    }
+  }
+
+  // Canonical dinámico si existe <link id="canonical">
+  const canonicalEl = document.querySelector('link#canonical');
+  if (canonicalEl) canonicalEl.href = location.href;
 
   // En home con hash → scroll suave
   if (onHome && (location.hash === '#availability' || location.hash === '#location')) {
     requestAnimationFrame(() => {
       const el = document.querySelector(location.hash);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  // Vincular cambio de idioma una sola vez
+  const sel = document.getElementById('langSwitcher');
+  if (sel && !sel.dataset.boundLangChange) {
+    sel.dataset.boundLangChange = '1';
+    sel.addEventListener('change', (e) => {
+      const newLang = e.target.value || 'es';
+      i18next.changeLanguage(newLang);
+
+      const semantic = getCurrentSemanticRoute();
+      const R = getRoutesMap()[newLang] || getRoutesMap().es;
+
+      // Si estás en home con hash de sección, conserva el hash
+      const hasHashSection = (location.hash === '#availability' || location.hash === '#location');
+      let dest = R[semantic] || R.home;
+      if (hasHashSection) dest = R.home + location.hash;
+
+      location.href = dest;
     });
   }
 };
@@ -177,7 +241,7 @@ document.addEventListener('click', (e) => {
   if (!a) return;
 
   const onHome = /^(?:\/|\/index\.html|\/es\/inicio\/?|\/en\/home\/?)$/i.test(location.pathname);
-  if (!onHome) return; // fuera de home, dejamos que navegue a la ruta limpia
+  if (!onHome) return; // fuera de home, navega normal
 
   e.preventDefault();
   const id = a.getAttribute('data-route') === 'availability' ? 'availability' : 'location';
@@ -190,7 +254,6 @@ document.addEventListener('click', (e) => {
 
 /* --- Scroll for pretty paths (/en/location, /es/disponibilidad, etc.) --- */
 (function () {
-  // ¿Estamos en una URL limpia que apunta a una sección de index?
   const p = location.pathname.replace(/\/+$/, '').toLowerCase();
 
   let targetId = null;
@@ -204,7 +267,6 @@ document.addEventListener('click', (e) => {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Espera a que el DOM esté listo (y a que se inyecten parciales si aplica)
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => setTimeout(scrollNow, 50));
   } else {
