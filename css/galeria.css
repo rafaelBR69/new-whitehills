@@ -23,8 +23,8 @@ html,body { height:100%; }
 
 /* ====== Variables (anchos/ruleta) ====== */
 :root{
-  --glr-card-w: 630px;
-  --glr-card-h: 600px;
+  --glr-card-w: 530px;
+  --glr-card-h: 500px;
   --glr-gap   : 28px;
   --glr-persp : 1100px;
 
