@@ -1,5 +1,6 @@
 /* =========================================================
    Galería 3D – optimizada (render completo + Supabase CDN)
+   (recortes 16:9 desde el servidor)
    ========================================================= */
 
 const DEBUG = false;
@@ -7,16 +8,24 @@ const DEBUG = false;
 /** Toggle rápido por si quisieras volver al URL original sin transform */
 const USE_SUPA_TRANSFORM = true;
 
-/** Helper: URLs optimizadas vía Supabase Transform API */
-// Reemplaza supa() por esta versión con formato
-function supa(url, { w, q = 70, resize = 'cover', format } = {}) {
+/** === Config de aspecto objetivo ===
+ * La card en CSS debe ser 16:9 para que encaje perfecto.
+ * Altura = ancho * 9/16
+ */
+const RATIO_H_OVER_W = 9 / 16;
+const H16_9 = (w) => Math.round(w * RATIO_H_OVER_W);
+
+/** Helper: URLs optimizadas vía Supabase Transform API (con height) */
+function supa(url, { w, h, q = 70, resize = 'cover', format } = {}) {
   if (!USE_SUPA_TRANSFORM) return url;
   try {
     const u = new URL(url);
+    // render image endpoint
     u.pathname = u.pathname.replace('/storage/v1/object/', '/storage/v1/render/image/');
-    if (w) u.searchParams.set('width', String(w));
+    if (w) u.searchParams.set('width',  String(w));
+    if (h) u.searchParams.set('height', String(h)); // <--- NUEVO
     u.searchParams.set('quality', String(q));
-    u.searchParams.set('resize', resize);
+    u.searchParams.set('resize',  resize);          // cover | contain
     if (format) u.searchParams.set('format', format); // avif | webp | jpeg
     return u.toString();
   } catch {
@@ -66,9 +75,6 @@ const $dots   = document.getElementById('glrDots');
 const $nameEl = document.querySelector('.glr-member__name');
 const $roleEl = document.querySelector('.glr-member__role');
 
-let $left = null;
-let $right = null;
-
 /** Estado */
 let team = TEAM;
 let cards = [];
@@ -78,7 +84,6 @@ let animating = false;
 function hydrateImage(card) {
   const img = card.querySelector('img[data-src]');
   if (!img) return;
-
   img.src    = img.dataset.src;
   if (img.dataset.srcset) img.srcset = img.dataset.srcset;
   img.removeAttribute('data-src');
@@ -94,18 +99,19 @@ function createCardAndDot(member, i) {
   const img = document.createElement('img');
   img.alt = member.name;
 
-  // Carga “rápida” para las 5 primeras visibles del carrusel
+  // Carga “rápida” para las primeras visibles del carrusel
   const eager = i < 4;
   img.decoding = 'async';
   img.loading = eager ? 'eager' : 'lazy';
   img.setAttribute('fetchpriority', eager ? 'high' : 'low');
 
-  img.src = supa(member.img, { w: 1200, q: 75 });
+  // === Usamos 16:9 en src y srcset (resize: cover) ===
+  img.src = supa(member.img, { w: 1200, h: H16_9(1200), q: 75, resize: 'cover' });
   img.srcset = [
-    `${supa(member.img, { w: 480,  q: 70 })} 480w`,
-    `${supa(member.img, { w: 768,  q: 70 })} 768w`,
-    `${supa(member.img, { w: 1200, q: 75 })} 1200w`,
-    `${supa(member.img, { w: 1600, q: 75 })} 1600w`
+    `${supa(member.img, { w: 480,  h: H16_9(480),  q: 70, resize: 'cover' })} 480w`,
+    `${supa(member.img, { w: 768,  h: H16_9(768),  q: 70, resize: 'cover' })} 768w`,
+    `${supa(member.img, { w: 1200, h: H16_9(1200), q: 75, resize: 'cover' })} 1200w`,
+    `${supa(member.img, { w: 1600, h: H16_9(1600), q: 75, resize: 'cover' })} 1600w`
   ].join(', ');
   img.sizes = '(max-width: 768px) 90vw, (max-width: 1200px) 70vw, 900px';
 
@@ -123,9 +129,7 @@ function createCardAndDot(member, i) {
     if (DEBUG) console.warn('No se pudo cargar:', member.img);
   };
 
-  // Si es eager, hidrátala ya
-  if (eager) { card.appendChild(img); hydrateImage(card); }
-  else { card.appendChild(img); } // se hidratará luego
+  card.appendChild(img);
 
   const dot = document.createElement('div');
   dot.className = 'glr-dot';
@@ -157,7 +161,6 @@ function hydrateNeighborhood(center) {
   }
   idxs.forEach(i => hydrateImage(cards[i]));
 }
-
 
 /** 8) Posiciones */
 function updateClasses(newIndex) {
@@ -200,17 +203,8 @@ function updateClasses(newIndex) {
   setTimeout(() => { animating = false; }, 800);
 }
 
-/** 9) Controles */
-function resolveControls(){
-  $left  = document.querySelector('.glr-nav--left, [data-glr="prev"], .carousel-control-prev.glr-control');
-  $right = document.querySelector('.glr-nav--right, [data-glr="next"], .carousel-control-next.glr-control');
-}
 function bindEvents() {
-  resolveControls();
-
-  if ($left)  $left.addEventListener('click', () => updateClasses(current - 1));
-  if ($right) $right.addEventListener('click', () => updateClasses(current + 1));
-
+  // Dots → salto directo al índice
   if ($dots) {
     $dots.addEventListener('click', (e) => {
       const d = e.target.closest('.glr-dot'); if (!d) return;
@@ -218,21 +212,53 @@ function bindEvents() {
       if (!Number.isNaN(idx)) updateClasses(idx);
     });
   }
+
+  // Utilidad: mitad horizontal de un rect
+  const midX = (rect) => rect.left + rect.width / 2;
+
+  // Click en el track → decide por lado (izq = prev, der = next)
   if ($track) {
     $track.addEventListener('click', (e) => {
-      const c = e.target.closest('.glr-card'); if (!c) return;
-      const idx = parseInt(c.dataset.index, 10);
-      if (!Number.isNaN(idx)) updateClasses(idx);
+      const targetCard = e.target.closest('.glr-card');
+
+      // 1) Click sobre una card
+      if (targetCard) {
+        const idx = parseInt(targetCard.dataset.index, 10);
+        if (Number.isNaN(idx)) return;
+
+        const offset = (idx - current + cards.length) % cards.length;
+
+        // a) Si es la card central: mitad izquierda = prev, derecha = next
+        if (offset === 0) {
+          const r = targetCard.getBoundingClientRect();
+          updateClasses(e.clientX < midX(r) ? current - 1 : current + 1);
+          return;
+        }
+
+        // b) Si no es la central:
+        //    - Clic en una card del lado izquierdo → prev
+        //    - Clic en una card del lado derecho → next
+        // Nota: offset grande (cercano a length) significa "lado izquierdo" por el wrap.
+        const isLeftSide = offset > cards.length / 2;
+        updateClasses(isLeftSide ? current - 1 : current + 1);
+        return;
+      }
+
+      // 2) Click en hueco del track: usa el centro del track
+      const tr = $track.getBoundingClientRect();
+      updateClasses(e.clientX < midX(tr) ? current - 1 : current + 1);
     });
   }
 
+  // Teclado
   document.addEventListener('keydown', (e) => {
     const tag = (document.activeElement?.tagName || '').toUpperCase();
-    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'BUTTON') return;
+    if (['INPUT','TEXTAREA','SELECT','BUTTON'].includes(tag)) return;
     if (e.key === 'ArrowLeft')  updateClasses(current - 1);
     if (e.key === 'ArrowRight') updateClasses(current + 1);
   });
 
+  // Gestos táctiles
   let startX = 0;
   document.addEventListener('touchstart', (e) => { startX = e.changedTouches[0].screenX; }, { passive:true });
   document.addEventListener('touchend', (e) => {
@@ -241,7 +267,8 @@ function bindEvents() {
   }, { passive:true });
 }
 
-// deja tu supa() tal cual, pero NO envíes {format:'webp'} desde preloadOnce
+
+/** Precarga en background (calienta el render 16:9) */
 function preloadOnce(url, { w = 64, q = 40 } = {}) {
   return new Promise((resolve) => {
     const img = new Image();
@@ -249,14 +276,14 @@ function preloadOnce(url, { w = 64, q = 40 } = {}) {
     img.loading = 'eager';
     img.onload = () => resolve(true);
     img.onerror = () => resolve(false);
-    img.src = supa(url, { w, q }); // <-- sin format
+    // Importante: no forzamos format; sí mandamos height 16:9
+    img.src = supa(url, { w, h: H16_9(w), q, resize: 'cover' });
   });
 }
 
-
 /** Precarga con límite de concurrencia */
 function ensureImages(urls, opts = {}) {
-  const CONCURRENCY = 4;           // ajusta si quieres más/menos paralelo
+  const CONCURRENCY = 4;
   let cursor = 0;
 
   function runNext() {
@@ -264,9 +291,7 @@ function ensureImages(urls, opts = {}) {
     const u = urls[cursor++];
     return preloadOnce(u, opts).finally(runNext);
   }
-
   const workers = Array.from({ length: Math.min(CONCURRENCY, urls.length) }, runNext);
-  // Devolvemos una promesa, pero en tu init la llamas “a fuego” sin await, está bien.
   return Promise.all(workers);
 }
 
@@ -281,13 +306,13 @@ function runIdle(fn, timeout = 1200){
 (async function init(){
   if (DEBUG) console.log('[galería] init… total imágenes:', PROVIDED_IMAGES.length);
 
-  // Render primero (rápido)
+  // Render primero
   renderCards(team);
   bindEvents();
 
-  // Primer layout (hidrata current ±2 dentro de updateClasses)
+  // Primer layout
   setTimeout(() => updateClasses(0), 30);
 
-  // Precalienta miniaturas en tiempo ocioso (concurrencia baja)
-  runIdle(() => ensureImages(PROVIDED_IMAGES, { w: 48, q: 38 }));
+  // Precalienta miniaturas en tiempo ocioso (16:9)
+  runIdle(() => ensureImages(PROVIDED_IMAGES, { w: 96, q: 38 }));
 })();
