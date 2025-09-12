@@ -214,7 +214,7 @@ document.addEventListener('submit', async (e) => {
     if (typeof openThank === 'function') openThank();
 
     await fetch(
-      'https://script.google.com/macros/s/AKfycbyCUQ0H6Hi4Cx00W3Rfp9L32GF7RcPVCqP6hO4wstPFSzJQ1IYt7BZ7C4dd7MCDnqRBlw/exec',
+      'https://script.google.com/macros/s/AKfycbzLaOWF1TmpNTpZV4hdurXLir1wcdapTuH4YATDM4iUcCyL4CVo3Bngz6DF4Fbk0S9n4Q/exec',
       { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }
     );
 
@@ -453,6 +453,59 @@ function uid(prefix='id') {
       console.log('[Map] Mapster inicializado');
     }
 
+    // Idioma actual (i18next → <html lang> → 'es-ES')
+    const getLang = () =>
+      (window.i18next?.language || document.documentElement.lang || 'es-ES')
+        .replace('_','-');
+
+    /* Convierte strings: "1.074.600€", "1,074,600.50", "1.074.600,50", " - €"... */
+    function toNumber(v){
+      if (typeof v === 'number') return v;
+      const s = String(v ?? '').trim();
+      if (!/\d/.test(s)) return NaN;
+
+      // Deja solo dígitos, puntos y comas (y posible -)
+      const clean = s.replace(/[^\d.,-]/g, '');
+      const hasDot   = clean.includes('.');
+      const hasComma = clean.includes(',');
+
+      // Caso con dos separadores: el último es decimal; el resto miles
+      if (hasDot && hasComma){
+        const lastSep = Math.max(clean.lastIndexOf('.'), clean.lastIndexOf(','));
+        const intPart = clean.slice(0, lastSep).replace(/[.,]/g, '');
+        const decPart = clean.slice(lastSep + 1).replace(/[^\d]/g, '');
+        return Number(intPart + (decPart ? '.' + decPart : ''));
+      }
+
+      // Solo comas o solo puntos
+      const sep = hasComma ? ',' : (hasDot ? '.' : '');
+      if (!sep) return Number(clean.replace(/[^\d-]/g, ''));
+
+      const parts = clean.split(sep);
+      const last  = parts[parts.length - 1];
+
+      // Si el último bloque tiene exactamente 3 dígitos -> probablemente miles
+      if (last.length === 3 && parts.length > 1){
+        return Number(clean.replace(new RegExp('\\' + sep, 'g'), ''));
+      }
+      // Si no, interpretamos el separador como decimal
+      return Number(parts.join('.'));
+    }
+
+    function formatEUR(v, lang = getLang()){
+      const n = toNumber(v);
+      if (!Number.isFinite(n) || n <= 0) return '';
+      const loc = lang.startsWith('en') ? 'en-GB' :
+                  lang.startsWith('es') ? 'es-ES' : lang;
+      return new Intl.NumberFormat(loc, {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(n);
+    }
+
+
     function mostrarInfo(viviendas, key, $out) {
       const d = viviendas[key];
       const _t = (k, dv = '') => (window.i18next ? i18next.t(k, { defaultValue: dv }) : (dv || k));
@@ -502,9 +555,9 @@ function uid(prefix='id') {
       const webURL = d.plano_pdf_web || d.plano_pdf || '';
       const pdfId  = uid('pdf-preview');
 
-      const priceHTML = (typeof d.coste_sin_iva === 'string' && /\d/.test(d.coste_sin_iva))
-        ? `<div class="precio"><strong>${d.coste_sin_iva}</strong></div>`
-        : '';
+          // En mostrarInfo:
+      const priceFmt = formatEUR(d.coste_sin_iva);
+      const priceHTML = priceFmt ? `<div class="precio"><strong>${priceFmt}</strong></div>` : '';
 
       $out.html(`
         <!-- CABECERA -->
@@ -518,7 +571,7 @@ function uid(prefix='id') {
         <!-- UNA SOLA COLUMNA -->
         <div class="info-card-grid">
           <div class="info-card-col col-only">
-            <ul class="list-unstyled info-list">
+            <ul class="list-unstyled info-list--compact">
               <li><span data-i18n="unit.info.m2c_sr">m2c SR (PB + P1)</span> <strong>${d.m2c_sr ?? '-'}</strong></li>
               <li><span data-i18n="unit.info.m2c_br">m2c BR (Sótano)</span> <strong>${d.m2c_br ?? '-'}</strong></li>
               <li><span data-i18n="unit.info.castillete">Castillete</span> <strong>${d.castillete ?? '-'}</strong></li>

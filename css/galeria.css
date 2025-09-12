@@ -243,7 +243,7 @@ html,body { height:100%; }
     --glr-depth-1: -100px;
     --glr-depth-2: -300px;
   }
-  .glr-about-title{ font-size:4.5rem; opacity:.14; }
+  .glr-about-title{ font-size:3.5rem; }
   .glr-member__name{ font-size:2rem; }
   .glr-member__role{ font-size:1.2rem; }
   .glr-member__name::before, .glr-member__name::after{ width:50px; }

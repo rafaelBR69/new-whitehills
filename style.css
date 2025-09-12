@@ -327,7 +327,6 @@ area:focus{outline:2px solid #2F4F4F;outline-offset:-2px;}
    ========================================================= */
 footer,footer p,footer .footer-text1{font-family:var(--ff-body);font-weight:400;}
 footer p:first-of-type{font-family:var(--ff-body);font-weight:500;}
-footer .social a{font-family:unset;}
 
 /* =========================================================
    MÓVIL (lead-card)
@@ -508,7 +507,7 @@ footer .social a{font-family:unset;}
   --bs-btn-hover-bg:var(--brand-color);
   --bs-btn-hover-border-color:var(--brand-color);
 }
-#info-text.is-disabled{opacity:.65;pointer-events:none;filter:grayscale(.2);}
+#info-text.is-disabled{opacity:.65;pointer-events:none;filter:grayscale(.2); font-size: 4rem;}
 
 .availability-head{text-align:center;max-width:960px;margin:2.25rem auto 1.5rem;padding:0 1rem;}
 .availability-head .availability-title{
@@ -801,3 +800,59 @@ img, svg, canvas, video, iframe { max-width: 100%; height: auto; display: block;
 .full-bleed { width: calc(100% + var(--scrollbar-comp)); margin-inline: calc(-0.5 * var(--scrollbar-comp)); }
 .hero-100vh { min-height: 100dvh; }
 button, input, select, textarea { max-width: 100%; }
+
+/* Límite de la columna de números y ancho total de la lista */
+#info-text .info-list--compact{
+  --col-num: 9ch;          /* ancho fijo para números (ajusta 7–12ch) */
+  max-width: 560px;        /* límite de la UL para que no se estire a 900px */
+  margin: 0 auto;          /* centra la lista */
+}
+
+#info-text .info-list--compact li{
+  display: grid !important;
+  /* CLAVE: la columna del texto NO se estira; solo ocupa lo que necesita */
+  grid-template-columns: auto var(--col-num);
+  align-items: center;
+  gap: .6rem;
+  padding: .35rem .5rem;
+  background: none !important;
+  background-image: none !important;
+}
+
+#info-text .info-list--compact li > span{
+  justify-self: start;
+  text-align: left;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#info-text .info-list--compact li > strong{
+  justify-self: end;
+  text-align: right;
+  white-space: nowrap;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Por si quedara alguna pseudo-banda previa */
+#info-text .info-list--compact li::before,
+#info-text .info-list--compact li::after{
+  content:none !important;
+  display:none !important;
+}
+
+/* Opcional: más compacto en móviles */
+@media (max-width:480px){
+  #info-text .info-list--compact{ --col-num: 7ch; max-width: 480px; }
+}
+
+/* Sube el límite de la columna de números */
+#info-text .info-list--compact{ --col-num: 14ch; } /* prueba 12–16ch según fuente */
+
+/* Asegura que el valor no se oculte */
+#info-text .info-list--compact li > strong{
+  white-space: nowrap;
+  overflow: visible;
+}

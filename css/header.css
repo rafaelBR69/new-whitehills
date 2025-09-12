@@ -222,7 +222,7 @@ header.scrolled .navbar-toggler-icon{
 
   /* Logo SIEMPRE verde */
   header .navbar-brand img{
-    content: url("./images/logo.png") !important;
+    content: url("/images/logo.png") !important;
     height: 62px;             /* ajusta si quieres */
     margin-top: -16px;        /* ajusta si quieres */
   }
