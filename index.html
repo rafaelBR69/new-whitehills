@@ -50,33 +50,69 @@
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#3b4d2b">
 
-  <!-- ─── Datos estructurados ─── -->
+  <!-- Datos estructurados WhiteHills Villas -->
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"WhiteHills Villas",
-    "url":"https://whitehillsvillas.com",
-    "logo":"https://whitehillsvillas.com/web-app-manifest-192x192.png",
-    "areaServed":[
-      { "@type":"AdministrativeArea", "name":"Fuengirola" },
-      { "@type":"AdministrativeArea", "name":"Málaga" },
-      { "@type":"AdministrativeArea", "name":"Torreblanca" }
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Organization","LocalBusiness","RealEstateAgent"],
+        "@id": "https://whitehillsvillas.com/#brand",
+        "name": "WhiteHills Villas – Oficial WebSite",
+        "alternateName": ["WhiteHills Villas Fuengirola","White Hills Villas"],
+        "url": "https://whitehillsvillas.com/",
+        "logo": "https://whitehillsvillas.com/web-app-manifest-192x192.png",
+        "image": "https://whitehillsvillas.com/images/og-home.jpg",
+        "telephone": "+34 952 59 91 59",
+        "sameAs": [
+          "https://www.instagram.com/blancarealspain/#",
+          "https://es.linkedin.com/company/blancareal-real-estate"
+        ],
+
+        /* —— Variante A: con oficina física (si atiendes público) —— */
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "CALLE Y NÚMERO",
+          "addressLocality": "Fuengirola",
+          "addressRegion": "Málaga",
+          "postalCode": "29000",
+          "addressCountry": "ES"
+        },
+        "geo": { "@type": "GeoCoordinates", "latitude": 36.575, "longitude": -4.606 },
+
+        /* —— Variante B: sin oficina abierta al público (SAB) —— 
+          Si NO atiendes en una dirección, borra "address" y "geo" y deja esto:
+        "areaServed": ["Fuengirola","Torreblanca","Costa del Sol"],
+        "serviceArea": [{
+          "@type": "AdministrativeArea",
+          "name": "Fuengirola"
+        }],
+        */
+
+        "openingHoursSpecification": [{
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "10:00",
+          "closes": "18:00"
+        }]
+      },
+
+      {
+        "@type": "WebSite",
+        "@id": "https://whitehillsvillas.com/#website",
+        "url": "https://whitehillsvillas.com/",
+        "name": "WhiteHills – Sitio web oficial",
+        "inLanguage": "es-ES",
+        "alternateName": "WhiteHills Villas",
+        "publisher": { "@id": "https://whitehillsvillas.com/#brand" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://whitehillsvillas.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        },
+        "availableLanguage": ["es-ES","en-GB"]
+      }
     ]
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebSite",
-    "name":"WhiteHills – Sitio web oficial",
-    "url":"https://whitehillsvillas.com/",
-    "inLanguage":"es-ES",
-    "potentialAction":{
-      "@type":"SearchAction",
-      "target":"https://whitehillsvillas.com/?q={search_term_string}",
-      "query-input":"required name=search_term_string"
-    }
   }
   </script>
 
