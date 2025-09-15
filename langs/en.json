@@ -20,6 +20,18 @@
     "tagline": "New‑build residences in Torremolinos – Mediterranean elegance with a soul of its own",
     "cta": "Go to villas"
   },
+  "home": {
+    "promo": {
+      "units":   { "label": "Homes",                 "value": 12 },
+      "parking": { "label": "Parking spaces",        "value": 1  },
+      "beds":    { "label": "Bedrooms",              "value": 3  },
+      "plot":    { "label": "plot sqm",              "value": 1803 },
+      "mins":    { "label": "min. to beach",        "value": 5  },
+      "sunnydays": { "label": "sunny days/year",     "value": 320 }
+    },
+    "metaTitle": "WhiteHills Villas – New-build villas in Fuengirola (Torreblanca), Málaga",
+    "metaDescription": "Exclusive development with terraces, pool and green areas. Official plans, prices and availability."
+  },
   "section3": {
     "title": "12 Modern Villas in Torreblanca, Fuengirola",
     "paragraph1": "WhiteHills Villas has been conceived as a perfect synthesis of contemporary elegance, modern comfort, and connection with nature. Located on a peaceful hillside, these exclusive villas offer panoramic views of the Mediterranean Sea, natural light all day, and open living spaces.",
@@ -156,16 +168,6 @@
   "privacyPolicy": {
     "pageTitle": "Privacy Policy | WhiteHills",
     "content": "<h1>Privacy Policy</h1>\n\n<p>AZUGA SERVICIO GLOBAL INMOBILIARIO&nbsp;S.L. complies with Regulation&nbsp;(EU)&nbsp;2016/679 (GDPR) and Spanish Organic Law&nbsp;3/2018 on Personal Data Protection, guaranteeing all data‑subject rights.</p>\n\n<p>In accordance with Law&nbsp;34/2002 on Information Society Services and E‑Commerce, prior consent will be requested before sending commercial communications.</p>\n\n<p>Users are informed of the controller’s identity, processing purposes and the means to exercise their rights before providing any data.</p>\n\n<h2>1.&nbsp;Data Controller</h2>\n<p><strong>AZUGA SERVICIO GLOBAL INMOBILIARIO&nbsp;S.L.</strong><br>Tax ID&nbsp;B93153021<br>C/ Monte&nbsp;Calahonda&nbsp;10, 29649&nbsp;Mijas&nbsp;Costa (Málaga, Spain)<br>Tel.&nbsp;+34&nbsp;952&nbsp;599&nbsp;159 · <a href=\\\"mailto:marcelo@blancareal.com\\\">marcelo@blancareal.com</a><br>Commercial Registry of Málaga: Sheet&nbsp;MA‑00111198, Volume&nbsp;04941, Book&nbsp;3848</p>\n\n<h2>2.&nbsp;Purpose of Processing</h2>\n<p>To respond to your contact request or commercial relationship and, where expressly authorised, to send you commercial communications. Data are kept while the relationship persists.</p>\n\n<h2>3.&nbsp;Legal Basis</h2>\n<p>Contractual relationship for the main purpose and your consent for marketing. Data must be accurate and up‑to‑date; they will be erased or rectified when no longer necessary.</p>\n\n<h2>4.&nbsp;Recipients</h2>\n<p>No data will be transferred to third parties except legal obligation. No international transfers unless service providers in third countries offer adequate safeguards.</p>\n\n<h2>5.&nbsp;Data‑subject Rights</h2>\n<ul>\n  <li>Access, rectification and erasure.</li>\n  <li>Restriction and objection to processing.</li>\n  <li>Data portability.</li>\n  <li>Withdrawal of consent.</li>\n  <li>Not to be subject to automated decisions.</li>\n</ul>\n<p>Exercise these rights by written request (with ID copy) to the addresses above.</p>\n\n<h2>6.&nbsp;Complaints</h2>\n<p>You may lodge a complaint with the Spanish Data Protection Agency: <a href=\\\"https://www.aepd.es\\\" target=\\\"_blank\\\">www.aepd.es</a>.</p>\n\n<p><em>Use of this Portal implies acceptance of these terms. Please review this policy periodically; it may change.</em></p>"
-  },
-  "home": {
-    "promo": {
-      "units":   { "label": "Homes",                 "value": 12 },
-      "parking": { "label": "Parking spaces",        "value": 1  },
-      "beds":    { "label": "Bedrooms",              "value": 3  },
-      "plot":    { "label": "plot sqm",              "value": 1803 },
-      "mins":    { "label": "min. to beach",        "value": 5  },
-      "sunnydays": { "label": "sunny days/year",     "value": 320 }
-    }
   },
   "ui.features3.title1": "Sea, nature and serenity",
   "ui.features3.text1_html": "In Torreblanca, one of Fuengirola’s most exclusive residential areas, you’ll live surrounded by peace and privacy, just minutes from the sea.<br><br>Carvajal and Torreblanca beaches stand out for their relaxed vibe and authentic beachfront chiringuitos.",

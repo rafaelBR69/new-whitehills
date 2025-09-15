@@ -15,6 +15,18 @@
   "btn": {
     "contact": "Contactar"
   },
+  "home": {
+    "promo": {
+      "units":   { "label": "Viviendas",            "value": 12 },
+      "parking": { "label": "Plazas de garaje",     "value": 1  },
+      "beds":    { "label": "Dormitorios",          "value": 3  },
+      "plot":    { "label": "m² de parcela",        "value": 1803 },
+      "mins":    { "label": "min. a la playa",       "value": 5  },
+      "sunnydays": { "label": "días de sol/año",    "value": 320 }
+    },
+    "metaTitle": "WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga",
+    "metaDescription": "Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales."
+  },
   "hero": {
     "welcome": "WhiteHills",
     "cta": "Ver villas"
@@ -155,16 +167,6 @@
   "privacyPolicy": {
     "pageTitle": "Política de privacidad | WhiteHills",
     "content": "<h1>Política de privacidad</h1>\n\n<p>AZUGA SERVICIO GLOBAL INMOBILIARIO&nbsp;S.L. cumple con las obligaciones impuestas en el Reglamento&nbsp;(UE)&nbsp;2016/679 del Parlamento Europeo y del Consejo (27&nbsp;abril&nbsp;2016) y la Ley Orgánica&nbsp;3/2018, de Protección de Datos Personales y garantía de los derechos digitales, garantizando los derechos de los afectados.</p>\n\n<p>Asimismo, en aplicación de la Ley&nbsp;34/2002 de Servicios de la Sociedad de la Información y de Comercio Electrónico, solicitará consentimiento previo para el envío de comunicaciones comerciales.</p>\n\n<p>Los usuarios serán informados sobre la identidad del responsable, las finalidades del tratamiento y la posibilidad de ejercer sus derechos antes de facilitar datos.</p>\n\n<h2>1.&nbsp;Responsable del tratamiento</h2>\n<p><strong>AZUGA SERVICIO GLOBAL INMOBILIARIO&nbsp;S.L.</strong><br>CIF&nbsp;B93153021<br>C/ Monte&nbsp;Calahonda&nbsp;10, 29649&nbsp;Mijas&nbsp;Costa (Málaga)<br>Tel.&nbsp;952&nbsp;599&nbsp;159 · <a href=\\\"mailto:info@blancareal.com\\\">info@blancareal.com</a><br>Registro Mercantil de Málaga: Hoja&nbsp;MA‑00111198, Tomo&nbsp;04941, Libro&nbsp;3848</p>\n\n<h2>2.&nbsp;Finalidad del tratamiento</h2>\n<p>Atender su solicitud de contacto o la relación comercial solicitada y, en su caso, remitirle comunicaciones comerciales (previo consentimiento). Los datos se conservarán mientras exista relación con la entidad.</p>\n\n<h2>3.&nbsp;Legitimación</h2>\n<p>Relación contractual para la finalidad principal y consentimiento para comunicaciones comerciales. Los datos deben ser veraces y actualizados; se suprimirán o rectificarán cuando dejen de ser necesarios.</p>\n\n<h2>4.&nbsp;Destinatarios</h2>\n<p>No se cederán datos a terceros salvo obligación legal. No hay transferencias internacionales, salvo prestación de servicios por proveedores en terceros países con garantías adecuadas.</p>\n\n<h2>5.&nbsp;Derechos de los interesados</h2>\n<ul>\n  <li>Acceso, rectificación o supresión.</li>\n  <li>Limitación y oposición al tratamiento.</li>\n  <li>Portabilidad de los datos.</li>\n  <li>Retirada del consentimiento.</li>\n  <li>No ser objeto de decisiones automatizadas.</li>\n</ul>\n<p>Para ejercerlos, envíe solicitud (y copia del DNI) a las direcciones indicadas.</p>\n\n<h2>6.&nbsp;Reclamaciones</h2>\n<p>Puede reclamar ante la Agencia Española de Protección de Datos: <a href=\\\"https://www.aepd.es\\\" target=\\\"_blank\\\">www.aepd.es</a>.</p>\n\n<p><em>El uso del Portal implica la aceptación de estas condiciones. Revise periódicamente esta política; puede variar.</em></p>"
-  },
-  "home": {
-    "promo": {
-      "units":   { "label": "Viviendas",            "value": 12 },
-      "parking": { "label": "Plazas de garaje",     "value": 1  },
-      "beds":    { "label": "Dormitorios",          "value": 3  },
-      "plot":    { "label": "m² de parcela",        "value": 1803 },
-      "mins":    { "label": "min. a la playa",       "value": 5  },
-      "sunnydays": { "label": "días de sol/año",    "value": 320 }
-    }
   },
   "ui.features3.title1": "Mar, naturaleza y serenidad",
   "ui.features3.text1_html": "En Torreblanca, una de las zonas residenciales más exclusivas de Fuengirola, vivirá rodeado de tranquilidad y privacidad, a sólo minutos del mar.<br><br>Las playas de Carvajal y Torreblanca destacan por su ambiente relajado y auténticos chiringuitos frente al Mediterráneo.",

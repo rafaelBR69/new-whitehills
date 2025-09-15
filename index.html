@@ -5,29 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- ─── SEO ─── -->
-  <title>WhiteHills</title>
-  <meta name="description" content="Villas de obra nueva en Fuengirola (Torreblanca), Málaga. Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales.">
+  <title>WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga</title>
+  <meta name="description" content="Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales.">
   <meta name="robots" content="index,follow">
-  <meta name="keywords" content="Villas en Fuengirola, Villas en Málaga, Obra nueva en Fuengirola, Obra nueva en Torreblanca, promoción de villas, viviendas nuevas Málaga">
-  <link rel="canonical" href="https://whitehillsvillas.com/es/inicio">
+  <link id="canonical" rel="canonical" href="https://whitehillsvillas.com/es/inicio">
 
-  <!-- hreflang -->
-  <link rel="alternate" href="https://whitehillsvillas.com/es/" hreflang="es">
-  <link rel="alternate" href="https://whitehillsvillas.com/en/" hreflang="en">
-  <link rel="alternate" href="https://whitehillsvillas.com/" hreflang="x-default">
+  <!-- hreflang (apunta a las rutas reales) -->
+  <link rel="alternate" href="https://whitehillsvillas.com/es/inicio" hreflang="es">
+  <link rel="alternate" href="https://whitehillsvillas.com/en/home"   hreflang="en">
+  <link rel="alternate" href="https://whitehillsvillas.com/es/inicio" hreflang="x-default">
 
-  <!-- Open Graph -->
+  <!-- Open Graph (fallback + i18n por atributo) -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Villas en Fuengirola y Málaga | Obra nueva en Torreblanca – WhiteHills">
-  <meta property="og:description" content="Villas de obra nueva en Fuengirola (Torreblanca), Málaga. Consulta planos, precios y disponibilidad en la web oficial.">
+  <meta property="og:title"
+        content="WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga"
+        data-i18n="[content]home.metaTitle">
+  <meta property="og:description"
+        content="Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales."
+        data-i18n="[content]home.metaDescription">
   <meta property="og:url" content="https://whitehillsvillas.com/es/inicio">
   <meta property="og:image" content="https://whitehillsvillas.com/images/og-home.jpg">
   <meta property="og:locale" content="es_ES">
 
-  <!-- Twitter Card -->
+  <!-- Twitter Card (fallback + i18n por atributo) -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Villas en Fuengirola y Málaga | Obra nueva en Torreblanca – WhiteHills">
-  <meta name="twitter:description" content="Villas de obra nueva en Fuengirola (Torreblanca), Málaga. Web oficial: planos, precios y disponibilidad.">
+  <meta name="twitter:title"
+        content="WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga"
+        data-i18n="[content]home.metaTitle">
+  <meta name="twitter:description"
+        content="Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales."
+        data-i18n="[content]home.metaDescription">
   <meta name="twitter:image" content="https://whitehillsvillas.com/images/og-home.jpg">
 
     <!-- Iconos / Font Awesome -->
@@ -116,7 +123,7 @@
   <!--*** Hero section ***-->
   <section class="section_1 parallax-bg">
     <div class="bg_div">
-      <h2 class="bg_text1" data-i18n="hero.welcome"></h2>
+      <h2 class="bg_text1" data-i18n="hero.welcome">WhiteHills Villas</h2>
       <a href="#availability" class="hero-cta" data-i18n="hero.cta" title="Villas en Fuengirola, Málaga">
         Ver villas
       </a>
