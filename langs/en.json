@@ -177,30 +177,22 @@
 
   "ui.features3.title3": "Mediterranean lifestyle",
   "ui.features3.text3_html": "With over 330 sunny days a year and an average temperature of 19&nbsp;°C, the Costa del Sol is synonymous with well-being and exclusivity.<br><br>More than 50 golf courses, a vibrant cultural scene and an international community make Málaga a unique place for those seeking the best of life by the sea.",
-  "unit": {
+   "unit": {
     "info": {
       "empty": "No data.",
-      "m2c_sr": "m² built SR (GF + 1F)",
-      "m2c_br": "m² built BR (Basement)",
-      "castillete": "Turret",
-      "terrazas_cubiertas": "Covered terraces",
-      "superficie": "Built area"
-    },
-    "price": {
-      "na": "Not available"
-    },
-    "actions": {
-      "view_plan": "View floorplan"
-    },
-    "cta": {
-      "schedule_visit": "Schedule a visit",
-      "origin_schedule": "Schedule a visit – Website"
+      "plot_m2": "Plot (m²)",
+      "built_area": "Built Area (m²)",
+      "covered_terraces": "Terraces (m²)",
+      "garden": "Garden (m²)"
     },
     "status": {
       "disponible": "Available",
-      "reservado": "Reserved",
-      "vendido": "Sold",
-      "no_disponible": "Not available"
+      "no_disponible": "Not available",
+      "reservado": "Reserved"
+    },
+    "cta": {
+      "schedule_visit": "Schedule a visit",
+      "origin_schedule": "Schedule visit – Website"
     }
   },
   "section": {
@@ -248,10 +240,10 @@
       },
       "steps": {
         "reserva": { "title": "Reservation", "sub": "€25,000" },
-        "cpc": { "title": "CPC", "sub": "Payment: 15%" },
-        "inicio": { "title": "Construction start", "sub": "Payment: 8%" },
-        "entrega": { "title": "Completion", "sub": "Payment: ~61%" },
-        "mas6": { "title": "+6 months after start", "sub": "Payment: 8%" }
+        "cpc": { "title": "PPC", "sub": "Payment: 15%* " },
+        "inicio": { "title": "Construction start", "sub": "Payment: 8%* " },
+        "entrega": { "title": "Completion", "sub": "Payment: 61%* " },
+        "mas6": { "title": "+6 months after start", "sub": "Payment: 8%* " }
       }
     }
   },

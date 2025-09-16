@@ -572,11 +572,10 @@ function uid(prefix='id') {
         <div class="info-card-grid">
           <div class="info-card-col col-only">
             <ul class="list-unstyled info-list--compact">
-              <li><span data-i18n="unit.info.m2c_sr">m2c SR (PB + P1)</span> <strong>${d.m2c_sr ?? '-'}</strong></li>
-              <li><span data-i18n="unit.info.m2c_br">m2c BR (Sótano)</span> <strong>${d.m2c_br ?? '-'}</strong></li>
-              <li><span data-i18n="unit.info.castillete">Castillete</span> <strong>${d.castillete ?? '-'}</strong></li>
-              <li><span data-i18n="unit.info.terrazas_cubiertas">Terrazas cubiertas</span> <strong>${d.terrazas_cubiertas ?? '-'}</strong></li>
-              <li><span data-i18n="unit.info.superficie">Superficie</span> <strong>${d.superficie ?? '-'}</strong></li>
+              <li><span data-i18n="unit.info.plot_m2">Plot (m²)</span> <strong>${d.plot_m2 ?? '-'}</strong></li>
+              <li><span data-i18n="unit.info.built_area">Built Area</span> <strong>${d.built_area ?? '-'}</strong></li>
+              <li><span data-i18n="unit.info.covered_terraces">Covered terraces</span> <strong>${d.covered_terraces ?? '-'}</strong></li>
+              <li><span data-i18n="unit.info.garden">Garden</span> <strong>${d.garden ?? '-'}</strong></li>
             </ul>
 
             ${priceHTML}

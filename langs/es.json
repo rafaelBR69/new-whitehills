@@ -123,18 +123,22 @@
     "title": "¿Le interesa?",
     "msgPlaceholderHousing": "Quiero más información sobre esta vivienda…"
   },
-  "blockInfo": {
-    "noData": "Sin datos…",
-    "pdfUnavailable": "Plano no disponible",
-    "rooms_one": "{{count}} habitación",
-    "rooms_other": "{{count}} dormitorios",
-    "builtArea": "{{value}} m² construidos",
-    "terrace": "{{value}} m² terraza",
-    "orientation": "Orientación {{dir}}",
+  "unit": {
+    "info": {
+      "empty": "Sin datos.",
+      "plot_m2": "Parcela (m²)",
+      "built_area": "Superficie construida (m²)",
+      "covered_terraces": "Terrazas (m²)",
+      "garden": "Jardín (m²)"
+    },
     "status": {
-      "reservado": "Reservado",
-      "vendido": "Vendido",
-      "disponible": "Disponible"
+      "disponible": "Disponible",
+      "no_disponible": "No disponible",
+      "reservado": "Reservado"
+    },
+    "cta": {
+      "schedule_visit": "Agendar visita",
+      "origin_schedule": "Agendar visita – Web"
     }
   },
   "orientationMap": {
@@ -176,32 +180,6 @@
 
   "ui.features3.title3": "Estilo de vida mediterráneo",
   "ui.features3.text3_html": "Con más de 330 días de sol al año y una temperatura media de 19&nbsp;ºC, la Costa del Sol es sinónimo de bienestar y exclusividad.<br><br>Más de 50 campos de golf, una vibrante oferta cultural y una comunidad internacional hacen de Málaga un enclave único para quienes buscan lo mejor de la vida junto al mar.",
-  "unit": {
-    "info": {
-      "empty": "Sin datos.",
-      "m2c_sr": "m2 construidos (PB + P1)",
-      "m2c_br": "m2 construidos (Sótano)",
-      "castillete": "Castillete",
-      "terrazas_cubiertas": "Terrazas cubiertas",
-      "superficie": "Superficie construida"
-      },
-    "price": {
-      "na": "No disponible"
-    },
-    "actions": {
-      "view_plan": "Ver plano"
-    },
-    "cta": {
-      "schedule_visit": "Agendar visita",
-      "origin_schedule": "Agendar visita – Web"
-    },
-    "status": {
-      "disponible": "Disponible",
-      "reservado": "Reservado",
-      "vendido": "Vendido",
-      "no_disponible": "No disponible"
-    }
-  },
   "section": {
     "title": "LOCALIZACIÓN",
     "imgAlt": "Descripción de la imagen de la sección"
@@ -247,10 +225,10 @@
       },
       "steps": {
         "reserva": { "title": "Reserva", "sub": "25.000€" },
-        "cpc": { "title": "CPC", "sub": "Pago: 15%" },
-        "inicio": { "title": "Inicio de obra", "sub": "Pago: 8%" },
-        "entrega": { "title": "Entrega de llaves", "sub": "Pago: 61% aprox." },
-        "mas6": { "title": "+6 meses inicio de obra", "sub": "Pago: 8%" }
+        "cpc": { "title": "CPC", "sub": "Pago: 15%* " },
+        "inicio": { "title": "Inicio de obra", "sub": "Pago: 8%* " },
+        "entrega": { "title": "Entrega de llaves", "sub": "Pago: 61%* " },
+        "mas6": { "title": "+6 meses inicio de obra", "sub": "Pago: 8%* " }
       }
     }
   },
