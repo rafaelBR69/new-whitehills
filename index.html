@@ -472,6 +472,59 @@
     log();
   })();
   </script>
+  <script>
+    // Traducción segura: nunca devuelve la *clave*; si falta, conserva el fallback
+    function tSafe(key, fallback) {
+      try {
+        if (!window.i18next) return fallback || key;
+        const exists = (i18next.exists && i18next.exists(key)) ||
+                      (typeof i18next.getResource === 'function' &&
+                        !!i18next.getResource(i18next.language, 'translation', key));
+        if (!exists) return fallback || key;
+        const out = i18next.t(key);
+        return (out && out !== key) ? out : (fallback || key);
+      } catch { return fallback || key; }
+    }
+
+    function applySEO() {
+      // 1) <title>
+      const titleEl = document.querySelector('title');
+      if (titleEl) {
+        const fb = titleEl.textContent.trim();
+        titleEl.textContent = tSafe('seo.home_title', fb);
+      }
+
+      // 2) meta description
+      const descEl = document.querySelector('meta[name="description"]');
+      if (descEl) {
+        const fb = descEl.getAttribute('content') || '';
+        descEl.setAttribute('content', tSafe('seo.home_desc', fb));
+      }
+
+      // 3) OG/Twitter (usa fallbacks del HTML si falta la clave)
+      const ogt = document.querySelector('meta[property="og:title"]');
+      if (ogt) ogt.setAttribute('content', tSafe('seo.home_title', ogt.getAttribute('content') || ''));
+
+      const ogd = document.querySelector('meta[property="og:description"]');
+      if (ogd) ogd.setAttribute('content', tSafe('seo.home_desc', ogd.getAttribute('content') || ''));
+
+      const twt = document.querySelector('meta[name="twitter:title"]');
+      if (twt) twt.setAttribute('content', tSafe('seo.home_title', twt.getAttribute('content') || ''));
+
+      const twd = document.querySelector('meta[name="twitter:description"]');
+      if (twd) twd.setAttribute('content', tSafe('seo.home_desc', twd.getAttribute('content') || ''));
+    }
+
+    // Aplica al iniciar i18n y en cada cambio de idioma
+    if (window.i18next) {
+      i18next.on('initialized', applySEO);
+      i18next.on('languageChanged', applySEO);
+    }
+    // Salvavidas por si algún script cambió el título a una clave
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.title.includes('.')) applySEO(); // p.ej. "hero.welcome"
+    });
+  </script>
   <script src="/app.js"></script>
 </body>
 </html>
