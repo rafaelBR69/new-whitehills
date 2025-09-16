@@ -214,7 +214,7 @@ document.addEventListener('submit', async (e) => {
     if (typeof openThank === 'function') openThank();
 
     await fetch(
-      'https://script.google.com/macros/s/AKfycbzLaOWF1TmpNTpZV4hdurXLir1wcdapTuH4YATDM4iUcCyL4CVo3Bngz6DF4Fbk0S9n4Q/exec',
+      'https://script.google.com/macros/s/AKfycbxTQVjCCN9eMnpvtK3ERkTf_d5NWV6cAIdk9qMLYQ3_gVJfsGAdNJuyiV-A0SiCUAN0Iw/exec',
       { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }
     );
 
