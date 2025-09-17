@@ -50,7 +50,7 @@
     "p2": "Technical solutions ensure a quiet, energy-efficient living experience. Everything is designed so your daily life flows with comfort and style.",
     "item": {
       "location": "Fuengirola",
-      "area": "169 – 268 m²",
+      "area": "245 – 260 m²",
       "plot": "Up to 225 m²",
       "beds": "3-4 bedrooms",
       "baths": "3-4 bathrooms",
@@ -236,7 +236,7 @@
       "skipLink": "Skip to content",
       "notes": {
         "iva": "*VAT not included.",
-        "disclaimer": "*These payment terms may be subject to change."
+        "disclaimer": ""
       },
       "steps": {
         "reserva": { "title": "Reservation", "sub": "€25,000" },

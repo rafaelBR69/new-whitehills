@@ -4,40 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ─── SEO ─── -->
+  <!-- ─── SEO (fallback ES, se sobreescribe abajo si /en/) ─── -->
   <title>WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga</title>
   <meta name="description" content="Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales.">
   <meta name="robots" content="index,follow">
   <link id="canonical" rel="canonical" href="https://whitehillsvillas.com/es/inicio">
 
-  <!-- hreflang (apunta a las rutas reales) -->
+  <!-- hreflang -->
   <link rel="alternate" href="https://whitehillsvillas.com/es/inicio" hreflang="es">
   <link rel="alternate" href="https://whitehillsvillas.com/en/home"   hreflang="en">
   <link rel="alternate" href="https://whitehillsvillas.com/es/inicio" hreflang="x-default">
 
-  <!-- Open Graph (fallback + i18n por atributo) -->
+  <!-- Open Graph (fallback ES) -->
   <meta property="og:type" content="website">
-  <meta property="og:title"
-        content="WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga"
-        data-i18n="[content]home.metaTitle">
-  <meta property="og:description"
-        content="Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales."
-        data-i18n="[content]home.metaDescription">
+  <meta property="og:title" content="WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga">
+  <meta property="og:description" content="Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales.">
   <meta property="og:url" content="https://whitehillsvillas.com/es/inicio">
   <meta property="og:image" content="https://whitehillsvillas.com/images/og-home.jpg">
+  <meta property="og:image:alt" content="Render de las villas WhiteHills en Fuengirola">
+  <meta property="og:site_name" content="WhiteHills Villas">
   <meta property="og:locale" content="es_ES">
 
-  <!-- Twitter Card (fallback + i18n por atributo) -->
+  <!-- Twitter Card (fallback ES) -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title"
-        content="WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga"
-        data-i18n="[content]home.metaTitle">
-  <meta name="twitter:description"
-        content="Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales."
-        data-i18n="[content]home.metaDescription">
+  <meta name="twitter:title" content="WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga">
+  <meta name="twitter:description" content="Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales.">
   <meta name="twitter:image" content="https://whitehillsvillas.com/images/og-home.jpg">
 
-    <!-- Iconos / Font Awesome -->
+  <!-- Iconos / Font Awesome -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         crossorigin="anonymous"
@@ -68,8 +62,6 @@
           "https://www.instagram.com/blancarealspain/#",
           "https://es.linkedin.com/company/blancareal-real-estate"
         ],
-
-        /* —— Variante A: con oficina física (si atiendes público) —— */
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "CALLE Y NÚMERO",
@@ -79,16 +71,6 @@
           "addressCountry": "ES"
         },
         "geo": { "@type": "GeoCoordinates", "latitude": 36.575, "longitude": -4.606 },
-
-        /* —— Variante B: sin oficina abierta al público (SAB) —— 
-          Si NO atiendes en una dirección, borra "address" y "geo" y deja esto:
-        "areaServed": ["Fuengirola","Torreblanca","Costa del Sol"],
-        "serviceArea": [{
-          "@type": "AdministrativeArea",
-          "name": "Fuengirola"
-        }],
-        */
-
         "openingHoursSpecification": [{
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
@@ -96,7 +78,6 @@
           "closes": "18:00"
         }]
       },
-
       {
         "@type": "WebSite",
         "@id": "https://whitehillsvillas.com/#website",
@@ -144,15 +125,58 @@
   <style>
     .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   </style>
-</head>
 
+  <!-- === SEO LOCALE TOGGLE POR PATH (/es/… vs /en/…) === -->
+  <script>
+    (function () {
+      var path = (location.pathname || '').toLowerCase();
+      var isEN = /^\/en(\/|$)/.test(path);
+      var SEO = {
+        es: {
+          title: "WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga",
+          desc:  "Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales.",
+          url:   "https://whitehillsvillas.com/es/inicio",
+          ogLocale: "es_ES",
+          h1: "Villas en Fuengirola y Málaga | Obra nueva en Torreblanca – WhiteHills"
+        },
+        en: {
+          title: "WhiteHills Villas – New-build villas in Fuengirola (Torreblanca), Málaga",
+          desc:  "Exclusive development with terraces, a pool, and landscaped areas. Official floor plans, prices, and availability.",
+          url:   "https://whitehillsvillas.com/en/home",
+          ogLocale: "en_GB",
+          h1: "Villas in Fuengirola and Málaga | New-build in Torreblanca – WhiteHills"
+        }
+      };
+      var L = isEN ? "en" : "es";
+      // lang del <html>
+      document.documentElement.setAttribute("lang", L);
+      // helpers
+      function setAttr(sel, attr, val){ var el = document.querySelector(sel); if(el && val){ el.setAttribute(attr, val); } }
+      function setText(sel, val){ var el = document.querySelector(sel); if(el && val){ el.textContent = val; } }
+      // title + description
+      document.title = SEO[L].title;
+      setAttr('meta[name="description"]','content', SEO[L].desc);
+      // OG / Twitter
+      setAttr('meta[property="og:title"]','content', SEO[L].title);
+      setAttr('meta[property="og:description"]','content', SEO[L].desc);
+      setAttr('meta[property="og:url"]','content', SEO[L].url);
+      setAttr('meta[property="og:locale"]','content', SEO[L].ogLocale);
+      setAttr('meta[name="twitter:title"]','content', SEO[L].title);
+      setAttr('meta[name="twitter:description"]','content', SEO[L].desc);
+      // Canonical
+      setAttr('link#canonical','href', SEO[L].url);
+      // H1 oculto
+      setText('h1.visually-hidden', SEO[L].h1);
+    })();
+  </script>
+</head>
 
 <body>
   <!--*** Header cargado dinámicamente ***-->
   <div id="header-placeholder"></div>
 
   <!-- H1 SEO (oculto visualmente, pero legible por buscadores y lectores) -->
-  <h1 class="visually-hidden" data-i18n="seo.h1">
+  <h1 class="visually-hidden">
     Villas en Fuengirola y Málaga | Obra nueva en Torreblanca – WhiteHills
   </h1>
 
@@ -171,19 +195,14 @@
   <section class="py-5 bg-white text-center section-services">
     <div class="container">
       <h2 class="mb-4 section-services-title" data-i18n="section3.title"></h2>
-
       <p class="mb-3 section-services-paragraph" data-i18n="section3.paragraph1"></p>
       <p class="mb-4 section-services-paragraph" data-i18n="section3.paragraph2"></p>
-
       <a href="/contact.html" class="section-services-btn px-4 py-2" data-i18n="section3.button"></a>
     </div>
   </section>
 
   <section class="section-img-text mx-auto mb-6">
-    <!-- Fondo verde por detrás -->
     <div class="section-img-background-extend"></div>
-
-    <!-- Texto centrado -->
     <div class="text-white py-6 position-relative z-1">
       <div class="container d-flex flex-column align-items-center text-center">
         <div class="row justify-content-center">
@@ -200,7 +219,6 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 mx-auto">
           <figure class="position-relative ratio ratio-16x9 mb-0">
-            <!-- Enlace Fancybox aplicado a todo el bloque -->
             <a data-fancybox href="https://youtu.be/TRpcobBeRqw" class="d-block w-100 h-100">
               <picture class="d-block w-100 h-100">
                 <source srcset="https://i.ytimg.com/vi_webp/TRpcobBeRqw/maxresdefault.webp" type="image/webp">
@@ -213,8 +231,6 @@
                   loading="lazy"
                 />
               </picture>
-
-              <!-- Botón de play centrado encima -->
               <span class="play-btn d-flex align-items-center justify-content-center position-absolute top-50 start-50 translate-middle rounded-circle text-white" role="button" aria-label="Reproducir vídeo">
                 <svg width="30" height="30" fill="currentColor" viewBox="0 0 384 512" aria-hidden="true">
                   <path d="M48 432L336 256 48 80v352z"/>
@@ -248,10 +264,7 @@
   <!-- BLOQUE “Interior + Características” -->
   <section class="interior-block">
     <div class="container">
-      <!-- impide que haga wrap en pantallas lg+ -->
       <div class="row align-items-center g-5 flex-lg-nowrap">
-
-        <!-- Texto -->
         <div class="col-lg-6 col-text">
           <h2 class="mb-4 interior-title" data-i18n="interior.title"></h2>
           <p class="mb-3 interior-text" data-i18n="interior.p1"></p>
@@ -301,7 +314,6 @@
           </div>
         </div>
 
-        <!-- Imagen -->
         <div class="col-lg-6 col-media">
           <figure class="mb-0 interior-figure">
             <img src="/images/garden_whitehills.webp"
@@ -310,7 +322,6 @@
                 data-i18n="[alt]interior.imgAlt">
           </figure>
         </div>
-
       </div>
     </div>
   </section>
@@ -381,26 +392,18 @@
     fetch('/partials/header.html')
       .then(r => r.text())
       .then(html => {
-        /* Inyecta el fragmento */
         document.getElementById('header-placeholder').innerHTML = html;
-
-        /* 2. Activa la lógica de scroll ⇆ cambio de logo ------------- */
         initHeaderScroll();
-
-        /* 3. (Opcional) Re-traduce el nuevo nodo si i18next ya estaba listo */
         window.applyI18nAndRoutes && window.applyI18nAndRoutes();
       });
 
-    /* ——— Función que añade/quita .scrolled al header ——— */
     function initHeaderScroll () {
-      const header = document.querySelector('header');      // ya existe
-      const hero   = document.querySelector('.section_1');  // tu bloque con la foto
-      if (!header || !hero) return;                         // seguridad extra
-
-      /* Cuando el hero desaparece del viewport → header.scrolled */
+      const header = document.querySelector('header');
+      const hero   = document.querySelector('.section_1');
+      if (!header || !hero) return;
       const io = new IntersectionObserver(
         ([entry]) => header.classList.toggle('scrolled', !entry.isIntersecting),
-        { threshold: 0 }          // basta que salga 1 px para activar
+        { threshold: 0 }
       );
       io.observe(hero);
     }
@@ -410,7 +413,6 @@
       .then(res => res.text())
       .then(html => {
         document.getElementById('availability-placeholder').innerHTML = html;
-        // 👇 inicia Mapster cuando el DOM del parcial ya está
         window.initAvailabilityMap && window.initAvailabilityMap();
       });
   </script>
@@ -419,8 +421,6 @@
       .then(r => r.text())
       .then(html => {
         document.getElementById('footer-placeholder').innerHTML = html;
-
-        // Re-traduce el footer si i18next ya está listo
         window.applyI18nAndRoutes && window.applyI18nAndRoutes();
       });
   </script>
@@ -433,9 +433,7 @@
     document.addEventListener('click', (e)=>{
       const btn = e.target.closest('.f3up-overlay');
       if(!btn) return;
-
       const card = btn.closest('.f3up-card');
-      // cerrar otras si quieres comportamiento exclusivo en móvil:
       if (window.matchMedia('(max-width: 900px)').matches) {
         document.querySelectorAll('.f3up-card.is-open').forEach(el=>{
           if(el!==card) el.classList.remove('is-open');
@@ -455,76 +453,26 @@
     }
   </script>
   <script>
-  (function () {
-    const log = () => {
-      const vv = window.visualViewport;
-      console.log({
-        innerW: window.innerWidth,
-        innerH: window.innerHeight,
-        devicePixelRatio: window.devicePixelRatio,
-        scale: vv ? vv.scale : 'n/a',
-        width: vv ? vv.width : 'n/a',
-        height: vv ? vv.height : 'n/a'
-      });
-    };
-    addEventListener('resize', log, { passive: true });
-    if (window.visualViewport) visualViewport.addEventListener('resize', log, { passive: true });
-    log();
-  })();
+    /* Log viewport debug (sin cambios) */
+    (function () {
+      const log = () => {
+        const vv = window.visualViewport;
+        console.log({
+          innerW: window.innerWidth,
+          innerH: window.innerHeight,
+          devicePixelRatio: window.devicePixelRatio,
+          scale: vv ? vv.scale : 'n/a',
+          width: vv ? vv.width : 'n/a',
+          height: vv ? vv.height : 'n/a'
+        });
+      };
+      addEventListener('resize', log, { passive: true });
+      if (window.visualViewport) visualViewport.addEventListener('resize', log, { passive: true });
+      log();
+    })();
   </script>
-  <script>
-    // Traducción segura: nunca devuelve la *clave*; si falta, conserva el fallback
-    function tSafe(key, fallback) {
-      try {
-        if (!window.i18next) return fallback || key;
-        const exists = (i18next.exists && i18next.exists(key)) ||
-                      (typeof i18next.getResource === 'function' &&
-                        !!i18next.getResource(i18next.language, 'translation', key));
-        if (!exists) return fallback || key;
-        const out = i18next.t(key);
-        return (out && out !== key) ? out : (fallback || key);
-      } catch { return fallback || key; }
-    }
 
-    function applySEO() {
-      // 1) <title>
-      const titleEl = document.querySelector('title');
-      if (titleEl) {
-        const fb = titleEl.textContent.trim();
-        titleEl.textContent = tSafe('seo.home_title', fb);
-      }
-
-      // 2) meta description
-      const descEl = document.querySelector('meta[name="description"]');
-      if (descEl) {
-        const fb = descEl.getAttribute('content') || '';
-        descEl.setAttribute('content', tSafe('seo.home_desc', fb));
-      }
-
-      // 3) OG/Twitter (usa fallbacks del HTML si falta la clave)
-      const ogt = document.querySelector('meta[property="og:title"]');
-      if (ogt) ogt.setAttribute('content', tSafe('seo.home_title', ogt.getAttribute('content') || ''));
-
-      const ogd = document.querySelector('meta[property="og:description"]');
-      if (ogd) ogd.setAttribute('content', tSafe('seo.home_desc', ogd.getAttribute('content') || ''));
-
-      const twt = document.querySelector('meta[name="twitter:title"]');
-      if (twt) twt.setAttribute('content', tSafe('seo.home_title', twt.getAttribute('content') || ''));
-
-      const twd = document.querySelector('meta[name="twitter:description"]');
-      if (twd) twd.setAttribute('content', tSafe('seo.home_desc', twd.getAttribute('content') || ''));
-    }
-
-    // Aplica al iniciar i18n y en cada cambio de idioma
-    if (window.i18next) {
-      i18next.on('initialized', applySEO);
-      i18next.on('languageChanged', applySEO);
-    }
-    // Salvavidas por si algún script cambió el título a una clave
-    document.addEventListener('DOMContentLoaded', () => {
-      if (document.title.includes('.')) applySEO(); // p.ej. "hero.welcome"
-    });
-  </script>
+  <!-- Quitamos el antiguo applySEO basado en i18n para no pisar lo anterior -->
   <script src="/app.js"></script>
 </body>
 </html>

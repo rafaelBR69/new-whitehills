@@ -49,7 +49,7 @@
     "p2": "Las soluciones técnicas garantizan una experiencia de habitabilidad eficiente y silenciosa. Todo está pensado para que su día a día fluya con comodidad y estilo.",
     "item": {
       "location": "Fuengirola",
-      "area": "169 – 268 m²",
+      "area": "245 – 260 m²",
       "plot": "Hasta 225 m²",
       "beds": "3-4 dormitorios",
       "baths": "3-4 baños",
@@ -221,7 +221,7 @@
       "skipLink": "Saltar al contenido",
       "notes": {
         "iva": "*IVA no incluido.",
-        "disclaimer": "*Estas formas de pago pueden estar sujetas a modificación."
+        "disclaimer": ""
       },
       "steps": {
         "reserva": { "title": "Reserva", "sub": "25.000€" },
