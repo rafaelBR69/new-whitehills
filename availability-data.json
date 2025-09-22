@@ -32,52 +32,52 @@
   "a4": {
     "numero_ud": "A4",
     "plot_m2": 206.11,
-    "built_area": 203.43,
-    "covered_terraces": 85.60,
+    "built_area": 203.61,
+    "covered_terraces": 73.68,
     "garden": 84.93,
     "coste_sin_iva": "1.166.400€",
     "estado": "disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A4.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/WhiteHills-A4.pdf"
   },
   "a5": {
     "numero_ud": "A5",
     "plot_m2": 245.81,
-    "built_area": 203.43,
-    "covered_terraces": 85.60,
+    "built_area": 203.61,
+    "covered_terraces": 73.18,
     "garden": 105.91,
     "coste_sin_iva": "1.171.800€",
     "estado": "disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A5.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/WhiteHills-A5.pdf"
   },
   "a6": {
     "numero_ud": "A6",
     "plot_m2": 345.95,
-    "built_area": 203.43,
-    "covered_terraces": 87.6,
+    "built_area": 203.61,
+    "covered_terraces": 62.59,
     "garden": 216.21,
     "coste_sin_iva": "1.182.600€",
     "estado": "disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A6.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/WhiteHills-A6.pdf"
   },
   "b1": {
     "numero_ud": "B1",
-    "plot_m2": null,
-    "built_area": 209.83,
-    "covered_terraces": 68.92,
-    "garden": 150.01,
+    "plot_m2": 227.12,
+    "built_area": 193.01,
+    "covered_terraces": 34.71,
+    "garden": 136.90,
     "coste_sin_iva": "1.074.600€",
     "estado": "disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B1.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/WhiteHills-B1.pdf"
   },
   "b2": {
     "numero_ud": "B2",
     "plot_m2": 337.19,
-    "built_area": 242.43,
-    "covered_terraces": 86.71,
-    "garden": 255.02,
+    "built_area": 270.36,
+    "covered_terraces": 84.09,
+    "garden": 237.28,
     "coste_sin_iva": "1.139.400€",
     "estado": "disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B2.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/WhiteHills-B2.pdf"
   },
   "b3": {
     "numero_ud": "B3",

@@ -856,3 +856,51 @@ button, input, select, textarea { max-width: 100%; }
   white-space: nowrap;
   overflow: visible;
 }
+
+/* Ajusta el espacio vertical entre ítems (opcional si ya usas g-3/g-4) */
+.interior-grid {
+  /* Si quieres un control fino además de g-3 */
+  row-gap: 1.25rem; /* ~20px */
+}
+
+/* Tamaño consistente de iconos */
+.interior-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+  /* Alineación óptica */
+  margin-top: 2px;
+}
+
+/* Tipografía del texto del ítem (opcional) */
+.interior-item {
+  line-height: 1.3;
+  /* font-weight: 500;  // si te gusta un pelín más marcado */
+}
+
+/* Aumenta el espacio vertical entre filas (además del g-3) */
+.interior-grid { 
+  row-gap: 1.25rem;          /* ~20px */
+  position: static;           /* evita overlays si había position:absolute inadvertido */
+}
+
+/* Íconos consistentes */
+.interior-grid .interior-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-top: 2px;            /* alineación óptica */
+}
+
+/* Texto de cada item */
+.interior-grid .interior-item { 
+  line-height: 1.3;
+}
+
+/* Por si algún estilo global aplicó column-count al texto del bloque */
+.section-text, .interior-grid { 
+  column-count: unset;
+  column-gap: normal;
+}
