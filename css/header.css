@@ -327,3 +327,49 @@ header.scrolled .lang-menu .dropdown-item:focus{
 
 /* Opcional: cursor y micro-espaciado */
 .lang-switch .dropdown-item{ cursor: pointer; }
+
+/* ==== ULTRA COMPACT NAV (desktop ≥ 992px) ======================= */
+:root{
+  /* si los tienes ya, estos valores pisan a los anteriores */
+  --ls-nav: 0.02em;       /* menos tracking */
+}
+
+@media (min-width: 992px){
+  /* menos padding vertical de la barra */
+  header.fixed-top .navbar{ padding-block: .8rem; }      /* antes 1.5rem */
+  header.fixed-top.scrolled .navbar{ padding-block: .35rem; }
+
+  /* reduce el gap entre <li> (usamos column-gap en el UL) */
+  .navbar-nav{
+    column-gap: .6rem;   /* ultra compacto entre items */
+  }
+
+  /* recorta el padding de cada enlace */
+  .navbar-nav .nav-link{
+    padding: .5rem .9rem !important;   /* antes .5rem 3rem */
+    letter-spacing: var(--ls-nav);
+  }
+  header.scrolled .navbar-nav .nav-link{
+    padding: .3rem .75rem !important;   /* aún más compacto en scroll */
+  }
+
+  /* acerca un pelín el selector de idioma */
+  .lang-switch{ margin-left: .25rem !important; }
+
+  /* si quieres bajar un poco el tamaño de fuente en desktop: descomenta
+  .navbar-nav .nav-link{ font-size: calc(var(--fs-nav) - .2rem); }
+  header.scrolled .navbar-nav .nav-link{ font-size: calc(var(--fs-nav-scroll) - .2rem); }
+  */
+}
+
+/* (Opcional) reduce un poco el logo para ganar aire horizontal */
+@media (min-width: 992px){
+  .navbar-brand img{
+    height: 100px;   /* antes 100px */
+    margin-top: -16px;
+  }
+  header.scrolled .navbar-brand img{
+    height: 70px;   /* antes 75px */
+    margin-top: -24px;
+  }
+}
