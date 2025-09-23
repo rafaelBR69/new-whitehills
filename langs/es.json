@@ -98,8 +98,8 @@
   },
   "availability": {
     "heroTitle": "Consulta la disponibilidad",
-    "heroSub": "Selecciona sobre la vivienda",
-    "clickHint":"Haga clic en una vivienda…"
+    "heroSub": "Selecciona sobre la unidad",
+    "clickHint":"Haga clic en una unidad…"
   },
   "blockA": {
     "title": "Bloque 1 · Planos",
@@ -220,7 +220,7 @@
       "title": "Proceso de compra",
       "skipLink": "Saltar al contenido",
       "notes": {
-        "iva": "*IVA no incluido.",
+        "iva": "+ 10% IVA",
         "disclaimer": ""
       },
       "steps": {

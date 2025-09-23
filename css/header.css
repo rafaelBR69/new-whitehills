@@ -248,3 +248,82 @@ header.scrolled .navbar-toggler-icon{
     background-image:url('data:image/svg+xml,%3Csvg viewBox%3D%220 0 30 30%22 xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath stroke%3D%22%233c4d28%22 stroke-linecap%3D%22round%22 stroke-miterlimit%3D%2210%22 stroke-width%3D%222%22 d%3D%22M4 7h22M4 15h22M4 23h22%22/%3E%3C/svg%3E') !important;
   }
 }
+/* ─────────────────────────────────────────────
+   LANG DROPDOWN — botón más grande + menú transparente sin scroll
+   ───────────────────────────────────────────── */
+
+/* Botón (estado cerrado) — tamaños mayores */
+header:not(.scrolled) .lang-btn{
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  font-family: var(--ff-body);
+  font-size: calc(var(--fs-nav) + .3rem);     /* ↑ más grande que antes */
+  font-weight: 700;                            /* un pelín más marcado */
+  padding: .5rem 1rem;                         /* un poco más de área clic */
+}
+header.scrolled .lang-btn{
+  background: transparent;
+  color: var(--brand-color);
+  border: 2px solid var(--brand-color);
+  border-radius: 6px;
+  font-family: var(--ff-body);
+  font-size: calc(var(--fs-nav) + .2rem);      /* ↑ más grande también en scroll */
+  font-weight: 700;
+  padding: .5rem 1rem;
+}
+
+.lang-btn:focus-visible{
+  outline: 2px solid rgba(255,255,255,.35);
+  outline-offset: 2px;
+}
+header.scrolled .lang-btn:focus-visible{
+  outline-color: rgba(60,77,40,.35);
+}
+
+/* Menú abierto — 100% transparente cuando NO hay scroll */
+header:not(.scrolled) .lang-menu{
+  background: transparent;                     /* totalmente transparente */
+  border: 0;                                   /* sin borde */
+  box-shadow: none;                            /* sin sombra */
+  backdrop-filter: none;                       /* sin blur */
+  min-width: 6rem;
+  padding: .25rem 0;
+}
+
+/* Ítems del menú (no scroll): blancos, sin fondo; hover transparente con subrayado */
+header:not(.scrolled) .lang-menu .dropdown-item{
+  font-size: calc(var(--fs-nav) + .1rem);      /* ↑ un poco más grande */
+  color:#fff;
+  background: transparent !important;
+}
+header:not(.scrolled) .lang-menu .dropdown-item:hover,
+header:not(.scrolled) .lang-menu .dropdown-item:focus{
+  background: transparent !important;          /* seguimos transparente */
+  color:#fff;
+  text-decoration: underline;                   /* feedback al hover */
+  text-underline-offset: .2em;
+}
+
+/* Con scroll: menú claro, también un poco más grande */
+header.scrolled .lang-menu{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  min-width: 6rem;
+  padding: .25rem 0;
+}
+header.scrolled .lang-menu .dropdown-item{
+  font-size: calc(var(--fs-nav) + .05rem);     /* ↑ respecto a antes */
+  color: var(--brand-color);
+}
+header.scrolled .lang-menu .dropdown-item:hover,
+header.scrolled .lang-menu .dropdown-item:focus{
+  background: rgba(60,77,40,.08);
+  color: var(--brand-color);
+  text-decoration: none;
+}
+
+/* Opcional: cursor y micro-espaciado */
+.lang-switch .dropdown-item{ cursor: pointer; }

@@ -30,8 +30,8 @@
 
       <!-- NAV LINKS + BOTÓN + SELECTOR -->
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <div class="d-flex align-items-center gap-4 me-5">
-          <ul class="navbar-nav text-uppercase align-items-center gap-3 mb-0">
+        <div class="d-flex align-items-center gap-1 me-1">
+          <ul class="navbar-nav text-uppercase align-items-center mb-0">
             <li class="nav-item" itemprop="name">
               <a class="nav-link"
                  href="#"
@@ -59,6 +59,14 @@
             <li class="nav-item" itemprop="name">
               <a class="nav-link"
                  href="#"
+                 data-route="galeria"
+                 data-i18n="nav.galeria"
+                 itemprop="url"
+                 title="Galería de imágenes"></a>
+            </li>
+            <li class="nav-item" itemprop="name">
+              <a class="nav-link"
+                 href="#"
                  data-route="process"
                  data-i18n="nav.process"
                  itemprop="url"
@@ -72,23 +80,21 @@
                  itemprop="url"
                  title="Contacto para información y visitas"></a>
             </li>
-            <li class="nav-item" itemprop="name">
-              <a class="nav-link"
-                 href="#"
-                 data-route="galeria"
-                 data-i18n="nav.galeria"
-                 itemprop="url"
-                 title="Galería de imágenes"></a>
-            </li>
           </ul>
 
-          <select id="langSwitcher"
-                  class="form-select form-select-sm border-2 fw-semibold"
-                  style="width: auto;"
-                  aria-label="Cambiar idioma del sitio">
-            <option value="es">ES</option>
-            <option value="en">EN</option>
-          </select>
+          <!-- Selector de idioma (dropdown) -->
+          <div class="dropdown lang-switch ms-2">
+            <button class="btn btn-sm lang-btn" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false"
+                    aria-label="Cambiar idioma">
+              <span id="lang-current">ES</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end lang-menu" role="menu" aria-label="Seleccionar idioma">
+              <li><button class="dropdown-item" type="button" data-lang="es">ES</button></li>
+              <li><button class="dropdown-item" type="button" data-lang="en">EN</button></li>
+            </ul>
+          </div>
+
         </div>
       </div>
 

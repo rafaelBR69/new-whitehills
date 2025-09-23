@@ -98,27 +98,9 @@
     "infoText": "Telephone: +34 621 283 445 · Email: marcelo@blancareal.com"
   },
   "availability": {
-    "heroTitle": "Check availability",
+    "heroTitle": "Check unit",
     "heroSub": "Select a property",
-    "clickHint":"Click on a home…"
-  },
-  "blockA": {
-    "title": "Building 1 · Plans",
-    "heroTitle": "Building 1",
-    "heroSub": "Select a residence",
-    "infoTitle": "Choose floor and typology",
-    "infoText": "More details and downloadable data sheets coming soon.",
-    "clickHint": "Click on a residence…",
-    "imgAlt": "Floor plan of Building A residences"
-  },
-  "blockB": {
-    "title": "Building 2 · Plans",
-    "heroTitle": "Building 2",
-    "heroSub": "Select a residence",
-    "infoTitle": "Choose floor and typology",
-    "infoText": "More details and downloadable data sheets coming soon.",
-    "clickHint": "Click on a residence…",
-    "imgAlt": "Floor plan of Building B residences"
+    "clickHint":"Click on a unit…"
   },
   "leadForm": {
     "title": "Are you interested?",
@@ -235,7 +217,7 @@
       "title": "Purchase process",
       "skipLink": "Skip to content",
       "notes": {
-        "iva": "*VAT not included.",
+        "iva": "+ 10% IVA",
         "disclaimer": ""
       },
       "steps": {

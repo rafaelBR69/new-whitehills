@@ -1208,20 +1208,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Selector de idioma
-  const $select = document.getElementById('langSwitcher');
-  const initialLang = (localStorage.getItem('i18n_lang') || 'es').toLowerCase();
+  // ────────────────────────────────────────────────────────────────
+  // Selector de idioma (Dropdown personalizado + fallback <select>)
+  // ────────────────────────────────────────────────────────────────
 
+  // 1) UI helpers para el dropdown
+  function updateLangUI(lng) {
+    const currentLabel = document.getElementById('lang-current');
+    if (currentLabel) currentLabel.textContent = String(lng).toUpperCase();
+
+    document.querySelectorAll('.lang-menu [data-lang]').forEach(btn => {
+      const isActive = (btn.dataset.lang || '').toLowerCase() === lng;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-current', isActive ? 'true' : 'false');
+    });
+
+    // Sincroniza el <select> si aún existe en alguna plantilla
+    const $select = document.getElementById('langSwitcher');
+    if ($select) $select.value = lng;
+  }
+
+  // 2) Reescribe hrefs según idioma en <a data-href-es data-href-en>
   function applyLang(lng) {
     document.querySelectorAll('a[data-href-es]').forEach(a => {
-      // slug objetivo según idioma
       const slug = (lng === 'en') ? a.dataset.hrefEn : a.dataset.hrefEs;
 
       if (IS_PROD) {
-        // En producción usamos slugs bonitos
         if (slug) a.setAttribute('href', slug);
       } else {
-        // En local dejamos el href (fallback .html). Si faltara, convertimos a .html
+        // En local: convierte slug a .html si hace falta
         const current = a.getAttribute('href') || '';
         if (!current || /^\/(es|en)\//.test(current)) {
           a.setAttribute('href', slugToHtml(slug));
@@ -1230,23 +1245,64 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  applyLang(initialLang);
+  // 3) Función central de cambio de idioma
+  function setLanguage(lng, { updateUI = true } = {}) {
+    lng = String(lng || 'es').toLowerCase();
+
+    try { localStorage.setItem('i18n_lang', lng); } catch {}
+
+    // i18next: dispara 'languageChanged' si está configurado
+    if (window.i18next && typeof i18next.changeLanguage === 'function') {
+      const cur = (i18next.language || '').slice(0,2).toLowerCase();
+      if (cur !== lng) i18next.changeLanguage(lng);
+    }
+
+    // <html lang="...">
+    document.documentElement.setAttribute('lang', lng === 'en' ? 'en' : 'es');
+
+    // Reescribir enlaces
+    applyLang(lng);
+
+    // Refrescar UI (dropdown / select)
+    if (updateUI) updateLangUI(lng);
+
+    // Evento custom por si otros módulos escuchan
+    window.dispatchEvent(new Event('i18n:changed'));
+  }
+
+  // 4) Inicialización
+  const initialLang =
+    (localStorage.getItem('i18n_lang') || document.documentElement.lang || 'es')
+      .toLowerCase();
+
+  updateLangUI(initialLang);
+  setLanguage(initialLang, { updateUI: false }); // ya actualizamos la UI arriba
+
+  // 5) Listeners de UI
+  // 5.a) Dropdown personalizado
+  document.querySelectorAll('.lang-menu [data-lang]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const lng = e.currentTarget.dataset.lang || 'es';
+      setLanguage(lng, { updateUI: true });
+    });
+  });
+
+  // 5.b) Fallback: <select id="langSwitcher">
+  const $select = document.getElementById('langSwitcher');
   if ($select) {
     $select.value = initialLang;
-    $select.addEventListener('change', e => {
-      const lng = e.target.value.toLowerCase();
-      localStorage.setItem('i18n_lang', lng);
-      applyLang(lng);
+    $select.addEventListener('change', (e) => {
+      setLanguage(e.target.value, { updateUI: true });
     });
   }
 
-  // Cinturón y tirantes: si en local haces clic en un slug, lo convertimos a .html al vuelo.
+  // 6) DEV: si clicas un slug /es/... o /en/... en local, conviértelo a .html
   if (!IS_PROD) {
     document.addEventListener('click', (ev) => {
       const a = ev.target.closest('a[data-href-es]');
       if (!a) return;
       const href = a.getAttribute('href') || '';
-      if (/^\/(es|en)\//.test(href)) { // parece slug
+      if (/^\/(es|en)\//.test(href)) {
         ev.preventDefault();
         const lng = (localStorage.getItem('i18n_lang') || 'es').toLowerCase();
         const slug = (lng === 'en') ? a.dataset.hrefEn : a.dataset.hrefEs;
@@ -1255,6 +1311,78 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 })();
+
+// ─────────────────────────────────────────────────────────────
+// i18n: carga diccionarios, función translateIn y ganchos globales
+// ─────────────────────────────────────────────────────────────
+
+// Ajusta estas rutas a donde tienes tus JSON
+const I18N_FILES = {
+  es: '/frontend/lang/es.json',
+  en: '/frontend/lang/en.json'
+};
+
+// Traduce todos los elementos dentro de un contenedor (por defecto, documento entero)
+function translateIn(root = document) {
+  if (!window.i18next) return;
+
+  root.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = i18next.t(key, { defaultValue: el.textContent?.trim() || '' });
+    if (/_html$/.test(key)) el.innerHTML = val;
+    else el.textContent = val;
+  });
+}
+
+// Utilidad pública por si otros módulos la invocan (ya la llamas en modales)
+window.applyI18nAndRoutes = function applyI18nAndRoutes(root = document) {
+  translateIn(root);
+  // Si tienes otras piezas que dependan del idioma, lánzalas aquí también:
+  if (typeof refreshPromoCounters === 'function') refreshPromoCounters();
+};
+
+// Carga de recursos + init
+async function initI18n() {
+  const stored = (localStorage.getItem('i18n_lang') || document.documentElement.lang || 'es').toLowerCase();
+  const want = (stored === 'en' ? 'en' : 'es');
+
+  // Cargar los JSON de ambos idiomas (cache-first del navegador)
+  const [esJson, enJson] = await Promise.all([
+    fetch(I18N_FILES.es).then(r => r.json()),
+    fetch(I18N_FILES.en).then(r => r.json())
+  ]);
+
+  await i18next.init({
+    lng: want,
+    fallbackLng: 'es',
+    resources: {
+      es: { translation: esJson },
+      en: { translation: enJson }
+    }
+  });
+
+  // Pinta inicialmente
+  document.documentElement.setAttribute('lang', want);
+  window.applyI18nAndRoutes(document);
+}
+
+// Cuando i18next cambie de idioma -> repintamos
+if (window.i18next) {
+  i18next.on('languageChanged', () => {
+    // Actualiza atributo lang en <html>
+    const cur = (i18next.language || 'es').slice(0,2).toLowerCase();
+    document.documentElement.setAttribute('lang', cur === 'en' ? 'en' : 'es');
+
+    // Re-traducir todo y refrescar contadores/otros módulos
+    window.applyI18nAndRoutes(document);
+  });
+}
+
+// Inicia i18n al cargar
+document.addEventListener('DOMContentLoaded', () => {
+  initI18n().catch(err => console.error('[i18n] init error:', err));
+});
+
 
 // ─────────────────────────────────────────────────────────────
 // 6) Refresco al cambiar de idioma (i18next / evento propio)
