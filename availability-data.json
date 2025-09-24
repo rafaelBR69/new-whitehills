@@ -32,7 +32,7 @@
   "a4": {
     "numero_ud": "A4",
     "plot_m2": 206.11,
-    "built_area": 203.61,
+    "built_area": 302.29,
     "covered_terraces": 73.68,
     "garden": 84.93,
     "coste_sin_iva": "1.166.400€",
@@ -42,7 +42,7 @@
   "a5": {
     "numero_ud": "A5",
     "plot_m2": 245.81,
-    "built_area": 203.61,
+    "built_area": 301.79,
     "covered_terraces": 73.18,
     "garden": 105.91,
     "coste_sin_iva": "1.171.800€",
@@ -52,7 +52,7 @@
   "a6": {
     "numero_ud": "A6",
     "plot_m2": 345.95,
-    "built_area": 203.61,
+    "built_area": 291.20,
     "covered_terraces": 62.59,
     "garden": 216.21,
     "coste_sin_iva": "1.182.600€",
@@ -62,7 +62,7 @@
   "b1": {
     "numero_ud": "B1",
     "plot_m2": 227.12,
-    "built_area": 193.01,
+    "built_area": 227.72,
     "covered_terraces": 34.71,
     "garden": 136.90,
     "coste_sin_iva": "1.074.600€",
@@ -72,7 +72,7 @@
   "b2": {
     "numero_ud": "B2",
     "plot_m2": 337.19,
-    "built_area": 270.36,
+    "built_area": 354.45,
     "covered_terraces": 84.09,
     "garden": 237.28,
     "coste_sin_iva": "1.139.400€",
