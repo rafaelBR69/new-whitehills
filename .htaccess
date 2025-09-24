@@ -34,10 +34,10 @@ RewriteRule ^ - [L]
 
 # ====== CANÓNICA: /index.html → /es/inicio (cámbialo a 301 cuando valides) ======
 RewriteCond %{THE_REQUEST} \s/+(index\.html)[\s?] [NC]
-RewriteRule ^index\.html$ es/inicio [R=302,L]
+RewriteRule ^index\.html$ en/home [R=302,L]
 
 # ====== Home raíz → ES (302 mientras pruebas; luego 301) ======
-RewriteRule ^$ es/inicio [R=302,L]
+RewriteRule ^$ en/home [R=302,L]
 
 # ====== Raíces de idioma ======
 RewriteRule ^es/?$ es/inicio [R=301,L]

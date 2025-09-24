@@ -29,8 +29,13 @@ function renderPage () {
 function detectLocaleFromURL () {
   const m = location.pathname.match(/^\/(es|en)(?:\/|$)/i);
   if (m) return m[1].toLowerCase();
-  const l = (i18next?.resolvedLanguage || i18next?.language || 'es').slice(0,2);
-  return (l === 'en' || l === 'es') ? l : 'es';
+  // Si no hay prefijo en URL, lee cookie
+  const ck = document.cookie.match(/(?:^|;\s*)wh_lang=([^;]+)/);
+  if (ck) {
+    const val = decodeURIComponent(ck[1]).slice(0,2);
+    if (val === 'en' || val === 'es') return val;
+  }
+  return 'en'; // por defecto EN
 }
 
 function getRoutesMap () {
@@ -191,12 +196,15 @@ i18next
   .use(i18nextBrowserLanguageDetector)
   .init({
     supportedLngs: ['es','en'],
-    fallbackLng  : 'es',
+    fallbackLng  : 'en',
     load         : 'languageOnly',
     nonExplicitSupportedLngs: true,
     detection: {
-      order: ['localStorage', 'htmlTag', 'navigator'],
-      caches: ['localStorage'],
+      // URL manda; luego cookie propia; luego localStorage
+      order: ['path', 'cookie', 'localStorage', 'htmlTag', 'navigator'],
+      caches: ['cookie', 'localStorage'],
+      cookieMinutes: 60*24*365,
+      cookieName: 'wh_lang',
       lookupLocalStorage: 'i18nextLng'
     },
     preload: ['es','en'],

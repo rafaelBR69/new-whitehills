@@ -1,34 +1,77 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ─── SEO (fallback ES, se sobreescribe abajo si /en/) ─── -->
-  <title>WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga</title>
-  <meta name="description" content="Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales.">
+  <!-- Redirección temprana y preferencia de idioma -->
+  <script>
+    (function () {
+      var COOKIE = 'wh_lang';
+      var DAYS = 365;
+      var path = (location.pathname || '').toLowerCase();
+
+      function getCookie(n){
+        return ('; '+document.cookie).split('; '+n+'=').pop().split(';')[0] || '';
+      }
+      function setCookie(n,v,days){
+        var d=new Date(); d.setTime(d.getTime()+days*24*60*60*1000);
+        document.cookie = n+'='+v+';expires='+d.toUTCString()+';path=/;SameSite=Lax';
+      }
+
+      // Mapeos específicos si alguno no es 1:1 (opcional)
+      var es2en = {
+        '/es/inicio': '/en/home'
+        // añade casos especiales si los hay
+      };
+      var en2es = {};
+      for (var k in es2en) en2es[es2en[k]] = k;
+
+      var pref = getCookie(COOKIE); // 'en' | 'es' | ''
+
+      if (!pref) {
+        setCookie(COOKIE, 'en', DAYS); // por defecto EN
+        // Si entra a / o /es/... forzamos espejo EN
+        if (path === '/' || path === '') { location.replace('/en/home'); return; }
+        if (path.startsWith('/es/')) {
+          var t = es2en[path] || path.replace(/^\/es\//,'/en/');
+          location.replace(t); return;
+        }
+      } else if (pref === 'en' && path.startsWith('/es/')) {
+        var t1 = es2en[path] || path.replace(/^\/es\//,'/en/');
+        location.replace(t1); return;
+      } else if (pref === 'es' && path.startsWith('/en/')) {
+        var t2 = en2es[path] || path.replace(/^\/en\//,'/es/');
+        location.replace(t2); return;
+      }
+    })();
+  </script>
+
+  <!-- ─── SEO (fallback EN, se sobreescribe abajo si /es/) ─── -->
+  <title>WhiteHills Villas – New-build villas in Fuengirola (Torreblanca), Málaga</title>
+  <meta name="description" content="Exclusive development with terraces, a pool, and landscaped areas. Official floor plans, prices, and availability.">
   <meta name="robots" content="index,follow">
-  <link id="canonical" rel="canonical" href="https://whitehillsvillas.com/es/inicio">
+  <link id="canonical" rel="canonical" href="https://whitehillsvillas.com/en/home">
 
   <!-- hreflang -->
   <link rel="alternate" href="https://whitehillsvillas.com/es/inicio" hreflang="es">
   <link rel="alternate" href="https://whitehillsvillas.com/en/home"   hreflang="en">
-  <link rel="alternate" href="https://whitehillsvillas.com/es/inicio" hreflang="x-default">
+  <link rel="alternate" href="https://whitehillsvillas.com/en/home"   hreflang="x-default">
 
-  <!-- Open Graph (fallback ES) -->
+  <!-- Open Graph (fallback EN) -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga">
-  <meta property="og:description" content="Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales.">
-  <meta property="og:url" content="https://whitehillsvillas.com/es/inicio">
+  <meta property="og:title" content="WhiteHills Villas – New-build villas in Fuengirola (Torreblanca), Málaga">
+  <meta property="og:description" content="Exclusive development with terraces, a pool, and landscaped areas. Official floor plans, prices, and availability.">
+  <meta property="og:url" content="https://whitehillsvillas.com/en/home">
   <meta property="og:image" content="https://whitehillsvillas.com/images/og-home.jpg">
-  <meta property="og:image:alt" content="Render de las villas WhiteHills en Fuengirola">
+  <meta property="og:image:alt" content="Render of WhiteHills villas in Fuengirola">
   <meta property="og:site_name" content="WhiteHills Villas">
-  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale" content="en_GB">
 
-  <!-- Twitter Card (fallback ES) -->
+  <!-- Twitter Card (fallback EN) -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga">
-  <meta name="twitter:description" content="Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales.">
+  <meta name="twitter:title" content="WhiteHills Villas – New-build villas in Fuengirola (Torreblanca), Málaga">
+  <meta name="twitter:description" content="Exclusive development with terraces, a pool, and landscaped areas. Official floor plans, prices, and availability.">
   <meta name="twitter:image" content="https://whitehillsvillas.com/images/og-home.jpg">
 
   <!-- Iconos / Font Awesome -->
@@ -396,14 +439,73 @@
 
   <!-- POP-UPs … (sin cambios) -->
 
-  <!-- ========== Header dinámico + scroll ========== -->
+  <!-- ========== Header dinámico + scroll + badge idioma ========== -->
   <script>
+    // Helpers de badge idioma reutilizables
+    function getCookieVal(name){
+      const m = document.cookie.match(new RegExp('(?:^|;\\s*)'+name+'=([^;]+)'));
+      return m ? decodeURIComponent(m[1]) : '';
+    }
+    function getCurrentLang(){
+      const p = (location.pathname||'').toLowerCase();
+      const m = p.match(/^\/(en|es)(?:\/|$)/i);
+      if (m) return m[1].toLowerCase();
+      const ck = getCookieVal('wh_lang');
+      return (ck === 'es' || ck === 'en') ? ck : 'en';
+    }
+    function paintLangBadge(lang){
+      var badge = document.getElementById('lang-current');
+      if (badge) badge.textContent = (lang || getCurrentLang()).toUpperCase();
+    }
+
     /* 1. Carga asíncrona del header -------------------------------- */
     fetch('/partials/header.html')
       .then(r => r.text())
       .then(html => {
         document.getElementById('header-placeholder').innerHTML = html;
         initHeaderScroll();
+
+        // Lógica del selector EN/ES para el dropdown
+        (function(){
+          var COOKIE = 'wh_lang';
+          function setCookie(n,v,days){
+            var d=new Date(); d.setTime(d.getTime()+days*24*60*60*1000);
+            document.cookie = n+'='+v+';expires='+d.toUTCString()+';path=/;SameSite=Lax';
+          }
+          function navTo(lang){
+            var p = (location.pathname||'').toLowerCase().replace(/\/+$/,'');
+            var h = (location.hash||'');
+            if (lang === 'en') {
+              if (p === '' || p === '/' || p === '/index.html') { location.assign('/en/home'+h); return; }
+              if (p.startsWith('/es/')) { location.assign(p.replace(/^\/es\//,'/en/')+h); return; }
+            } else {
+              if (p === '' || p === '/' || p === '/index.html') { location.assign('/es/inicio'+h); return; }
+              if (p.startsWith('/en/')) { location.assign(p.replace(/^\/en\//,'/es/')+h); return; }
+            }
+            location.reload();
+          }
+
+          // Soporta el dropdown del header (botones EN/ES)
+          document.addEventListener('click', function(e){
+            var btn = e.target.closest('.lang-menu [data-lang]');
+            if (!btn) return;
+            var lang = btn.getAttribute('data-lang'); // 'en' | 'es'
+            setCookie(COOKIE, lang, 365);
+            try { i18next.changeLanguage(lang); } catch(_) {}
+            paintLangBadge(lang); // repinta inmediatamente
+            navTo(lang);
+          });
+        })();
+
+        // Pinta el badge inmediatamente tras inyectar el header
+        paintLangBadge(getCurrentLang());
+
+        // Si i18next cambia de idioma, mantener badge en sync
+        if (window.i18next?.on) {
+          i18next.on('languageChanged', (lng)=> paintLangBadge(lng));
+        }
+
+        // Aplica rutas/i18n de tu app
         window.applyI18nAndRoutes && window.applyI18nAndRoutes();
       });
 
@@ -418,6 +520,7 @@
       io.observe(hero);
     }
   </script>
+
   <script>
     fetch('/partials/availability-map.html')
       .then(res => res.text())
