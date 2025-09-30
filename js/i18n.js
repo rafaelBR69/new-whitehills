@@ -65,6 +65,25 @@ function getRoutesMap () {
   };
 }
 
+// === Cambio de idioma centralizado (navega a la ruta canónica) ===
+window.setLang = function setLang(l) {
+  const lang = (l === 'en') ? 'en' : 'es';
+  try { localStorage.setItem('i18nextLng', lang); } catch {}
+  try {
+    document.cookie = 'wh_lang=' + encodeURIComponent(lang) + ';path=/;max-age=' + (60*60*24*365);
+  } catch {}
+
+  const R = getRoutesMap()[lang];
+  const semantic = getCurrentSemanticRoute(); // home, contact, gallery, etc.
+  let dest = R[semantic] || R.home;
+
+  // conserva sección si estás en home con hash válido
+  if (location.hash === '#availability' || location.hash === '#location') {
+    dest += location.hash;
+  }
+  location.href = dest; // ← navegación real asegura idioma correcto y cache fresca
+};
+
 /* Ruta semántica actual (para mantenerla al cambiar idioma) */
 function getCurrentSemanticRoute () {
   const p = location.pathname.replace(/\/+$/,'').toLowerCase();
@@ -200,12 +219,10 @@ i18next
     load         : 'languageOnly',
     nonExplicitSupportedLngs: true,
     detection: {
-      // URL manda; luego cookie propia; luego localStorage
-      order: ['path', 'cookie', 'localStorage', 'htmlTag', 'navigator'],
-      caches: ['cookie', 'localStorage'],
-      cookieMinutes: 60*24*365,
-      cookieName: 'wh_lang',
-      lookupLocalStorage: 'i18nextLng'
+      // La RUTA manda; luego cookie; el resto fuera para evitar estados viejos
+      order: ['path', 'cookie'],
+      caches: ['cookie'],
+      cookieName: 'wh_lang'
     },
     preload: ['es','en'],
     backend: { loadPath: '/langs/{{lng}}.json' },

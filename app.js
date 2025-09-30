@@ -1192,147 +1192,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
-(function () {
-  // Dominios de producción donde quieres slugs bonitos
-  const PROD_HOSTS = [
-    'whitehillsvillas.com',
-    'www.whitehillsvillas.com',
-    'rafaelbr69.github.io'     // quita/añade los que necesites
-  ];
-  const IS_PROD = PROD_HOSTS.includes(location.hostname);
-
-  // Mapa slug → archivo .html para desarrollo local
-  function slugToHtml(url) {
-    try {
-      const u = new URL(url, location.origin);
-      const path = u.pathname.replace(/\/+$/,''); // sin barra final
-      const hash = u.hash || '';
-
-      const map = {
-        '/es/inicio':              'index.html',
-        '/en/home':                'index.html',
-        '/es/proceso-compra':      'proceso.html',
-        '/en/process':             'proceso.html',
-        '/es/contacto':            'contact.html',
-        '/en/contact':             'contact.html',
-        '/es/aviso-legal':         'legal-notice.html',
-        '/en/legal-notice':        'legal-notice.html',
-        '/es/politica-cookies':    'cookies-policy.html',
-        '/en/cookie-policy':       'cookies-policy.html',
-        '/es/politica-privacidad': 'privacy-policy.html',
-        '/en/privacy-policy':      'privacy-policy.html'
-      };
-
-      const html = map[path];
-      return (html ? html : url) + hash;
-    } catch {
-      return url;
-    }
-  }
-
-  // ────────────────────────────────────────────────────────────────
-  // Selector de idioma (Dropdown personalizado + fallback <select>)
-  // ────────────────────────────────────────────────────────────────
-
-  // 1) UI helpers para el dropdown
-  function updateLangUI(lng) {
-    const currentLabel = document.getElementById('lang-current');
-    if (currentLabel) currentLabel.textContent = String(lng).toUpperCase();
-
-    document.querySelectorAll('.lang-menu [data-lang]').forEach(btn => {
-      const isActive = (btn.dataset.lang || '').toLowerCase() === lng;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-current', isActive ? 'true' : 'false');
-    });
-
-    // Sincroniza el <select> si aún existe en alguna plantilla
-    const $select = document.getElementById('langSwitcher');
-    if ($select) $select.value = lng;
-  }
-
-  // 2) Reescribe hrefs según idioma en <a data-href-es data-href-en>
-  function applyLang(lng) {
-    document.querySelectorAll('a[data-href-es]').forEach(a => {
-      const slug = (lng === 'en') ? a.dataset.hrefEn : a.dataset.hrefEs;
-
-      if (IS_PROD) {
-        if (slug) a.setAttribute('href', slug);
-      } else {
-        // En local: convierte slug a .html si hace falta
-        const current = a.getAttribute('href') || '';
-        if (!current || /^\/(es|en)\//.test(current)) {
-          a.setAttribute('href', slugToHtml(slug));
-        }
-      }
-    });
-  }
-
-  // 3) Función central de cambio de idioma
-  function setLanguage(lng, { updateUI = true } = {}) {
-    lng = String(lng || 'es').toLowerCase();
-
-    try { localStorage.setItem('i18n_lang', lng); } catch {}
-
-    // i18next: dispara 'languageChanged' si está configurado
-    if (window.i18next && typeof i18next.changeLanguage === 'function') {
-      const cur = (i18next.language || '').slice(0,2).toLowerCase();
-      if (cur !== lng) i18next.changeLanguage(lng);
-    }
-
-    // <html lang="...">
-    document.documentElement.setAttribute('lang', lng === 'en' ? 'en' : 'es');
-
-    // Reescribir enlaces
-    applyLang(lng);
-
-    // Refrescar UI (dropdown / select)
-    if (updateUI) updateLangUI(lng);
-
-    // Evento custom por si otros módulos escuchan
-    window.dispatchEvent(new Event('i18n:changed'));
-  }
-
-  // 4) Inicialización
-  const initialLang =
-    (localStorage.getItem('i18n_lang') || document.documentElement.lang || 'es')
-      .toLowerCase();
-
-  updateLangUI(initialLang);
-  setLanguage(initialLang, { updateUI: false }); // ya actualizamos la UI arriba
-
-  // 5) Listeners de UI
-  // 5.a) Dropdown personalizado
+// === Selector de idioma: delega siempre en window.setLang (i18n.js) ===
+document.addEventListener('DOMContentLoaded', () => {
+  // Dropdown personalizado: <button data-lang="es|en">
   document.querySelectorAll('.lang-menu [data-lang]').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      const lng = e.currentTarget.dataset.lang || 'es';
-      setLanguage(lng, { updateUI: true });
+      e.preventDefault();
+      const lng = (btn.dataset.lang || 'es').toLowerCase();
+      if (typeof window.setLang === 'function') window.setLang(lng);
+      else location.href = (lng === 'en') ? '/en/home' : '/es/inicio';
     });
   });
 
-  // 5.b) Fallback: <select id="langSwitcher">
-  const $select = document.getElementById('langSwitcher');
-  if ($select) {
-    $select.value = initialLang;
-    $select.addEventListener('change', (e) => {
-      setLanguage(e.target.value, { updateUI: true });
+  // Fallback <select id="langSwitcher">
+  const sel = document.getElementById('langSwitcher');
+  if (sel) {
+    sel.addEventListener('change', (e) => {
+      const lng = (e.target.value || 'es').toLowerCase();
+      if (typeof window.setLang === 'function') window.setLang(lng);
+      else location.href = (lng === 'en') ? '/en/home' : '/es/inicio';
     });
   }
+});
 
-  // 6) DEV: si clicas un slug /es/... o /en/... en local, conviértelo a .html
-  if (!IS_PROD) {
-    document.addEventListener('click', (ev) => {
-      const a = ev.target.closest('a[data-href-es]');
-      if (!a) return;
-      const href = a.getAttribute('href') || '';
-      if (/^\/(es|en)\//.test(href)) {
-        ev.preventDefault();
-        const lng = (localStorage.getItem('i18n_lang') || 'es').toLowerCase();
-        const slug = (lng === 'en') ? a.dataset.hrefEn : a.dataset.hrefEs;
-        location.href = slugToHtml(slug);
-      }
-    });
-  }
-})();
 
 // ─────────────────────────────────────────────────────────────
 // i18n: carga diccionarios, función translateIn y ganchos globales
