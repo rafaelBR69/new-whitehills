@@ -1036,6 +1036,12 @@ function buildPromoList() {
   const box = document.getElementById('promoStats');
   if (!box) return;
 
+  // Evita duplicados si ya se construyó
+  if (box.querySelector('ul')) return;
+
+  // O, si prefieres, forzar estado limpio:
+  // box.innerHTML = '';
+
   const ul = document.createElement('ul');
 
   PROMO_ITEMS.forEach(({ key, icon, extra = '' }) => {
@@ -1103,19 +1109,35 @@ function buildPromoList() {
     io.observe(section);
   }
 
-  /* ---------- Orquestación de la promo ---------------------------- */
+let __promoStarted = false;
+
 document.addEventListener('DOMContentLoaded', () => {
   const startPromo = () => {
-    buildPromoList();        // crea el <ul> con los “0”
-    observePromoCounters();  // espera al 10 % de visibilidad y anima
+    if (__promoStarted) return;          // evita dobles arranques
+    __promoStarted = true;
+    buildPromoList();
+    observePromoCounters();
   };
 
-  if (i18next.isInitialized) {
-    startPromo();            // i18next ya estaba listo
+  if (window.i18next?.isInitialized) {
+    // i18next ya listo
+    startPromo();
+  } else if (window.i18next?.on) {
+    // Espera a que i18next termine de inicializarse
+    const handler = () => {
+      startPromo();
+      // limpiamos el listener para no dejarlo colgado
+      if (typeof i18next.off === 'function') {
+        i18next.off('initialized', handler);
+      }
+    };
+    i18next.on('initialized', handler);
   } else {
-    i18next.on('initialized', startPromo); // se ejecutará cuando acabe
+    // Si i18next no existe, arranca igualmente
+    startPromo();
   }
 });
+
 
 (() => {
   const hero = document.querySelector('.section_1.parallax-bg');
@@ -1315,11 +1337,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // ─────────────────────────────────────────────────────────────
 // i18n: carga diccionarios, función translateIn y ganchos globales
 // ─────────────────────────────────────────────────────────────
-
+/*
 // Ajusta estas rutas a donde tienes tus JSON
 const I18N_FILES = {
-  es: '/frontend/lang/es.json',
-  en: '/frontend/lang/en.json'
+  es: 'langs/es.json',
+  en: 'langs/en.json'
 };
 
 // Traduce todos los elementos dentro de un contenedor (por defecto, documento entero)
@@ -1420,3 +1442,4 @@ if (window.i18next && typeof i18next.on === 'function') {
 }
 //    (ii) si en tu app disparas un evento custom (p. ej. setLang → window.dispatchEvent(new Event('i18n:changed')))
 window.addEventListener('i18n:changed', onLanguageChangedDebounced);
+*/
