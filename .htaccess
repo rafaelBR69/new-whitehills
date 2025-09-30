@@ -12,6 +12,7 @@ AddType application/json              .json
 AddType application/manifest+json     .webmanifest
 AddType text/css                      .css
 AddType image/svg+xml                 .svg
+AddType application/xml               .xml
 
 # ====== CACHÉ ESTÁTICOS (opcional pero recomendable) ======
 <IfModule mod_expires.c>
@@ -26,6 +27,9 @@ AddType image/svg+xml                 .svg
   ExpiresByType image/jpeg                     "access plus 1 year"
   ExpiresByType image/gif                      "access plus 1 year"
 </IfModule>
+
+# ====== SERVIR sitemap/robots SIEMPRE TAL CUAL (opcional, recomendable) ======
+RewriteRule ^(sitemap\.xml|robots\.txt)$ - [L]
 
 # ====== BYPASS: si existe archivo o carpeta → NO reescribir ======
 RewriteCond %{REQUEST_FILENAME} -f [OR]

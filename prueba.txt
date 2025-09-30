@@ -1,6 +1,0 @@
-Reserva: El IVA de esta cantidad se abonara en el CPC
-CPC: 15% + IVA (10%), el 15% incluye la reserva ya abonada, pero no su IVA 
-Inicio de obra: 8% + IVA (10%).
-+6 meses incio de obra: 8% + IVA (10%).
-+12 meses de incio de obra: 8% + IVA (10%).
-Entrega de llaves: 61% + IVA (10%)

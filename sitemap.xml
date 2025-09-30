@@ -1,18 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- HOME -->
   <url>
-    <loc>https://whitehillsvillas.com/</loc>
-    <lastmod>2025-07-28</lastmod>
-    <priority>1.0</priority>
+    <loc>https://whitehillsvillas.com/es/inicio</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/inicio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/home"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/home"/>
   </url>
   <url>
-    <loc>https://whitehillsvillas.com/proceso.html</loc>
-    <lastmod>2025-07-28</lastmod>
-    <priority>0.8</priority>
+    <loc>https://whitehillsvillas.com/en/home</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/inicio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/home"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/home"/>
+  </url>
+
+  <!-- GALERÍA -->
+  <url>
+    <loc>https://whitehillsvillas.com/es/galeria</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/galeria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/gallery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/gallery"/>
   </url>
   <url>
-    <loc>https://whitehillsvillas.com/contact.html</loc>
-    <lastmod>2025-07-28</lastmod>
-    <priority>0.5</priority>
+    <loc>https://whitehillsvillas.com/en/gallery</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/galeria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/gallery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/gallery"/>
   </url>
+
+  <!-- SECCIONES (cargan index.html con query pero tienen URL propia) -->
+  <url>
+    <loc>https://whitehillsvillas.com/es/disponibilidad</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/disponibilidad"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/availability"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/availability"/>
+  </url>
+  <url>
+    <loc>https://whitehillsvillas.com/en/availability</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/disponibilidad"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/availability"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/availability"/>
+  </url>
+
+  <url>
+    <loc>https://whitehillsvillas.com/es/localizacion</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/localizacion"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/location"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/location"/>
+  </url>
+  <url>
+    <loc>https://whitehillsvillas.com/en/location</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/localizacion"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/location"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/location"/>
+  </url>
+
+  <!-- PROCESO -->
+  <url>
+    <loc>https://whitehillsvillas.com/es/proceso-compra</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/proceso-compra"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/process"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/process"/>
+  </url>
+  <url>
+    <loc>https://whitehillsvillas.com/en/process</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/proceso-compra"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/process"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/process"/>
+  </url>
+
+  <!-- CONTACTO -->
+  <url>
+    <loc>https://whitehillsvillas.com/es/contacto</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/contacto"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/contact"/>
+  </url>
+  <url>
+    <loc>https://whitehillsvillas.com/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/contacto"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/contact"/>
+  </url>
+
+  <!-- LEGALES -->
+  <url>
+    <loc>https://whitehillsvillas.com/es/aviso-legal</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/legal-notice"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/legal-notice"/>
+  </url>
+  <url>
+    <loc>https://whitehillsvillas.com/en/legal-notice</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/legal-notice"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/legal-notice"/>
+  </url>
+
+  <url>
+    <loc>https://whitehillsvillas.com/es/politica-privacidad</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/politica-privacidad"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/privacy-policy"/>
+  </url>
+  <url>
+    <loc>https://whitehillsvillas.com/en/privacy-policy</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/politica-privacidad"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/privacy-policy"/>
+  </url>
+
+  <url>
+    <loc>https://whitehillsvillas.com/es/politica-cookies</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/politica-cookies"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/cookie-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/cookie-policy"/>
+  </url>
+  <url>
+    <loc>https://whitehillsvillas.com/en/cookie-policy</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/politica-cookies"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/cookie-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/cookie-policy"/>
+  </url>
+
 </urlset>
