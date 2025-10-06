@@ -1,10 +1,11 @@
-###############################################
-# WhiteHills URL Rewrites (IONOS / Apache)
-###############################################
 RewriteEngine On
 Options -MultiViews
 RewriteBase /
 DirectoryIndex index.html
+
+# === RAÍZ → EN (1 salto, siempre) ===
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ https://whitehillsvillas.com/en/home [R=301,L]
 
 # === CANÓNICA ÚNICA: forzar https + sin www en 1 salto ===
 RewriteCond %{HTTPS} !=on [OR]
@@ -17,71 +18,63 @@ AddType application/json              .json
 AddType application/manifest+json     .webmanifest
 AddType text/css                      .css
 AddType image/svg+xml                 .svg
-AddType application/xml               .xml  # p.ej. sitemap.xml
+AddType application/xml               .xml
 
 # ====== 2) CACHÉ ESTÁTICOS ======
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType text/css                       "access plus 1 month"
-  ExpiresByType application/javascript         "access plus 1 month"
-  ExpiresByType application/json               "access plus 1 week"
-  ExpiresByType application/manifest+json      "access plus 1 week"
-  ExpiresByType image/svg+xml                  "access plus 1 month"
-  ExpiresByType image/webp                     "access plus 1 year"
-  ExpiresByType image/png                      "access plus 1 year"
-  ExpiresByType image/jpeg                     "access plus 1 year"
-  ExpiresByType image/gif                      "access plus 1 year"
+  ExpiresByType text/css                  "access plus 1 month"
+  ExpiresByType application/javascript    "access plus 1 month"
+  ExpiresByType application/json          "access plus 1 week"
+  ExpiresByType application/manifest+json "access plus 1 week"
+  ExpiresByType image/svg+xml             "access plus 1 month"
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType image/gif                 "access plus 1 year"
 </IfModule>
 
 # ====== 3) NO reescribir sitemap/robots ======
 RewriteRule ^(sitemap\.xml|robots\.txt)$ - [L]
+<FilesMatch "^(sitemap\.xml|robots\.txt)$">
+  <IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 hour"
+  </IfModule>
+  <IfModule mod_headers.c>
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </IfModule>
+</FilesMatch>
 
 # ====== 4) CANÓNICAS .HTML → SLUGS BONITOS (301) ======
-# index.html → /en/home
 RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
 RewriteRule ^index\.html$ en/home [R=301,L]
-
-# contact.html → /es/contacto
 RewriteCond %{THE_REQUEST} \s/+contact\.html[\s?] [NC]
 RewriteRule ^contact\.html$ es/contacto [R=301,L]
-
-# proceso.html → /es/proceso-compra
 RewriteCond %{THE_REQUEST} \s/+proceso\.html[\s?] [NC]
 RewriteRule ^proceso\.html$ es/proceso-compra [R=301,L]
-
-# process.html → /en/process
 RewriteCond %{THE_REQUEST} \s/+process\.html[\s?] [NC]
 RewriteRule ^process\.html$ en/process [R=301,L]
-
-# privacy-policy.html → /en/privacy-policy
 RewriteCond %{THE_REQUEST} \s/+privacy-policy\.html[\s?] [NC]
 RewriteRule ^privacy-policy\.html$ en/privacy-policy [R=301,L]
-
-# cookie(s)-policy.html (singular o plural) → /en/cookie-policy
 RewriteCond %{THE_REQUEST} \s/+cookies?-policy\.html[\s?] [NC]
 RewriteRule ^cookies?-policy\.html$ en/cookie-policy [R=301,L]
-
-# galeria.html → /es/galeria
 RewriteCond %{THE_REQUEST} \s/+galeria\.html[\s?] [NC]
 RewriteRule ^galeria\.html$ es/galeria [R=301,L]
 
-# ====== 5) REDIRECCIÓN DE HOME (debe ir ANTES del BYPASS) ======
-# Raíz → /en/home (301 definitiva)
-RewriteRule ^$ en/home [R=301,L]
+# ====== 5) (ELIMINAR ESTA SECCIÓN EN TU ARCHIVO) ======
+# RewriteRule ^$ en/home [R=301,L]
 
 # ====== 6) BYPASS: si existe archivo o carpeta → NO reescribir ======
-# (opción A) moverlo aquí (recomendado)
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
-# (opción B alternativa: si prefieres no moverlo, añade esta línea extra)
-# RewriteCond %{REQUEST_URI} !^/$
 
-# ====== 7) REDIRECCIONES DE RAÍZ DE IDIOMA ======
-RewriteRule ^es/?$ es/inicio [R=301,L]
-RewriteRule ^en/?$ en/home   [R=301,L]
+# ====== 7) RAÍZ DE IDIOMA → ABSOLUTA CANÓNICA ======
+RewriteRule ^es/?$ https://whitehillsvillas.com/es/inicio [R=301,L]
+RewriteRule ^en/?$ https://whitehillsvillas.com/en/home   [R=301,L]
 
-# ====== 8) MAPEO DE HOME ======
+# ====== 8) MAPEO DE HOME (interno a index.html) ======
 RewriteRule ^es/inicio/?$ index.html [L,NC]
 RewriteRule ^en/home/?$    index.html [L,NC]
 
@@ -98,7 +91,6 @@ RewriteRule ^es/contacto/?$             contact.html         [L,NC]
 RewriteRule ^es/aviso-legal/?$          legal-notice.html    [L,NC]
 RewriteRule ^es/politica-cookies/?$     cookie-policy.html   [L,NC]
 RewriteRule ^es/politica-privacidad/?$  privacy-policy.html  [L,NC]
-
 # EN
 RewriteRule ^en/process/?$        proceso.html         [L,NC]
 RewriteRule ^en/contact/?$        contact.html         [L,NC]
@@ -106,9 +98,9 @@ RewriteRule ^en/legal-notice/?$   legal-notice.html    [L,NC]
 RewriteRule ^en/cookie-policy/?$  cookie-policy.html   [L,NC]
 RewriteRule ^en/privacy-policy/?$ privacy-policy.html  [L,NC]
 
-# ====== 11) GALERÍA (mapas a archivo físico) ======
+# ====== 11) GALERÍA ======
 RewriteRule ^es/galeria/?$ galeria.html [L,NC]
 RewriteRule ^en/gallery/?$ galeria.html [L,NC]
 
-# ====== 12) CATCH-ALL idioma → index.html (evita 404) ======
+# ====== 12) CATCH-ALL idioma → index.html ======
 RewriteRule ^(es|en)/.+$ index.html [QSA,L,NC]

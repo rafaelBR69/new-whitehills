@@ -5,12 +5,14 @@
   <!-- HOME -->
   <url>
     <loc>https://whitehillsvillas.com/es/inicio</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/inicio"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/home"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/home"/>
   </url>
   <url>
     <loc>https://whitehillsvillas.com/en/home</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/inicio"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/home"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/home"/>
@@ -19,26 +21,30 @@
   <!-- GALERÍA -->
   <url>
     <loc>https://whitehillsvillas.com/es/galeria</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/galeria"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/gallery"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/gallery"/>
   </url>
   <url>
     <loc>https://whitehillsvillas.com/en/gallery</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/galeria"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/gallery"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/gallery"/>
   </url>
 
-  <!-- SECCIONES (cargan index.html con query pero tienen URL propia) -->
+  <!-- SECCIONES -->
   <url>
     <loc>https://whitehillsvillas.com/es/disponibilidad</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/disponibilidad"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/availability"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/availability"/>
   </url>
   <url>
     <loc>https://whitehillsvillas.com/en/availability</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/disponibilidad"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/availability"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/availability"/>
@@ -46,12 +52,14 @@
 
   <url>
     <loc>https://whitehillsvillas.com/es/localizacion</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/localizacion"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/location"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/location"/>
   </url>
   <url>
     <loc>https://whitehillsvillas.com/en/location</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/localizacion"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/location"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/location"/>
@@ -60,12 +68,14 @@
   <!-- PROCESO -->
   <url>
     <loc>https://whitehillsvillas.com/es/proceso-compra</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/proceso-compra"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/process"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/process"/>
   </url>
   <url>
     <loc>https://whitehillsvillas.com/en/process</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/proceso-compra"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/process"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/process"/>
@@ -74,12 +84,14 @@
   <!-- CONTACTO -->
   <url>
     <loc>https://whitehillsvillas.com/es/contacto</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/contacto"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/contact"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/contact"/>
   </url>
   <url>
     <loc>https://whitehillsvillas.com/en/contact</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/contacto"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/contact"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/contact"/>
@@ -88,12 +100,14 @@
   <!-- LEGALES -->
   <url>
     <loc>https://whitehillsvillas.com/es/aviso-legal</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/legal-notice"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/legal-notice"/>
   </url>
   <url>
     <loc>https://whitehillsvillas.com/en/legal-notice</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/legal-notice"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/legal-notice"/>
@@ -101,12 +115,14 @@
 
   <url>
     <loc>https://whitehillsvillas.com/es/politica-privacidad</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/politica-privacidad"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/privacy-policy"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/privacy-policy"/>
   </url>
   <url>
     <loc>https://whitehillsvillas.com/en/privacy-policy</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/politica-privacidad"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/privacy-policy"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/privacy-policy"/>
@@ -114,12 +130,14 @@
 
   <url>
     <loc>https://whitehillsvillas.com/es/politica-cookies</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/politica-cookies"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/cookie-policy"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/cookie-policy"/>
   </url>
   <url>
     <loc>https://whitehillsvillas.com/en/cookie-policy</loc>
+    <lastmod>2025-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="https://whitehillsvillas.com/es/politica-cookies"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://whitehillsvillas.com/en/cookie-policy"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://whitehillsvillas.com/en/cookie-policy"/>

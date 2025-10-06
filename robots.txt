@@ -1,3 +1,5 @@
+# WhiteHills Villas — robots.txt
 User-agent: *
 Allow: /
+
 Sitemap: https://whitehillsvillas.com/sitemap.xml
