@@ -168,8 +168,10 @@
                title="Introduce un email válido (ej: nombre@dominio.com)">
 
         <label class="contact-form__label" for="cf-phone" data-i18n="popup.phoneLabel">Teléfono</label>
-        <input class="contact-form__input" id="cf-phone" type="tel" name="phone"
-               autocomplete="tel" inputmode="tel" enterkeyhint="next">
+        <input class="contact-form__input" id="cf-phone" type="tel" name="phone" required
+               autocomplete="tel" inputmode="tel" enterkeyhint="next"
+               pattern="^[0-9+()\\s\\-\\.]{7,}$"
+               title="Introduce un teléfono válido (7–15 dígitos).">
 
         <label class="contact-form__label" for="cf-message" data-i18n="popup.msgLabel">Mensaje</label>
         <textarea class="contact-form__textarea" id="cf-message" name="message" rows="4"
@@ -326,8 +328,20 @@
         else if (!emailRegex.test(v)) mailEl.setCustomValidity('Introduce un email válido (ej: nombre@dominio.com).');
         markValidity(mailEl);
       }
-      nameEl.addEventListener('input', () => { validateName(); nameEl.reportValidity(); });
+      function validatePhone() {
+        phoneEl.setCustomValidity('');
+        const v = (phoneEl.value || '').trim();
+        const digits = v.replace(/\D/g, '');
+        if (!v) phoneEl.setCustomValidity('El teléfono es obligatorio.');
+        else if (digits.length < 7 || digits.length > 15) {
+          phoneEl.setCustomValidity('Introduce un teléfono válido (7–15 dígitos).');
+        }
+        markValidity(phoneEl);
+      }
+
+      nameEl.addEventListener('input', () => { validateName();  nameEl.reportValidity();  });
       mailEl.addEventListener('input', () => { validateEmail(); mailEl.reportValidity(); });
+      phoneEl.addEventListener('input',() => { validatePhone(); phoneEl.reportValidity(); });
 
       function setButton(state){
         // state: 'idle' | 'sending' | 'success' | 'error'
@@ -378,6 +392,7 @@
         // Validación
         validateName();
         validateEmail();
+        validatePhone();
         if (!form.checkValidity()) {
           const firstInvalid = form.querySelector(':invalid');
           firstInvalid && firstInvalid.focus({ preventScroll: false });

@@ -33,7 +33,9 @@
              title="Introduce un email válido (ej: nombre@dominio.com)">
 
       <label for="lf-tel" data-i18n="modal.form.phone">Teléfono</label>
-      <input id="lf-tel" type="tel" name="telefono" autocomplete="tel" inputmode="tel" enterkeyhint="next">
+      <input id="lf-tel" type="tel" name="telefono" required autocomplete="tel" inputmode="tel" enterkeyhint="next"
+             pattern="^[0-9+()\\s\\-\\.]{7,}$"
+             title="Introduce un teléfono válido (7–15 dígitos).">
 
       <label for="lf-msg" data-i18n="modal.form.message">Mensaje</label>
       <textarea id="lf-msg" name="mensaje" rows="4"
@@ -102,8 +104,11 @@
       <input id="bf-email" type="email" name="email" required autocomplete="email" spellcheck="false" enterkeyhint="next"
              title="Introduce un email válido (ej: nombre@dominio.com)">
 
-      <label for="bf-tel" data-i18n="form.phone_optional">Teléfono (opcional)</label>
-      <input id="bf-tel" type="tel" name="telefono" autocomplete="tel" inputmode="tel" enterkeyhint="next">
+      <!-- Teléfono ahora OBLIGATORIO -->
+      <label for="bf-tel" data-i18n="form.phone">Teléfono</label>
+      <input id="bf-tel" type="tel" name="telefono" required autocomplete="tel" inputmode="tel" enterkeyhint="next"
+             pattern="^[0-9+()\\s\\-\\.]{7,}$"
+             title="Introduce un teléfono válido (7–15 dígitos).">
 
       <input type="hidden" name="download_url" value="">
 
@@ -280,6 +285,19 @@
     input.classList.toggle('is-invalid', invalid);
     input.setAttribute('aria-invalid', invalid ? 'true' : 'false');
   }
+  function validatePhone(input){
+    input.setCustomValidity('');
+    const v = (input.value || '').trim();
+    // Limpia y cuenta dígitos
+    const digits = v.replace(/\D/g, '');
+    if (!v) input.setCustomValidity('El teléfono es obligatorio.');
+    else if (digits.length < 7 || digits.length > 15) {
+      input.setCustomValidity('Introduce un teléfono válido (7–15 dígitos).');
+    }
+    const invalid = !input.checkValidity();
+    input.classList.toggle('is-invalid', invalid);
+    input.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+  }
 
   function fakeSend(payload){ return new Promise(r => setTimeout(() => r({ ok:true, sandbox:true }), 1100)); }
   async function sendToSheet(payload){
@@ -312,12 +330,14 @@
     // Live validation
     if (nameEl) nameEl.addEventListener('input', () => { validateName(nameEl); nameEl.reportValidity(); });
     if (mailEl) mailEl.addEventListener('input', () => { validateEmail(mailEl); mailEl.reportValidity(); });
+    if (telEl)  telEl.addEventListener('input',  () => { validatePhone(telEl);  telEl.reportValidity(); });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       if (nameEl) validateName(nameEl);
       if (mailEl) validateEmail(mailEl);
+      if (telEl)  validatePhone(telEl);
       if (!form.checkValidity()) {
         const firstInvalid = form.querySelector(':invalid');
         if (firstInvalid) firstInvalid.focus({ preventScroll:false });
