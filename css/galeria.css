@@ -64,16 +64,57 @@ html, body { height: 100%; }
 .glr-about-title{
   position: absolute;
   left: 50%;
-  top: calc(var(--hdr-h, 80px) + 8px); /* justo bajo el header fijo */
+  top: calc(var(--hdr-h, 80px) + 2vh); /* Slightly more flexible top spacing */
   transform: translateX(-50%);
   pointer-events: none;
   white-space: nowrap;
 
   color: #3c4d28;
-  font-size: 7.5rem;
+  font-size: clamp(3rem, 10vw, 7.5rem); /* Fluid font size */
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -.02em;
+}
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+@media (max-width: 900px) {
+  .glr-member { margin-bottom: 2rem; } /* Compact member info on mobile */
+  :root {
+    --glr-card-w : min(300px, 92vw);
+    --glr-card-h : calc(var(--glr-card-w) * 9 / 16);
+    --glr-shift-1: calc(var(--glr-card-w) * 0.92 + var(--glr-gap));
+    --glr-shift-2: calc(var(--glr-card-w) * 1.7 + var(--glr-gap) * 2);
+    --glr-depth-1: -80px;
+    --glr-depth-2: -240px;
+    --glr-persp  : 800px;
+    --glr-ctrl-size   : 36px;
+    --glr-chevron-size: 24px;
+    --glr-ctrl-gap    : 8px;
+  }
+  .glr-carousel {
+    height: calc(var(--glr-card-h) + 50px);
+    margin-top: 40px;
+  }
+  .glr-member { margin-top: 24px; }
+  .glr-member__name {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+  .glr-member__name::before,
+  .glr-member__name::after {
+    width: 60px;
+    top: 90%;
+  }
+  .glr-member__name::before { left: -70px; }
+  .glr-member__name::after  { right: -70px; }
+  .glr-member__role {
+    font-size: 1.1rem;
+    padding: 8px 0;
+    margin-top: -10px;
+  }
+  .glr-dots { margin-top: 30px; }
 }
 
 /* ==========================================================================
@@ -372,7 +413,7 @@ html, body { height: 100%; }
 /* <= 900px: cards más compactas manteniendo 16:9 */
 @media (max-width: 900px){
   :root{
-    --glr-card-w : 300px;
+    --glr-card-w : min(300px, 92vw);
     --glr-card-h : calc(var(--glr-card-w) * 9 / 16);
     --glr-shift-1: calc(var(--glr-card-w) * 0.92 + var(--glr-gap));
     --glr-shift-2: calc(var(--glr-card-w) * 1.84 + var(--glr-gap) * 2);

@@ -137,14 +137,26 @@
 /* Cerrar (X) */
 .modal__close{
   position: absolute;
-  top: .8rem; right: .8rem;        /* ↑ */
-  background: none; border: none;
-  font-size: 3.6rem;               /* ↑ */
-  color: currentColor;
+  top: 1rem; right: 1rem;
+  width: 4.6rem;
+  height: 4.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.42);
+  font-size: 3.2rem;
+  line-height: 1;
+  color: #fff;
+  z-index: 5;
+  pointer-events: auto;
   cursor: pointer;
   transition: transform .15s ease, opacity .15s ease;
 }
-.modal__close:hover{ opacity: .85; }
+.modal__close:hover{
+  opacity: .95;
+  background: rgba(255,255,255,.24);
+}
 .modal__close:active{ transform: scale(.92); }
 
 /* Foco accesible */
@@ -162,6 +174,12 @@
 }
 @media (max-width: 420px){
   .modal__box{ padding: 2.2rem 1.8rem; }
+  .modal__close{
+    top: .8rem; right: .8rem;
+    width: 4.2rem;
+    height: 4.2rem;
+    font-size: 2.8rem;
+  }
 }
 
 /* Reduced motion */

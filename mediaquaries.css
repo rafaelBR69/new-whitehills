@@ -31,7 +31,7 @@
   body.nav-open{ overflow:hidden; }
 
   .section-services-title,
-  .section-img-title{ font-size:3.2rem; }
+  .section-img-title{ /* font-size:3.2rem; */ }
 
   .section-services-paragraph,
   .section-img-paragraph{ font-size:2rem; max-width:900px; }
@@ -52,7 +52,7 @@
   .plan-container{ display:flex; flex-direction:column; align-items:center; }
 
   .section-services-title,
-  .section-img-title{ font-size:2.8rem; }
+  .section-img-title{ /* font-size:2.8rem; */ }
 
   .section-services-paragraph,
   .section-img-paragraph{ font-size:1.9rem; max-width:760px; }
@@ -67,18 +67,45 @@
 
   .interior-title{
     font-weight:500;
-    font-size:3.3rem !important;
+    /* font-size:3.3rem !important; */
     text-align:center !important;
   }
   .interior-text{
     font-weight:500;
-    font-size:2.2rem !important;
+    /* font-size:2.2rem !important; */
     text-align:center !important;
+  }
+
+  /* Mejora Hero Status (Pills) */
+  .hero-status-inline {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .35rem .75rem;
+    margin-bottom: 2rem;
+  }
+  .hero-status-inline .hero-separator {
+    display: inline-block;
+    color: rgba(255,255,255,.52);
+    padding: 0 .2rem;
+  }
+  .hero-status-inline .hero-pill {
+    background: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border: 0 !important;
+    font-size: 1.5rem;
+    letter-spacing: .01em;
   }
 }
 
 /* ≤ 768px — bloques img-text, modales y ruleta */
 @media (max-width:768px){
+  .footer-contact {
+    white-space: pre-line;
+  }
+
   .img-text,
   .img-text--reverse{ flex-direction:column; text-align:center; }
   .img-text__img{ width:100%; flex-basis:auto; max-width:none; }
@@ -88,16 +115,16 @@
   .modal__form label,
   .modal__form input,
   .modal__form textarea,
-  .modal__send{ font-size:1.3rem; }
+  .modal__send{ /* font-size:1.3rem; */ }
 
   .contact-form{ width:95%; padding:2rem 1.5rem; }
   .contact-form__title{ font-size:1.9rem; }
 
-  .section-services-title{ font-size:2.4rem; }
+  .section-services-title{ /* font-size:2.4rem; */ }
   .section-services-paragraph{ font-size:1.8rem; max-width:640px; }
   .section-services-btn{ font-size:1.5rem; border-width:1.5px; }
 
-  .section-img-title{ font-size:2.6rem; }
+  .section-img-title{ /* font-size:2.6rem; */ }
   .section-img-paragraph{ font-size:1.7rem; max-width:640px; }
   .section-img-background-extend{ height:340px; }
   .video-overlap{ margin-top:-140px; }
@@ -168,15 +195,11 @@
     position:static; transform:none; text-align:center;
     margin:calc(var(--header-h) + 1rem) 0 .8rem; order:0;
   }
-  .bg_div :first-child {
-    font-size: 8rem;
-    font-weight: 300;
-    animation: slideinBottom 2s ease;
-  }
+
 
   .interior-title {
       font-weight: 500;
-      font-size: 2.5rem !important;
+      /* font-size: 2.5rem !important; */
       text-align: center !important;
   }
 
@@ -185,9 +208,6 @@
       font-size: 1.9rem !important;
       text-align: center !important;
   }
-
-  .bg_text1{ font-size:clamp(2.4rem,7vw,3.2rem); color:#5C4033 !important; }
-  .bg_text2{ font-size:clamp(1.4rem,4vw,2rem); color:#5C4033 !important; }
 
   .plan-box{
     display:flex; flex-direction:column; align-items:center;
@@ -231,7 +251,7 @@
 
   .section-services-title,
   .section-img-title{
-    font-size:2.5rem;
+    /* font-size:2.5rem; */
     font-family: var(--ff-body);
     font-weight:500;
   }
@@ -248,41 +268,51 @@
   .section-img-background-extend{ height:510px; }
   .video-overlap{ margin-top:-10px; }
 
-  /* Hero móvil limpio y consistente */
+    /* Hero móvil limpio y consistente (alineado con style.css) */
   .section_1.parallax-bg{
     position: relative;
     min-height: 92svh;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat;
+    padding: calc(var(--header-h) + 1.5rem) 1.6rem calc(var(--header-h) + 1.5rem);
   }
+
   .section_1.parallax-bg::before{
-    content:"";
-    position:absolute; inset:0;
-    background: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.38));
-    z-index:0; pointer-events:none;
+    display: none;
   }
+
   .section_1.parallax-bg .bg_div{
-    position:absolute; inset:0;
-    display:grid; place-items:center;
+    position: relative;
+    inset: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align:center;
-    padding:0 1.25rem;
+    padding: 0 1.25rem;
     z-index:1;
-    margin:0; transform:none; width:100%; height:100%;
-    padding-bottom:10vh; /* sube un poco el conjunto */
+    margin:0 auto;
+    transform:none;
+    width: min(100%, 920px);
+    height: auto;
   }
+
   .section_1.parallax-bg .bg_text1{
     margin-bottom:.4rem;
     color:#fff !important;
     text-shadow:0 2px 8px rgba(0,0,0,.35);
   }
+
   .section_1.parallax-bg .hero-cta{
-    font-size:2.1rem;
-    padding:.6rem 1.2rem;
-    color:#fff !important;
-    border:2px solid rgba(255,255,255,.85);
-    background: rgba(0,0,0,.15);
-    backdrop-filter: blur(4px);
+    font-size:1.6rem;
+    padding:1rem 2.4rem;
+    color:var(--brand-color) !important;
+    border:none;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    backdrop-filter: none;
+    animation: pulse-white 2s infinite;
   }
 }
 
@@ -293,18 +323,18 @@
 @media (max-width:480px){
   .modal__box{ max-width:95%; padding:1.5rem 1rem; }
   .modal__title{ font-size:1.7rem; }
-  .modal__close{ font-size:2rem; }
+  .modal__close{ font-size:2.8rem; }
   .modal__send{ font-size:1.4rem; }
 }
 
 /* ≤ 360px */
 @media (max-width:360px){
   .service-header{ width:73%; }
-  footer :nth-child(1),
-  footer :nth-child(2){ font-size:1.5rem; }
+  footer .footer-label,
+  footer .footer-contact{ font-size:1.5rem; }
   .footer-text1{ font-size:1.3rem; }
   .section-services-title,
-  .section-img-title{ font-size:1.9rem; }
+  .section-img-title{ /* font-size:1.9rem; */ }
   .section-services-paragraph,
   .section-img-paragraph{ font-size:1.45rem; }
   .section-services-btn{ font-size:1.3rem; padding:.4rem 1.2rem; }
@@ -368,8 +398,192 @@
 
   .interior-block .container{ max-width:1500px; }
 
-  footer :nth-child(1),
-  footer :nth-child(2){ font-size:2.8rem; }
+  footer .footer-label,
+  footer .footer-contact{ font-size:2.8rem; }
   .footer-text1{ font-size:2.4rem; }
   #langSwitcher{ font-size:1.8rem; }
+}
+
+/* ===========================================================
+   Availability Map - Mobile Premium
+   =========================================================== */
+@media (max-width: 991.98px){
+  .section_1--availability{
+    display:block !important;
+    min-height:auto !important;
+    padding:1.2rem .75rem 2.1rem !important;
+    background:linear-gradient(180deg,#f5f8f4 0%,#eef3ef 100%);
+  }
+
+  .section_1--availability .availability-box{
+    width:100%;
+    margin:.25rem auto 0;
+    padding:.85rem;
+    border-radius:18px;
+    border:1px solid rgba(60,77,40,.14);
+    background:#fff;
+    box-shadow:0 10px 24px rgba(32,46,24,.1);
+  }
+
+  .section_1--availability .availability-head{
+    margin:.4rem auto 1rem;
+    padding:0 .45rem;
+  }
+
+  .section_1--availability .availability-title{
+    font-size:clamp(4rem,7.4vw,5.2rem);
+    line-height:1.05;
+    letter-spacing:-.02em;
+    margin:0 0 .35rem;
+    color:var(--brand-color);
+    font-weight:650;
+  }
+
+  .section_1--availability .availability-sub{
+    font-size:clamp(2rem,3.3vw,2.5rem);
+    line-height:1.25;
+    margin:0;
+    color:#2f3f24;
+    opacity:.95;
+    font-weight:500;
+  }
+
+  .section_1--availability .map-canvas{
+    border-radius:14px;
+    border:1px solid rgba(60,77,40,.18);
+    box-shadow:0 8px 20px rgba(24,37,18,.2);
+    overflow:hidden;
+  }
+
+  .section_1--availability .map-viewport{
+    border-radius:14px;
+  }
+
+  #avail-ruleta{
+    display:block !important;
+    margin-top:1rem;
+    padding:.2rem 0 .8rem;
+  }
+
+  #avail-ruleta .ruleta-track{
+    gap:.95rem;
+    padding:0 .35rem .2rem;
+    scroll-snap-type:x mandatory;
+  }
+
+  #avail-ruleta .ruleta-card{
+    flex:0 0 auto;
+    width:min(86vw, 365px);
+    max-width:365px;
+    min-height:295px;
+    padding:1rem .95rem !important;
+    border-radius:16px;
+    border:1px solid rgba(60,77,40,.14);
+    box-shadow:0 10px 22px rgba(30,43,22,.1);
+    background:#fff;
+  }
+
+  #avail-ruleta .ruleta-card.is-active{
+    outline:2px solid rgba(60,77,40,.55);
+    outline-offset:-2px;
+    box-shadow:0 12px 24px rgba(30,43,22,.16);
+  }
+
+  #avail-ruleta .ruleta-card__head{
+    margin-bottom:.75rem !important;
+  }
+
+  #avail-ruleta .ruleta-card__title{
+    font-size:clamp(3.2rem,7vw,4rem) !important;
+    line-height:1;
+    color:#1f2b1a;
+    letter-spacing:-.01em;
+  }
+
+  #avail-ruleta .phase-pill{
+    font-size:1.18rem !important;
+    padding:.32rem .72rem !important;
+    border-radius:999px;
+  }
+
+  #avail-ruleta .badge{
+    font-size:1.08rem !important;
+    font-weight:700;
+    border-radius:999px;
+    padding:.38rem .62rem;
+  }
+
+  #avail-ruleta .ruleta-card__body{
+    font-size:1.62rem;
+  }
+
+  #avail-ruleta .ruleta-card__list{
+    font-size:1em !important;
+    padding-left:0;
+    margin-bottom:.8rem !important;
+  }
+
+  #avail-ruleta .ruleta-card__list li{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:1rem;
+    padding:.38rem 0;
+    border-bottom:1px solid rgba(60,77,40,.09);
+    font-size:1em !important;
+    line-height:1.35;
+  }
+
+  #avail-ruleta .ruleta-card__list li strong{
+    font-size:1.02em !important;
+    color:#1f2b1a;
+    font-weight:700;
+  }
+
+  #avail-ruleta .ruleta-card .precio{
+    font-size:2.35rem !important;
+    margin:.35rem 0 .62rem !important;
+    text-align:center;
+    line-height:1.1;
+  }
+
+  #avail-ruleta .ruleta-card .precio strong{
+    font-size:1em !important;
+    color:#a56c2e;
+    letter-spacing:.01em;
+  }
+
+  #avail-ruleta .ruleta-card a.btn.btn-dark{
+    min-height:42px;
+    width:100%;
+    border-radius:999px !important;
+    font-size:1.35rem;
+    font-weight:650 !important;
+    border-color:#2d3b23;
+    background:linear-gradient(180deg,#35482a 0%,#27341f 100%);
+    box-shadow:0 8px 16px rgba(25,36,19,.2);
+    letter-spacing:.01em;
+  }
+
+}
+
+@media (max-width: 480px){
+  .section_1--availability{
+    padding:1rem .6rem 2rem !important;
+  }
+
+  .section_1--availability .availability-box{
+    padding:.7rem;
+    border-radius:15px;
+  }
+
+  #avail-ruleta .ruleta-card{
+    width:min(89vw, 345px);
+    min-height:286px;
+    padding:.9rem .85rem !important;
+  }
+
+  #avail-ruleta .ruleta-card__title{
+    font-size:3rem !important;
+  }
 }

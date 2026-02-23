@@ -121,16 +121,18 @@ window.closeModal = () => window.closeVisitModal();
 
 /* Cierre por overlay o botón X (para cualquier modal) */
 document.addEventListener('click', (e) => {
-  const isOverlay = e.target.classList?.contains('modal__overlay');
-  const closeBtn  = e.target.closest?.('.modal__close');
+  const target    = (e.target && e.target.nodeType === 3) ? e.target.parentElement : e.target;
+  const isOverlay = target?.classList?.contains('modal__overlay');
+  const closeBtn  = target?.closest?.('.modal__close');
   if (isOverlay || closeBtn) {
-    const modal = (isOverlay ? e.target.closest('.modal') : closeBtn.closest('.modal'));
-    modal?.classList.remove('show');
+    const modal = (isOverlay ? target.closest('.modal') : closeBtn.closest('.modal'));
+    if (modal) toggleModal(modal, false);  // ← asegura limpiar .show/.is-open y body
   }
   // ids específicos de "Gracias" (por compatibilidad)
-  const id = e.target.id;
+  const id = target?.id;
   if (id === 'thankOverlay' || id === 'thankClose' || id === 'thankOk') closeThank();
 });
+
 /* ▶️ Abrir “Agendar visita” (.btn-visit) */
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('.btn-visit');
@@ -149,6 +151,18 @@ document.addEventListener('click', (e) => {
     origin.value = 'Agendar visita – Web';
   }
   openVisitModal();
+});
+
+/* ▶️ CTA fijo móvil “Contact” → abre modal de datos existente */
+document.addEventListener('click', async (e) => {
+  const trigger = e.target.closest('[data-action="open-contact-modal"]');
+  if (!trigger) return;
+
+  // Si no existe la función modal, dejamos navegación normal al enlace.
+  if (typeof window.openVisitModal !== 'function') return;
+
+  e.preventDefault();
+  await window.openVisitModal();
 });
 
 
@@ -235,6 +249,17 @@ function setInfoDisabled($out, disabled = true) {
   $out.toggleClass('is-disabled', disabled)
       .attr('aria-hidden', disabled ? 'true' : 'false');
 }
+function normalizeUnitStatus(status) {
+  return String(status || '').toLowerCase().replace(/[_-]+/g, ' ').trim();
+}
+function shouldHideUnitContent(status) {
+  const est = normalizeUnitStatus(status);
+  return est === 'reservado' || est === 'vendido';
+}
+function clearMobileUnitExtra() {
+  const container = document.getElementById('mobile-unit-extra');
+  if (container) container.innerHTML = '';
+}
 function uid(prefix='id') {
   return `${prefix}-${Math.random().toString(36).slice(2,9)}`;
 }
@@ -242,6 +267,44 @@ function uid(prefix='id') {
   /* ──────────────────────────────
     Availability map (Image-Mapster)
   ──────────────────────────────── */
+const AVAILABILITY_DATA_CACHE = new Map();
+
+function normalizeAvailabilityData(payload) {
+  if (!payload || typeof payload !== 'object') return {};
+
+  if (Array.isArray(payload)) {
+    const pairs = payload
+      .filter(Boolean)
+      .map((v) => [String(v.id || v.numero_ud || '').toLowerCase(), v])
+      .filter(([k]) => !!k);
+    return Object.fromEntries(pairs);
+  }
+
+  return payload;
+}
+
+function loadAvailabilityData(jsonURL) {
+  const key = String(jsonURL || '').trim();
+  if (!key) return Promise.reject(new Error('Missing availability JSON URL'));
+
+  if (AVAILABILITY_DATA_CACHE.has(key)) {
+    return AVAILABILITY_DATA_CACHE.get(key);
+  }
+
+  const isDefaultAvailabilityJson = /\/availability-data\.json(?:[?#].*)?$/i.test(key);
+  const fetchDirect = () => fetch(key, { cache: 'force-cache' }).then((res) => {
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  });
+  const source = isDefaultAvailabilityJson && window.__WH_AVAILABILITY_DATA_PROMISE
+    ? Promise.resolve(window.__WH_AVAILABILITY_DATA_PROMISE).catch(fetchDirect)
+    : fetchDirect();
+
+  const promise = Promise.resolve(source).then(normalizeAvailabilityData);
+  AVAILABILITY_DATA_CACHE.set(key, promise);
+  return promise;
+}
+
   window.initAvailabilityMap = function initAvailabilityMap () {
     // 1) Librerías disponibles
     if (!window.jQuery || !$.fn.mapster) {
@@ -278,12 +341,8 @@ function uid(prefix='id') {
     $('map[name="avail-map"] area').attr('href', '#');
 
     // 5) Carga de datos y arranque
-    $.getJSON(jsonURL)
-      .done((list) => {
-        const viviendas = Array.isArray(list)
-          ? Object.fromEntries(list.map(v => [String(v.id).toLowerCase(), v]))
-          : list;
-
+    loadAvailabilityData(jsonURL)
+      .then((viviendas) => {
         window.VIVIENDAS = viviendas;
 
         const order    = orderKeysFromMap();
@@ -303,27 +362,27 @@ function uid(prefix='id') {
           mqMobile.addEventListener('change', (e) => {
             if (e.matches) {
               // Entrando a móvil → ocultamos panel y limpiamos estado visual de cards
-              setInfoDisabled($('#info-text'), true);
+              const $info = $('#info-text');
+              $info.empty();
+              setInfoDisabled($info, true);
+              clearMobileUnitExtra();
               $('#ruleta-track .ruleta-card').removeClass('is-active');
             } else {
-              // Volviendo a desktop → si hay card activa mostramos su info; si no, nada
+              // Volviendo a desktop → si hay card activa reaplicamos la selección
               const $active = $('#ruleta-track .ruleta-card.is-active');
               if ($active.length) {
                 const key  = String($active.data('key')).toLowerCase();
-                const $out = $('#info-text');
-                if (typeof mostrarInfo === 'function') {
-                  if (mostrarInfo.length >= 3) { mostrarInfo(viviendas, key, $out); }
-                  else { mostrarInfo(key); }
-                }
-                setInfoDisabled($out, false);
+                selectUnidad(key, { source: 'breakpoint' });
               } else {
-                setInfoDisabled($('#info-text'), true);
+                const $info = $('#info-text');
+                $info.empty();
+                setInfoDisabled($info, true);
               }
             }
           });
         }
       })
-      .fail(() => console.error('[Map] No se pudo leer', jsonURL));
+      .catch((err) => console.error('[Map] No se pudo leer', jsonURL, err));
 
     function iniciarMapster (viviendas, initialKey = null, opts = {}) {
 
@@ -344,11 +403,11 @@ function uid(prefix='id') {
 
         const est = norm(v.estado);
 
-        // === VENDIDO → bloqueado (no clickable), rojo ===
+        // === VENDIDO → rojo y clicable (sin mostrar contenido en panel) ===
         if (est === 'vendido') {
           vendidos.push(key);
           return {
-            key, isSelectable:false, staticState:true, selected:true,
+            key, isSelectable:true, staticState:true, selected:true,
             render_highlight:{ fillColor:RED, fillOpacity:0.55, stroke:true, strokeColor:RED, strokeWidth:3 },
             render_select   :{ fillColor:RED, fillOpacity:0.55, stroke:true, strokeColor:RED, strokeWidth:3 }
           };
@@ -404,10 +463,6 @@ function uid(prefix='id') {
           const v = viviendas[key];
           if (!v) return false;
 
-          const est = norm(v.estado);
-          // ❌ sólo bloqueamos VENDIDO; NO bloqueamos no_disponible ni reservado
-          if (est === 'vendido') return false;
-
           // 👇 Centraliza selección + pintado (evita dobles)
           selectUnidad(key, { source:'mapster' });
           return false;
@@ -451,6 +506,43 @@ function uid(prefix='id') {
 
       $img.data('mapstered', true);
       console.log('[Map] Mapster inicializado');
+    }
+
+    // Pon esto arriba, cerca de otras constantes
+    const ASSET_BASE = '/whitehills/new-whitehills/';
+
+    // Convierte "assets/loquesea.mp4" -> "/whitehills/new-whitehills/assets/loquesea.mp4"
+    // Deja intactas las URLs absolutas (http/https o que ya empiecen por "/")
+    function resolveAsset(u) {
+      if (!u) return '';
+      if (/^https?:\/\//i.test(u) || u.startsWith('/')) return u;
+      return ASSET_BASE + u.replace(/^\.?\//,'');
+    }
+
+    function autoplayUnitVideo() {
+      const v = document.querySelector('#info-text .video-el');
+      if (!v) return;
+
+      // Pausa otros vídeos
+      document.querySelectorAll('video').forEach(el => { if (el !== v) { try{ el.pause(); }catch{} } });
+
+      // Intenta reproducir con sonido; si el navegador bloquea, vuelve a intentar en mute
+      const start = () => {
+        const p = v.play();
+        if (p && typeof p.then === 'function') {
+          p.catch(() => {           // Safari/iOS u otros bloqueos
+            v.muted = true;
+            v.play().catch(()=>{});
+          });
+        }
+      };
+
+      // iOS: asegúrate de inline
+      v.setAttribute('playsinline','');
+      v.playsInline = true;
+
+      if (v.readyState >= 2) start();
+      else v.addEventListener('canplay', start, { once:true });
     }
 
     // Idioma actual (i18next → <html lang> → 'es-ES')
@@ -505,153 +597,264 @@ function uid(prefix='id') {
       }).format(n);
     }
 
+    function toKey(s) {
+      return String(s || '').toLowerCase().trim().replace(/[\s-]+/g, '_');
+    }
+
+    function getPhaseKey(d) {
+      const raw = d?.fase ?? d?.phase ?? '';
+      const k = toKey(raw);
+      if (k === 'phase_1' || k === 'fase_1') return 'fase_1';
+      if (k === 'phase_2' || k === 'fase_2') return 'fase_2';
+      return '';
+    }
+
+    function getPhaseLabel(phaseKey) {
+      if (phaseKey === 'fase_1') return 'Fase 1';
+      if (phaseKey === 'fase_2') return 'Fase 2';
+      return '';
+    }
+
 
     function mostrarInfo(viviendas, key, $out) {
       const d = viviendas[key];
-      const _t = (k, dv = '') => (window.i18next ? i18next.t(k, { defaultValue: dv }) : (dv || k));
+      if (!d || !$out?.length) return;
+
       const norm  = s => String(s || '').toLowerCase().replace(/[_-]+/g,' ').trim();
       const asKey = s => String(s || '').toLowerCase().trim().replace(/[\s-]+/g, '_');
 
-      if (!d) {
-        $out.html('<p data-i18n="unit.info.empty">Sin datos.</p>');
-        if (typeof translateIn === 'function') translateIn($out[0]);
-        else {
-          $out.find('[data-i18n]').each(function () {
-            const k = this.getAttribute('data-i18n');
-            const val = _t(k, this.textContent);
-            if (/_html$/.test(k)) this.innerHTML = val; else this.textContent = val;
-          });
-        }
+      const estNorm   = norm(d.estado);
+      const estadoKey = asKey(d.estado);
+      const phaseKey  = getPhaseKey(d);
+      const phaseText = getPhaseLabel(phaseKey);
+      const phaseCls  = phaseKey ? ` phase-pill--${phaseKey.endsWith('2') ? '2' : '1'}` : '';
+
+      /* ===============================
+        SIN CONTENIDO (reservado / vendido)
+      =============================== */
+      if (shouldHideUnitContent(estNorm)) {
+        $out.empty();
+        setInfoDisabled($out, true);
         return;
       }
 
-      const estNorm   = norm(d.estado);
-      const estadoKey = asKey(d.estado);
-
-      // ⛔ Vista mínima para NO DISPONIBLE y RESERVADO (solo badge)
-      if (estNorm === 'no disponible' || estNorm === 'reservado') {
+      /* ===============================
+        VISTA MÍNIMA (no disponible)
+      =============================== */
+      if (estNorm === 'no disponible') {
         $out.html(`
-          <div class="info-card-head">
-            <h3>
-              ${d.numero_ud || key}
-              <span class="badge badge-${estadoKey}" data-i18n="unit.status.${estadoKey}">${d.estado || ''}</span>
-            </h3>
+          <div class="wh-info">
+            <div class="info-card info-card--wide">
+              <div class="info-card-head">
+                <h3>
+                  ${d.numero_ud || key}
+                  ${phaseKey ? `
+                    <span class="phase-pill${phaseCls}"
+                          data-i18n="unit.phase.${phaseKey}">
+                      ${phaseText}
+                    </span>` : ``}
+                  <span class="badge badge-${estadoKey}"
+                        data-i18n="unit.status.${estadoKey}">
+                    ${d.estado || ''}
+                  </span>
+                </h3>
+              </div>
+            </div>
           </div>
         `);
 
-        if (typeof translateIn === 'function') translateIn($out[0]);
-        else {
-          $out.find('[data-i18n]').each(function () {
-            const k = this.getAttribute('data-i18n');
-            const val = _t(k, this.textContent);
-            if (/_html$/.test(k)) this.innerHTML = val; else this.textContent = val;
+        // 🔤 Traducción correcta
+        if (window.i18next?.isInitialized) {
+          $out[0].querySelectorAll('[data-i18n]').forEach(el => {
+            el.textContent = i18next.t(el.dataset.i18n, {
+              defaultValue: el.textContent.trim()
+            });
           });
         }
+
         setInfoDisabled($out, false);
         return;
       }
 
-      // === Vista completa (disponible/otros) — UNA COLUMNA ===
+      /* ===============================
+        VISTA COMPLETA (disponible)
+      =============================== */
       const webURL = d.plano_pdf_web || d.plano_pdf || '';
       const pdfId  = uid('pdf-preview');
 
-          // En mostrarInfo:
-      const priceFmt = formatEUR(d.coste_sin_iva);
-      const priceHTML = priceFmt ? `<div class="precio"><strong>${priceFmt}</strong></div>` : '';
+      const priceFmt  = formatEUR(d.coste_sin_iva);
+      const priceHTML = priceFmt
+        ? `<div class="precio"><strong>${priceFmt}</strong></div>`
+        : '';
+
+      const guessBase = typeof window.UNIT_VIDEO_BASE === 'string'
+        ? window.UNIT_VIDEO_BASE.replace(/\/+$/, '')
+        : '';
+
+      const guessed  = guessBase
+        ? `${guessBase}/${asKey(d.numero_ud || key)}.mp4`
+        : '';
+
+      const videoURL = resolveAsset(d.video_url || d.video || guessed || '');
+      const hasVideo = !!videoURL;
+
+      const mediaH =
+        window.matchMedia('(min-width: 1200px)').matches ? 560 :
+        window.matchMedia('(min-width: 992px)').matches  ? 520 :
+        window.matchMedia('(min-width: 768px)').matches  ? 460 :
+        window.matchMedia('(min-width: 600px)').matches  ? 380 : 280;
 
       $out.html(`
-        <!-- CABECERA -->
-        <div class="info-card-head">
-          <h3>
-            ${d.numero_ud}
-            <span class="badge badge-${estadoKey}" data-i18n="unit.status.${estadoKey}">${d.estado || ''}</span>
-          </h3>
-        </div>
+        <div class="wh-info">
+          <div class="info-card info-card--wide">
 
-        <!-- UNA SOLA COLUMNA -->
-        <div class="info-card-grid">
-          <div class="info-card-col col-only">
-            <ul class="list-unstyled info-list--compact">
-              <li><span data-i18n="unit.info.plot_m2">Plot (m²)</span> <strong>${d.plot_m2 ?? '-'}</strong></li>
-              <li><span data-i18n="unit.info.built_area">Built Area</span> <strong>${d.built_area ?? '-'}</strong></li>
-              <li><span data-i18n="unit.info.covered_terraces">Covered terraces</span> <strong>${d.covered_terraces ?? '-'}</strong></li>
-              <li><span data-i18n="unit.info.garden">Garden</span> <strong>${d.garden ?? '-'}</strong></li>
-            </ul>
+            <!-- CABECERA -->
+            <div class="info-card-head">
+              <h3>
+                ${d.numero_ud}
+                ${phaseKey ? `
+                  <span class="phase-pill${phaseCls}"
+                        data-i18n="unit.phase.${phaseKey}">
+                    ${phaseText}
+                  </span>` : ``}
+                <span class="badge badge-${estadoKey}"
+                      data-i18n="unit.status.${estadoKey}">
+                  ${d.estado || ''}
+                </span>
+              </h3>
+            </div>
 
-            ${priceHTML}
+            <!-- DATOS -->
+            <div class="info-card-grid">
+              <div class="info-card-col col-only">
+                <ul class="list-unstyled info-list--compact">
+                  <li><span data-i18n="unit.info.plot_m2">Parcela (m²)</span> <strong>${d.plot_m2 ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.built_area">Superficie construida (m²)</span> <strong>${d.built_area ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.covered_terraces">Terrazas (m²)</span> <strong>${d.covered_terraces ?? '-'}</strong></li>
+                  <li><span data-i18n="unit.info.garden">Jardín</span> <strong>${d.garden ?? '-'}</strong></li>
+                </ul>
+                ${priceHTML}
+              </div>
+            </div>
+
+            <!-- MEDIOS -->
+            <div class="unit-media" style="--media-h:${mediaH}px;">
+              <div class="media-col">
+                <div class="pdf-box" id="${pdfId}"></div>
+              </div>
+
+              ${hasVideo ? `
+              <div class="media-col">
+                <div class="video-frame">
+                  <video class="video-el" id="${pdfId}-vid"
+                        controls preload="metadata" playsinline
+                        ${d.video_poster ? `poster="${d.video_poster}"` : ''}>
+                    <source src="${videoURL}" type="video/mp4">
+                    <span data-i18n="unit.media.video_not_supported">
+                      Your browser does not support HTML5 video.
+                    </span>
+                  </video>
+                </div>
+              </div>` : ''}
+            </div>
+
+            <!-- CTA -->
+            <div class="visit-actions">
+              <button type="button" class="btn-visit" data-unit="${d.numero_ud || key}">
+                <span data-i18n="unit.cta.schedule_visit">Agendar visita</span>
+              </button>
+            </div>
+
           </div>
-        </div>
-
-        <!-- PDF debajo -->
-        <div class="pdf-preview" id="${pdfId}"></div>
-
-        <!-- CTA -->
-        <div class="visit-actions">
-          <button type="button" class="btn-visit" data-unit="${d.numero_ud || key}">
-            <span data-i18n="unit.cta.schedule_visit">Agendar visita</span>
-          </button>
         </div>
       `);
 
-      // Traducción
-      if (typeof translateIn === 'function') translateIn($out[0]);
-      else {
-        $out.find('[data-i18n]').each(function () {
-          const k = this.getAttribute('data-i18n');
-          const val = _t(k, this.textContent);
-          if (/_html$/.test(k)) this.innerHTML = val; else this.textContent = val;
+      /* 🔤 Traducción correcta POST-render */
+      if (window.i18next?.isInitialized) {
+        $out[0].querySelectorAll('[data-i18n]').forEach(el => {
+          el.textContent = i18next.t(el.dataset.i18n, {
+            defaultValue: el.textContent.trim()
+          });
         });
       }
 
       setInfoDisabled($out, false);
 
-      // PDF (si hay)
+      /* PDF */
       if (webURL) {
-        const $pdf = $out.find('#' + pdfId);
-        const maxH =
-          window.matchMedia('(min-width:1200px)').matches ? 560 :
-          window.matchMedia('(min-width:768px)').matches  ? 500 : 420;
-
-        renderPdfGallery(webURL, $pdf, { initialPage: 1, maxHeight: maxH, zoom: 0.95 });
-      } else {
-        console.warn('[PDF] La vivienda no tiene URL de plano:', key);
+        renderPdfGallery(webURL, $out.find('#' + pdfId), {
+          initialPage: 1,
+          maxHeight: mediaH,
+          zoom: 0.95
+        });
       }
 
-      // CTA
+      /* Vídeo */
+      if (hasVideo) {
+        const v = document.getElementById(`${pdfId}-vid`);
+        if (v && !v.currentSrc) v.load();
+      }
+
+      /* CTA */
       $out.off('click', '.btn-visit').on('click', '.btn-visit', function (e) {
         e.preventDefault();
-        const unit = this.getAttribute('data-unit') || key;
-
-        try {
-          if (window.leadForm) {
-            let inp = leadForm.querySelector('[name="unidad"]');
-            if (!inp) {
-              inp = document.createElement('input');
-              inp.type = 'hidden';
-              inp.name = 'unidad';
-              leadForm.appendChild(inp);
-            }
-            inp.value = unit;
-
-            let org = leadForm.querySelector('[name="origin"]') || leadForm.querySelector('[name="origen"]');
-            if (!org) {
-              org = document.createElement('input');
-              org.type = 'hidden';
-              org.name = 'origin';
-              leadForm.appendChild(org);
-            }
-            org.value = _t('unit.cta.origin_schedule', 'Agendar visita – Web');
-          }
-        } catch (err) {
-          console.warn('No pude pre-rellenar la unidad en el leadForm:', err);
-        }
-
         if (typeof openModal === 'function') openModal();
-        else {
-          const m = document.getElementById('infoModal');
-          if (m) m.classList.add('show');
-        }
       });
+    }
+
+
+    function mostrarInfoMobile(viviendas, key) {
+      const d = viviendas[key];
+      if (!d) return;
+
+      const videoURL = resolveAsset(d.video_url || '');
+      const containerId = 'mobile-unit-extra';
+
+      // Si no hay vídeo → limpia y sal
+      if (!videoURL) {
+        const c = document.getElementById(containerId);
+        if (c) c.innerHTML = '';
+        return;
+      }
+
+      const html = `
+        <div class="mobile-unit-info">
+          <div class="mobile-video">
+            <video class="video-el" controls playsinline preload="metadata">
+              <source src="${videoURL}" type="video/mp4">
+              <span data-i18n="unit.media.video_not_supported">
+                Your browser does not support HTML5 video.
+              </span>
+            </video>
+          </div>
+        </div>
+      `;
+
+      // Insertar DEBAJO de la ruleta
+      let container = document.getElementById(containerId);
+      if (!container) {
+        container = document.createElement('div');
+        container.id = containerId;
+        document
+          .getElementById('ruleta-track')
+          ?.insertAdjacentElement('afterend', container);
+      }
+
+      container.innerHTML = html;
+
+      // ✅ TRADUCCIÓN CORRECTA (tu sistema real)
+      if (window.i18next?.isInitialized) {
+        container
+          .querySelectorAll('[data-i18n]')
+          .forEach(el => {
+            el.textContent = i18next.t(el.dataset.i18n, {
+              defaultValue: el.textContent.trim()
+            });
+          });
+      }
+
+      // Autoplay seguro en móvil
+      setTimeout(() => autoplayUnitVideo(), 200);
     }
 
     /* === Utilidades ========================================================= */
@@ -667,160 +870,161 @@ function uid(prefix='id') {
     }
 
     function buildRuleta(viviendas, { autoselectOnInit = true } = {}) {
-      const _t = (k, dv = '') => (window.i18next ? i18next.t(k, { defaultValue: dv }) : (dv || k));
       const norm  = s => String(s || '').toLowerCase().replace(/[_-]+/g,' ').trim();
       const asKey = s => String(s || '').toLowerCase().trim().replace(/[\s-]+/g, '_');
 
-      const order  = orderKeysFromMap();
+      const order  = orderKeysFromMap(); // 🔥 keys EXACTAS del <map>
       const $track = $('#ruleta-track');
       $track.empty();
 
+      /* ===============================
+        CONSTRUCCIÓN DE CARDS
+      =============================== */
       order.forEach(key => {
-        const d = viviendas[key];
-        if (!d) return;
-
-        const estNorm   = norm(d.estado);
-        const estadoKey = asKey(d.estado);
-
-        // URL del plano (si existe)
-        const pdfURL = (typeof getPlanoURL === 'function')
-          ? getPlanoURL(d)
-          : (d.plano_pdf_web || d.plano_pdf || d.plano_pdf_print || '');
-
-        // === CARDS COMPACTAS (reservado / no disponible / vendido) ===
-        if (estNorm === 'reservado' || estNorm === 'no disponible' || estNorm === 'vendido') {
-          const html = `
-            <article class="ruleta-card ruleta-card--wide is-compact"
-                    role="listitem" data-key="${key}" data-state="${estadoKey}">
-              <header class="ruleta-card__head d-flex align-items-center justify-content-between">
-                <h4 class="ruleta-card__title m-0">${d.numero_ud || key}</h4>
-                <span class="badge badge-${estadoKey}" data-i18n="unit.status.${estadoKey}">${d.estado || ''}</span>
-              </header>
-            </article>`;
-          $track.append(html);
+        const d = viviendas[key]; // 🔥 SIN tocar la key
+        if (!d) {
+          console.warn('[RUETA] Vivienda no encontrada en JSON:', key);
           return;
         }
 
-        // === CARD NORMAL (disponible / otros) → lista corta + precio/botón ===
-        const priceHTML = d.coste_sin_iva
-          ? `<div class="ruleta-card__price precio"><strong>${d.coste_sin_iva}</strong></div>`
-          : `<div class="ruleta-card__price precio"><strong><span data-i18n="unit.price.na">No disponible €</span></strong></div>`;
+        const estNorm   = norm(d.estado);
+        const estadoKey = asKey(d.estado);
+        const phaseKey  = getPhaseKey(d);
+        const phaseText = getPhaseLabel(phaseKey);
+        const phaseCls  = phaseKey ? ` phase-pill--${phaseKey.endsWith('2') ? '2' : '1'}` : '';
 
-        const html = `
-          <article class="ruleta-card ruleta-card--wide"
-                  role="listitem" data-key="${key}" data-state="${estadoKey}">
-            <header class="ruleta-card__head d-flex align-items-center justify-content-between">
-              <h4 class="ruleta-card__title m-0">${d.numero_ud || key}</h4>
-              <span class="badge badge-${estadoKey}" data-i18n="unit.status.${estadoKey}">${d.estado || ''}</span>
+        const pdfURL = typeof getPlanoURL === 'function'
+          ? getPlanoURL(d)
+          : (d.plano_pdf_web || d.plano_pdf || d.plano_pdf_print || '');
+        const canShowPlan = estNorm === 'disponible';
+
+        const priceText = typeof formatEUR === 'function'
+          ? formatEUR(d.coste_sin_iva)
+          : (d.coste_sin_iva ? String(d.coste_sin_iva) : '');
+
+        /* ===============================
+          CARD NORMAL (Disponible/Vendido)
+        =============================== */
+        $track.append(`
+          <article class="ruleta-card ruleta-card--wide p-3"
+                  data-key="${key}"
+                  data-state="${estadoKey}">
+
+            <header class="ruleta-card__head d-flex justify-content-between align-items-center mb-3">
+              <div class="ruleta-card__head-left">
+                <h4 class="ruleta-card__title m-0">${d.numero_ud || key}</h4>
+                ${phaseKey ? `
+                  <span class="phase-pill${phaseCls}"
+                        data-i18n="unit.phase.${phaseKey}">
+                    ${phaseText}
+                  </span>` : ``}
+              </div>
+              <span class="badge badge-${estadoKey}"
+                    data-i18n="unit.status.${estadoKey}">
+                ${d.estado || ''}
+              </span>
             </header>
 
             <div class="ruleta-card__body">
-              <div class="ruleta-card__cols">
-                <ul class="ruleta-card__list">
-                  <li><span data-i18n="unit.info.m2c_sr">m2c SR (PB + P1)</span> <strong>${d.m2c_sr ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.m2c_br">m2c BR (Sótano)</span> <strong>${d.m2c_br ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.castillete">Castillete</span> <strong>${d.castillete ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.terrazas_cubiertas">Terrazas cubiertas</span> <strong>${d.terrazas_cubiertas ?? '-'}</strong></li>
-                  <li><span data-i18n="unit.info.superficie">Superficie</span> <strong>${d.superficie ?? '-'}</strong></li>
-                </ul>
-              </div>
+              <ul class="ruleta-card__list list-unstyled mb-3" style="font-size: 0.9em;">
+                <li class="d-flex justify-content-between mb-1">
+                  <span data-i18n="unit.info.plot_m2"></span> <strong>${d.plot_m2 ?? '-'}</strong>
+                </li>
+                <li class="d-flex justify-content-between mb-1">
+                  <span data-i18n="unit.info.built_area"></span> <strong>${d.built_area ?? '-'}</strong>
+                </li>
+                <li class="d-flex justify-content-between mb-1">
+                  <span data-i18n="unit.info.covered_terraces"></span> <strong>${d.covered_terraces ?? '-'}</strong>
+                </li>
+                <li class="d-flex justify-content-between mb-1">
+                  <span data-i18n="unit.info.garden"></span> <strong>${d.garden ?? '-'}</strong>
+                </li>
+              </ul>
 
-              <div class="ruleta-card__bottom">
-                ${priceHTML}
-                ${pdfURL ? `
-                  <a class="btn-ver-plano" href="${pdfURL}" target="_blank" rel="noopener">
-                    <span data-i18n="unit.actions.view_plan">Ver plano</span>
-                  </a>` : ``}
+              <div class="ruleta-card__bottom d-flex flex-column gap-2 mt-auto">
+                <div class="d-flex justify-content-between align-items-end">
+                  ${
+                    priceText
+                      ? `<div class="precio mb-0" style="font-size: 1.4rem;"><strong>${priceText}</strong></div>`
+                      : `<div class="precio mb-0" style="font-size: 1.4rem;"><strong><span data-i18n="unit.price.na"></span></strong></div>`
+                  }
+                </div>
+
+                ${
+                  canShowPlan && pdfURL
+                    ? `<a href="${pdfURL}" target="_blank" rel="noopener"
+                         class="btn btn-sm btn-dark w-100 d-flex align-items-center justify-content-center gap-2"
+                         style="border-radius: 50px; font-weight: 600;">
+                         <i class="fa-regular fa-file-pdf"></i>
+                         <span data-i18n="unit.actions.view_plan">Obtener plano</span>
+                       </a>`
+                    : ``
+                }
               </div>
             </div>
-          </article>`;
-        $track.append(html);
+          </article>
+        `);
       });
 
-      // Traducción del bloque recién creado
-      if (typeof translateIn === 'function') {
-        translateIn($track[0]);
-      } else {
-        $track.find('[data-i18n]').each(function () {
-          const k = this.getAttribute('data-i18n');
-          const val = _t(k, this.textContent);
-          if (/_html$/.test(k)) this.innerHTML = val; else this.textContent = val;
+      /* ===============================
+        TRADUCCIÓN (UNA SOLA VEZ)
+      =============================== */
+      if (window.i18next?.isInitialized) {
+        $track[0].querySelectorAll('[data-i18n]').forEach(el => {
+          el.textContent = i18next.t(el.dataset.i18n, {
+            defaultValue: el.textContent.trim()
+          });
         });
       }
 
+      /* ===============================
+        INTERACCIÓN / SELECCIÓN
+      =============================== */
       let activeIndex = 0;
-
-      function updateArrows() {
-        // si tienes flechas, gestiona aquí
-      }
 
       function activateByIndex(i, { scroll = true, source = 'ruleta' } = {}) {
         const $cards = $track.find('.ruleta-card');
         const $card  = $cards.eq(i);
         if (!$card.length) return;
 
-        const key  = String($card.data('key')).toLowerCase();
-        const data = (window.VIVIENDAS || window.viviendas || {});
-        const est  = norm(data[key]?.estado);
-
-        // bloquea click en vendido
-        if (est === 'vendido') return;
+        const key = $card.data('key'); // 🔥 KEY REAL
+        const d   = viviendas[key];
+        if (!d) return;
 
         activeIndex = i;
         $cards.removeClass('is-active');
         $card.addClass('is-active');
 
+        // 🔥 AQUÍ YA FUNCIONA mostrarInfo / mostrarInfoMobile
         selectUnidad(key, { source });
 
         if (scroll) {
-          $card.get(0).scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          $card[0].scrollIntoView({
+            behavior: 'smooth',
+            inline: 'center',
+            block: 'nearest'
+          });
         }
-        updateArrows();
       }
 
-      // Click en card
-      $track.off('click', '.ruleta-card').on('click', '.ruleta-card', function () {
-        const i = $(this).index();
-        activateByIndex(i, { source: 'ruleta' });
-      });
+      $track
+        .off('click', '.ruleta-card')
+        .on('click', '.ruleta-card', function () {
+          activateByIndex($(this).index(), { source: 'ruleta' });
+        });
 
-      // Activación al terminar el scroll (card centrada)
-      let scrollTO = null;
-      $track.off('scroll').on('scroll', function() {
-        clearTimeout(scrollTO);
-        scrollTO = setTimeout(() => {
-          const $cards   = $track.find('.ruleta-card');
-          const trackRect= $track[0].getBoundingClientRect();
-          const centerX  = trackRect.left + trackRect.width / 2;
-
-          let best = -1, bestDist = Infinity;
-          $cards.each(function(i) {
-            const r = this.getBoundingClientRect();
-            const c = r.left + r.width / 2;
-            const d = Math.abs(c - centerX);
-            if (d < bestDist) { bestDist = d; best = i; }
-          });
-
-          if (best >= 0 && best !== activeIndex) {
-            activateByIndex(best, { scroll: false, source: 'ruleta' });
-          }
-        }, 120);
-      });
-
-      // Estado inicial
+      /* ===============================
+        SELECCIÓN INICIAL
+      =============================== */
       if (autoselectOnInit) {
-        let firstIdx = 0;
-        for (let i = 0; i < order.length; i++) {
-          const v = viviendas[order[i]];
-          if (v && norm(v.estado) !== 'reservado') { firstIdx = i; break; }
-        }
-        activateByIndex(firstIdx, { scroll: false, source: 'ruleta' });
-      } else {
-        updateArrows();
+        const firstIdx = order.findIndex(k => {
+          const v = viviendas[k];
+          const s = v ? norm(v.estado) : '';
+          return v && s !== 'reservado' && s !== 'vendido' && s !== 'no disponible';
+        });
+        activateByIndex(Math.max(firstIdx, 0), { scroll: false });
       }
     }
-
-
 
     let _prevKey = null;
     let _selectedKey = null;
@@ -849,6 +1053,10 @@ function uid(prefix='id') {
       const key = String(rawKey).toLowerCase();
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
       const $img = $('#avail-img');
+      const viviendas = window.VIVIENDAS || window.viviendas || {};
+      const unidad = viviendas[key];
+      if (!unidad) return;
+      const hideContent = shouldHideUnitContent(unidad.estado);
 
       // 1) Card activa en la ruleta
       const $cards = $('#ruleta-track .ruleta-card');
@@ -860,8 +1068,8 @@ function uid(prefix='id') {
       // 2) Selección en Mapster (persistente)
       if (_mapReady) {
         if (_prevKey && _prevKey !== key) {
-          const prev = (window.VIVIENDAS || window.viviendas || {})[_prevKey];
-          const prevEst = String(prev?.estado || '').toLowerCase().replace(/[_-]+/g,' ').trim();
+          const prev = viviendas[_prevKey];
+          const prevEst = normalizeUnitStatus(prev?.estado);
           // 👇 Si la anterior era "reservado", la dejamos pintada en amarillo
           if (prevEst !== 'reservado') {
             $img.mapster('set', false, _prevKey);
@@ -880,19 +1088,23 @@ function uid(prefix='id') {
       // 3) Panel: solo desktop
       if (!isMobile) {
         const $out = $('#info-text');
-        try {
-          if (typeof mostrarInfo === 'function') {
-            if (mostrarInfo.length >= 3) {
-              mostrarInfo(window.VIVIENDAS || window.viviendas, key, $out);
-            } else {
-              mostrarInfo(key);
-            }
-          }
-          setInfoDisabled($out, false);
-          scrollInfoIntoView();
-        } catch(e) { console.warn('mostrarInfo error:', e); }
+        clearMobileUnitExtra();
+        if (hideContent) {
+          $out.empty();
+          setInfoDisabled($out, true);
+          return;
+        }
+
+        mostrarInfo(viviendas, key, $out);
+        setInfoDisabled($out, false);
+        autoplayUnitVideo();
+        scrollInfoIntoView();
       } else {
-        setInfoDisabled($('#info-text'), true);
+        if (hideContent) {
+          clearMobileUnitExtra();
+          return;
+        }
+        mostrarInfoMobile(viviendas, key);
       }
     }
 
@@ -1100,7 +1312,7 @@ function buildPromoList() {
         obs.disconnect();        // sólo una vez
       }
     }, {
-      threshold: 0.10            // ← 10 % del elemento visible
+      threshold: 0.10            // ← 10 % del elemento visible
       // Si prefieres la otra fórmula:
       // threshold: 0,
       // rootMargin: '0px 0px -90% 0px'
@@ -1325,3 +1537,29 @@ if (window.i18next && typeof i18next.on === 'function') {
 //    (ii) si en tu app disparas un evento custom (p. ej. setLang → window.dispatchEvent(new Event('i18n:changed')))
 window.addEventListener('i18n:changed', onLanguageChangedDebounced);
 */
+function applyI18nToContainer(root) {
+  if (!root || !window.i18next?.isInitialized) return;
+
+  root.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = i18next.t(el.dataset.i18n, {
+      defaultValue: el.textContent.trim()
+    });
+  });
+
+  root.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.placeholder = i18next.t(el.dataset.i18nPlaceholder);
+  });
+}
+
+
+window.translateDynamic = function translateDynamic(root) {
+  if (!window.i18next || !i18next.isInitialized) return;
+
+  root
+    .querySelectorAll('[data-i18n]')
+    .forEach(el => {
+      const key = el.dataset.i18n;
+      const val = i18next.t(key, { defaultValue: el.textContent });
+      el.textContent = val;
+    });
+};

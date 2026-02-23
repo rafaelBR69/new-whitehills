@@ -89,13 +89,13 @@ RewriteRule ^en/location/?$       index.html?section=location     [QSA,L,NC]
 RewriteRule ^es/proceso-compra/?$       proceso.html         [L,NC]
 RewriteRule ^es/contacto/?$             contact.html         [L,NC]
 RewriteRule ^es/aviso-legal/?$          legal-notice.html    [L,NC]
-RewriteRule ^es/politica-cookies/?$     cookie-policy.html   [L,NC]
+RewriteRule ^es/politica-cookies/?$     cookies-policy.html   [L,NC]
 RewriteRule ^es/politica-privacidad/?$  privacy-policy.html  [L,NC]
 # EN
 RewriteRule ^en/process/?$        proceso.html         [L,NC]
 RewriteRule ^en/contact/?$        contact.html         [L,NC]
 RewriteRule ^en/legal-notice/?$   legal-notice.html    [L,NC]
-RewriteRule ^en/cookie-policy/?$  cookie-policy.html   [L,NC]
+RewriteRule ^en/cookie-policy/?$  cookies-policy.html   [L,NC]
 RewriteRule ^en/privacy-policy/?$ privacy-policy.html  [L,NC]
 
 # ====== 11) GALERÍA ======

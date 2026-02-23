@@ -21,7 +21,7 @@
   font-family: var(--ff-body, "Montserrat", system-ui, -apple-system, sans-serif);
   font-weight: 500;
   line-height: 1.1;
-  font-size: clamp(28px, 3vw, 44px);
+  font-size: clamp(2.4rem, 5vw, 4.4rem); /* Adjusted slightly for mobile readability */
   margin: 0;
   color: var(--proc-title-color);
 }

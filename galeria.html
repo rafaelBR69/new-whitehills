@@ -168,6 +168,7 @@
       .then(html => {
         const host = document.getElementById('modals-placeholder');
         host.innerHTML = html;
+        window.applyI18nAndRoutes && window.applyI18nAndRoutes();
         // Asegura estado cerrado al cargar (por si el parcial trae clases residuales)
         document.body.classList.remove('modal-open');
         host.querySelectorAll('.modal').forEach(m => m.classList.remove('is-open','show'));

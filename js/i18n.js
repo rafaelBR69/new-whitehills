@@ -21,8 +21,12 @@ function renderPage () {
     .querySelectorAll('[data-i18n-placeholder]')
     .forEach(el => { el.placeholder = i18next.t(el.dataset.i18nPlaceholder); });
 
+  const currentLang = (i18next.resolvedLanguage || i18next.language || detectLocaleFromURL() || 'es').slice(0,2);
   const sel = document.getElementById('langSwitcher');
-  if (sel) sel.value = (i18next.resolvedLanguage || i18next.language || 'es').slice(0,2);
+  if (sel) sel.value = currentLang;
+
+  const badge = document.getElementById('lang-current');
+  if (badge) badge.textContent = currentLang.toUpperCase();
 }
 
 /* ---------- 2) Utilidades de rutas / idioma ---------- */
@@ -81,7 +85,7 @@ window.setLang = function setLang(l) {
   if (location.hash === '#availability' || location.hash === '#location') {
     dest += location.hash;
   }
-  location.href = dest; // ← navegación real asegura idioma correcto y cache fresca
+  location.href = dest; // navegación real asegura idioma correcto y cache fresca
 };
 
 /* Ruta semántica actual (para mantenerla al cambiar idioma) */
@@ -108,6 +112,11 @@ function getCurrentSemanticRoute () {
 /* ---------- 3) Aplicar i18n + rutas ---------- */
 window.applyI18nAndRoutes = function applyI18nAndRoutes () {
   if (window.i18next && i18next.isInitialized) renderPage();
+
+  // 🔑 fuerza traducción de la ruleta (desktop + móvil)
+  if (typeof window.translateRuleta === 'function') {
+    window.translateRuleta();
+  }
 
   const L = detectLocaleFromURL();     // 'es' | 'en'
   const routes = getRoutesMap()[L];
@@ -138,6 +147,18 @@ window.applyI18nAndRoutes = function applyI18nAndRoutes () {
   setHref('footer a[data-route="cookies"]', routes.cookies);
   setHref('footer a[data-route="privacy"]', routes.privacy);
 
+  // WhatsApp CTA con mensaje precargado por idioma
+  const defaultWaMessage = L === 'en'
+    ? 'Hi, I want more information about WhiteHills villas.'
+    : 'Buenas, quiero más información sobre las villas de WhiteHills';
+  const waMessageRaw = (window.i18next && typeof i18next.t === 'function')
+    ? i18next.t('chatCta.message', { defaultValue: defaultWaMessage })
+    : defaultWaMessage;
+  const waMessage = (!waMessageRaw || waMessageRaw === 'chatCta.message')
+    ? defaultWaMessage
+    : waMessageRaw;
+  setHref('a.floating-whatsapp', `https://wa.me/34621283445?text=${encodeURIComponent(waMessage)}`);
+
   // html[lang]
   document.documentElement.setAttribute('lang', L);
 
@@ -152,9 +173,9 @@ window.applyI18nAndRoutes = function applyI18nAndRoutes () {
     }
   });
 
-  // Título y meta description por página (si existen claves)
+  // SEO por ruta: prioridad a seo.<route> y fallback a claves legacy
   const semantic = getCurrentSemanticRoute();
-  const keyBase  = (
+  const legacyKeyBase = (
     semantic === 'galeria'   ? 'gallery' :
     semantic === 'process'   ? 'process' :
     semantic === 'contact'   ? 'contact' :
@@ -163,22 +184,58 @@ window.applyI18nAndRoutes = function applyI18nAndRoutes () {
     semantic === 'privacy'   ? 'privacy' :
     semantic === 'home'      ? 'home'    : null
   );
+  const seoKeyBase = `seo.${semantic}`;
 
-  if (keyBase) {
-    const metaTitle = i18next.t(`${keyBase}.metaTitle`, { defaultValue: '' });
-    if (metaTitle) document.title = metaTitle;
-
-    const metaDesc = i18next.t(`${keyBase}.metaDescription`, { defaultValue: '' });
-    if (metaDesc) {
-      let m = document.querySelector('meta[name="description"]');
-      if (!m) { m = document.createElement('meta'); m.setAttribute('name','description'); document.head.appendChild(m); }
-      m.setAttribute('content', metaDesc);
+  const upsertMeta = (selector, attrs, content) => {
+    if (!content) return;
+    let el = document.querySelector(selector);
+    if (!el) {
+      el = document.createElement('meta');
+      Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+      document.head.appendChild(el);
     }
-  }
+    el.setAttribute('content', content);
+  };
 
-  // Canonical dinámico si existe <link id="canonical">
-  const canonicalEl = document.querySelector('link#canonical');
-  if (canonicalEl) canonicalEl.href = location.href;
+  const seoTitle = i18next.t(`${seoKeyBase}.title`, { defaultValue: '' });
+  const seoDesc = i18next.t(`${seoKeyBase}.metaDescription`, { defaultValue: '' });
+  const seoCanonical = i18next.t(`${seoKeyBase}.canonical`, { defaultValue: '' });
+  const seoRobots = i18next.t(`${seoKeyBase}.robots`, { defaultValue: '' });
+  const seoOgTitle = i18next.t(`${seoKeyBase}.ogTitle`, { defaultValue: seoTitle });
+  const seoOgDesc = i18next.t(`${seoKeyBase}.ogDescription`, { defaultValue: seoDesc });
+
+  const fallbackTitle = legacyKeyBase ? i18next.t(`${legacyKeyBase}.metaTitle`, { defaultValue: '' }) : '';
+  const fallbackDesc = legacyKeyBase ? i18next.t(`${legacyKeyBase}.metaDescription`, { defaultValue: '' }) : '';
+  const fallbackRobots = legacyKeyBase ? i18next.t(`${legacyKeyBase}.robots`, { defaultValue: '' }) : '';
+
+  const pageTitle = seoTitle || fallbackTitle;
+  const pageDesc = seoDesc || fallbackDesc;
+  const pageRobots = seoRobots || fallbackRobots;
+  const canonicalHref = seoCanonical || location.href;
+
+  if (pageTitle) document.title = pageTitle;
+  upsertMeta('meta[name="description"]', { name: 'description' }, pageDesc);
+  upsertMeta('meta[name="robots"]', { name: 'robots' }, pageRobots);
+  upsertMeta('meta[property="og:title"]', { property: 'og:title' }, seoOgTitle || pageTitle);
+  upsertMeta('meta[property="og:description"]', { property: 'og:description' }, seoOgDesc || pageDesc);
+  upsertMeta('meta[property="og:url"]', { property: 'og:url' }, canonicalHref);
+  upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title' }, seoOgTitle || pageTitle);
+  upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description' }, seoOgDesc || pageDesc);
+
+  const canonicalEl = document.querySelector('link#canonical, link[rel="canonical"]');
+  if (canonicalEl) canonicalEl.href = canonicalHref;
+
+  const routeMap = getRoutesMap();
+  const toAbs = (rel) => rel ? `${location.origin}${rel}` : '';
+  const altEsUrl = toAbs(routeMap.es[semantic] || routeMap.es.home);
+  const altEnUrl = toAbs(routeMap.en[semantic] || routeMap.en.home);
+  const xDefaultUrl = altEnUrl;
+  const altEsEl = document.querySelector('link#alt-es');
+  const altEnEl = document.querySelector('link#alt-en');
+  const altXDefaultEl = document.querySelector('link#alt-x-default');
+  if (altEsEl) altEsEl.href = altEsUrl;
+  if (altEnEl) altEnEl.href = altEnUrl;
+  if (altXDefaultEl) altXDefaultEl.href = xDefaultUrl;
 
   // En home con hash → scroll suave
   if (onHome && (location.hash === '#availability' || location.hash === '#location')) {
@@ -188,27 +245,31 @@ window.applyI18nAndRoutes = function applyI18nAndRoutes () {
     });
   }
 
-  // Vincular cambio de idioma una sola vez
+  // Vincular cambio de idioma (select + dropdown) una sola vez
+  const goToLanguage = (lang) => {
+    const next = (lang || 'es').slice(0,2).toLowerCase() === 'en' ? 'en' : 'es';
+    if (typeof window.setLang === 'function') window.setLang(next);
+    else location.href = (next === 'en') ? '/en/home' : '/es/inicio';
+  };
+
   const sel = document.getElementById('langSwitcher');
   if (sel && !sel.dataset.boundLangChange) {
     sel.dataset.boundLangChange = '1';
     sel.addEventListener('change', (e) => {
-      const newLang = e.target.value || 'es';
-      i18next.changeLanguage(newLang);
-
-      const semantic = getCurrentSemanticRoute();
-      const R = getRoutesMap()[newLang] || getRoutesMap().es;
-
-      // Si estás en home con hash de sección, conserva el hash
-      const hasHashSection = (location.hash === '#availability' || location.hash === '#location');
-      let dest = R[semantic] || R.home;
-      if (hasHashSection) dest = R.home + location.hash;
-
-      location.href = dest;
+      goToLanguage(e.target.value);
     });
   }
-};
 
+  document.querySelectorAll('.lang-menu [data-lang]').forEach(btn => {
+    if (btn.dataset.boundLangChange) return;
+    btn.dataset.boundLangChange = '1';
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      goToLanguage(btn.dataset.lang);
+    });
+  });
+};
 /* ---------- 4) Inicializa i18next ---------- */
 i18next
   .use(i18nextHttpBackend)
@@ -232,6 +293,11 @@ i18next
   .then(() => {
     renderPage();
     window.applyI18nAndRoutes();
+
+    // 🔑 por si la ruleta se creó antes
+    if (typeof window.translateRuleta === 'function') {
+      window.translateRuleta();
+    }
   })
   .catch(err => console.error('i18n init error', err));
 

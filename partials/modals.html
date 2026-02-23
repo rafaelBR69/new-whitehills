@@ -327,6 +327,9 @@
     const originHiddenEl = form.querySelector('input[name="origin"]');
     const downloadEl = form.querySelector('input[name="download_url"]');
 
+    // Teléfono siempre obligatorio en cualquier formulario de lead
+    if (telEl) telEl.required = true;
+
     // Live validation
     if (nameEl) nameEl.addEventListener('input', () => { validateName(nameEl); nameEl.reportValidity(); });
     if (mailEl) mailEl.addEventListener('input', () => { validateEmail(mailEl); mailEl.reportValidity(); });

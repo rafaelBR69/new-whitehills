@@ -1,122 +1,146 @@
 {
   "a1": {
     "numero_ud": "A1",
+    "fase": "fase_2",
     "plot_m2": 544.46,
     "built_area": 203.43,
-    "covered_terraces": 85.60,
+    "covered_terraces": 73.68,
     "garden": 423.05,
-    "coste_sin_iva": " - €",
-    "estado": "No disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A1.pdf"
+    "coste_sin_iva": "1.201.350 €",
+    "estado": "vendido",
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-A1.pdf",
+    "video_url": "/assets/Vistas-A1-WhiteHills.mp4"
   },
   "a2": {
     "numero_ud": "A2",
+    "fase": "fase_2",
     "plot_m2": 245.67,
     "built_area": 203.43,
-    "covered_terraces": 85.60,
+    "covered_terraces": 73.68,
     "garden": 138.02,
-    "coste_sin_iva": " - €",
-    "estado": "No disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A2.pdf"
+    "coste_sin_iva": "1.201.350 €",
+    "estado": "vendido",
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-A2.pdf",
+    "video_url": "/assets/Vistas-A2-WhiteHills.mp4"
   },
   "a3": {
     "numero_ud": "A3",
+    "fase": "fase_2",
     "plot_m2": 204.11,
     "built_area": 203.43,
-    "covered_terraces": 85.60,
+    "covered_terraces": 73.68,
     "garden": 84.22,
-    "coste_sin_iva": " - €",
-    "estado": "No disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-A3.pdf"
+    "coste_sin_iva": "1.081.215 €",
+    "estado": "disponible",
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-A3.pdf",
+    "video_url": "/assets/Vistas-A3-WhiteHills.mp4"
   },
   "a4": {
     "numero_ud": "A4",
+    "fase": "fase_1",
     "plot_m2": 206.11,
     "built_area": 302.29,
     "covered_terraces": 73.68,
     "garden": 84.93,
-    "coste_sin_iva": "1.166.400€",
-    "estado": "disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Floorplans-WhiteHills-A4.pdf"
+    "coste_sin_iva": "898.000 €",
+    "estado": "vendido",
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-A4.pdf",
+    "video_url": "/assets/Vistas-A4-WhiteHills.mp4"
   },
   "a5": {
     "numero_ud": "A5",
+    "fase": "fase_1",
     "plot_m2": 245.81,
     "built_area": 301.79,
     "covered_terraces": 73.18,
     "garden": 105.91,
-    "coste_sin_iva": "1.171.800€",
+    "coste_sin_iva": "912.760 €",
     "estado": "disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Floorplans-WhiteHills-A5.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-A5.pdf",
+    "video_url": "/assets/Vistas-A5-WhiteHills.mp4"
   },
   "a6": {
     "numero_ud": "A6",
+    "fase": "fase_1",
     "plot_m2": 345.95,
-    "built_area": 291.20,
+    "built_area": 203.61,
     "covered_terraces": 62.59,
-    "garden": 216.21,
-    "coste_sin_iva": "1.182.600€",
+    "garden": 291.20,
+    "coste_sin_iva": "939.620 €",
     "estado": "disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Floorplans-WhiteHills-A6.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-A6.pdf",
+    "video_url": "/assets/Vistas-A6-WhiteHills.mp4"
   },
   "b1": {
     "numero_ud": "B1",
+    "fase": "fase_1",
     "plot_m2": 227.12,
     "built_area": 227.72,
     "covered_terraces": 34.71,
     "garden": 136.90,
-    "coste_sin_iva": "1.074.600€",
+    "coste_sin_iva": "885.000 €",
     "estado": "disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Floorplans-WhiteHills-B1.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-B1.pdf",
+    "video_url": "/assets/Vistas-B1-WhiteHills.mp4"
   },
   "b2": {
     "numero_ud": "B2",
+    "fase": "fase_1",
     "plot_m2": 337.19,
     "built_area": 354.45,
     "covered_terraces": 84.09,
     "garden": 237.28,
-    "coste_sin_iva": "1.139.400€",
+    "coste_sin_iva": "937.215 €",
     "estado": "disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Floorplans-WhiteHills-B2.pdf"
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-B2.pdf",
+    "video_url": "/assets/Vistas-B2-WhiteHills.mp4"
   },
   "b3": {
     "numero_ud": "B3",
+    "fase": "fase_2",
     "plot_m2": 141.23,
-    "built_area": 222.7,
-    "covered_terraces": 80.65,
+    "built_area": 222.70,
+    "covered_terraces": 75.54,
     "garden": 71.18,
-    "coste_sin_iva": " - €",
-    "estado": "No disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B3.pdf"
+    "coste_sin_iva": "989.786 €",
+    "estado": "disponible",
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-B3.pdf",
+    "video_url": "/assets/Vistas-B3-WhiteHills.mp4"
   },
   "b4": {
     "numero_ud": "B4",
+    "fase": "fase_2",
     "plot_m2": 218.76,
     "built_area": 239.72,
-    "covered_terraces": 73.57,
+    "covered_terraces": 93.12,
     "garden": 168.89,
-    "coste_sin_iva": " - €",
-    "estado": "No disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B4.pdf"
+    "coste_sin_iva": "973.352 €",
+    "estado": "disponible",
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-B4.pdf",
+    "video_url": "/assets/Vistas-B4-WhiteHills.mp4"
   },
   "b5": {
     "numero_ud": "B5",
-    "plot_m2": 251.03,
-    "built_area": 253.83,
-    "covered_terraces": 71.90,
-    "garden": 163.09,
-    "coste_sin_iva": " - €",
-    "estado": "No disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B5.pdf"
+    "fase": "fase_2",
+    "plot_m2": 204.31,
+    "built_area": 225.70,
+    "covered_terraces": 41.71,
+    "garden": 127.42,
+    "coste_sin_iva": "764.320 €",
+    "estado": "disponible",
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-B5.pdf",
+    "video_url": "/assets/Vistas-B5-WhiteHills.mp4"
   },
   "b6": {
     "numero_ud": "B6",
-    "plot_m2": null,
-    "built_area": 258.23,
-    "covered_terraces": 0,
-    "garden": null,
-    "coste_sin_iva": " - €",
-    "estado": "No disponible",
-    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/White-Hills-B6.pdf"
+    "fase": "fase_2",
+    "plot_m2": 251.03,
+    "built_area": 253.83,
+    "covered_terraces": 41.72,
+    "garden": 163.09,
+    "coste_sin_iva": "879.008 €",
+    "estado": "disponible",
+    "plano_pdf": "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/planos/Planos-Comerciales-WhiteHills-B6.pdf",
+    "video_url": "/assets/Vistas-B6-WhiteHills.mp4"
   }
 }

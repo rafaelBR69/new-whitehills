@@ -3,3 +3,45 @@ planos/
 *.pdf
 planos/
 *.pdf
+
+# --- Assets pesados (NO van en Git) ---
+*.mp4
+*.zip
+assets/*.mp4
+assets/*.zip
+
+# --- Node / builds (si aplica) ---
+node_modules/
+dist/
+build/
+.next/
+
+# --- Sistema / IDE ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# deps / builds
+node_modules/
+out/
+dist/
+.build/
+.cache/
+.tmp/
+
+# big media / archives (NO en git)
+*.zip
+*.mp4
+*.mov
+*.mkv
+*.avi
+
+# optional: generated variants if you have them
+**/*.v1.webp
+**/*.v2.webp
+
+# logs
+*.log
+.DS_Store
+

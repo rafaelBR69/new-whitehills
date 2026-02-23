@@ -15,30 +15,47 @@
   "btn": {
     "contact": "Contactar"
   },
+  "mobileCta": {
+    "contact": "Contactar",
+    "availability": "Ver villas"
+  },
+  "chatCta": {
+    "aria": "Abrir WhatsApp con el comercial",
+    "cta": "¿Necesita más información?",
+    "text": "WhatsApp comercial",
+    "message": "Buenas, quiero más información sobre las villas de WhiteHills"
+  },
   "home": {
     "promo": {
-      "units":   { "label": "Viviendas",            "value": 12 },
-      "parking": { "label": "Plazas de garaje",     "value": 1  },
-      "beds":    { "label": "Dormitorios",          "value": 3  },
-      "plot":    { "label": "m² de parcela",        "value": 1803 },
-      "mins":    { "label": "min. a la playa",       "value": 5  },
-      "sunnydays": { "label": "días de sol/año",    "value": 320 }
+      "units":   { "label": "Viviendas",         "value": 12 },
+      "parking": { "label": "Plazas de garaje",  "value": 1  },
+      "beds":    { "label": "Dormitorios",       "value": 3  },
+      "plot":    { "label": "m² de parcela",     "value": 1803 },
+      "mins":    { "label": "min. a la playa",   "value": 5  },
+      "sunnydays": { "label": "días de sol/año", "value": 320 }
     },
-    "metaTitle": "WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga",
-    "metaDescription": "Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales."
+    "metaTitle": "Villas a la venta en Fuengirola - WhiteHills",
+    "metaDescription": "Descubre nuestras 12 villas de lujo sostenibles con vistas al mar y piscinas privadas en la Costa del Sol.",
+    "status": {
+      "aria":    "Estado del proyecto",
+      "license": "Licencia concedida",
+      "land":    "Terreno comprado",
+      "finance": "Financiación aprobada"
+    }
   },
   "hero": {
     "welcome": "WhiteHills",
-    "cta": "Ver villas"
+    "cta": "Ver villas",
+    "luxLine": "Exclusividad mediterránea a otro nivel"
   },
   "section3": {
-    "title": "12 villas modernas en Torreblanca, Fuengirola",
+    "title": "12 propiedades a la venta en Torreblanca, Fuengirola",
     "paragraph1": "WhiteHills Villas ha sido concebida como una síntesis perfecta entre elegancia contemporánea, confort moderno y conexión con la naturaleza. Situadas en una ladera tranquila, estas villas exclusivas ofrecen vistas panorámicas al mar Mediterráneo, luz natural todo el día y estancias abiertas al exterior.",
     "paragraph2": "Cada villa combina elegancia arquitectónica, materiales de alta gama y diseño eficiente para una experiencia de vida excepcional. Un refugio privado junto al mar, a sólo unos minutos del corazón de Fuengirola y Málaga.",
     "button": "CONTACTAR"
   },
   "video": {
-    "blockTitle": "Villas sostenibles con piscina privada en la Costa del Sol",
+    "blockTitle": "Viviendas de obra nueva en la Costa del Sol",
     "blockParagraph": "Ubicadas en un entorno privilegiado, estas villas combinan eficiencia energética, acabados premium y diseño contemporáneo. Ofrecen un equilibrio perfecto entre elegancia y entorno natural, con piscina privada y espacios exteriores pensados para disfrutar del clima de la Costa del Sol durante todo el año.",
     "imgAlt": "Vista previa del vídeo de las villas en la Costa del Sol",
     "ctaBrochure": "OBTENER BROCHURE"
@@ -123,22 +140,54 @@
     "title": "¿Le interesa?",
     "msgPlaceholderHousing": "Quiero más información sobre esta vivienda…"
   },
+  "homeLead": {
+    "kicker": "Disponibilidad",
+    "title": "Solicite información de las villas disponibles",
+    "subtitle": "Déjenos sus datos y nuestro equipo le contactará con precios actualizados, planos y disponibilidad.",
+    "form": {
+      "name": "Nombre",
+      "namePlaceholder": "Su nombre completo",
+      "email": "Email",
+      "emailPlaceholder": "nombre@email.com",
+      "phone": "Teléfono",
+      "phonePlaceholder": "+34",
+      "message": "Mensaje",
+      "messagePlaceholder": "Indíquenos qué vivienda le interesa más…",
+      "submit": "Solicitar información"
+    }
+  },
   "unit": {
     "info": {
       "empty": "Sin datos.",
       "plot_m2": "Parcela (m²)",
       "built_area": "Superficie construida (m²)",
       "covered_terraces": "Terrazas (m²)",
-      "garden": "Jardín (m²)"
+      "garden": "Jardín (m²)",
+      "m2c_sr": "m² construidos (PB + P1)",
+      "m2c_br": "m² construidos (Sótano)",
+      "castillete": "Castillete",
+      "terrazas_cubiertas": "Terrazas cubiertas",
+      "superficie": "Superficie"
     },
     "status": {
       "disponible": "Disponible",
+      "reservado": "Reservado",
       "no_disponible": "No disponible",
-      "reservado": "Reservado"
+      "vendido": "Vendido"
+    },
+    "phase": {
+      "fase_1": "Fase 1",
+      "fase_2": "Fase 2"
+    },
+    "media": {
+      "video_not_supported": "Tu navegador no soporta vídeo HTML5."
     },
     "cta": {
       "schedule_visit": "Agendar visita",
       "origin_schedule": "Agendar visita – Web"
+    },
+    "actions": {
+      "view_plan": "Obtener plano"
     }
   },
   "orientationMap": {
@@ -152,19 +201,24 @@
     "SO": "Suroeste"
   },
   "footer": {
-    "contact": "marcelo@blancareal.com | +34 621 283 445",
-    "follow": "Síganos",
-    "legal": "Aviso legal",
-    "cookies": "Política de cookies",
-    "privacy": "Política de privacidad",
-    "copyright": "©2025 | WhiteHills",
-    "developer": "Desarrollado por Marketing BlancaReal"
-  },
+  "contact": "marcelo@blancareal.com \n +34 621 283 445",
+  "follow": "Síganos",
+  "legal": "Aviso legal",
+  "cookies": "Política de cookies",
+  "privacy": "Política de privacidad",
+  "copyright": "©2025 | WhiteHills",
+  "developer": "Desarrollado por Marketing BlancaReal",
+
+  "promoter": "Promotor",
+  "broker": "Comercializadora"
+},
   "legalNotice": {
       "pageTitle": "Aviso legal | WhiteHills",
-      "content": "<h1>Aviso legal</h1>\n\n<p><strong>Para dar cumplimiento a lo establecido en la Ley&nbsp;34/2002 de 11&nbsp;de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE),</strong> a continuación se indican los datos de información general del sitio web <em>www.balconesdelpinillo.com</em>.</p>\n\n<h2>Entidad</h2>\n<p><strong>Nombre comercial:</strong> BLANCA&nbsp;REAL<br>\n<strong>Denominación social:</strong> AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, S.L.<br>\n<strong>CIF:</strong> B93153021<br>\n<strong>Domicilio social:</strong> Calle Monte Calahonda&nbsp;10, 29649 Mijas Costa<br>\n<strong>Teléfono:</strong> 952&nbsp;599&nbsp;159<br>\n<strong>Email:</strong> <a href='mailto:infoo@blancareal.com'>info@blancareal.com</a><br>\nInscrita en el Registro Mercantil de Málaga, Hoja MA‑00111198, Tomo 04941, Libro 3848</p>\n\n<h2>Utilización del sitio web</h2>\n<p>El sitio web se ofrece con fines promocionales, informando sobre los distintos servicios prestados por AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, empresa dedicada a prestar servicios como Agencia Inmobiliaria. AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO podrá dejar de prestar los servicios de información ofrecidos en este sitio web sin mediar comunicación con el usuario, sin que ello genere obligación legal alguna hacia éste o terceros.</p>\n\n<h2>Privacidad</h2>\n<p>La información que AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO pueda recabar de los usuarios de este sitio web se utilizará exclusivamente para facilitar la información solicitada y/o para contestar las consultas planteadas. Para más información consulte nuestra <a href='/privacy-policy.html'>Política de Privacidad</a>.</p>\n\n<h2>Vínculos a terceros</h2>\n<p>En caso de acceder a sitios de terceros mediante vínculos, el usuario quedará regido por los Términos de Uso y la Política de Privacidad del nuevo sitio, aceptando que AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO no asumirá responsabilidad ni obligación legal por el uso de tales sitios.</p>\n\n<h2>Propiedad intelectual</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, por sí mismo o como cesionario o licenciatario, es titular de todos los derechos de propiedad intelectual e industrial de los elementos que componen este sitio web, quedando así todos los derechos reservados. Queda expresamente prohibida la reproducción, distribución o comunicación pública —total o parcial— de los contenidos de esta web con fines comerciales, conforme a los artículos&nbsp;8 y&nbsp;21 de la Ley de Propiedad Intelectual. El usuario puede visualizar, imprimir y almacenar los contenidos siempre que sea para uso estrictamente personal y privado.</p>\n\n<h2>Condiciones de uso y responsabilidad</h2>\n<p>El usuario se compromete a utilizar la web de AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO conforme a la legalidad, la moral y el orden público, absteniéndose de:</p>\n<ul>\n  <li>Uso no autorizado o con fines fraudulentos del sitio web.</li>\n  <li>Intentar accesos no autorizados por su legítimo titular.</li>\n  <li>Uso del portal con fines ilícitos o lesivos para terceros, o con intención de perjudicar al sitio o a otros usuarios.</li>\n  <li>Producir daños en los sistemas que la web pudiera tener instalados.</li>\n</ul>\n<p>El titular sólo será responsable de los contenidos creados por él mismo, no de los enlaces o contenidos externos añadidos por terceros.</p>\n\n<p>El propietario se reserva el derecho de realizar, sin previo aviso, las alteraciones que considere oportunas —tanto en contenidos como en servicios—, así como de aprobar o retirar contenidos añadidos por terceros que no considere oportunos.</p>\n\n<h2>Modificaciones de los Términos de Uso</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO se reserva el derecho de modificar estos Términos de Uso y la Política de Privacidad cuando lo estime conveniente. El usuario se obliga a revisar periódicamente dichos términos, ya que pueden cambiar sin previo aviso.</p>\n\n<h2>Ley aplicable y jurisdicción</h2>\n<p>La ley aplicable será la española. Para la resolución de cualquier conflicto que pueda surgir con ocasión de la visita al portal o del uso de los contenidos publicados, las partes se someterán a los Juzgados y Tribunales que correspondan.</p>"
+      "intro": "Información legal y condiciones de uso del sitio web.",
+      "content": "<h1>Aviso legal</h1>\n\n<p><strong>Para dar cumplimiento a lo establecido en la Ley&nbsp;34/2002 de 11&nbsp;de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE),</strong> a continuación se indican los datos de información general del sitio web <em>www.balconesdelpinillo.com</em>.</p>\n\n<h2>Entidad</h2>\n<p><strong>Nombre comercial:</strong> BLANCA&nbsp;REAL<br>\n<strong>Denominación social:</strong> AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, S.L.<br>\n<strong>CIF:</strong> B93153021<br>\n<strong>Domicilio social:</strong> Calle&nbsp;Monte&nbsp;Calahonda&nbsp;10,&nbsp;29649&nbsp;Mijas&nbsp;Costa<br>\n<strong>Teléfono:</strong> 952&nbsp;599&nbsp;159<br>\n<strong>Email:</strong> <a href='mailto:infoo@blancareal.com'>info@blancareal.com</a><br>\nInscrita en el Registro Mercantil de Málaga, Hoja&nbsp;MA‑00111198, Tomo&nbsp;04941, Libro&nbsp;3848</p>\n\n<h2>Utilización del sitio web</h2>\n<p>El sitio web se ofrece con fines promocionales, informando sobre los distintos servicios prestados por AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, empresa dedicada a prestar servicios como Agencia Inmobiliaria. AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO podrá dejar de prestar los servicios de información ofrecidos en este sitio web sin mediar comunicación con el usuario, sin que ello genere obligación legal alguna hacia éste o terceros.</p>\n\n<h2>Privacidad</h2>\n<p>La información que AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO pueda recabar de los usuarios de este sitio web se utilizará exclusivamente para facilitar la información solicitada y/o para contestar las consultas planteadas. Para más información consulte nuestra <a href='/privacy-policy.html'>Política de Privacidad</a>.</p>\n\n<h2>Vínculos a terceros</h2>\n<p>En caso de acceder a sitios de terceros mediante vínculos, el usuario quedará regido por los Términos de Uso y la Política de Privacidad del nuevo sitio, aceptando que AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO no asumirá responsabilidad ni obligación legal por el uso de tales sitios.</p>\n\n<h2>Propiedad intelectual</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, por sí mismo o como cesionario o licenciatario, es titular de todos los derechos de propiedad intelectual e industrial de los elementos que componen este sitio web, quedando así todos los derechos reservados. Queda expresamente prohibida la reproducción, distribución o comunicación pública —total o parcial— de los contenidos de esta web con fines comerciales, conforme a los artículos&nbsp;8 y&nbsp;21 de la Ley de Propiedad Intelectual. El usuario puede visualizar, imprimir y almacenar los contenidos siempre que sea para uso estrictamente personal y privado.</p>\n\n<h2>Condiciones de uso y responsabilidad</h2>\n<p>El usuario se compromete a utilizar la web de AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO conforme a la legalidad, la moral y el orden público, absteniéndose de:</p>\n<ul>\n  <li>Uso no autorizado o con fines fraudulentos del sitio web.</li>\n  <li>Intentar accesos no autorizados por su legítimo titular.</li>\n  <li>Uso del portal con fines ilícitos o lesivos para terceros, o con intención de perjudicar al sitio o a otros usuarios.</li>\n  <li>Producir daños en los sistemas que la web pudiera tener instalados.</li>\n</ul>\n<p>El titular sólo será responsable de los contenidos creados por él mismo, no de los enlaces o contenidos externos añadidos por terceros.</p>\n\n<p>El propietario se reserva el derecho de realizar, sin previo aviso, las alteraciones que considere oportunas —tanto en contenidos como en servicios—, así como de aprobar o retirar contenidos añadidos por terceros que no considere oportunos.</p>\n\n<h2>Modificaciones de los Términos de Uso</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO se reserva el derecho de modificar estos Términos de Uso y la Política de Privacidad cuando lo estime conveniente. El usuario se obliga a revisar periódicamente dichos términos, ya que pueden cambiar sin previo aviso.</p>\n\n<h2>Ley aplicable y jurisdicción</h2>\n<p>La ley aplicable será la española. Para la resolución de cualquier conflicto que pueda surgir con ocasión de la visita al portal o del uso de los contenidos publicados, las partes se someterán a los Juzgados y Tribunales que correspondan.</p>"
   },
   "cookiePolicy": {
+    "intro": "Información sobre el uso de cookies en este sitio web.",
     "pageTitle": "Política de cookies | WhiteHills",
     "content": "<div class=\"entry-content\">\n\n\n<p>En cumplimiento de la Ley de Servicios de la Sociedad de la Información y de Comercio Electrónico y conforme a la Directiva Europea 2009/136/CE, así como a las Directrices 05/2020 del Comité Europeo de Protección de Datos, www.whitehillsvillas.com le informa sobre el uso de cookies y solicita su consentimiento para seguir utilizándolas con el mero hecho de continuar navegando por este sitio web.</p>\n\n<p>Las cookies son pequeños archivos que se descargan y almacenan en el dispositivo del usuario al acceder a determinados sitios web, con la finalidad de almacenar información de navegación, reconocer el dispositivo o recopilar datos con fines estadísticos. En ningún caso contienen virus ni sistemas perjudiciales para el usuario.<br>Al aceptar el aviso de cookies que aparece al iniciar la navegación o al configurar las cookies de este sitio, usted acepta expresamente el uso de estas cookies. Si las deshabilita, la navegación puede no ser óptima y algunas funcionalidades podrían no funcionar correctamente.</p>\n\n<p><strong>TIPOS DE COOKIES</strong> (fuente: Agencia Española de Protección de Datos)</p>\n<ol><li><em>Según la entidad que las gestione</em>:\n<ul><li>Cookies propias: enviadas al equipo del usuario desde un dominio gestionado por el editor.</li><li>Cookies de terceros: enviadas desde un dominio no gestionado por el editor.</li></ul></li>\n<li><em>Según el tiempo de activación</em>:\n<ul><li>Cookies de sesión: recogen y almacenan datos mientras el usuario navega.</li><li>Cookies persistentes: los datos permanecen almacenados y pueden ser tratados durante un periodo definido.</li></ul></li>\n<li><em>Según su finalidad</em>:\n<ul><li>Cookies técnicas</li><li>Cookies de personalización</li><li>Cookies de análisis</li></ul></li></ol>\n\n<p>BLANCA REAL utiliza cookies con los fines que se detallan a continuación. Si en el futuro se emplean otras tecnologías, se informará debidamente.</p>\n\n<h2>Cookies técnicas</h2>\n<p>Estas cookies son esenciales para la navegación segura y el correcto funcionamiento del sitio. Están habilitadas por defecto y no pueden rechazarse.</p>\n<ul><li>Navegación segura e ininterrumpida.</li><li>Guardar preferencias sobre aceptación o rechazo de cookies.</li><li>Compartir contenido en redes sociales.</li></ul>\n\n<h2>Cookies analíticas</h2>\n<p>Permiten el seguimiento y análisis del comportamiento de los usuarios con el fin de introducir mejoras.</p>\n<table><thead><tr><th>Cookie</th><th>Finalidad</th><th>Propietario</th></tr></thead><tbody><tr><td>fr</td><td>Medición y personalización de Facebook. Duración 90 días.</td><td>Facebook</td></tr><tr><td>Test_cookie</td><td>Evalúa eficacia de campañas online. DoubleClick/Google Ads.</td><td>Google</td></tr><tr><td>NID</td><td>Servicios Google (Maps, búsqueda). Cookie persistente.</td><td>Google</td></tr><tr><td>_ga, _gat, _gid, _secure_3PAPSID, _secure_3PSID</td><td>Google Analytics. Identificador anónimo.</td><td>Google Analytics</td></tr><tr><td>Gat_gtag_UA</td><td>Información de campaña vinculada a Analytics y AdWords.</td><td>Google</td></tr><tr><td>Optanonalertboxclosed, optanonconsent…</td><td>Gestión de preferencias de cookies.</td><td>OneTrust</td></tr></tbody></table>\n\n<h2>Control y eliminación de cookies</h2>\n<p>Puede aceptar o rechazar cookies mediante el módulo de configuración o desde la opción correspondiente de su navegador. Si limita las cookies, algunas funciones interactivas podrían no estar disponibles.</p>\n<p>Guías para la gestión de cookies en navegadores populares:</p>\n<ul><li>Firefox: <a href=\"https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias\" target=\"_blank\" rel=\"noopener\">Instrucciones</a></li><li>Chrome: <a href=\"https://support.google.com/accounts/answer/61416?hl=es\" target=\"_blank\" rel=\"noopener\">Instrucciones</a></li><li>Edge/Explorer: <a href=\"https://support.microsoft.com/es-es/help/17442/windows-internet-explorer-delete-manage-cookies\" target=\"_blank\" rel=\"noopener\">Instrucciones</a></li><li>Safari: <a href=\"https://support.apple.com/es-es/guide/safari/sfri11471/mac\" target=\"_blank\" rel=\"noopener\">Instrucciones</a></li><li>Opera: <a href=\"https://help.opera.com/Windows/11.50/es-ES/cookies.html\" target=\"_blank\" rel=\"noopener\">Instrucciones</a></li></ul>\n</div>"
   },
@@ -228,7 +282,7 @@
         "cpc": { "title": "CPC", "sub": "Pago: 15%* " },
         "inicio": { "title": "Inicio de obra", "sub": "Pago: 8%* " },
         "entrega": { "title": "Entrega de llaves", "sub": "Pago: 61%* " },
-        "mas6": { "title": "+6 meses inicio de obra", "sub": "Pago: 8%* " }
+        "mas6": { "title": "+12 meses inicio de obra", "sub": "Pago: 8%* " }
       }
     }
   },
@@ -240,7 +294,9 @@
 
   "form.name": "Nombre",
   "form.email": "Email",
+  "form.phone": "Teléfono",
   "form.phone_optional": "Teléfono (opcional)",
+  "unit.price.na": "Precio a consultar",
 
   "rgpd.required": "Acepto la <a href=\"/privacy-policy.html\" target=\"_blank\" rel=\"noopener\">Política de privacidad</a> y el <a href=\"/legal-notice.html\" target=\"_blank\" rel=\"noopener\">Aviso legal</a>. Más información sobre cookies en la <a href=\"/cookie-policy.html\" target=\"_blank\" rel=\"noopener\">Política de cookies</a>.",
   "rgpd.marketing": "Consiento recibir comunicaciones comerciales por medios electrónicos (opcional).",
@@ -257,13 +313,13 @@
   },
   "seo": {
     "home": {
-      "title": "WhiteHills Villas en Torreblanca (Fuengirola) | Obra nueva con piscina privada",
-      "metaDescription": "12 villas modernas en Torreblanca, Fuengirola: 3–4 dormitorios, terrazas y piscina privada. Vistas al Mediterráneo y altas calidades. Solicite información.",
+      "title": "Villas a la venta en Fuengirola - WhiteHills",
+      "metaDescription": "Descubre nuestras 12 villas de lujo sostenibles con vistas al mar y piscinas privadas en la Costa del Sol.",
       "slug": "/",
-      "canonical": "https://whitehillsvillas.com/es/",
+      "canonical": "https://whitehillsvillas.com/es/inicio",
       "alternates": {
-        "en": "https://whitehillsvillas.com/en/",
-        "x-default": "https://whitehillsvillas.com/"
+        "en": "https://whitehillsvillas.com/en/home",
+        "x-default": "https://whitehillsvillas.com/en/home"
       },
       "robots": "index,follow",
       "ogTitle": "WhiteHills Villas | Obra nueva en Fuengirola",
@@ -284,6 +340,19 @@
       "robots": "index,follow",
       "ogImage": "/og/es-availability.jpg",
       "breadcrumbs": ["Inicio","Disponibilidad"]
+    },
+    "location": {
+      "title": "Ubicacion en Fuengirola | WhiteHills Villas",
+      "metaDescription": "Descubre la ubicacion de WhiteHills Villas en Torreblanca, Fuengirola, cerca de la playa, servicios clave y el Aeropuerto de Malaga.",
+      "slug": "/localizacion",
+      "canonical": "https://whitehillsvillas.com/es/localizacion",
+      "alternates": {
+        "en": "https://whitehillsvillas.com/en/location",
+        "x-default": "https://whitehillsvillas.com/en/location"
+      },
+      "robots": "index,follow",
+      "ogImage": "/og/es-location.jpg",
+      "breadcrumbs": ["Inicio","Localizacion"]
     },
     "contact": {
       "title": "Contacto | WhiteHills Villas",

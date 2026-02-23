@@ -7,6 +7,13 @@
   --ff-body: 'Montserrat', sans-serif;
 }
 
+/* Prevent zoom on iOS inputs */
+@media (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
 /* 2) Hero con imagen de fondo (centrado total de su contenido) */
 .contact-page .section_1{ margin: 0; }
 .contact-hero{
@@ -33,7 +40,7 @@
 .contact-page .hero-form{
   font-family: var(--ff-body);
   color: #142016;
-  width: clamp(360px, 65vw, 960px);   /* ▲ antes 50vw/720px */
+  width: min(100% - 2rem, 960px);
   margin: 0 auto;
   display: grid;
   gap: 14px;
@@ -115,7 +122,8 @@
 /* 7) Responsivo (móvil) */
 @media (max-width: 768px){
   .contact-page .hero-form{
-    width: min(94vw, 640px);      /* ▲ un pelín más en móvil */
+    width: min(94vw, 640px);
+    padding: 1.5rem 1rem; /* Reduce padding on mobile */
   }
   .hero-form label{
     font-size: 1.6rem;
@@ -133,10 +141,10 @@ body.contact-page .contact-hero{
 
 /* El formulario: más ancho y SIN el tope 420px */
 body.contact-page #leadForm.hero-form{
-  width: clamp(360px, 65vw, 760px) !important; /* ajusta 65vw/960 a tu gusto */
-  max-width: none !important;                  /* anula el max-width:420px */
-  min-width: 0;                                /* por si el contenedor es flex */
-  margin: 0 auto;                              /* centra horizontal */
+  width: min(100% - 2rem, 960px) !important;   /* Ancho fluido con tope máximo */
+  max-width: none !important;
+  min-width: 0;
+  margin: 0 auto;
   display: grid;
   gap: 14px;
   justify-items: stretch;
@@ -201,4 +209,49 @@ body.contact-page #leadForm.hero-form textarea{
   transform-origin: top left;     /* evita que “salte” al escalar */
   margin-top: .1rem;              /* afina alineación vertical */
   accent-color: var(--brand-color, #3c4d28);
+}
+
+/* =====================================================
+   Contact desktop tuning (bajar y reducir formulario)
+   git remote set-url origin https://github.com/rafaelBR69/new-whitehills.git
+   git remote -v
+git push -u origin main
+   ===================================================== */
+@media (min-width: 992px){
+  body.contact-page .contact-hero{
+    align-items: flex-start;
+    padding-top: calc(var(--header-h) + 19rem);
+    padding-bottom: 4.2rem;
+  }
+
+  body.contact-page #leadForm.hero-form{
+    width: min(100% - 3rem, 820px) !important;
+    gap: 1rem;
+  }
+
+  body.contact-page #leadForm.hero-form .hero-form__title{
+    font-size: 2.4rem;
+    margin-bottom: .35rem;
+  }
+
+  body.contact-page #leadForm.hero-form label{
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+
+  body.contact-page #leadForm.hero-form input,
+  body.contact-page #leadForm.hero-form textarea{
+    font-size: 1.45rem;
+    padding: .95rem 1.15rem;
+    border-radius: 10px;
+  }
+
+  body.contact-page #leadForm.hero-form textarea{
+    min-height: 110px;
+  }
+
+  body.contact-page #leadForm.hero-form .modal__send{
+    font-size: 1.45rem;
+    padding: .9rem 2.15rem;
+  }
 }

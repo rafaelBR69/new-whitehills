@@ -15,31 +15,48 @@
   "btn": {
     "contact": "Contact us"
   },
+  "mobileCta": {
+    "contact": "Contact",
+    "availability": "See villas"
+  },
+  "chatCta": {
+    "aria": "Open WhatsApp with sales agent",
+    "cta": "Need more information?",
+    "text": "Sales WhatsApp",
+    "message": "Hi, I want more information about WhiteHills villas."
+  },
   "hero": {
     "welcome": "WhiteHills",
     "tagline": "New‑build residences in Torremolinos – Mediterranean elegance with a soul of its own",
-    "cta": "Go to villas"
+    "cta": "Go to villas",
+    "luxLine": "Mediterranean signature living"
   },
   "home": {
     "promo": {
-      "units":   { "label": "Homes",                 "value": 12 },
-      "parking": { "label": "Parking spaces",        "value": 1  },
-      "beds":    { "label": "Bedrooms",              "value": 3  },
-      "plot":    { "label": "plot sqm",              "value": 1803 },
-      "mins":    { "label": "min. to beach",        "value": 5  },
-      "sunnydays": { "label": "sunny days/year",     "value": 320 }
+      "units":   { "label": "Units",            "value": 12 },
+      "parking": { "label": "Parking spaces",   "value": 1  },
+      "beds":    { "label": "Bedrooms",         "value": 3  },
+      "plot":    { "label": "Plot m²",          "value": 1803 },
+      "mins":    { "label": "min. to the beach","value": 5  },
+      "sunnydays": { "label": "sunny days/year","value": 320 }
     },
-    "metaTitle": "WhiteHills Villas – New-build villas in Fuengirola (Torreblanca), Málaga",
-    "metaDescription": "Exclusive development with terraces, pool and green areas. Official plans, prices and availability."
+    "metaTitle": "Villas for sale in Fuengirola - WhiteHills",
+    "metaDescription": "Discover our 12 sustainable luxury villas for sale in Torreblanca, Fuengirola, with sea views and private pools on the Costa del Sol.",
+    "status": {
+      "aria":    "Project status",
+      "license": "Building permit granted",
+      "land":    "Land acquired",
+      "finance": "Financing approved"
+    }
   },
   "section3": {
-    "title": "12 Modern Villas in Torreblanca, Fuengirola",
+    "title": "12 properties for sale in Torreblanca, Fuengirola",
     "paragraph1": "WhiteHills Villas has been conceived as a perfect synthesis of contemporary elegance, modern comfort, and connection with nature. Located on a peaceful hillside, these exclusive villas offer panoramic views of the Mediterranean Sea, natural light all day, and open living spaces.",
     "paragraph2": "Each villa combines architectural elegance, high-end materials, and efficient design for an exceptional living experience. A private retreat by the sea, just minutes from the heart of Fuengirola and Málaga.",
     "button": "CONTACT US"
   },
   "video": {
-    "blockTitle": "Sustainable villas with private pool on the Costa del Sol",
+    "blockTitle": "New build homes in Costa del Sol",
     "blockParagraph": "Located in a privileged setting, these villas combine energy efficiency, premium finishes, and contemporary design. They offer a perfect balance between elegance and natural surroundings, with private pools and outdoor spaces designed to enjoy the Costa del Sol’s climate all year round.",
     "imgAlt": "Video preview of the villas on the Costa del Sol",
     "ctaBrochure": "OBTAIN BROCHURE"
@@ -106,6 +123,22 @@
     "title": "Are you interested?",
     "msgPlaceholderHousing": "I would like more information about this residence…"
   },
+  "homeLead": {
+    "kicker": "Availability",
+    "title": "Request information about available villas",
+    "subtitle": "Leave your details and our team will contact you with updated prices, plans and unit availability.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email",
+      "emailPlaceholder": "name@email.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+34",
+      "message": "Message",
+      "messagePlaceholder": "Tell us which unit interests you the most…",
+      "submit": "Request information"
+    }
+  },
   "blockInfo": {
     "noData": "No data…",
     "pdfUnavailable": "Plan not available",
@@ -131,19 +164,24 @@
     "SO": "South‑West"
   },
   "footer": {
-    "contact": "marcelo@blancareal.com | +34 621 28 34 45",
+    "contact": "marcelo@blancareal.com \n +34 621 283 445",
     "follow": "Follow us",
     "legal": "Legal notice",
-    "cookies": "Cookie policy",
+    "cookies": "Cookies policy",
     "privacy": "Privacy policy",
-    "copyright": "©2025 | WhiteHills",
-    "developer": "Developed by BlancaReal Marketing"
+    "copyright": "©2025 | WhiteHills",
+    "developer": "Developed by Marketing BlancaReal",
+
+    "promoter": "Developer",
+    "broker": "Sales agency"
   },
   "legalNotice": {
     "pageTitle": "Legal Notice | WhiteHills",
-    "content": "<h1>Legal Notice</h1>\n\n<p><strong>In compliance with Law&nbsp;34/2002 of 11&nbsp;July on Services of the Information Society and Electronic Commerce (LSSICE),</strong> the following general information about the website <em>www.whitehillsvillas.com</em> is provided.</p>\n\n<h2>Entity</h2>\n<p><strong>Trade name:</strong> BLANCA&nbsp;REAL<br>\n<strong>Corporate name:</strong> AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, S.L.<br>\n<strong>CIF:</strong> B93153021<br>\n<strong>Registered office:</strong> Calle Monte Calahonda&nbsp;10, 29649 Mijas Costa<br>\n<strong>Telephone:</strong> 952&nbsp;599&nbsp;159<br>\n<strong>Email:</strong> <a href='mailto:info@blancareal.com'>info@blancareal.com</a><br>\nRegistered in the Commercial Registry of Málaga, Sheet MA‑00111198, Volume 04941, Book 3848</p>\n\n<h2>Use of the Website</h2>\n<p>The website is offered for promotional purposes, providing information about the various services offered by AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, a company acting as a Real Estate Agency. AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO may cease to provide these information services without prior notice, which will not entail any legal obligation towards the user or third parties.</p>\n\n<h2>Privacy</h2>\n<p>The information that AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO may collect from users of this website will be used exclusively to provide requested information and/or to respond to user enquiries. For more details, please consult our <a href='/privacy-policy.html'>Privacy Policy</a>.</p>\n\n<h2>Links to Third Parties</h2>\n<p>When following links to third‑party sites, the user will be governed by the Terms of Use and Privacy Policy of the new site, accepting that AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO will not be responsible nor have any legal obligation for the use of such sites.</p>\n\n<h2>Intellectual Property</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, either as owner, transferee or licensee, holds all intellectual and industrial property rights over the elements of this website. Reproduction, distribution or public communication of all or part of the contents for commercial purposes is expressly prohibited in accordance with articles&nbsp;8 and&nbsp;21 of the Intellectual Property Law. Users may view, print, store and copy the contents for strictly personal and private use.</p>\n\n<h2>Terms of Use and Responsibility</h2>\n<p>The user agrees to use this website in accordance with the law, morality and public order, refraining from:</p>\n<ul>\n  <li>Unauthorised or fraudulent use of the website.</li>\n  <li>Attempting unauthorised access by the legitimate owner.</li>\n  <li>Using the portal for illegal purposes, harmful to third parties or with the intention of damaging the site or other users.</li>\n  <li>Causing damage to the systems installed for the website’s operation.</li>\n</ul>\n<p>The owner of AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO will only be responsible for content created by them, not for links incorporated by third parties or external sites beyond their control.</p>\n\n<p>The owner reserves the right to make any changes deemed appropriate, without prior notice, to both content and services offered, and to approve or remove third‑party content considered inappropriate.</p>\n\n<h2>Modifications to the Terms of Use</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO reserves the right to modify these Terms of Use and the Privacy Policy at any time. Users are obliged to review these terms periodically, as they may change without prior notice.</p>\n\n<h2>Applicable Law and Jurisdiction</h2>\n<p>Spanish law shall apply in case of dispute or conflict regarding this Legal Notice or any services of this Portal. Any conflict arising from visiting the Portal or using its contents shall be settled in the competent Courts and Tribunals.</p>"
+    "intro": "Legal information and terms of use of this website.",
+    "content": "<h1>Legal Notice</h1>\n\n<p><strong>In compliance with Law&nbsp;34/2002 of 11&nbsp;July on Services of the Information Society and Electronic Commerce (LSSICE),</strong> the following general information about the website <em>www.whitehillsvillas.com</em> is provided.</p>\n\n<h2>Entity</h2>\n<p><strong>Trade name:</strong> BLANCA&nbsp;REAL<br>\n<strong>Corporate name:</strong> AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, S.L.<br>\n<strong>CIF:</strong> B93153021<br>\n<strong>Registered office:</strong> Calle&nbsp;Monte&nbsp;Calahonda&nbsp;10, 29649&nbsp;Mijas&nbsp;Costa<br>\n<strong>Telephone:</strong> 952&nbsp;599&nbsp;159<br>\n<strong>Email:</strong> <a href='mailto:info@blancareal.com'>info@blancareal.com</a><br>\nRegistered in the Commercial Registry of Málaga, Sheet&nbsp;MA‑00111198, Volume&nbsp;04941, Book&nbsp;3848</p>\n\n<h2>Use of the Website</h2>\n<p>The website is offered for promotional purposes, providing information about the various services offered by AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, a company acting as a Real Estate Agency. AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO may cease to provide these information services without prior notice, which will not entail any legal obligation towards the user or third parties.</p>\n\n<h2>Privacy</h2>\n<p>The information that AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO may collect from users of this website will be used exclusively to provide requested information and/or to respond to user enquiries. For more details, please consult our <a href='/privacy-policy.html'>Privacy Policy</a>.</p>\n\n<h2>Links to Third Parties</h2>\n<p>When following links to third‑party sites, the user will be governed by the Terms of Use and Privacy Policy of the new site, accepting that AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO will not be responsible nor have any legal obligation for the use of such sites.</p>\n\n<h2>Intellectual Property</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO, either as owner, transferee or licensee, holds all intellectual and industrial property rights over the elements of this website. Reproduction, distribution or public communication of all or part of the contents for commercial purposes is expressly prohibited in accordance with articles&nbsp;8 and&nbsp;21 of the Intellectual Property Law. Users may view, print, store and copy the contents for strictly personal and private use.</p>\n\n<h2>Terms of Use and Responsibility</h2>\n<p>The user agrees to use this website in accordance with the law, morality and public order, refraining from:</p>\n<ul>\n  <li>Unauthorised or fraudulent use of the website.</li>\n  <li>Attempting unauthorised access by the legitimate owner.</li>\n  <li>Using the portal for illegal purposes, harmful to third parties or with the intention of damaging the site or other users.</li>\n  <li>Causing damage to the systems installed for the website’s operation.</li>\n</ul>\n<p>The owner of AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO will only be responsible for content created by them, not for links incorporated by third parties or external sites beyond their control.</p>\n\n<p>The owner reserves the right to make any changes deemed appropriate, without prior notice, to both content and services offered, and to approve or remove third‑party content considered inappropriate.</p>\n\n<h2>Modifications to the Terms of Use</h2>\n<p>AZUGA&nbsp;SERVICIO&nbsp;GLOBAL&nbsp;INMOBILIARIO reserves the right to modify these Terms of Use and the Privacy Policy at any time. Users are obliged to review these terms periodically, as they may change without prior notice.</p>\n\n<h2>Applicable Law and Jurisdiction</h2>\n<p>Spanish law shall apply in case of dispute or conflict regarding this Legal Notice or any services of this Portal. Any conflict arising from visiting the Portal or using its contents shall be settled in the competent Courts and Tribunals.</p>"
   },
   "cookiePolicy": {
+    "intro": "Information about the use of cookies on this website.",
     "pageTitle": "Cookies Policy | WhiteHills",
     "content": "<div class=\"entry-content\">\n\n\n<p>In compliance with the Law on Information Society Services and Electronic Commerce and with European Directive 2009/136/EC (Guidelines 05/2020 of the EDPB), www.whitehillsvillas.com informs you about its use of cookies and assumes your consent simply by continuing to browse this website.</p>\n\n<p>Cookies are small files downloaded to a user’s device when visiting certain websites, storing browsing information, recognising the device or browser, or gathering statistical data. They do not contain viruses or harmful code.<br>By accepting the cookie banner or configuring cookies on this site, you expressly accept their use. Disabling cookies may impair your browsing experience and some features may not work correctly.</p>\n\n<p><strong>TYPES OF COOKIES</strong> (source: Spanish Data Protection Agency)</p>\n<ol><li><em>By managing entity</em>:\n<ul><li>First‑party cookies: sent from a domain managed by the editor.</li><li>Third‑party cookies: sent from a domain not managed by the editor.</li></ul></li>\n<li><em>By activation time</em>:\n<ul><li>Session cookies: store data while the user is on the page.</li><li>Persistent cookies: data remain stored for a defined period.</li></ul></li>\n<li><em>By purpose</em>:\n<ul><li>Technical cookies</li><li>Personalisation cookies</li><li>Analytics cookies</li></ul></li></ol>\n\n<p>BLANCA REAL uses the cookies listed below. Should other technologies be adopted, users will be informed accordingly.</p>\n\n<h2>Technical cookies</h2>\n<p>Essential for safe navigation and proper site operation. Enabled by default and cannot be refused.</p>\n<ul><li>Ensure safe, uninterrupted browsing.</li><li>Save user preferences about cookie settings.</li><li>Share content on social networks.</li></ul>\n\n<h2>Analytics cookies</h2>\n<p>Track and analyse user behaviour to improve the service.</p>\n<table><thead><tr><th>COOKIE</th><th>PURPOSE</th><th>OWNER</th></tr></thead><tbody><tr><td>fr</td><td>Statistics and customisation by Facebook. 90‑day duration.</td><td>Facebook</td></tr><tr><td>Test_cookie</td><td>Evaluates online marketing campaigns. DoubleClick/Google Ads.</td><td>Google</td></tr><tr><td>NID</td><td>Google services (Maps, search). Persistent cookie.</td><td>Google</td></tr><tr><td>_ga, _gat, _gid, _secure_3PAPSID, _secure_3PSID</td><td>Google Analytics anonymous identifier.</td><td>Google Analytics</td></tr><tr><td>Gat_gtag_UA</td><td>Campaign information linked to Analytics and AdWords.</td><td>Google</td></tr><tr><td>Optanonalertboxclosed, optanonconsent…</td><td>Stores and determines user cookie choices.</td><td>OneTrust</td></tr></tbody></table>\n\n<h2>Control and deletion of cookies</h2>\n<p>You may accept or reject cookies via the settings module or through your browser options. Restricting cookies may disable some interactive features.</p>\n<p>Guides for managing cookies in popular browsers:</p>\n<ul><li>Firefox: <a href=\"https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop\" target=\"_blank\" rel=\"noopener\">Instructions</a></li><li>Chrome: <a href=\"https://support.google.com/accounts/answer/61416\" target=\"_blank\" rel=\"noopener\">Instructions</a></li><li>Edge/Explorer: <a href=\"https://support.microsoft.com/windows/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09\" target=\"_blank\" rel=\"noopener\">Instructions</a></li><li>Safari: <a href=\"https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac\" target=\"_blank\" rel=\"noopener\">Instructions</a></li><li>Opera: <a href=\"https://help.opera.com/en/latest/web-preferences/#cookies\" target=\"_blank\" rel=\"noopener\">Instructions</a></li></ul>\n</div>"
   },
@@ -159,22 +197,38 @@
 
   "ui.features3.title3": "Mediterranean lifestyle",
   "ui.features3.text3_html": "With over 330 sunny days a year and an average temperature of 19&nbsp;°C, the Costa del Sol is synonymous with well-being and exclusivity.<br><br>More than 50 golf courses, a vibrant cultural scene and an international community make Málaga a unique place for those seeking the best of life by the sea.",
-   "unit": {
+  "unit": {
     "info": {
-      "empty": "No data.",
+      "empty": "No data available.",
       "plot_m2": "Plot (m²)",
-      "built_area": "Built Area (m²)",
+      "built_area": "Built area (m²)",
       "covered_terraces": "Terraces (m²)",
-      "garden": "Garden (m²)"
+      "garden": "Garden (m²)",
+      "m2c_sr": "Built area (Ground + First floor)",
+      "m2c_br": "Built area (Basement)",
+      "castillete": "Tower",
+      "terrazas_cubiertas": "Covered terraces",
+      "superficie": "Total area"
     },
     "status": {
       "disponible": "Available",
-      "no_disponible": "Not available",
-      "reservado": "Reserved"
+      "reservado": "Reserved",
+      "no_disponible": "Unavailable",
+      "vendido": "Sold"
+    },
+    "phase": {
+      "fase_1": "Phase 1",
+      "fase_2": "Phase 2"
+    },
+    "media": {
+      "video_not_supported": "Your browser does not support HTML5 video."
     },
     "cta": {
       "schedule_visit": "Schedule a visit",
-      "origin_schedule": "Schedule visit – Website"
+      "origin_schedule": "Schedule visit – Web"
+    },
+    "actions": {
+      "view_plan": "Get plan"
     }
   },
   "section": {
@@ -225,7 +279,7 @@
         "cpc": { "title": "PPC", "sub": "Payment: 15%* " },
         "inicio": { "title": "Construction start", "sub": "Payment: 8%* " },
         "entrega": { "title": "Completion", "sub": "Payment: 61%* " },
-        "mas6": { "title": "+6 months after start", "sub": "Payment: 8%* " }
+        "mas6": { "title": "+12 months after start", "sub": "Payment: 8%* " }
       }
     }
   },
@@ -237,7 +291,9 @@
 
   "form.name": "Name",
   "form.email": "Email",
+  "form.phone": "Phone",
   "form.phone_optional": "Phone (optional)",
+  "unit.price.na": "Price on request",
 
   "rgpd.required": "I accept the <a href=\"/privacy-policy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> and the <a href=\"/legal-notice.html\" target=\"_blank\" rel=\"noopener\">Legal Notice</a>. More information about cookies in the <a href=\"/cookie-policy.html\" target=\"_blank\" rel=\"noopener\">Cookie Policy</a>.",
   "rgpd.marketing": "I consent to receive marketing communications by electronic means (optional).",
@@ -254,13 +310,13 @@
   },
   "seo": {
     "home": {
-      "title": "WhiteHills Villas in Torreblanca (Fuengirola) | New-build with private pool",
-      "metaDescription": "12 modern villas in Torreblanca, Fuengirola: 3–4 bedrooms, terraces and private pool. Mediterranean views and premium finishes. Request details.",
+      "title": "Villas for sale in Fuengirola - WhiteHills",
+      "metaDescription": "Discover our 12 sustainable luxury villas for sale in Torreblanca, Fuengirola, with sea views and private pools on the Costa del Sol.",
       "slug": "/",
-      "canonical": "https://whitehillsvillas.com/en/",
+      "canonical": "https://whitehillsvillas.com/en/home",
       "alternates": {
-        "es": "https://whitehillsvillas.com/es/",
-        "x-default": "https://whitehillsvillas.com/"
+        "es": "https://whitehillsvillas.com/es/inicio",
+        "x-default": "https://whitehillsvillas.com/en/home"
       },
       "robots": "index,follow",
       "ogTitle": "WhiteHills Villas | New build in Fuengirola",
@@ -281,6 +337,19 @@
       "robots": "index,follow",
       "ogImage": "/og/en-availability.jpg",
       "breadcrumbs": ["Home","Availability"]
+    },
+    "location": {
+      "title": "Location in Fuengirola | WhiteHills Villas",
+      "metaDescription": "Explore WhiteHills Villas in Torreblanca, Fuengirola, close to the beach, key services and Malaga International Airport.",
+      "slug": "/location",
+      "canonical": "https://whitehillsvillas.com/en/location",
+      "alternates": {
+        "es": "https://whitehillsvillas.com/es/localizacion",
+        "x-default": "https://whitehillsvillas.com/en/location"
+      },
+      "robots": "index,follow",
+      "ogImage": "/og/en-location.jpg",
+      "breadcrumbs": ["Home","Location"]
     },
     "contact": {
       "title": "Contact | WhiteHills Villas",

@@ -1,5 +1,5 @@
 <!-- /partials/footer.html -->
-<footer class="bg-light text-center py-4" role="contentinfo"
+<footer class="bg-light py-4" role="contentinfo"
         itemscope itemtype="https://schema.org/Organization">
   <div class="container">
 
@@ -7,53 +7,101 @@
     <meta itemprop="name" content="WhiteHills Villas">
     <link itemprop="url" href="https://whitehillsvillas.com">
 
-    <!-- Línea de contacto -->
-    <p class="mb-2" data-i18n="footer.contact"></p>
+    <div class="row align-items-center footer-row text-center">
 
-    <!-- Seguimiento y redes sociales -->
-    <div class="mb-3">
-      <span data-i18n="footer.follow"></span><br />
-      <div class="d-flex justify-content-center gap-3 mt-2 social" aria-label="Síguenos en redes">
-        <a href="https://www.instagram.com/blancarealspain/?hl=es"
-           target="_blank" rel="noopener external"
-           aria-label="Instagram" itemprop="sameAs" title="Instagram – WhiteHills Villas">
-          <i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-          <span class="visually-hidden">Instagram</span>
-        </a>
-        <a href="https://es.linkedin.com/company/blancareal-real-estate"
-           target="_blank" rel="noopener external"
-           aria-label="LinkedIn" itemprop="sameAs" title="LinkedIn – WhiteHills Villas">
-          <i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-          <span class="visually-hidden">LinkedIn</span>
-        </a>
-        <a href="https://www.blancareal.com/"
-           target="_blank" rel="noopener external"
-           aria-label="Sitio oficial Blanca Real" itemprop="sameAs" title="Blanca Real – Sitio oficial">
-          <i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-          <span class="visually-hidden">Sitio web</span>
-        </a>
-        <a href="https://www.youtube.com/@BlancaRealSpain"
-           target="_blank" rel="noopener external"
-           aria-label="YouTube" itemprop="sameAs" title="YouTube – WhiteHills Villas">
-          <i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-          <span class="visually-hidden">YouTube</span>
-        </a>
+      <!-- Columna izquierda: PROMOTOR -->
+      <div class="col-12 col-md-4 mb-4 mb-md-0 footer-col">
+        <p class="footer-label mb-2" data-i18n="footer.promoter"></p>
+        <img src="/images/fedezu-logo.jpg"
+             alt="Promotor WhiteHills"
+             class="footer-logo">
       </div>
+
+      <!-- Columna central: contenido actual -->
+      <div class="col-12 col-md-4 mb-4 mb-md-0 footer-col">
+
+        <!-- Línea de contacto -->
+        <p class="mb-2 footer-contact" data-i18n="footer.contact"></p>
+
+        <!-- Seguimiento y redes sociales -->
+        <div class="mb-3">
+          <span data-i18n="footer.follow"></span><br />
+          <div class="d-flex justify-content-center gap-3 mt-2 social"
+               aria-label="Síguenos en redes">
+            <a href="https://www.instagram.com/blancarealspain/?hl=es"
+               target="_blank" rel="noopener external"
+               aria-label="Instagram" itemprop="sameAs" title="Instagram – WhiteHills Villas">
+              <i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
+              <span class="visually-hidden">Instagram</span>
+            </a>
+            <a href="https://es.linkedin.com/company/blancareal-real-estate"
+               target="_blank" rel="noopener external"
+               aria-label="LinkedIn" itemprop="sameAs" title="LinkedIn – WhiteHills Villas">
+              <i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+              <span class="visually-hidden">LinkedIn</span>
+            </a>
+            <a href="https://www.blancareal.com/"
+               target="_blank" rel="noopener external"
+               aria-label="Sitio oficial Blanca Real" itemprop="sameAs" title="Blanca Real – Sitio oficial">
+              <i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
+              <span class="visually-hidden">Sitio web</span>
+            </a>
+            <a href="https://www.youtube.com/@BlancaRealSpain"
+               target="_blank" rel="noopener external"
+               aria-label="YouTube" itemprop="sameAs" title="YouTube – WhiteHills Villas">
+              <i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
+              <span class="visually-hidden">YouTube</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Enlaces legales -->
+        <nav class="legal-links mb-2" aria-label="Enlaces legales">
+          <a href="#" data-route="legal"   data-i18n="footer.legal"   target="_blank" rel="noopener"
+             class="mx-2 text-decoration-none text-muted" title="Aviso legal"></a>
+          <a href="#" data-route="cookies" data-i18n="footer.cookies" target="_blank" rel="noopener"
+             class="mx-2 text-decoration-none text-muted" title="Política de cookies"></a>
+          <a href="#" data-route="privacy" data-i18n="footer.privacy" target="_blank" rel="noopener"
+             class="mx-2 text-decoration-none text-muted" title="Política de privacidad"></a>
+        </nav>
+
+        <!-- Copyright y desarrollo -->
+        <p class="footer-text1 mb-0 text-muted" data-i18n="footer.copyright"></p>
+        <p class="footer-text1 text-muted" data-i18n="footer.developer"></p>
+      </div>
+
+      <!-- Columna derecha: COMERCIALIZADORA -->
+      <div class="col-12 col-md-4 footer-col">
+        <p class="footer-label mb-2" data-i18n="footer.broker"></p>
+        <img src="/images/logo-br.png"
+             alt="Comercializadora BlancaReal"
+             class="footer-logo">
+      </div>
+
     </div>
-
-    <!-- Enlaces legales -->
-    <nav class="legal-links mb-2" aria-label="Enlaces legales">
-      <a href="#" data-route="legal"   data-i18n="footer.legal"   target="_blank" rel="noopener"
-         class="mx-2 text-decoration-none text-muted" title="Aviso legal"></a>
-      <a href="#" data-route="cookies" data-i18n="footer.cookies" target="_blank" rel="noopener"
-         class="mx-2 text-decoration-none text-muted" title="Política de cookies"></a>
-      <a href="#" data-route="privacy" data-i18n="footer.privacy" target="_blank" rel="noopener"
-         class="mx-2 text-decoration-none text-muted" title="Política de privacidad"></a>
-    </nav>
-
-    <!-- Copyright y desarrollo -->
-    <p class="footer-text1 mb-0 text-muted" data-i18n="footer.copyright"></p>
-    <p class="footer-text1 text-muted" data-i18n="footer.developer"></p>
-
   </div>
+
+  <div class="mobile-sticky-cta" aria-label="Acciones rápidas">
+    <a href="#"
+       data-route="contact"
+       data-action="open-contact-modal"
+       class="mobile-sticky-cta__btn mobile-sticky-cta__btn--contact"
+       data-i18n="mobileCta.contact"></a>
+    <a href="#" data-route="availability" class="mobile-sticky-cta__btn mobile-sticky-cta__btn--availability" data-i18n="mobileCta.availability"></a>
+  </div>
+
+  <a
+    class="floating-whatsapp"
+    href="https://wa.me/34621283445"
+    target="_blank"
+    rel="noopener noreferrer"
+    data-i18n="[aria-label]chatCta.aria;[title]chatCta.aria"
+    aria-label="Abrir WhatsApp para solicitar más información"
+    title="Abrir WhatsApp para solicitar más información">
+    <span class="floating-whatsapp__icon" aria-hidden="true">
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+    </span>
+    <span class="floating-whatsapp__label" data-i18n="chatCta.cta">¿Necesita más información?</span>
+    <span class="visually-hidden" data-i18n="chatCta.text">WhatsApp comercial</span>
+  </a>
 </footer>

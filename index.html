@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="google-site-verification" content="zGNUjwAjoep8pxl3ZzUvd1g7H87xcdmnIAI9XGhnEuQ" />
 
   <!-- Redirección temprana y preferencia de idioma -->
   <script>
@@ -48,20 +49,20 @@
   </script>
 
   <!-- ─── SEO (fallback EN, se sobreescribe abajo si /es/) ─── -->
-  <title>WhiteHills Villas – New-build villas in Fuengirola (Torreblanca), Málaga</title>
-  <meta name="description" content="Exclusive development with terraces, a pool, and landscaped areas. Official floor plans, prices, and availability.">
+  <title>Villas for sale in Fuengirola - WhiteHills</title>
+  <meta name="description" content="Discover our 12 sustainable luxury villas for sale in Torreblanca, Fuengirola, with sea views and private pools on the Costa del Sol.">
   <meta name="robots" content="index,follow">
   <link id="canonical" rel="canonical" href="https://whitehillsvillas.com/en/home">
 
   <!-- hreflang -->
-  <link rel="alternate" href="https://whitehillsvillas.com/es/inicio" hreflang="es">
-  <link rel="alternate" href="https://whitehillsvillas.com/en/home"   hreflang="en">
-  <link rel="alternate" href="https://whitehillsvillas.com/en/home"   hreflang="x-default">
+  <link id="alt-es" rel="alternate" href="https://whitehillsvillas.com/es/inicio" hreflang="es">
+  <link id="alt-en" rel="alternate" href="https://whitehillsvillas.com/en/home"   hreflang="en">
+  <link id="alt-x-default" rel="alternate" href="https://whitehillsvillas.com/en/home"   hreflang="x-default">
 
   <!-- Open Graph (fallback EN) -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="WhiteHills Villas – New-build villas in Fuengirola (Torreblanca), Málaga">
-  <meta property="og:description" content="Exclusive development with terraces, a pool, and landscaped areas. Official floor plans, prices, and availability.">
+  <meta property="og:title" content="Villas for sale in Fuengirola - WhiteHills">
+  <meta property="og:description" content="Discover our 12 sustainable luxury villas for sale in Torreblanca, Fuengirola, with sea views and private pools on the Costa del Sol.">
   <meta property="og:url" content="https://whitehillsvillas.com/en/home">
   <meta property="og:image" content="https://whitehillsvillas.com/images/og-home.jpg">
   <meta property="og:image:alt" content="Render of WhiteHills villas in Fuengirola">
@@ -70,9 +71,12 @@
 
   <!-- Twitter Card (fallback EN) -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="WhiteHills Villas – New-build villas in Fuengirola (Torreblanca), Málaga">
-  <meta name="twitter:description" content="Exclusive development with terraces, a pool, and landscaped areas. Official floor plans, prices, and availability.">
+  <meta name="twitter:title" content="Villas for sale in Fuengirola - WhiteHills">
+  <meta name="twitter:description" content="Discover our 12 sustainable luxury villas for sale in Torreblanca, Fuengirola, with sea views and private pools on the Costa del Sol.">
   <meta name="twitter:image" content="https://whitehillsvillas.com/images/og-home.jpg">
+
+  <link rel="preconnect" href="https://fnmgoidqojutofowzuey.supabase.co" crossorigin>
+  <link rel="dns-prefetch" href="//fnmgoidqojutofowzuey.supabase.co">
 
   <!-- Iconos / Font Awesome -->
   <link rel="stylesheet"
@@ -172,44 +176,129 @@
   <!-- === SEO LOCALE TOGGLE POR PATH (/es/… vs /en/…) === -->
   <script>
     (function () {
-      var path = (location.pathname || '').toLowerCase();
+      var path = (location.pathname || '').toLowerCase().replace(/\/+$/, '');
+      if (!path) path = '/';
+
+      function detectRoute(p) {
+        if (/\/(es\/disponibilidad|en\/availability)$/.test(p)) return 'availability';
+        if (/\/(es\/localizacion|en\/location)$/.test(p)) return 'location';
+        return 'home';
+      }
+
       var isEN = /^\/en(\/|$)/.test(path);
+      var route = detectRoute(path);
+
       var SEO = {
         es: {
-          title: "WhiteHills Villas – Villas de obra nueva en Fuengirola (Torreblanca), Málaga",
-          desc:  "Promoción exclusiva con terrazas, piscina y zonas verdes. Planos, precios y disponibilidad oficiales.",
-          url:   "https://whitehillsvillas.com/es/inicio",
-          ogLocale: "es_ES",
-          h1: "Villas en Fuengirola y Málaga | Obra nueva en Torreblanca – WhiteHills"
+          home: {
+            title: "Villas a la venta en Fuengirola - WhiteHills",
+            desc:  "Descubre nuestras 12 villas de lujo sostenibles con vistas al mar y piscinas privadas en la Costa del Sol.",
+            url:   "https://whitehillsvillas.com/es/inicio",
+            ogLocale: "es_ES",
+            robots: "index,follow",
+            h1: "Villas a la venta en Fuengirola",
+            alternates: {
+              es: "https://whitehillsvillas.com/es/inicio",
+              en: "https://whitehillsvillas.com/en/home",
+              "x-default": "https://whitehillsvillas.com/en/home"
+            }
+          },
+          availability: {
+            title: "Disponibilidad y planos | WhiteHills Villas Fuengirola",
+            desc:  "Consulta viviendas disponibles, precios y planos descargables de WhiteHills Villas en Fuengirola.",
+            url:   "https://whitehillsvillas.com/es/disponibilidad",
+            ogLocale: "es_ES",
+            robots: "index,follow",
+            h1: "Disponibilidad de villas en Fuengirola",
+            alternates: {
+              es: "https://whitehillsvillas.com/es/disponibilidad",
+              en: "https://whitehillsvillas.com/en/availability",
+              "x-default": "https://whitehillsvillas.com/en/availability"
+            }
+          },
+          location: {
+            title: "Ubicacion en Fuengirola | WhiteHills Villas",
+            desc:  "Descubre la ubicacion de WhiteHills Villas en Torreblanca, Fuengirola, cerca de la playa, servicios clave y el Aeropuerto de Malaga.",
+            url:   "https://whitehillsvillas.com/es/localizacion",
+            ogLocale: "es_ES",
+            robots: "index,follow",
+            h1: "Ubicacion de WhiteHills en Fuengirola",
+            alternates: {
+              es: "https://whitehillsvillas.com/es/localizacion",
+              en: "https://whitehillsvillas.com/en/location",
+              "x-default": "https://whitehillsvillas.com/en/location"
+            }
+          }
         },
         en: {
-          title: "WhiteHills Villas – New-build villas in Fuengirola (Torreblanca), Málaga",
-          desc:  "Exclusive development with terraces, a pool, and landscaped areas. Official floor plans, prices, and availability.",
-          url:   "https://whitehillsvillas.com/en/home",
-          ogLocale: "en_GB",
-          h1: "Villas in Fuengirola and Málaga | New-build in Torreblanca – WhiteHills"
+          home: {
+            title: "Villas for sale in Fuengirola - WhiteHills",
+            desc:  "Discover our 12 sustainable luxury villas for sale in Torreblanca, Fuengirola, with sea views and private pools on the Costa del Sol.",
+            url:   "https://whitehillsvillas.com/en/home",
+            ogLocale: "en_GB",
+            robots: "index,follow",
+            h1: "Villas for sale in Fuengirola",
+            alternates: {
+              es: "https://whitehillsvillas.com/es/inicio",
+              en: "https://whitehillsvillas.com/en/home",
+              "x-default": "https://whitehillsvillas.com/en/home"
+            }
+          },
+          availability: {
+            title: "Availability & floorplans | WhiteHills Villas Fuengirola",
+            desc:  "See available homes, prices and downloadable floorplans for WhiteHills Villas in Fuengirola.",
+            url:   "https://whitehillsvillas.com/en/availability",
+            ogLocale: "en_GB",
+            robots: "index,follow",
+            h1: "Availability of villas in Fuengirola",
+            alternates: {
+              es: "https://whitehillsvillas.com/es/disponibilidad",
+              en: "https://whitehillsvillas.com/en/availability",
+              "x-default": "https://whitehillsvillas.com/en/availability"
+            }
+          },
+          location: {
+            title: "Location in Fuengirola | WhiteHills Villas",
+            desc:  "Explore WhiteHills Villas in Torreblanca, Fuengirola, close to the beach, key services and Malaga International Airport.",
+            url:   "https://whitehillsvillas.com/en/location",
+            ogLocale: "en_GB",
+            robots: "index,follow",
+            h1: "Location of WhiteHills in Fuengirola",
+            alternates: {
+              es: "https://whitehillsvillas.com/es/localizacion",
+              en: "https://whitehillsvillas.com/en/location",
+              "x-default": "https://whitehillsvillas.com/en/location"
+            }
+          }
         }
       };
+
       var L = isEN ? "en" : "es";
-      // lang del <html>
+      var conf = (SEO[L] && SEO[L][route]) ? SEO[L][route] : SEO[L].home;
+
       document.documentElement.setAttribute("lang", L);
-      // helpers
+
       function setAttr(sel, attr, val){ var el = document.querySelector(sel); if(el && val){ el.setAttribute(attr, val); } }
       function setText(sel, val){ var el = document.querySelector(sel); if(el && val){ el.textContent = val; } }
-      // title + description
-      document.title = SEO[L].title;
-      setAttr('meta[name="description"]','content', SEO[L].desc);
-      // OG / Twitter
-      setAttr('meta[property="og:title"]','content', SEO[L].title);
-      setAttr('meta[property="og:description"]','content', SEO[L].desc);
-      setAttr('meta[property="og:url"]','content', SEO[L].url);
-      setAttr('meta[property="og:locale"]','content', SEO[L].ogLocale);
-      setAttr('meta[name="twitter:title"]','content', SEO[L].title);
-      setAttr('meta[name="twitter:description"]','content', SEO[L].desc);
-      // Canonical
-      setAttr('link#canonical','href', SEO[L].url);
-      // H1 oculto
-      setText('h1.visually-hidden', SEO[L].h1);
+
+      document.title = conf.title;
+      setAttr('meta[name="description"]','content', conf.desc);
+      setAttr('meta[name="robots"]','content', conf.robots);
+
+      setAttr('meta[property="og:title"]','content', conf.title);
+      setAttr('meta[property="og:description"]','content', conf.desc);
+      setAttr('meta[property="og:url"]','content', conf.url);
+      setAttr('meta[property="og:locale"]','content', conf.ogLocale);
+      setAttr('meta[name="twitter:title"]','content', conf.title);
+      setAttr('meta[name="twitter:description"]','content', conf.desc);
+
+      setAttr('link#canonical','href', conf.url);
+
+      setAttr('link#alt-es','href', conf.alternates.es);
+      setAttr('link#alt-en','href', conf.alternates.en);
+      setAttr('link#alt-x-default','href', conf.alternates["x-default"]);
+
+      setText('h1.visually-hidden', conf.h1);
     })();
   </script>
 </head>
@@ -220,18 +309,36 @@
 
   <!-- H1 SEO (oculto visualmente, pero legible por buscadores y lectores) -->
   <h1 class="visually-hidden">
-    Villas en Fuengirola y Málaga | Obra nueva en Torreblanca – WhiteHills
+    Villas for sale in Fuengirola
   </h1>
 
-  <!--*** Hero section ***-->
   <section class="section_1 parallax-bg">
     <div class="bg_div">
-      <h2 class="bg_text1" data-i18n="hero.welcome">WhiteHills Villas</h2>
-      <a href="#availability" class="hero-cta" data-i18n="hero.cta" title="Villas en Fuengirola, Málaga">
-        Ver villas
+      <!-- Título principal -->
+      <h2 class="bg_text1">WhiteHills</h2>
+      <p class="hero-lux-line" data-i18n="hero.luxLine">
+        Mediterranean Signature Living
+      </p>
+
+      <!-- Subtítulo / estado del proyecto -->
+      <div class="hero-status-inline" data-i18n="[aria-label]home.status.aria" aria-label="Project status">
+        <span class="hero-pill" data-i18n="home.status.license">
+          Building permit granted
+        </span>
+        <span class="hero-separator" aria-hidden="true">|</span>
+        <span class="hero-pill" data-i18n="home.status.land">
+          Land acquired
+        </span>
+        <span class="hero-separator" aria-hidden="true">|</span>
+        <span class="hero-pill" data-i18n="home.status.finance">
+          Financing approved
+        </span>
+      </div>
+
+      <a href="#availability" class="hero-cta" title="Villas in Fuengirola, Málaga" data-i18n="hero.cta">
+        Go to villas
       </a>
     </div>
-    <div class="promo-info reveal" id="promoStats"></div>
   </section>
 
   <!--*** Services section ***-->
@@ -262,7 +369,7 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 mx-auto">
           <figure class="position-relative ratio ratio-16x9 mb-0">
-            <a data-fancybox href="https://youtu.be/TRpcobBeRqw" class="d-block w-100 h-100">
+            <a data-fancybox href="https://youtu.be/TRpcobBeRqw?si=NEsbDxD7tfmTAPVA" class="d-block w-100 h-100">
               <picture class="d-block w-100 h-100">
                 <source srcset="https://i.ytimg.com/vi_webp/TRpcobBeRqw/maxresdefault.webp" type="image/webp">
                 <img
@@ -304,6 +411,62 @@
     </div>
   </section>
 
+  <section class="availability" id="availability">
+    <div id="availability-placeholder"></div>
+  </section>
+
+  <section class="availability-lead" id="availability-contact">
+    <div class="container">
+      <div class="availability-lead-shell">
+        <div class="availability-lead-copy">
+          <span class="availability-lead-kicker" data-i18n="homeLead.kicker"></span>
+          <h2 class="availability-lead-title" data-i18n="homeLead.title"></h2>
+          <p class="availability-lead-sub" data-i18n="homeLead.subtitle"></p>
+        </div>
+
+        <form id="homeLeadForm" class="availability-lead-form" data-lead>
+          <div class="availability-form-grid">
+            <label class="availability-field">
+              <span data-i18n="homeLead.form.name"></span>
+              <input type="text" name="name" required data-i18n-placeholder="homeLead.form.namePlaceholder">
+            </label>
+
+            <label class="availability-field">
+              <span data-i18n="homeLead.form.email"></span>
+              <input type="email" name="email" required data-i18n-placeholder="homeLead.form.emailPlaceholder">
+            </label>
+
+            <label class="availability-field">
+              <span data-i18n="homeLead.form.phone"></span>
+              <input type="tel" name="phone" required data-i18n-placeholder="homeLead.form.phonePlaceholder">
+            </label>
+
+            <label class="availability-field availability-field--full">
+              <span data-i18n="homeLead.form.message"></span>
+              <textarea name="message" rows="4" required data-i18n-placeholder="homeLead.form.messagePlaceholder"></textarea>
+            </label>
+          </div>
+
+          <label class="availability-check">
+            <input type="checkbox" name="rgpd" required>
+            <span data-i18n="rgpd.required"></span>
+          </label>
+
+          <label class="availability-check">
+            <input type="checkbox" name="marketing_ok">
+            <span data-i18n="rgpd.marketing"></span>
+          </label>
+
+          <div class="hp-wrapper" aria-hidden="true">
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" class="availability-submit" data-i18n="homeLead.form.submit"></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- BLOQUE “Interior + Características” -->
   <section class="interior-block">
     <div class="container">
@@ -312,7 +475,7 @@
         <!-- Columna de texto -->
         <div class="col-lg-6 col-text">
           <h2 class="mb-4 interior-title" data-i18n="interior.title"></h2>
-          <p class="mb-3 interior-text" data-i18n="interior.p1"></p>
+          <p class="mb-3 interior-text" data-i18n="interior.p1" data-nosnippet></p>
           <p class="mb-4 interior-text" data-i18n="interior.p2"></p>
 
           <!-- SOLO la lista va en grid 1/2/3 cols -->
@@ -368,10 +531,18 @@
         <div class="col-lg-6 col-media">
           <figure class="mb-0 interior-figure">
             <img
-              src="/images/garden_whitehills.webp"
+              src="https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/garden_whitehills.v1.1024.webp"
+              srcset="
+                https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/garden_whitehills.v1.480.webp 480w,
+                https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/garden_whitehills.v1.1024.webp 1024w,
+                https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/garden_whitehills.v1.1920.webp 1920w
+              "
+              sizes="(max-width: 600px) 92vw, (max-width: 1200px) 48vw, 1920px"
               alt=""
               class="interior-img"
-              data-i18n="[alt]interior.imgAlt">
+              data-i18n="[alt]interior.imgAlt"
+              loading="lazy"
+              decoding="async">
           </figure>
         </div>
 
@@ -379,24 +550,20 @@
     </div>
   </section>
 
-  <section class="availability" id="availability">
-    <div id="availability-placeholder"></div>
-  </section>
-
   <section class="features-3up" id="destacados">
     <div class="f3up-row">
-      <article class="f3up-card" style="--bg:url('/images/family_beach.webp')">
-        <button class="f3up-overlay" type="button">
+      <article class="f3up-card" style="--bg:url('https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/family_beach.v1.1024.webp')">
+        <div class="f3up-overlay" role="button" tabindex="0" aria-expanded="false">
           <h3 class="f3up-title" data-i18n="ui.features3.title1">Mar, naturaleza y serenidad</h3>
           <p class="f3up-text" data-i18n="ui.features3.text1_html">
             En Torreblanca, una de las zonas residenciales más exclusivas de Fuengirola, vivirá rodeado de tranquilidad y privacidad, a sólo minutos del mar.<br><br>
             Las playas de Carvajal y Torreblanca destacan por su ambiente relajado y auténticos chiringuitos frente al Mediterráneo.
           </p>
-        </button>
+        </div>
       </article>
 
-      <article class="f3up-card" style="--bg:url('/images/wine.webp')">
-        <button class="f3up-overlay" type="button">
+      <article class="f3up-card" style="--bg:url('https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/wine.v1.1024.webp')">
+        <div class="f3up-overlay" role="button" tabindex="0" aria-expanded="false">
           <h3 class="f3up-title" data-i18n="ui.features3.title2">Conexiones y servicios de primer nivel</h3>
           <p class="f3up-text" data-i18n="ui.features3.text2_html">
             Una ubicación estratégica que combina privacidad y accesibilidad:<br>
@@ -405,30 +572,54 @@
             Conexión directa con la autovía y el AVE Madrid–Málaga.<br><br>
             Además, tendrás a su alcance colegios de prestigio como Salliver y el Colegio Finlandés, restaurantes gourmet, supermercados, centros de salud y el Centro Comercial Miramar.
           </p>
-        </button>
+        </div>
       </article>
 
-      <article class="f3up-card" style="--bg:url('/images/golf.webp')">
-        <button class="f3up-overlay" type="button">
+      <article class="f3up-card" style="--bg:url('https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/golf.v1.1024.webp')">
+        <div class="f3up-overlay" role="button" tabindex="0" aria-expanded="false">
           <h3 class="f3up-title" data-i18n="ui.features3.title3">Estilo de vida mediterráneo</h3>
           <p class="f3up-text" data-i18n="ui.features3.text3_html">
             Con más de 330 días de sol al año y una temperatura media de 19&nbsp;ºC, la Costa del Sol es sinónimo de bienestar y exclusividad.<br><br>
             Más de 50 campos de golf, una vibrante oferta cultural y una comunidad internacional hacen de Málaga un enclave único para quienes buscan lo mejor de la vida junto al mar.
           </p>
-        </button>
+        </div>
       </article>
     </div>
   </section>
 
-  <section class="title-image-block py-5" >
+  <section class="title-image-block py-5">
     <div class="container">
-      <h2 class="mb-4 text-center titulo-localizacion" data-i18n="section.title" id="location">Título de la sección</h2>
+      <h2 class="mb-4 text-center titulo-localizacion" data-i18n="section.title" id="location">
+        Título de la sección
+      </h2>
 
       <img
-        src="/images/location.webp"
+        src="https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/location.v1.1024.webp"
+        srcset="
+          https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/location.v1.480.webp 480w,
+          https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/location.v1.1024.webp 1024w,
+          https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/location.v1.1920.webp 1920w
+        "
+        sizes="(max-width: 600px) 92vw, (max-width: 1200px) 80vw, 1920px"
         class="section-image img-fluid rounded shadow-sm d-block mx-auto"
         alt="Descripción de la imagen"
-        data-i18n="[alt]section.imgAlt">
+        data-i18n="[alt]section.imgAlt"
+        loading="lazy"
+        decoding="async"
+      >
+
+      <!-- 🔹 Mapa interactivo Google Maps -->
+      <div class="wh-map-wrap">
+        <iframe
+          class="wh-map-frame"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3204.1128156159007!2d-4.6059924!3d36.5754991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72e340e8fec7a3%3A0x7fe0ca61bfd573bd!2sWhiteHills%20Villas!5e0!3m2!1ses!2ses!4v1764917577415!5m2!1ses!2ses"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+
     </div>
   </section>
 
@@ -522,6 +713,13 @@
   </script>
 
   <script>
+    window.__WH_AVAILABILITY_DATA_PROMISE = fetch('/availability-data.json', { cache: 'force-cache' })
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      });
+  </script>
+  <script>
     fetch('/partials/availability-map.html')
       .then(res => res.text())
       .then(html => {
@@ -540,20 +738,51 @@
   <script>
     fetch('/partials/modals.html')
       .then(r => r.text())
-      .then(html => { document.getElementById('modals-placeholder').innerHTML = html; });
+      .then(html => {
+        document.getElementById('modals-placeholder').innerHTML = html;
+        window.applyI18nAndRoutes && window.applyI18nAndRoutes();
+      });
   </script>
   <script>
-    document.addEventListener('click', (e)=>{
-      const btn = e.target.closest('.f3up-overlay');
-      if(!btn) return;
-      const card = btn.closest('.f3up-card');
-      if (window.matchMedia('(max-width: 900px)').matches) {
-        document.querySelectorAll('.f3up-card.is-open').forEach(el=>{
-          if(el!==card) el.classList.remove('is-open');
+    (function () {
+      function toggleFeatureCard(card) {
+        if (!card) return;
+        const willOpen = !card.classList.contains('is-open');
+
+        document.querySelectorAll('.f3up-card.is-open').forEach(el => {
+          if (el !== card) {
+            el.classList.remove('is-open');
+            const overlay = el.querySelector('.f3up-overlay');
+            if (overlay) overlay.setAttribute('aria-expanded', 'false');
+          }
         });
-        card.classList.toggle('is-open');
+
+        card.classList.toggle('is-open', willOpen);
+        const ownOverlay = card.querySelector('.f3up-overlay');
+        if (ownOverlay) ownOverlay.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
       }
-    });
+
+      document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('.f3up-overlay');
+        if (!trigger) return;
+        const card = trigger.closest('.f3up-card');
+        if (window.matchMedia('(max-width: 900px)').matches) {
+          e.preventDefault();
+          toggleFeatureCard(card);
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        const trigger = e.target.closest('.f3up-overlay');
+        if (!trigger) return;
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        const card = trigger.closest('.f3up-card');
+        if (window.matchMedia('(max-width: 900px)').matches) {
+          e.preventDefault();
+          toggleFeatureCard(card);
+        }
+      });
+    })();
   </script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imagemapster/1.5.4/jquery.imagemapster.min.js"></script>

@@ -93,7 +93,7 @@
       display:inline-flex;
       align-items:center;
       gap:.5rem;
-      min-width:9.5rem; /* evita saltos de ancho */
+      min-width:9.5rem;
       transition:background-color .2s ease, border-color .2s ease, color .2s ease, transform .06s ease;
       will-change:transform;
     }
@@ -103,46 +103,31 @@
     .contact-form__button .btn-dots,
     .contact-form__button .btn-check{ display:none; align-items:center; }
 
-    /* Dots "..." animados */
     .btn-dots span{ opacity:0; font-weight:700; font-size:1.15em; line-height:1; }
     .btn-dots span:nth-child(1){ animation:dot 1.2s infinite; animation-delay:0s; }
     .btn-dots span:nth-child(2){ animation:dot 1.2s infinite; animation-delay:.2s; }
     .btn-dots span:nth-child(3){ animation:dot 1.2s infinite; animation-delay:.4s; }
-    @keyframes dot{
-      0%{opacity:0}
-      20%{opacity:1}
-      100%{opacity:0}
-    }
+    @keyframes dot{ 0%{opacity:0} 20%{opacity:1} 100%{opacity:0} }
 
-    /* Estado: enviando */
     .contact-form__button.is-sending .btn-label{ display:none; }
     .contact-form__button.is-sending .btn-dots{ display:inline-flex; }
 
-    /* Estado: éxito */
-    .contact-form__button.is-success{
-      background:#198754; border-color:#198754;
-    }
+    .contact-form__button.is-success{ background:#198754; border-color:#198754; }
     .contact-form__button.is-success .btn-label,
     .contact-form__button.is-success .btn-dots{ display:none; }
     .contact-form__button.is-success .btn-check{ display:inline-flex; }
 
-    /* Mensaje de estado bajo el botón */
-    .form-status{
-      margin-top:.75rem; font-size:.95rem;
-    }
+    .form-status{ margin-top:.75rem; font-size:.95rem; }
     .form-status.ok{ color:#198754; }
     .form-status.err{ color:#dc3545; }
   </style>
 </head>
 
 <body class="contact-page">
-  <!-- Skip link -->
   <a class="visually-hidden" href="#main-content">Saltar al contenido</a>
 
-  <!--*** Header dinámico ***-->
   <div id="header-placeholder"></div>
 
-  <!-- ===== MAIN ===== -->
   <main id="main-content" role="main">
     <!-- ███ HERO · FORMULARIO EN LA IMAGEN ███ -->
     <section class="section_1 contact-hero" id="contactForm" aria-labelledby="contactTitle">
@@ -193,7 +178,7 @@
           </label>
         </div>
 
-        <!-- Honeypot anti-spam (no tabulable, oculto) -->
+        <!-- Honeypot anti-spam -->
         <div class="hp-wrapper contact-form__hp" aria-hidden="true">
           <label for="website">Website</label>
           <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
@@ -207,13 +192,11 @@
           <span class="btn-check" aria-hidden="true"><i class="fa-solid fa-check"></i>&nbsp;Enviado</span>
         </button>
 
-        <!-- Estado del envío (accesible) -->
         <p id="formStatus" class="form-status" aria-live="polite" role="status"></p>
       </form>
     </section>
   </main>
 
-  <!--*** Footer dinámico ***-->
   <div id="footer-placeholder"></div>
 
   <!-- ─── JS globales ─── -->
@@ -278,8 +261,6 @@
       .then(r => r.text())
       .then(html => {
         document.getElementById('footer-placeholder').innerHTML = html;
-
-        /* Retraducción del footer si i18n ya está */
         window.applyI18nAndRoutes && window.applyI18nAndRoutes();
       });
   </script>
@@ -292,8 +273,8 @@
 
       /* ======== CONFIG ======== */
       const SANDBOX  = true; // ⬅️ Cambia a false cuando tengas el Web App
-      const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwXUji7ljlDIuacCTfThyAY2bEtKuvvYhk8o5uGH-F-M82dbuLXNayt-31ppnAkrBj7aQ/exec'; // ⬅️ tu URL de Apps Script
-      const SECRET   = 'WH_V1_123456'; // ⬅️ pon un secreto sencillo y el mismo en Apps Script
+      const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwXUji7ljlDIuacCTfThyAY2bEtKuvvYhk8o5uGH-F-M82dbuLXNayt-31ppnAkrBj7aQ/exec';
+      const SECRET   = 'WH_V1_123456';
 
       const btn     = form.querySelector('.contact-form__button');
       const status  = document.getElementById('formStatus');
@@ -308,6 +289,9 @@
 
       const nameRegex  = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]{2,}$/;
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+      /* Fuerza teléfono obligatorio por seguridad (además del required del HTML) */
+      if (phoneEl) phoneEl.required = true;
 
       function markValidity(el){
         const invalid = !el.checkValidity();
@@ -344,7 +328,6 @@
       phoneEl.addEventListener('input',() => { validatePhone(); phoneEl.reportValidity(); });
 
       function setButton(state){
-        // state: 'idle' | 'sending' | 'success' | 'error'
         btn.classList.remove('is-sending','is-success');
         btn.disabled = (state === 'sending');
         if (state === 'sending') {
@@ -363,7 +346,6 @@
         }
       }
 
-      // === Simulación SANDBOX ===
       function fakeSend(payload){
         return new Promise((resolve) => {
           console.debug('SANDBOX payload →', payload);
@@ -371,13 +353,11 @@
         });
       }
 
-      // === Envío real a Apps Script (evitando preflight con text/plain) ===
       async function sendToSheet(payload){
-        const body = JSON.stringify(payload);
         const res = await fetch(ENDPOINT, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // simple request → no preflight
-          body
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
         });
         if (!res.ok) {
           const t = await res.text().catch(()=> '');
@@ -389,7 +369,6 @@
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Validación
         validateName();
         validateEmail();
         validatePhone();
@@ -399,7 +378,6 @@
           return;
         }
 
-        // Honeypot
         if (hpEl && hpEl.value.trim() !== '') {
           setButton('success');
           setTimeout(() => setButton('idle'), 2200);
@@ -422,9 +400,8 @@
 
         try {
           setButton('sending');
-          const res = await (SANDBOX ? fakeSend(payload) : sendToSheet(payload));
+          await (SANDBOX ? fakeSend(payload) : sendToSheet(payload));
 
-          // Éxito
           setButton('success');
           form.reset();
           [nameEl, mailEl, phoneEl, msgEl].forEach(el => {

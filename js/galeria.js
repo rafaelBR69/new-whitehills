@@ -4,49 +4,36 @@
    ========================================================= */
 
 const DEBUG = false;
+const VARIANT_VERSION = "v1";
+const VARIANT_WIDTHS = [480, 1024, 1920];
 
-/** Toggle rápido por si quisieras volver al URL original sin transform */
-const USE_SUPA_TRANSFORM = true;
-
-/** === Config de aspecto objetivo ===
- * La card en CSS debe ser 16:9 para que encaje perfecto.
- * Altura = ancho * 9/16
- */
-const RATIO_H_OVER_W = 9 / 16;
-const H16_9 = (w) => Math.round(w * RATIO_H_OVER_W);
-
-/** Helper: URLs optimizadas vía Supabase Transform API (con height) */
-function supa(url, { w, h, q = 70, resize = 'cover', format } = {}) {
-  if (!USE_SUPA_TRANSFORM) return url;
+function toVariantUrl(originalUrl, width) {
   try {
-    const u = new URL(url);
-    // render image endpoint
-    u.pathname = u.pathname.replace('/storage/v1/object/', '/storage/v1/render/image/');
-    if (w) u.searchParams.set('width',  String(w));
-    if (h) u.searchParams.set('height', String(h)); // <--- NUEVO
-    u.searchParams.set('quality', String(q));
-    u.searchParams.set('resize',  resize);          // cover | contain
-    if (format) u.searchParams.set('format', format); // avif | webp | jpeg
+    const u = new URL(originalUrl);
+    const ext = u.pathname.match(/\.[a-z0-9]+$/i)?.[0] || "";
+    if (!ext) return originalUrl;
+    u.pathname = u.pathname.replace(new RegExp(`${ext}$`, "i"), `.${VARIANT_VERSION}.${width}.webp`);
     return u.toString();
   } catch {
-    return url;
+    return originalUrl;
   }
 }
 
 /** 1) Tus URLs públicas (Supabase) */
 const PROVIDED_IMAGES = [
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/basement_1_WhiteHills.webp",
-  "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/basement_2_WhiteHills.webp",
-  "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/basement_3_WhiteHills.webp",
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/bedroom_1_WhiteHills.webp",
+  "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/Kitchen_2_WhiteHills.jpg",
+  "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/Living_room_WhiteHills.jpg",
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/bedroom_2_WhiteHills.webp",
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/exterior_facade_1_WhiteHills.webp",
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/exterior_facade_2_WhiteHills.webp",
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/exterior_facade_3_WhiteHills.webp",
+  "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/Inside_the_Basement_WhiteHills.jpg",
+  "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/Inside_the_Basement_2_WhiteHills.jpg",
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/garage_WhiteHills.webp",
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/garden_WhiteHills.webp",
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/kitchen_WhiteHills.webp",
-  "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/Living_room_1_WhiteHills.webp",
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/Living_room_2_WhiteHills.webp",
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/Living_room_3_WhiteHills.webp",
   "https://fnmgoidqojutofowzuey.supabase.co/storage/v1/object/public/PDFWH/images/Living_room_4_WhiteHills.webp"
@@ -99,25 +86,33 @@ function createCardAndDot(member, i) {
   const img = document.createElement('img');
   img.alt = member.name;
 
-  // Carga “rápida” para las primeras visibles del carrusel
-  const eager = i < 4;
+  // Solo la primera imagen arranca eager; el resto lazy.
+  const eager = i === 0;
   img.decoding = 'async';
   img.loading = eager ? 'eager' : 'lazy';
   img.setAttribute('fetchpriority', eager ? 'high' : 'low');
 
-  // === Usamos 16:9 en src y srcset (resize: cover) ===
-  img.src = supa(member.img, { w: 1200, h: H16_9(1200), q: 75, resize: 'cover' });
-  img.srcset = [
-    `${supa(member.img, { w: 480,  h: H16_9(480),  q: 70, resize: 'cover' })} 480w`,
-    `${supa(member.img, { w: 768,  h: H16_9(768),  q: 70, resize: 'cover' })} 768w`,
-    `${supa(member.img, { w: 1200, h: H16_9(1200), q: 75, resize: 'cover' })} 1200w`,
-    `${supa(member.img, { w: 1600, h: H16_9(1600), q: 75, resize: 'cover' })} 1600w`
-  ].join(', ');
-  img.sizes = '(max-width: 768px) 90vw, (max-width: 1200px) 70vw, 900px';
+  const [w480, w1024, w1920] = VARIANT_WIDTHS;
+  const src480 = toVariantUrl(member.img, w480);
+  const src1024 = toVariantUrl(member.img, w1024);
+  const src1920 = toVariantUrl(member.img, w1920);
+
+  img.src = src1024;
+  img.srcset = `${src480} ${w480}w, ${src1024} ${w1024}w, ${src1920} ${w1920}w`;
+  img.sizes = '(max-width: 600px) 480px, (max-width: 1200px) 1024px, 1920px';
+  img.dataset.fallbackSrc = member.img;
 
   img.addEventListener('load', () => img.classList.add('is-loaded'));
 
   img.onerror = () => {
+    if (img.dataset.fallbackApplied !== '1') {
+      img.dataset.fallbackApplied = '1';
+      img.srcset = '';
+      img.sizes = '';
+      img.src = img.dataset.fallbackSrc || member.img;
+      return;
+    }
+
     card.style.background = 'linear-gradient(135deg,#222,#111)';
     card.style.display = 'flex';
     card.style.alignItems = 'center';
@@ -267,41 +262,6 @@ function bindEvents() {
   }, { passive:true });
 }
 
-
-/** Precarga en background (calienta el render 16:9) */
-function preloadOnce(url, { w = 64, q = 40 } = {}) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.decoding = 'async';
-    img.loading = 'eager';
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    // Importante: no forzamos format; sí mandamos height 16:9
-    img.src = supa(url, { w, h: H16_9(w), q, resize: 'cover' });
-  });
-}
-
-/** Precarga con límite de concurrencia */
-function ensureImages(urls, opts = {}) {
-  const CONCURRENCY = 4;
-  let cursor = 0;
-
-  function runNext() {
-    if (cursor >= urls.length) return Promise.resolve();
-    const u = urls[cursor++];
-    return preloadOnce(u, opts).finally(runNext);
-  }
-  const workers = Array.from({ length: Math.min(CONCURRENCY, urls.length) }, runNext);
-  return Promise.all(workers);
-}
-
-function runIdle(fn, timeout = 1200){
-  if ('requestIdleCallback' in window) {
-    return requestIdleCallback(fn, { timeout });
-  }
-  return setTimeout(fn, timeout);
-}
-
 /** 10) Init */
 (async function init(){
   if (DEBUG) console.log('[galería] init… total imágenes:', PROVIDED_IMAGES.length);
@@ -312,7 +272,4 @@ function runIdle(fn, timeout = 1200){
 
   // Primer layout
   setTimeout(() => updateClasses(0), 30);
-
-  // Precalienta miniaturas en tiempo ocioso (16:9)
-  runIdle(() => ensureImages(PROVIDED_IMAGES, { w: 96, q: 38 }));
 })();
