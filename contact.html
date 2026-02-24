@@ -124,7 +124,7 @@
 </head>
 
 <body class="contact-page">
-  <a class="visually-hidden" href="#main-content">Saltar al contenido</a>
+  <a class="visually-hidden-focusable" href="#main-content">Saltar al contenido</a>
 
   <div id="header-placeholder"></div>
 
@@ -268,6 +268,8 @@
   <!-- Validación + Envío con estados (… y ✔) -->
   <script>
     (() => {
+      if (window.__WH_GLOBAL_LEAD_HANDLER__) return;
+
       const form    = document.getElementById('leadForm');
       if (!form) return;
 

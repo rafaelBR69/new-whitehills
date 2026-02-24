@@ -78,13 +78,14 @@
 
 <body class="process-page proc-page">
   <!-- Skip link para accesibilidad -->
-  <a class="visually-hidden" href="#main-content" data-i18n="process.simple.skipLink">Saltar al contenido</a>
+  <a class="visually-hidden-focusable" href="#main-content" data-i18n="process.simple.skipLink">Saltar al contenido</a>
 
   <!--*** Header dinámico ***-->
   <div id="header-placeholder"></div>
 
   <!-- ===== MAIN ===== -->
   <main id="main-content" role="main">
+    <h1 class="visually-hidden" data-i18n="process.simple.h1">Proceso de compra de WhiteHills Villas</h1>
 
     <section class="process-tl" id="proceso-compra">
       <h2 class="process-tl__title" data-i18n="process.simple.title">Proceso de compra</h2>
@@ -162,7 +163,7 @@
         document.getElementById('header-placeholder').innerHTML = html;
 
         const header = document.querySelector('header');
-        const hero   = document.querySelector('.proc-simple'); // observamos esta sección
+        const hero   = document.querySelector('.process-tl'); // observamos esta sección
         if (header && hero) {
           const io = new IntersectionObserver(
             ([entry]) => header.classList.toggle('scrolled', !entry.isIntersecting),

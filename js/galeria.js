@@ -126,9 +126,17 @@ function createCardAndDot(member, i) {
 
   card.appendChild(img);
 
-  const dot = document.createElement('div');
+  const dot = document.createElement('button');
+  dot.type = 'button';
   dot.className = 'glr-dot';
   dot.dataset.index = i;
+  dot.setAttribute('aria-current', 'false');
+  dot.setAttribute(
+    'aria-label',
+    (document.documentElement.lang || '').toLowerCase().startsWith('en')
+      ? `Go to image ${i + 1}`
+      : `Ir a imagen ${i + 1}`
+  );
 
   return { card, dot };
 }

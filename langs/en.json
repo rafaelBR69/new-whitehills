@@ -47,6 +47,21 @@
       "license": "Building permit granted",
       "land":    "Land acquired",
       "finance": "Financing approved"
+    },
+    "trust": {
+      "title": "Buy with legal certainty and complete confidence",
+      "item1": {
+        "label": "Legal certainty",
+        "value": "Building permit granted and legal documentation ready for review."
+      },
+      "item2": {
+        "label": "True exclusivity",
+        "value": "Only 12 private villas in a consolidated Costa del Sol location."
+      },
+      "item3": {
+        "label": "Premium guidance",
+        "value": "Commercial and legal advisory support throughout the buying process."
+      }
     }
   },
   "section3": {
@@ -247,7 +262,8 @@
   },
   "modal": {
     "visit": {
-      "title": "Schedule a visit"
+      "title": "Schedule a visit",
+      "desc": "Leave your details and we will contact you to arrange a private viewing."
     },
     "brochure": {
       "title": "Download brochure",
@@ -279,6 +295,7 @@
     "simple": {
       "pageTitle": "Purchase Process – WhiteHills",
       "title": "Purchase process",
+      "h1": "WhiteHills Villas purchase process",
       "skipLink": "Skip to content",
       "notes": {
         "iva": "+ 10% IVA",

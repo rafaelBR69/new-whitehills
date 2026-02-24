@@ -61,6 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const $id = (x) => document.getElementById(x);
 
+// Single source of truth for lead forms across pages.
+window.__WH_GLOBAL_LEAD_HANDLER__ = true;
+
+const LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwXUji7ljlDIuacCTfThyAY2bEtKuvvYhk8o5uGH-F-M82dbuLXNayt-31ppnAkrBj7aQ/exec';
+const LEAD_TIMEOUT_MS = 15000;
+
 /* Helper genérico: soporta .show y .is-open */
 function toggleModal(modalEl, show = true) {
   if (!modalEl) return;
@@ -134,12 +140,13 @@ document.addEventListener('click', (e) => {
 });
 
 /* ▶️ Abrir “Agendar visita” (.btn-visit) */
-document.addEventListener('click', (e) => {
+document.addEventListener('click', async (e) => {
   const btn = e.target.closest('.btn-visit');
   if (!btn) return;
 
   e.preventDefault();
   const unit = btn.getAttribute('data-unit') || '';
+  await openVisitModal();
   const form = $id('visitForm'); // <-- antes buscabas 'leadForm'
   if (form) {
     let u = form.querySelector('[name="unidad"]');
@@ -150,7 +157,6 @@ document.addEventListener('click', (e) => {
     if (!origin) { origin = document.createElement('input'); origin.type = 'hidden'; origin.name = 'origin'; form.appendChild(origin); }
     origin.value = 'Agendar visita – Web';
   }
-  openVisitModal();
 });
 
 /* ▶️ CTA fijo móvil “Contact” → abre modal de datos existente */
@@ -178,6 +184,81 @@ document.addEventListener('click', async (e) => {
 });
 
 
+function getLeadMessages() {
+  const lang = (document.documentElement.lang || '').toLowerCase();
+  const isEN = lang.startsWith('en');
+  return isEN
+    ? {
+        sending: 'Sending...',
+        successVerified: 'Request sent successfully. Our team will contact you shortly.',
+        successUnverified: 'Request received. Our team will contact you shortly.',
+        error: 'We could not send your request. Please try again or contact us by phone.'
+      }
+    : {
+        sending: 'Enviando...',
+        successVerified: 'Solicitud enviada correctamente. Nuestro equipo le contactará muy pronto.',
+        successUnverified: 'Solicitud recibida. Nuestro equipo le contactará muy pronto.',
+        error: 'No se pudo enviar la solicitud. Inténtelo de nuevo o contacte por teléfono.'
+      };
+}
+
+function getLeadUi(form) {
+  const submitBtn = form.querySelector('button[type="submit"], .modal__send, .availability-submit, .contact-form__button');
+  const statusEl = form.querySelector('.form-status, [role="status"]');
+  return { submitBtn, statusEl };
+}
+
+function setLeadUiState(form, state, message = '') {
+  const { submitBtn, statusEl } = getLeadUi(form);
+  const isSending = state === 'sending';
+  const isSuccess = state === 'success';
+  const isError = state === 'error';
+
+  if (submitBtn) {
+    submitBtn.disabled = isSending;
+    submitBtn.classList.toggle('is-sending', isSending);
+    submitBtn.classList.toggle('is-success', isSuccess);
+  }
+
+  if (statusEl) {
+    statusEl.textContent = message;
+    statusEl.classList.remove('ok', 'err');
+    if (isSuccess) statusEl.classList.add('ok');
+    if (isError) statusEl.classList.add('err');
+  }
+}
+
+async function submitLeadPayload(data) {
+  const body = JSON.stringify(data);
+  const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timeoutId = controller
+    ? setTimeout(() => controller.abort(), LEAD_TIMEOUT_MS)
+    : null;
+
+  try {
+    const res = await fetch(LEAD_ENDPOINT, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body,
+      signal: controller ? controller.signal : undefined
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return { verified: true };
+  } catch (primaryErr) {
+    // If CORS blocks reading the response, assume request was sent but unverified.
+    if (primaryErr?.name === 'TypeError') {
+      if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+        throw primaryErr;
+      }
+      return { verified: false, reason: primaryErr };
+    }
+    throw primaryErr;
+  } finally {
+    if (timeoutId) clearTimeout(timeoutId);
+  }
+}
+
 /* ==== Envío a Google Sheets para TODOS los formularios data-lead ==== */
 document.addEventListener('submit', async (e) => {
   const form = e.target;
@@ -185,7 +266,14 @@ document.addEventListener('submit', async (e) => {
 
   e.preventDefault();
 
+  if (form.dataset.whSubmitting === '1') return;
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
   const fd = new FormData(form);
+  const messages = getLeadMessages();
 
   // Honeypot
   if (fd.get('website')?.trim()) {
@@ -223,23 +311,32 @@ document.addEventListener('submit', async (e) => {
   const downloadUrl = data.download_url || form.querySelector('[name="download_url"]')?.value;
 
   try {
-    // Cierra el modal actual (si aplica) y abre “Gracias”
-    form.closest('.modal')?.classList.remove('show');
-    if (typeof openThank === 'function') openThank();
+    form.dataset.whSubmitting = '1';
+    setLeadUiState(form, 'sending', messages.sending);
 
-    await fetch(
-      'https://script.google.com/macros/s/AKfycbwXUji7ljlDIuacCTfThyAY2bEtKuvvYhk8o5uGH-F-M82dbuLXNayt-31ppnAkrBj7aQ/exec',
-      { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }
-    );
+    const result = await submitLeadPayload(data);
+    const successMessage = result.verified
+      ? messages.successVerified
+      : messages.successUnverified;
+    setLeadUiState(form, 'success', successMessage);
+
+    const parentModal = form.closest('.modal');
+    if (parentModal) {
+      toggleModal(parentModal, false);
+      if (typeof openThank === 'function') await openThank();
+    }
 
     if (shouldDownload && downloadUrl) {
       window.open(downloadUrl, '_blank', 'noopener');
     }
 
     form.reset();
+    setTimeout(() => setLeadUiState(form, 'idle', ''), 2200);
   } catch (err) {
     console.error(err);
-    alert('Ups, no se pudo enviar. Inténtalo de nuevo.');
+    setLeadUiState(form, 'error', messages.error);
+  } finally {
+    form.dataset.whSubmitting = '0';
   }
 }, true);
 

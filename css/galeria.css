@@ -262,13 +262,19 @@ html, body { height: 100%; }
   margin-top: 46px;
 }
 .glr-dot{
+  appearance: none;
+  border: 1px solid #3c4d28;
+  padding: 0;
   width: 12px; height: 12px; border-radius: 50%;
   background: rgba(60,77,40,.18);
-  border: 1px solid #3c4d28;
   cursor: pointer;
   transition: all .3s ease;
 }
 .glr-dot.is-active{ background: #3c4d28; transform: scale(1.2); }
+.glr-dot:focus-visible{
+  outline: 2px solid rgba(60,77,40,.5);
+  outline-offset: 3px;
+}
 
 /* ==========================================================================
    Flechas (glr-nav) – botón pequeño, fondo transparente, borde blanco
@@ -375,7 +381,8 @@ html, body { height: 100%; }
   box-shadow: 0 6px 16px rgba(0,0,0,.14) inset;
 }
 .glr-page .btn-visit:focus-visible{
-  outline: none;
+  outline: 2px solid rgba(59,77,43,.55);
+  outline-offset: 3px;
   box-shadow:
     0 0 0 .2rem rgba(59,77,43,.35),
     0 10px 24px rgba(0,0,0,.18);

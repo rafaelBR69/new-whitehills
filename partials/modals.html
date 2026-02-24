@@ -14,6 +14,9 @@
     <button id="modalClose" class="modal__close" type="button" aria-label="Cerrar">×</button>
 
     <h3 id="visitTitle" class="modal__title" data-i18n="modal.visit.title">Agendar visita</h3>
+    <p id="visitDesc" class="modal__paragraph" data-i18n="modal.visit.desc">
+      Déjanos tus datos y te contactaremos para organizar una visita privada.
+    </p>
 
     <form id="visitForm" class="modal__form" data-lead data-origin="Agendar visita – Web">
       <!-- Honeypot -->
@@ -211,6 +214,8 @@
 <!-- JS: Abrir modal desde CTA + Validación + Envío (SANDBOX / Apps Script) -->
 <script>
 (() => {
+  if (window.__WH_GLOBAL_LEAD_HANDLER__) return;
+
   /* ======== CONFIG ======== */
   const SANDBOX  = true; // ⬅️ true = simular; false = enviar a Sheets
   const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwXUji7ljlDIuacCTfThyAY2bEtKuvvYhk8o5uGH-F-M82dbuLXNayt-31ppnAkrBj7aQ/exec'; // ⬅️ tu Web App

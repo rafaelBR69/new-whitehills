@@ -41,6 +41,21 @@
       "license": "Licencia concedida",
       "land":    "Terreno comprado",
       "finance": "Financiación aprobada"
+    },
+    "trust": {
+      "title": "Comprar con seguridad y total confianza",
+      "item1": {
+        "label": "Seguridad jurídica",
+        "value": "Licencia concedida y documentación legal preparada para revisión."
+      },
+      "item2": {
+        "label": "Exclusividad real",
+        "value": "Solo 12 villas privadas en una ubicación consolidada de la Costa del Sol."
+      },
+      "item3": {
+        "label": "Acompañamiento premium",
+        "value": "Asesoramiento comercial y legal durante todo el proceso de compra."
+      }
     }
   },
   "hero": {
@@ -250,7 +265,8 @@
   },
   "modal": {
     "visit": {
-      "title": "Agendar visita"
+      "title": "Agendar visita",
+      "desc": "Déjanos tus datos y te contactaremos para organizar una visita privada."
     },
     "brochure": {
       "title": "Descargar brochure",
@@ -282,6 +298,7 @@
     "simple": {
       "pageTitle": "Proceso de Compra – WhiteHills",
       "title": "Proceso de compra",
+      "h1": "Proceso de compra de WhiteHills Villas",
       "skipLink": "Saltar al contenido",
       "notes": {
         "iva": "+ 10% IVA",
