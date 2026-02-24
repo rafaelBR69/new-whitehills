@@ -23,7 +23,7 @@
     "aria": "Open WhatsApp with sales agent",
     "cta": "Need more information?",
     "text": "Sales WhatsApp",
-    "message": "Hi, I want more information about WhiteHills villas."
+    "message": "Hello, I would like more information about WhiteHills villas."
   },
   "hero": {
     "welcome": "WhiteHills",
@@ -41,7 +41,7 @@
       "sunnydays": { "label": "sunny days/year","value": 320 }
     },
     "metaTitle": "Villas for sale in Fuengirola - WhiteHills",
-    "metaDescription": "Discover our 12 sustainable luxury villas for sale in Torreblanca, Fuengirola, with sea views and private pools on the Costa del Sol.",
+    "metaDescription": "Discover our 12 luxury sustainable villas for sale in Torreblanca, Fuengirola, with sea views and private pools on the Costa del Sol.",
     "status": {
       "aria":    "Project status",
       "license": "Building permit granted",
@@ -50,16 +50,26 @@
     }
   },
   "section3": {
-    "title": "12 properties for sale in Torreblanca, Fuengirola",
-    "paragraph1": "WhiteHills Villas has been conceived as a perfect synthesis of contemporary elegance, modern comfort, and connection with nature. Located on a peaceful hillside, these exclusive villas offer panoramic views of the Mediterranean Sea, natural light all day, and open living spaces.",
+    "title": "Properties for sale in Fuengirola",
+    "paragraph1": "WhiteHills Villas has been conceived as a perfect synthesis of contemporary elegance, modern comfort, and connection with nature. Among the most sought-after properties for sale in Fuengirola, these exclusive homes offer panoramic views of the Mediterranean Sea, natural light all day, and open living spaces.",
     "paragraph2": "Each villa combines architectural elegance, high-end materials, and efficient design for an exceptional living experience. A private retreat by the sea, just minutes from the heart of Fuengirola and Málaga.",
     "button": "CONTACT US"
   },
   "video": {
     "blockTitle": "New build homes in Costa del Sol",
-    "blockParagraph": "Located in a privileged setting, these villas combine energy efficiency, premium finishes, and contemporary design. They offer a perfect balance between elegance and natural surroundings, with private pools and outdoor spaces designed to enjoy the Costa del Sol’s climate all year round.",
-    "imgAlt": "Video preview of the villas on the Costa del Sol",
+    "blockParagraph": "Located in a privileged setting, these new build homes combine energy efficiency, premium finishes, and contemporary design. They offer a perfect balance between elegance and natural surroundings, with private pools and outdoor spaces designed to enjoy the Costa del Sol's climate all year round.",
+    "imgAlt": "Video preview of the new build homes on the Costa del Sol",
     "ctaBrochure": "OBTAIN BROCHURE"
+  },
+  "faq": {
+    "title": "Frequently asked questions about luxury villas in Fuengirola",
+    "subtitle": "Everything you need to know about WhiteHills before arranging your visit.",
+    "q1": "Best real estate agencies for luxury villas in Fuengirola",
+    "a1": "BlancaReal is a real estate agency specialising in luxury homes since 1969. They have properties for sale in Fuengirola and throughout the western Costa del Sol.",
+    "q2": "Which areas near Fuengirola are known for exclusive properties?",
+    "a2": "Torreblanca is an area of Fuengirola that offers a large number of exclusive properties for sale with private swimming pools, sea views and first-class transport links and services.",
+    "q3": "Where to find luxury villas in Fuengirola with private pools and nearby beach?",
+    "a3": "All the villas in Torreblanca (Fuengirola) have a modern private swimming pool and are located less than five minutes from the beaches of Carvajal and Torreblanca."
   },
   "interior": {
     "title": "Spacious interiors and functional design",
@@ -311,7 +321,7 @@
   "seo": {
     "home": {
       "title": "Villas for sale in Fuengirola - WhiteHills",
-      "metaDescription": "Discover our 12 sustainable luxury villas for sale in Torreblanca, Fuengirola, with sea views and private pools on the Costa del Sol.",
+      "metaDescription": "Discover our 12 luxury sustainable villas for sale in Torreblanca, Fuengirola, with sea views and private pools on the Costa del Sol.",
       "slug": "/",
       "canonical": "https://whitehillsvillas.com/en/home",
       "alternates": {

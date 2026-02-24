@@ -149,7 +149,7 @@ window.applyI18nAndRoutes = function applyI18nAndRoutes () {
 
   // WhatsApp CTA con mensaje precargado por idioma
   const defaultWaMessage = L === 'en'
-    ? 'Hi, I want more information about WhiteHills villas.'
+    ? 'Hello, I would like more information about WhiteHills villas.'
     : 'Buenas, quiero más información sobre las villas de WhiteHills';
   const waMessageRaw = (window.i18next && typeof i18next.t === 'function')
     ? i18next.t('chatCta.message', { defaultValue: defaultWaMessage })

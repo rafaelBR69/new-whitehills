@@ -35,7 +35,7 @@
       "sunnydays": { "label": "días de sol/año", "value": 320 }
     },
     "metaTitle": "Villas a la venta en Fuengirola - WhiteHills",
-    "metaDescription": "Descubre nuestras 12 villas de lujo sostenibles con vistas al mar y piscinas privadas en la Costa del Sol.",
+    "metaDescription": "Descubre nuestras 12 villas de lujo sostenibles a la venta en Torreblanca, Fuengirola, con vistas al mar y piscinas privadas en la Costa del Sol.",
     "status": {
       "aria":    "Estado del proyecto",
       "license": "Licencia concedida",
@@ -49,16 +49,26 @@
     "luxLine": "Exclusividad mediterránea a otro nivel"
   },
   "section3": {
-    "title": "12 propiedades a la venta en Torreblanca, Fuengirola",
-    "paragraph1": "WhiteHills Villas ha sido concebida como una síntesis perfecta entre elegancia contemporánea, confort moderno y conexión con la naturaleza. Situadas en una ladera tranquila, estas villas exclusivas ofrecen vistas panorámicas al mar Mediterráneo, luz natural todo el día y estancias abiertas al exterior.",
+    "title": "Propiedades a la venta en Fuengirola",
+    "paragraph1": "WhiteHills Villas ha sido concebida como una síntesis perfecta entre elegancia contemporánea, confort moderno y conexión con la naturaleza. Entre las mejores propiedades a la venta en Fuengirola, estas viviendas exclusivas ofrecen vistas panorámicas al mar Mediterráneo, luz natural todo el día y estancias abiertas al exterior.",
     "paragraph2": "Cada villa combina elegancia arquitectónica, materiales de alta gama y diseño eficiente para una experiencia de vida excepcional. Un refugio privado junto al mar, a sólo unos minutos del corazón de Fuengirola y Málaga.",
     "button": "CONTACTAR"
   },
   "video": {
     "blockTitle": "Viviendas de obra nueva en la Costa del Sol",
-    "blockParagraph": "Ubicadas en un entorno privilegiado, estas villas combinan eficiencia energética, acabados premium y diseño contemporáneo. Ofrecen un equilibrio perfecto entre elegancia y entorno natural, con piscina privada y espacios exteriores pensados para disfrutar del clima de la Costa del Sol durante todo el año.",
-    "imgAlt": "Vista previa del vídeo de las villas en la Costa del Sol",
+    "blockParagraph": "Ubicadas en un entorno privilegiado, estas viviendas de obra nueva combinan eficiencia energética, acabados premium y diseño contemporáneo. Ofrecen un equilibrio perfecto entre elegancia y entorno natural, con piscina privada y espacios exteriores pensados para disfrutar del clima de la Costa del Sol durante todo el año.",
+    "imgAlt": "Vista previa del vídeo de las viviendas de obra nueva en la Costa del Sol",
     "ctaBrochure": "OBTENER BROCHURE"
+  },
+  "faq": {
+    "title": "Preguntas frecuentes sobre villas de lujo en Fuengirola",
+    "subtitle": "Resolvemos las dudas clave para que pueda valorar WhiteHills con total confianza.",
+    "q1": "Mejores inmobiliarias para villas de lujo en Fuengirola",
+    "a1": "BlancaReal es una agencia inmobiliaria especializada en viviendas de lujo desde 1969. Dispone de propiedades a la venta en Fuengirola y en toda la Costa del Sol occidental.",
+    "q2": "¿Qué zonas cerca de Fuengirola son conocidas por propiedades exclusivas?",
+    "a2": "Torreblanca es una zona de Fuengirola que ofrece un gran número de propiedades exclusivas a la venta con piscinas privadas, vistas al mar y excelentes conexiones y servicios.",
+    "q3": "¿Dónde encontrar villas de lujo en Fuengirola con piscina privada y cerca de la playa?",
+    "a3": "Todas las villas de Torreblanca (Fuengirola) cuentan con una piscina privada moderna y se ubican a menos de cinco minutos de las playas de Carvajal y Torreblanca."
   },
   "interior": {
     "title": "Interiores espaciosos y diseño funcional",
@@ -314,7 +324,7 @@
   "seo": {
     "home": {
       "title": "Villas a la venta en Fuengirola - WhiteHills",
-      "metaDescription": "Descubre nuestras 12 villas de lujo sostenibles con vistas al mar y piscinas privadas en la Costa del Sol.",
+      "metaDescription": "Descubre nuestras 12 villas de lujo sostenibles a la venta en Torreblanca, Fuengirola, con vistas al mar y piscinas privadas en la Costa del Sol.",
       "slug": "/",
       "canonical": "https://whitehillsvillas.com/es/inicio",
       "alternates": {

@@ -878,6 +878,87 @@ footer p:first-of-type{font-family:var(--ff-body);font-weight:500;}
   .f3up-card,.f3up-text{transition:none;}
 }
 
+/* =========================================================
+   FAQ LUXURY ACCORDION
+   ========================================================= */
+.faq-lux{
+  background:linear-gradient(180deg,#f8f6f2 0%,#ffffff 72%);
+}
+.faq-lux__head{
+  max-width:980px;
+  margin:0 auto 2.4rem;
+}
+.faq-lux__title{
+  font-family:var(--ff-body);
+  font-size:clamp(2.8rem,2vw + 1.8rem,4.2rem);
+  font-weight:500;
+  color:var(--brand-color);
+  margin-bottom:.8rem;
+}
+.faq-lux__subtitle{
+  font-family:var(--ff-body);
+  font-size:2rem;
+  line-height:1.6;
+  color:#4b4b4b;
+  margin:0 auto;
+  max-width:900px;
+}
+.faq-lux__accordion{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;
+  gap:1.2rem;
+}
+.faq-lux__accordion .accordion-item{
+  border:1px solid rgba(59,77,43,.22);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,.05);
+}
+.faq-lux__accordion .accordion-button{
+  font-family:var(--ff-body);
+  font-size:2.1rem;
+  font-weight:500;
+  color:#243220;
+  background:#fff;
+  padding:2rem 2.4rem;
+  box-shadow:none;
+}
+.faq-lux__accordion .accordion-button:not(.collapsed){
+  background:rgba(59,77,43,.08);
+  color:var(--brand-color);
+}
+.faq-lux__accordion .accordion-button:focus{
+  box-shadow:none;
+}
+.faq-lux__accordion .accordion-button::after{
+  background-size:1.4rem;
+  filter:grayscale(100%) contrast(1.1);
+}
+.faq-lux__accordion .accordion-body{
+  font-family:var(--ff-body);
+  font-size:1.9rem;
+  line-height:1.7;
+  color:#3f3f3f;
+  padding:0 2.4rem 2rem;
+}
+@media (max-width: 768px){
+  .faq-lux__title{
+    font-size:3rem;
+  }
+  .faq-lux__subtitle{
+    font-size:1.8rem;
+  }
+  .faq-lux__accordion .accordion-button{
+    font-size:1.8rem;
+    padding:1.6rem 1.6rem;
+  }
+  .faq-lux__accordion .accordion-body{
+    font-size:1.7rem;
+    padding:0 1.6rem 1.6rem;
+  }
+}
+
 /* CTA brochure */
 .video-cta-wrap{margin-top:2rem;}
 .btn-brochure{

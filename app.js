@@ -256,6 +256,16 @@ function shouldHideUnitContent(status) {
   const est = normalizeUnitStatus(status);
   return est === 'reservado' || est === 'vendido';
 }
+function shouldKeepUnitPainted(status) {
+  const est = normalizeUnitStatus(status);
+  return est === 'reservado' || est === 'vendido' || est === 'no disponible';
+}
+function getMapTooltipLabel(viviendas, areaKey) {
+  const key = String(areaKey || '').toLowerCase();
+  const unidad = viviendas?.[key];
+  const raw = String(unidad?.numero_ud || key || '').trim();
+  return raw ? raw.toUpperCase() : '';
+}
 function clearMobileUnitExtra() {
   const container = document.getElementById('mobile-unit-extra');
   if (container) container.innerHTML = '';
@@ -440,6 +450,58 @@ function loadAvailabilityData(jsonURL) {
         };
       });
 
+      const persistentKeys = Object.keys(viviendas).filter((k) =>
+        shouldKeepUnitPainted(viviendas?.[k]?.estado)
+      );
+
+      const tooltipWrap = document.querySelector('#availability-home .imap-wrap');
+      const tooltipEl = document.getElementById('imapTooltip');
+      let tooltipVisible = false;
+      const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+      const moveTooltip = (ev) => {
+        if (!tooltipVisible || !tooltipWrap || !tooltipEl || !ev) return;
+        const clientX = typeof ev.clientX === 'number'
+          ? ev.clientX
+          : (typeof ev.pageX === 'number' ? ev.pageX - window.scrollX : null);
+        const clientY = typeof ev.clientY === 'number'
+          ? ev.clientY
+          : (typeof ev.pageY === 'number' ? ev.pageY - window.scrollY : null);
+        if (clientX == null || clientY == null) return;
+        const rect = tooltipWrap.getBoundingClientRect();
+        const x = clamp((clientX - rect.left) + 12, 0, Math.max(0, rect.width - tooltipEl.offsetWidth - 4));
+        const y = clamp((clientY - rect.top) + 12, 0, Math.max(0, rect.height - tooltipEl.offsetHeight - 4));
+        tooltipEl.style.left = `${x}px`;
+        tooltipEl.style.top = `${y}px`;
+      };
+      const showTooltip = (label, ev) => {
+        if (!tooltipEl || !tooltipWrap || !label) return;
+        tooltipEl.textContent = label;
+        tooltipEl.classList.add('show');
+        tooltipEl.setAttribute('aria-hidden', 'false');
+        tooltipVisible = true;
+        moveTooltip(ev);
+      };
+      const hideTooltip = () => {
+        if (!tooltipEl) return;
+        tooltipEl.classList.remove('show');
+        tooltipEl.setAttribute('aria-hidden', 'true');
+        tooltipVisible = false;
+      };
+      if (tooltipWrap && !tooltipWrap.dataset.tooltipFollowBound) {
+        tooltipWrap.dataset.tooltipFollowBound = '1';
+        tooltipWrap.addEventListener('pointermove', moveTooltip, { passive: true });
+      }
+
+      const repaintPersistentAreas = () => {
+        if (!_mapReady) return;
+        persistentKeys.forEach((k) => {
+          $img.mapster('set', true, k);
+        });
+      };
+      _repaintPersistentAreas = () => {
+        requestAnimationFrame(repaintPersistentAreas);
+      };
+
       $img.mapster({
         wrapClass      : 'plan-wrapper',
         mapKey         : 'data-key',
@@ -451,9 +513,19 @@ function loadAvailabilityData(jsonURL) {
         render_select    : { fillColor: base, fillOpacity: 0.60, stroke:true, strokeColor: border, strokeWidth:3 },
         render_highlight : { fillColor: base, fillOpacity: 0.25, stroke:true, strokeColor: border, strokeWidth:3 },
 
+        onMouseover: function(area, e){
+          const label = getMapTooltipLabel(viviendas, area?.key);
+          showTooltip(label, e);
+          return true;
+        },
+
         onMouseout: function(){
+          hideTooltip();
           if(_selectedKey){
-            requestAnimationFrame(() => $img.mapster('set', true, _selectedKey));
+            requestAnimationFrame(() => {
+              $img.mapster('set', true, _selectedKey);
+              repaintPersistentAreas();
+            });
           }
         },
 
@@ -465,6 +537,7 @@ function loadAvailabilityData(jsonURL) {
 
           // 👇 Centraliza selección + pintado (evita dobles)
           selectUnidad(key, { source:'mapster' });
+          repaintPersistentAreas();
           return false;
         },
 
@@ -475,10 +548,14 @@ function loadAvailabilityData(jsonURL) {
           const reapplySelected = () => {
             if (_selectedKey) {
               if (_prevKey && _prevKey !== _selectedKey) {
-                $img.mapster('set', false, _prevKey);
+                const prev = viviendas[_prevKey];
+                if (!shouldKeepUnitPainted(prev?.estado)) {
+                  $img.mapster('set', false, _prevKey);
+                }
               }
               $img.mapster('set', true, _selectedKey);
               _prevKey = _selectedKey;
+              repaintPersistentAreas();
             }
           };
 
@@ -487,7 +564,10 @@ function loadAvailabilityData(jsonURL) {
             const parentW = $img.parent().width();
             const targetW = Math.min(parentW, natural);
             $img.mapster('resize', targetW, 0, 0);
-            requestAnimationFrame(reapplySelected);
+            requestAnimationFrame(() => {
+              reapplySelected();
+              repaintPersistentAreas();
+            });
           };
           ajustar();
           $(window).on('resize', ajustar);
@@ -1030,6 +1110,7 @@ function loadAvailabilityData(jsonURL) {
     let _selectedKey = null;
     let _pendingSelection = null;
     let _mapReady = false;
+    let _repaintPersistentAreas = null;
     
 
     function scrollInfoIntoView() {
@@ -1069,9 +1150,8 @@ function loadAvailabilityData(jsonURL) {
       if (_mapReady) {
         if (_prevKey && _prevKey !== key) {
           const prev = viviendas[_prevKey];
-          const prevEst = normalizeUnitStatus(prev?.estado);
-          // 👇 Si la anterior era "reservado", la dejamos pintada en amarillo
-          if (prevEst !== 'reservado') {
+          // Keep sold/reserved/unavailable units painted when moving to another unit.
+          if (!shouldKeepUnitPainted(prev?.estado)) {
             $img.mapster('set', false, _prevKey);
           }
         }
@@ -1080,7 +1160,10 @@ function loadAvailabilityData(jsonURL) {
         _selectedKey = key;                     // <- recordamos cuál está seleccionada
         requestAnimationFrame(() => {
           if (_selectedKey === key) $img.mapster('set', true, key);
-        })
+        });
+        if (typeof _repaintPersistentAreas === 'function') {
+          _repaintPersistentAreas();
+        }
       } else {
         _pendingSelection = key;                // la aplicamos cuando esté configurado
       }
